@@ -19,6 +19,7 @@
         "trailingComma": "none",
         "tabWidth": 2,
         "useTabs": false,
+        "endOfLine": "auto",
         "react/jsx-max-props-per-line": [1, { "when": "always" }]
       }
     ]

@@ -8,11 +8,7 @@ class Layout extends React.Component {
     return (
       <Wrapper>
         <Header />
-        {/* all app children components goes there */}
         <Wrapper>{this.props.children}</Wrapper>
-        {/* calling footer component  */}
-
-        {/* <Footer /> */}
       </Wrapper>
     );
   }

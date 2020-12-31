@@ -4,6 +4,7 @@ import {
   Link
   // , useRouteMatch
 } from 'react-router-dom';
+
 import {
   Collapse,
   Navbar,
@@ -16,6 +17,13 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+import styled from 'styled-components';
+
+const img = styled.img`
+  width: 120px;
+  height: 50px;
+  object-fit: contain;
+`;
 
 const Header = (props) => {
   //   let { path, url } = useRouteMatch();
@@ -27,89 +35,11 @@ const Header = (props) => {
     <div className="navContainer">
       <Navbar className="Navbar" light expand="lg">
         <Link to="/">
-          {' '}
-          <img src={logo} className="app-logo" alt="logo" />
+          <img src={logo} alt="logo" />
         </Link>
 
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar home>
-          {/* {
-          window.location.pathname == "/" ? (
-            <>
-              <span className="nav-span"></span>
-
-              <Nav className="mr-auto" navbar>
-                <NavItem>
-                  <NavLink tag={Link} to="/homeexplorer" className="home">
-                    {" "}
-                    Home
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="#"> Network Pool</NavLink>
-                </NavItem>
-                <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
-                    Blockchain
-                  </DropdownToggle>
-                  <DropdownMenu>
-                  <DropdownItem tag={Link} to="/homeexplorer">
-                      Home Explorer
-                    </DropdownItem>
-                    <DropdownItem devider />
-                    <DropdownItem tag={Link} to="/transactions">
-                      Transactions Block
-                    </DropdownItem>
-                    <DropdownItem tag={Link} to="/transactionpopup">
-                      Transactions Detail
-                    </DropdownItem>
-                    <DropdownItem tag={Link} to="/pendingtransaction">
-                      Pending Transactions
-                    </DropdownItem>
-                    <DropdownItem tag={Link} to="/proposal">
-                      Propsal
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem tag={Link} to="/blocklist">
-                      Block List
-                    </DropdownItem>
-                    <DropdownItem tag={Link} to="/forkedblock">
-                      Forked Block
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem tag={Link} to="/uncle">
-                      Uncle Block
-                    </DropdownItem>
-                    <DropdownItem tag={Link} to="/verifiedcontract">
-                    Verified Contracts
-                    </DropdownItem>
-                    <DropdownItem tag={Link} to="/votingpower">
-                      Voting Power
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-
-                <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
-                    Wallet
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-                <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
-                    API
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-              </Nav>
-              <NavLink color href="#">
-                {" "}
-                Ledger
-              </NavLink>
-              <Button color="primary" size="sm">
-                Get Started
-              </Button>
-            </>
-          ) : 
-          ( */}
           <>
             <Nav className="ml-auto" navbar>
               <NavItem>
@@ -178,18 +108,6 @@ const Header = (props) => {
           {/* )} */}
         </Collapse>
       </Navbar>
-
-      {/* //  <div className="navContainer">
-//       <Navbar className="Navbar" light expand="lg">
-//         <Link>
-//           {" "}
-//           <img src={logo} className="app-logo" alt="logo" />
-//         </Link>
-//         <NavbarToggler onClick={toggle} />
-//         <Collapse isOpen={isOpen} navbar home>
-         
-//         </Collapse>
-//       </Navbar></div> */}
     </div>
   );
 };

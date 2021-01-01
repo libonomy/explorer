@@ -62,7 +62,7 @@ const Header = (props) => {
               <NavHeading href="#">Blockchain</NavHeading>
             </NavItem>
             <NavItem>
-              <NavHeading href="#">Token</NavHeading>
+              <NavHeading href="#">this is Blockchain</NavHeading>
             </NavItem>
             <NavItem>
               <NavHeading href="#">Resources</NavHeading>

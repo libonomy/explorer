@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout } from 'src/layouts';
 import { Landing } from 'src/views/landing';
-import { HOME } from './Constants';
+import { HOME } from './Routes';
 
 class App extends Component {
   render() {

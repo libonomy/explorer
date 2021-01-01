@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Header, NavBar } from 'src/components';
+import { Header, NavBar, Footer } from 'src/components';
 
 const Wrapper = styled.div``;
 
@@ -10,6 +10,7 @@ const MainLayout = ({ children }) => {
       <Header />
       <NavBar />
       <Wrapper>{children}</Wrapper>
+      <Footer />
     </Wrapper>
   );
 };

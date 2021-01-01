@@ -83,15 +83,13 @@ const FluidContainer = styled.div`
 
   .input-group {
     .dropdown-menu.show {
-      position: absolute;
-      will-change: transform;
-      top: 187px !important;
-      left: -1px !important;
-      border: 1px solid rgba(0, 0, 0, 0.15);
       border-radius: 0.25rem;
       outline: none;
       .dropdown-item:hover {
         background-color: #f8f9fa;
+      }
+      button:focus {
+        outline: none;
       }
       .dropdown-item:active {
         background-color: #ffffff;
@@ -127,6 +125,7 @@ const FluidContainer = styled.div`
         font-style: normal;
         text-align: left;
         border: none;
+        box-shadow: none;
         border-top-right-radius: 6px;
         border-bottom-right-radius: 6px;
       }

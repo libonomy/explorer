@@ -38,6 +38,9 @@ const NavHeading = styled(NavLink)`
   &:hover {
     color: #40b1be !important;
   }
+  .navbar {
+    padding: 0.5rem 0rem;
+  }
 `;
 
 const Header = (props) => {

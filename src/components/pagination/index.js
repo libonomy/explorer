@@ -17,14 +17,15 @@ const Wrapper = styled.div`
   flex-direction: row;
 `;
 const Dots = styled.span`
-  margin-right: 5px;
+  margin-right: 7px;
 `;
 const Link = styled(PaginationLink)`
   padding: 8px 9.2px 8.4px 10px;
   border-radius: 2px;
   box-shadow: 0 0 4px 0 rgba(18, 38, 63, 0.1);
+  border: none;
   font-family: PoppinsRegular;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
@@ -38,7 +39,7 @@ const Link = styled(PaginationLink)`
 `;
 
 const Item = styled(PaginationItem)`
-  margin-right: 5px;
+  margin-right: 7px;
   &.active .page-link {
     background-color: ${colors.primary};
     border-color: ${colors.primary};
@@ -48,6 +49,39 @@ const Item = styled(PaginationItem)`
 const DropdownExp = styled(Dropdown)`
   box-shadow: 0 0 4px 0 rgba(18, 38, 63, 0.1);
 `;
+
+const DropdownItemExp = styled(DropdownItem)`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.27px;
+  text-align: left;
+`;
+
+const DropdownToggleExp = styled(DropdownToggle)`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.27px;
+  text-align: left;
+  background: none !important;
+  line-height: 1.3;
+  border: none;
+  color: ${colors.black} !important;
+  &:focus {
+    outline: 0;
+    box-shadow: none !important;
+  }
+  &:hover {
+    background: none;
+  }
+`;
+
 const Pagination = ({
   count = 100,
   page = 1,
@@ -95,16 +129,16 @@ const Pagination = ({
       </RsPagination>
 
       <DropdownExp isOpen={dropdownOpen} toggle={toggle}>
-        <DropdownToggle caret>Dropdown</DropdownToggle>
+        <DropdownToggleExp caret>{limit}/Page</DropdownToggleExp>
         <DropdownMenu>
-          <DropdownItem header>Header</DropdownItem>
-          <DropdownItem>Some Action</DropdownItem>
-          <DropdownItem text>Dropdown Item Text</DropdownItem>
-          <DropdownItem disabled>Action (disabled)</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Foo Action</DropdownItem>
-          <DropdownItem>Bar Action</DropdownItem>
-          <DropdownItem>Quo Action</DropdownItem>
+          {[10, 20, 30, 40, 50].map((item, i) => (
+            <DropdownItemExp
+            // active={item === state.limit}
+            // onClick={() => setState({ ...state, limit: item })}
+            >
+              {item}/pages
+            </DropdownItemExp>
+          ))}
         </DropdownMenu>
       </DropdownExp>
     </Wrapper>

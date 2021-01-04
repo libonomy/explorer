@@ -24,7 +24,10 @@ const Link = styled(NavLink)`
   font-style: normal;
   letter-spacing: 0.42px;
   text-align: left;
-  color: #ffffff;
+  color: ${colors.white};
+  &:hover {
+    color: ${colors.black};
+  }
 `;
 
 const NavBar = () => {

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import { Pagination } from 'src/components';
+import { SuccessIcon, FailIcon } from 'src/assets/images';
 import styled from 'styled-components';
+import colors from 'src/vars/colors';
 
 const Wrapper = styled.div``;
 
@@ -14,6 +16,9 @@ const TableCol = styled.td`
   line-height: 1;
   letter-spacing: 0.36px;
   text-align: left;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const TableHeading = styled.th`
   font-family: PoppinsBold;
@@ -54,9 +59,23 @@ const Text = styled.span`
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.75;
   letter-spacing: 0.36px;
   text-align: left;
+`;
+const FailText = styled.span`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.36px;
+  text-align: left;
+  color: ${colors.red};
+`;
+
+const TextIconWrapper = styled.div``;
+const Icon = styled.img`
+  margin-right: 5px;
 `;
 
 const TxsTable = () => {
@@ -69,30 +88,47 @@ const TxsTable = () => {
       <Table hover>
         <TableHeader>
           <TableRow>
-            <TableHeading>#</TableHeading>
-            <TableHeading>First Name</TableHeading>
-            <TableHeading>Last Name</TableHeading>
-            <TableHeading>Username</TableHeading>
+            <TableHeading>Height</TableHeading>
+            <TableHeading>Block Hash</TableHeading>
+            <TableHeading>Age</TableHeading>
+            <TableHeading>Status</TableHeading>
+            <TableHeading>To</TableHeading>
+            <TableHeading>From</TableHeading>
+            <TableHeading>Value</TableHeading>
           </TableRow>
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCol>Mark</TableCol>
-            <TableCol>Otto</TableCol>
-            <TableCol>@mdo</TableCol>
-            <TableCol>@mdo</TableCol>
+            <TableCol>1234841</TableCol>
+            <TableCol>
+              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3{' '}
+            </TableCol>
+            <TableCol>1 min ago</TableCol>
+            <TableCol>
+              <TextIconWrapper>
+                <Icon src={SuccessIcon}></Icon>
+                <Text>success</Text>
+              </TextIconWrapper>
+            </TableCol>
+            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
+            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
+            <TableCol>2 libocoin</TableCol>
           </TableRow>
           <TableRow>
-            <TableCol>Jacob</TableCol>
-            <TableCol>Thornton</TableCol>
-            <TableCol>@fat</TableCol>
-            <TableCol>@fat</TableCol>
-          </TableRow>
-          <TableRow>
-            <TableCol>Larry</TableCol>
-            <TableCol>the Bird</TableCol>
-            <TableCol>@twitter</TableCol>
-            <TableCol>@twitter</TableCol>
+            <TableCol>1234841</TableCol>
+            <TableCol>
+              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3{' '}
+            </TableCol>
+            <TableCol>1 min ago</TableCol>
+            <TableCol>
+              <TextIconWrapper>
+                <Icon src={FailIcon}></Icon>
+                <FailText>fail</FailText>
+              </TextIconWrapper>
+            </TableCol>
+            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
+            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
+            <TableCol>2 libocoin</TableCol>
           </TableRow>
         </TableBody>
       </Table>

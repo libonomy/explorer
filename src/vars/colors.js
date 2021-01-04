@@ -24,7 +24,7 @@ const colors = {
   darkGray10Alpha: 'rgba(64, 64, 64, 0.1)',
   dark75Alpha: 'rgba(37, 36, 41, 0.75)',
   navLinkGrey: '#CFCFCF',
-  red: '#EC0000',
+  red: '#8b0000',
   dMBlack1: '#323031',
   dmBlack2: '#353439',
   shaddow: ''

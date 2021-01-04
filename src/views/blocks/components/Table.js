@@ -13,7 +13,9 @@ const TableCol = styled.td`
   font-style: normal;
   line-height: 1;
   letter-spacing: 0.36px;
-  text-align: left;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const TableHeading = styled.th`
   font-family: PoppinsBold;
@@ -69,30 +71,62 @@ const BlocksTable = () => {
       <Table hover>
         <TableHeader>
           <TableRow>
-            <TableHeading>#</TableHeading>
-            <TableHeading>First Name</TableHeading>
-            <TableHeading>Last Name</TableHeading>
-            <TableHeading>Username</TableHeading>
+            <TableHeading>Height</TableHeading>
+            <TableHeading>Block Hash</TableHeading>
+            <TableHeading>Age</TableHeading>
+            <TableHeading>Txs</TableHeading>
+            <TableHeading>Proposer</TableHeading>
+            <TableHeading>Block Reward</TableHeading>
           </TableRow>
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCol>Mark</TableCol>
-            <TableCol>Otto</TableCol>
-            <TableCol>@mdo</TableCol>
-            <TableCol>@mdo</TableCol>
+            <TableCol>9012738</TableCol>
+            <TableCol>
+              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3
+            </TableCol>
+            <TableCol>2 years ago</TableCol>
+            <TableCol>168</TableCol>
+            <TableCol>
+              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3
+            </TableCol>
+            <TableCol>195146</TableCol>
           </TableRow>
           <TableRow>
-            <TableCol>Jacob</TableCol>
-            <TableCol>Thornton</TableCol>
-            <TableCol>@fat</TableCol>
-            <TableCol>@fat</TableCol>
+            <TableCol>9012738</TableCol>
+            <TableCol>
+              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3
+            </TableCol>
+            <TableCol>2 years ago</TableCol>
+            <TableCol>168</TableCol>
+            <TableCol>
+              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3
+            </TableCol>
+            <TableCol>195146</TableCol>
           </TableRow>
           <TableRow>
-            <TableCol>Larry</TableCol>
-            <TableCol>the Bird</TableCol>
-            <TableCol>@twitter</TableCol>
-            <TableCol>@twitter</TableCol>
+            <TableCol>9012738</TableCol>
+            <TableCol>
+              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3
+            </TableCol>
+            <TableCol>2 years ago</TableCol>
+            <TableCol>168</TableCol>
+            <TableCol>
+              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3
+            </TableCol>
+            <TableCol>195146</TableCol>
+          </TableRow>
+          <TableRow>
+            <TableCol>9012738</TableCol>
+            <TableCol>
+              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3
+            </TableCol>
+            <TableCol>2 years ago</TableCol>
+            <TableCol>168</TableCol>
+            <TableCol>
+              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3
+            </TableCol>
+            <TableCol>19514655</TableCol>
           </TableRow>
         </TableBody>
       </Table>

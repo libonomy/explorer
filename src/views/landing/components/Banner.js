@@ -38,11 +38,10 @@ const Content = styled.div`
 const CardWrapper = styled(Card)`
   width: 345px;
   height: 151px;
-  margin-left: 7.5rem;
   border-radius: 10px;
   background-color: #ffffff;
   @media (max-width: 991px) {
-    margin-left: 0rem;
+    margin-top: 20px;
   }
 `;
 const CardColumn = styled(Col)`
@@ -50,9 +49,8 @@ const CardColumn = styled(Col)`
   justify-content: center;
 `;
 const Title = styled.h1`
-  font-family: Poppins;
+  font-family: PoppinsRegular;
   font-size: 30px;
-  font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: 2;
@@ -61,7 +59,7 @@ const Title = styled.h1`
   color: #fff5f5;
 `;
 const Paragraph = styled.p`
-  font-family: Poppins;
+  font-family: PoppinsRegular;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -104,10 +102,11 @@ const FluidContainer = styled.div`
     .form-control {
       padding: 0;
       border-left: 2px solid #fff !important;
+      font-family: PoppinsRegular;
       opacity: 0.5;
       border: none;
-      font-size: 12px;
-      margin-top: 4px;
+      font-size: 11px;
+      margin-top: 6px;
       box-shadow: none;
     }
 
@@ -119,7 +118,7 @@ const FluidContainer = styled.div`
         box-shadow: none;
       }
       .btn-secondary {
-        font-family: Poppins;
+        font-family: PoppinsRegular;
         font-weight: normal;
         font-stretch: normal;
         font-style: normal;
@@ -164,7 +163,10 @@ const VerticalSpan = styled.span`
   margin: 8px 0px;
 `;
 const SearchColumn = styled(Col)`
-  padding: 20px 0;
+  padding: 40px 0px 0px 0px;
+  @media (max-width: 991px) {
+    padding: 30px 0px;
+  }
 `;
 function Banner() {
   const [splitButtonOpen, setSplitButtonOpen] = useState(false);

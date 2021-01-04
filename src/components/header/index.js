@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Logo } from 'src/assets/images';
+import { LogoExp } from 'src/assets/images';
 import {
   Link
   // , useRouteMatch
@@ -20,15 +20,15 @@ const Wrapper = styled(Navbar)`
     outline: none;
   }
 `;
-const Logoo = styled.img`
+const Logo = styled.img`
   width: 158px;
   height: 18px;
   object-fit: contain;
 `;
 const NavHeading = styled(NavLink)`
   color: #000 !important;
-  font-family: Poppins;
-  font-size: 14px;
+  font-family: PoppinsRegular;
+  font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -53,7 +53,7 @@ const Header = (props) => {
     <Container>
       <Wrapper light expand="lg">
         <Link to="/">
-          <Logoo src={Logo} alt="logo" />
+          <Logo src={LogoExp} alt="logo" />
         </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar home>

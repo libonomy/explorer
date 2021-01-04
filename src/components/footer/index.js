@@ -1,24 +1,37 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
-import { Logo } from 'src/assets/images';
+import {
+  LogoExp,
+  Pinterest,
+  Instagram,
+  Twitter,
+  Facebook
+} from 'src/assets/images';
 import styled from 'styled-components';
-const FooterWrapper = styled.div`
-  padding: 2rem;
-  padding-bottom: 0rem;
+const Wrapper = styled.div`
+padding: 2rem;
+padding-bottom: 1rem;
+background: #fff;
+}
 `;
-const Logoo = styled.img`
+const Logo = styled.img`
   width: 158px;
   height: 18px;
   object-fit: contain;
   margin: 10px -4px 22px -4px;
 `;
-const UnorderList = styled.ul`
+const ShapeIcon = styled.img`
+  width: 13.7px;
+  height: 13.7px;
+  object-fit: contain;
+`;
+const List = styled.ul`
   padding: 0;
   list-style: none;
   margin-bottom: 0;
 `;
-const FooterList = styled.li`
+const ListItem = styled.li`
   padding: 8px !important;
   margin-left: 18px !important;
   @media (max-width: 991px) {
@@ -28,17 +41,17 @@ const FooterList = styled.li`
     color: #092326;
     text-decoration: none;
     font-size: 12px;
-    line-height: 28px;
+    line-height: 2;
     font-weight: 400;
   }
 `;
 const Paragraph = styled.p`
-  font-family: Poppins;
-  font-size: 14px;
+  font-family: PoppinsRegular;
+  font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1;
+  line-height: 2;
   letter-spacing: normal;
   text-align: left;
   color: #092326;
@@ -56,7 +69,7 @@ const FooterSocialIcon = styled.ul`
   margin: 0;
   margin-left: 10px;
 `;
-const FooterLists = styled.li`
+const ListItems = styled.li`
   padding-left: 15px;
 
   :first-child {
@@ -66,7 +79,15 @@ const FooterLists = styled.li`
     color: #fff;
   }
 `;
-const CopyRight = styled.div`
+const CopyRight = styled.p`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.64;
+  letter-spacing: 0.42px;
+  text-align: left;
   padding-left: 15px;
 
   li:first-child {
@@ -85,15 +106,15 @@ class Footer extends Component {
   render() {
     return (
       <>
-        <FooterWrapper>
+        <Wrapper>
           <Container>
             <Row>
               <Col lg="6" md="12" xs="12">
                 <Col lg="12" md="12" xs="12">
-                  <UnorderList>
+                  <List>
                     <Link href="#">
-                      <Logoo
-                        src={Logo}
+                      <Logo
+                        src={LogoExp}
                         alt="logo-proper-six"
                         class="img-footer"
                       />
@@ -105,90 +126,106 @@ class Footer extends Component {
                     </Paragraph>
                     <Paragraph>info@libonomy.com</Paragraph>
                     <Paragraph>+44 742 458 6677</Paragraph>
-                  </UnorderList>
+                  </List>
                 </Col>
               </Col>
               <Col lg="2" md="4" xs="12">
-                <UnorderList>
-                  <FooterList>
+                <List>
+                  <ListItem>
                     <Link to="#">About Us</Link>
-                  </FooterList>
-                  <FooterList>
+                  </ListItem>
+                  <ListItem>
                     <Link to="#">Advertise</Link>
-                  </FooterList>
-                  <FooterList>
+                  </ListItem>
+                  <ListItem>
                     <Link to="#">Terms & Conditions</Link>
-                  </FooterList>
-                </UnorderList>
+                  </ListItem>
+                </List>
               </Col>
               <Col lg="2" md="4" xs="12">
-                <UnorderList>
-                  <FooterList>
+                <List>
+                  <ListItem>
                     <Link to="#">Developers API</Link>
-                  </FooterList>
-                  <FooterList>
+                  </ListItem>
+                  <ListItem>
                     <Link href="#">Information Center</Link>
-                  </FooterList>
-                  <FooterList>
+                  </ListItem>
+                  <ListItem>
                     <Link to="#">Newsletter</Link>
-                  </FooterList>
-                </UnorderList>
+                  </ListItem>
+                </List>
               </Col>
               <Col lg="2" md="4" xs="12">
-                <UnorderList>
-                  <FooterList>
+                <List>
+                  <ListItem>
                     <Link to="#">Blockchain</Link>
-                  </FooterList>
-                  <FooterList>
+                  </ListItem>
+                  <ListItem>
                     <Link to="#">Wallet</Link>
-                  </FooterList>
+                  </ListItem>
 
-                  <FooterList>
+                  <ListItem>
                     <Link to="#">Exchange</Link>
-                  </FooterList>
-                </UnorderList>
+                  </ListItem>
+                </List>
               </Col>
             </Row>
           </Container>
-        </FooterWrapper>
+        </Wrapper>
         <FooterTail>
           <Container>
             <Row>
               <FooterColumn>
                 <FooterSocialIcon>
-                  <FooterLists>
+                  <ListItems>
                     <Link
                       href="#"
                       target="_blank"
                       rel="follow"
                       title="Pinterest">
-                      <i class="fab fa-pinterest-p"></i>
+                      <ShapeIcon
+                        src={Pinterest}
+                        alt="logo-proper-six"
+                        class="img-footer"
+                      />
                     </Link>
-                  </FooterLists>
-                  <FooterLists>
+                  </ListItems>
+                  <ListItems>
                     <Link
                       href="#"
                       target="_blank"
                       rel="follow"
                       title="Instagram">
-                      <i class="fab fa-instagram"></i>
+                      <ShapeIcon
+                        src={Instagram}
+                        alt="logo-proper-six"
+                        class="img-footer"
+                      />
                     </Link>
-                  </FooterLists>
+                  </ListItems>
 
-                  <FooterLists>
+                  <ListItems>
                     <Link href="#" target="_blank" rel="follow" title="Twitter">
-                      <i class="fab fa-twitter"></i>
+                      <ShapeIcon
+                        src={Twitter}
+                        alt="logo-proper-six"
+                        class="img-footer"
+                      />
                     </Link>
-                  </FooterLists>
-                  <FooterLists>
+                  </ListItems>
+                  <ListItems>
                     <Link
                       href="#"
                       target="_blank"
                       rel="follow"
                       title="Facebook">
-                      <i class="fab fa-facebook"></i>
+                      <ShapeIcon
+                        src={Facebook}
+                        alt="logo-proper-six"
+                        class="img-footer"
+                      />
                     </Link>
-                  </FooterLists>
+                  </ListItems>
                 </FooterSocialIcon>
                 <CopyRight>
                   &copy; Libonomy (2020). All rights reserved.

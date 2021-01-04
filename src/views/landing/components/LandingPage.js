@@ -1,32 +1,36 @@
 import React from 'react';
-import { Card, CardText, CardTitle, Col, Container } from 'reactstrap';
+import { Card, CardText, CardTitle, Col, Container, Row } from 'reactstrap';
+import CardExplorer from 'src/components/statistics-card/card-1';
+import Data from 'src/components/statistics-card/data';
+import styled from 'styled-components';
+const ColExp = styled(Col)`
+  padding: 10.5px 13px;
+`;
+const RowExp = styled(Row)`
+  padding: 10.5px 13px;
+`;
 const LandingPage = () => {
   return (
     <Container>
-      <Col lg="6" md="6" sm="6">
-        <Card>
-          <div className="cards-body">
-            <div className="body-content">
-              <div className="body-inner-div">
-                <span className="img-div">{/* <img src={marketCap} /> */}</span>
-                <CardTitle>Circulation Amount</CardTitle>
-              </div>
-              <div>
-                <CardText>N/A</CardText>
-              </div>
-            </div>
-            <div className="body-content">
-              <div className="body-inner-div">
-                <span className="img-div"></span>
-                <CardTitle>Active Amount</CardTitle>
-              </div>
-              <div>
-                <CardText>N/A</CardText>
-              </div>
-            </div>
-          </div>
-        </Card>
-      </Col>
+      <RowExp>
+        <ColExp lg="7">
+          <Row>
+            {Data.map(({ id, title, title1, text, text1, text2 }) => (
+              <ColExp lg="6" md="6" sm="6">
+                <CardExplorer
+                  key={id}
+                  title={title}
+                  title1={title1}
+                  text={text}
+                  text1={text1}
+                  text2={text2}
+                />
+              </ColExp>
+            ))}
+          </Row>
+        </ColExp>
+        <Col lg="5" md="12"></Col>
+      </RowExp>
     </Container>
   );
 };

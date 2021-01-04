@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
-import { Logo } from 'src/assets/images';
+import { logo } from 'src/assets/images';
 import styled from 'styled-components';
 const Logoo = styled.img`
   width: 158px;
@@ -49,7 +49,7 @@ class Footer extends Component {
                     target="_blank"
                     rel="follow">
                     <Logoo
-                      src={Logo}
+                      src={logo}
                       alt="logo-proper-six"
                       class="img-footer"
                     />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import { Pagination } from 'src/components';
-import { SuccessIcon, FailIcon } from 'src/assets/images';
+import { successIcon, failIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 
@@ -106,7 +106,7 @@ const TxsTable = () => {
             <TableCol>1 min ago</TableCol>
             <TableCol>
               <TextIconWrapper>
-                <Icon src={SuccessIcon}></Icon>
+                <Icon src={successIcon}></Icon>
                 <Text>success</Text>
               </TextIconWrapper>
             </TableCol>
@@ -122,7 +122,7 @@ const TxsTable = () => {
             <TableCol>1 min ago</TableCol>
             <TableCol>
               <TextIconWrapper>
-                <Icon src={FailIcon}></Icon>
+                <Icon src={failIcon}></Icon>
                 <FailText>fail</FailText>
               </TextIconWrapper>
             </TableCol>

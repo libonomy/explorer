@@ -11,9 +11,9 @@ import {
   DropdownItem
 } from 'reactstrap';
 import styled from 'styled-components';
-import { LiboBackground, Search } from 'src/assets/images';
+import { liboBackground, search } from 'src/assets/images';
 const Wrapper = styled.div`
-  background: url(${LiboBackground});
+  background: url(${liboBackground});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -212,7 +212,7 @@ function Banner() {
                 <Input placeholder="Search by Address / Txn Hash / Block / Token / Ens" />
                 <InputGroupAddon addonType="append">
                   <Button>
-                    <SearchLogo src={Search} alt="search-logo" />
+                    <SearchLogo src={search} alt="search-logo" />
                   </Button>
                 </InputGroupAddon>
               </InputGroup>

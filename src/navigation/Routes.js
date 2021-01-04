@@ -2,6 +2,7 @@ import { Blocks } from 'src/views/blocks';
 import ViewBlock from 'src/views/blocks/ViewBlock';
 import { Landing } from 'src/views/landing';
 import { Transactions, ViewTx } from 'src/views/transactions';
+import NotFound from './NotFound';
 
 export const app = [
   {
@@ -23,5 +24,9 @@ export const app = [
   {
     path: '/blocks/:id',
     component: ViewBlock
+  },
+  {
+    path: '/not-found',
+    component: NotFound
   }
 ];

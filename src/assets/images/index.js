@@ -1,5 +1,7 @@
-export { default as Logo } from './logo.png';
-export { default as LiboBackground } from './libo-background.png';
-export { default as Search } from './search.png';
-export { default as SuccessIcon } from './success-icon.svg';
-export { default as FailIcon } from './fail-icon.svg';
+export { default as logo } from './logo.png';
+export { default as liboBackground } from './libo-background.png';
+export { default as search } from './search.png';
+export { default as successIcon } from './success-icon.svg';
+export { default as failIcon } from './fail-icon.svg';
+export { default as fourOFour } from './404.svg';
+export { default as wireBreak } from './wire-break.svg';

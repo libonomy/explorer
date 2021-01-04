@@ -21,7 +21,7 @@ const Heading = styled.h1`
   font-family: PoppinsMedium;
 `;
 
-const PageContainerTb = ({ heading, children }) => {
+const PageContainer = ({ heading, children }) => {
   return (
     <Container>
       <Heading>{heading}</Heading>
@@ -30,4 +30,4 @@ const PageContainerTb = ({ heading, children }) => {
   );
 };
 
-export default PageContainerTb;
+export default PageContainer;

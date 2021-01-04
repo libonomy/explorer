@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardText, CardTitle, Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import CardExplorer from 'src/components/statistics-card/card-1';
 import Data from 'src/components/statistics-card/data';
 import styled from 'styled-components';
@@ -29,7 +29,9 @@ const LandingPage = () => {
             ))}
           </Row>
         </ColExp>
-        <Col lg="5" md="12"></Col>
+        <Col lg="5" md="12">
+          card work
+        </Col>
       </RowExp>
     </Container>
   );

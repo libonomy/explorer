@@ -1,11 +1,10 @@
 import React from 'react';
+// import Header from '../../components/header/index';
 import LandingPage from '../landing/components/LandingPage';
-import Banner from './components/Banner';
 const Landing = () => {
   return (
     <div>
-      <Banner />
-
+      {/* <Header /> */}
       <LandingPage />
     </div>
   );

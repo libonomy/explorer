@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout } from 'src/layouts';
-import { Blocks } from 'src/views/blocks';
 import { Landing } from 'src/views/landing';
-import { app } from './Routes';
+import { HOME } from './CONSTANTS';
 
 class App extends Component {
   render() {
@@ -11,9 +10,7 @@ class App extends Component {
       <Router>
         <Layout>
           <Switch>
-            {app.map((route, i) => (
-              <Route exact path={route.path} component={route.component} />
-            ))}
+            <Route exact path={HOME} component={Landing} />
           </Switch>
         </Layout>
       </Router>

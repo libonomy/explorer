@@ -12,6 +12,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
 padding: 2rem;
 padding-bottom: 1rem;
+margin-top:2.5rem;
 background: #fff;
 }
 `;

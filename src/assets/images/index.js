@@ -8,3 +8,6 @@ export { default as Twitter } from './twitter-icon.svg';
 export { default as Facebook } from './facebook-icon.svg';
 export { default as SuccessIcon } from './success-icon.svg';
 export { default as FailIcon } from './fail-icon.svg';
+export { default as logo } from './logo.png';
+export { default as fourOFour } from './404.svg';
+export { default as wireBreak } from './wire-break.svg';

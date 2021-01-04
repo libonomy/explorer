@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
 import { Layout } from 'src/layouts';
 import { Blocks } from 'src/views/blocks';
 import { Landing } from 'src/views/landing';
@@ -14,6 +19,7 @@ class App extends Component {
             {app.map((route, i) => (
               <Route exact path={route.path} component={route.component} />
             ))}
+            <Redirect to="not-found" />
           </Switch>
         </Layout>
       </Router>

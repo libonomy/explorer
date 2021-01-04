@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PageContainerTb } from 'src/components';
+import { PageContainer } from 'src/components';
 import BlocksTable from './components/Table';
 
 const Blocks = () => {
   return (
-    <PageContainerTb heading="All Blocks">
+    <PageContainer heading="All Blocks">
       <BlocksTable />
-    </PageContainerTb>
+    </PageContainer>
   );
 };
 

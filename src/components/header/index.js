@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Logo } from 'src/assets/images';
-import {
-  Link
-  // , useRouteMatch
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
   Collapse,

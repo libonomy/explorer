@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import logo from '../../assets/images/logo.png';
-import {
-  Link
-  // , useRouteMatch
-} from 'react-router-dom';
+import { Logo } from 'src/assets/images';
+import { Link } from 'react-router-dom';
 
 import {
   Collapse,
@@ -12,17 +9,32 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  Container
 } from 'reactstrap';
 import styled from 'styled-components';
-
-const img = styled.img`
-  width: 120px;
-  height: 50px;
+const Wrapper = styled(Navbar)`
+  .navbar-toggler:focus {
+    outline: none;
+  }
+`;
+const Logoo = styled.img`
+  width: 158px;
+  height: 18px;
   object-fit: contain;
+`;
+const NavHeading = styled(NavLink)`
+  color: #000 !important;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 3;
+  letter-spacing: 0.42px;
+  text-align: left;
+  &:hover {
+    color: #40b1be !important;
+  }
 `;
 
 const Header = (props) => {
@@ -32,83 +44,35 @@ const Header = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div className="navContainer">
-      <Navbar className="Navbar" light expand="lg">
+    <Container>
+      <Wrapper light expand="lg">
         <Link to="/">
-          <img src={logo} alt="logo" />
+          <Logoo src={Logo} alt="logo" />
         </Link>
-
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar home>
-          <>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/" className="dashboard">
-                  {' '}
-                  Dashboard
-                </NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Blockchain
-                </DropdownToggle>
-                <DropdownMenu>
-                  {/* <DropdownItem tag={Link} to="/homeexplorer">
-                      Home Explorer
-                    </DropdownItem> */}
-                  <DropdownItem devider />
-                  <DropdownItem tag={Link} to="/transactions">
-                    Transactions
-                  </DropdownItem>
-                  {/* <DropdownItem tag={Link} to="/transactionpopup">
-                      Transactions Detail
-                    </DropdownItem> */}
-                  <DropdownItem tag={Link} to="/pendingtransaction">
-                    Pending Transactions
-                  </DropdownItem>
-                  <DropdownItem tag={Link} to="/approvals">
-                    Approvals
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem tag={Link} to="/blocklist">
-                    Blocks
-                  </DropdownItem>
-                  <DropdownItem tag={Link} to="/sideblocks">
-                    Side Blocks
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem tag={Link} to="/minerblock">
-                    View Miner Block
-                  </DropdownItem>
-                  <DropdownItem tag={Link} to="/verifiedcontract">
-                    View Verified Contracts
-                  </DropdownItem>
-                  <DropdownItem tag={Link} to="/contracttx">
-                    View Contract Transactions
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Token
-                </DropdownToggle>
-              </UncontrolledDropdown>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Resources
-                </DropdownToggle>
-              </UncontrolledDropdown>
-            </Nav>
-            <NavLink color href="#">
-              {' '}
-              More
-            </NavLink>
-          </>
-          {/* )} */}
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavHeading href="#">Dashboard</NavHeading>
+            </NavItem>
+            <NavItem>
+              <NavHeading href="#">Blockchain</NavHeading>
+            </NavItem>
+            <NavItem>
+              <NavHeading href="#">this is Blockchain</NavHeading>
+            </NavItem>
+            <NavItem>
+              <NavHeading href="#">Resources</NavHeading>
+            </NavItem>
+            <NavItem>
+              <NavHeading color href="#">
+                More
+              </NavHeading>
+            </NavItem>
+          </Nav>
         </Collapse>
-      </Navbar>
-    </div>
+      </Wrapper>
+    </Container>
   );
 };
 

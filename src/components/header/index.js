@@ -1,76 +1,90 @@
 import React, { useState } from 'react';
-import { logo } from 'src/assets/images';
+import { logo, search } from 'src/assets/images';
 import { Link } from 'react-router-dom';
-
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  Nav,
-  NavItem,
-  NavLink,
-  Container
+  Container,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButtonDropdown,
+  Input,
+  Button,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap';
 import styled from 'styled-components';
-const Wrapper = styled(Navbar)`
-  .navbar-toggler:focus {
-    outline: none;
-  }
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
-const Logoo = styled.img`
+
+const RightSection = styled.div`
   width: 158px;
   height: 18px;
   object-fit: contain;
 `;
-const NavHeading = styled(NavLink)`
-  color: #000 !important;
-  font-family: Poppins;
-  font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 3;
-  letter-spacing: 0.42px;
-  text-align: left;
-  &:hover {
-    color: #40b1be !important;
-  }
+const LeftSection = styled.div``;
+
+const Logo = styled.img`
+  width: 158px;
+  height: 18px;
+  object-fit: contain;
 `;
 
+const VerticalLine = styled.span`
+  height: 25px;
+  border: solid black 1px;
+  opacity: 0.3;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 8px 0px;
+`;
+const SearchIcon = styled.img`
+  width: 20px;
+  height: 20px;
+`;
+
+const SearchBox = styled(InputGroup)``;
+const IconButton = styled(Button)``;
 const Header = (props) => {
-  //   let { path, url } = useRouteMatch();
+  const [splitButtonOpen, setSplitButtonOpen] = useState(false);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
-
+  const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
   return (
     <Container>
-      <Wrapper light expand="lg">
-        <Link to="/">
-          <Logoo src={logo} alt="logo" />
-        </Link>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar home>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavHeading href="#">Dashboard</NavHeading>
-            </NavItem>
-            <NavItem>
-              <NavHeading href="#">Blockchain</NavHeading>
-            </NavItem>
-            <NavItem>
-              <NavHeading href="#">this is Blockchain</NavHeading>
-            </NavItem>
-            <NavItem>
-              <NavHeading href="#">Resources</NavHeading>
-            </NavItem>
-            <NavItem>
-              <NavHeading color href="#">
-                More
-              </NavHeading>
-            </NavItem>
-          </Nav>
-        </Collapse>
+      <Wrapper>
+        <RightSection>
+          <Link to="/">
+            <Logo src={logo} alt="logo" />
+          </Link>
+        </RightSection>
+        <LeftSection>
+          <SearchBox>
+            <InputGroupButtonDropdown
+              addonType="prepend"
+              isOpen={splitButtonOpen}
+              toggle={toggleSplit}>
+              <DropdownToggle split>
+                <Button>All Filter</Button>
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>Blockchain</DropdownItem>
+                <DropdownItem>Token</DropdownItem>
+                <DropdownItem>Resources</DropdownItem>
+                {/* <DropdownItem divider /> */}
+                <DropdownItem>Other Action</DropdownItem>
+              </DropdownMenu>
+            </InputGroupButtonDropdown>
+            <VerticalLine />
+            <Input placeholder="Search by Address / Txn Hash / Block / Token / Ens" />
+            <InputGroupAddon addonType="append">
+              <IconButton>
+                <SearchIcon src={search} alt="search-logo" />
+              </IconButton>
+            </InputGroupAddon>
+          </SearchBox>
+        </LeftSection>
       </Wrapper>
     </Container>
   );

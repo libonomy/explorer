@@ -1,13 +1,7 @@
 import React from 'react';
-import { PageContainer } from 'src/components';
-import TxsTable from './components/Table';
 
 const Transactions = () => {
-  return (
-    <PageContainer heading="All Transactions">
-      <TxsTable />
-    </PageContainer>
-  );
+  return <div>Transactions Page</div>;
 };
 
 export default Transactions;

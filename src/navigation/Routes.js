@@ -1,7 +1,7 @@
 import { Blocks } from 'src/views/blocks';
 import ViewBlock from 'src/views/blocks/ViewBlock';
 import { Landing } from 'src/views/landing';
-import { Transactions } from 'src/views/transactions';
+import { Transactions, ViewTx } from 'src/views/transactions';
 
 export const app = [
   {
@@ -11,6 +11,10 @@ export const app = [
   {
     path: '/txs',
     component: Transactions
+  },
+  {
+    path: '/txs/:hash',
+    component: ViewTx
   },
   {
     path: '/blocks',

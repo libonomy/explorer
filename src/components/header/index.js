@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Logo } from 'src/assets/images';
+import { logo } from 'src/assets/images';
 import { Link } from 'react-router-dom';
 
 import {
@@ -47,7 +47,7 @@ const Header = (props) => {
     <Container>
       <Wrapper light expand="lg">
         <Link to="/">
-          <Logoo src={Logo} alt="logo" />
+          <Logoo src={logo} alt="logo" />
         </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar home>

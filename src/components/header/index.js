@@ -63,7 +63,7 @@ const SearchBox = styled(InputGroup)`
   background: white;
   border-radius: 6px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
-  margin: 0 12px;
+
   @media (max-width: 576px) {
     margin: 1.5rem 0px 0px 0px;
   }

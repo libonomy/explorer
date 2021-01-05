@@ -4,8 +4,11 @@ import { Pagination } from 'src/components';
 import { successIcon, failIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
+import { useMediaQuery } from 'src/hooks';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  overflow-y: auto;
+`;
 
 const TableCol = styled.td`
   font-family: PoppinsRegular;
@@ -79,11 +82,13 @@ const Icon = styled.img`
 `;
 
 const TxsTable = () => {
+  const matches = useMediaQuery('(min-width:600px)');
+
   return (
     <Wrapper>
       <Header>
         <Text>Block #11540841 to #11540865 (Total of 11,540,866 blocks)</Text>
-        <Pagination />
+        {matches && <Pagination />}
       </Header>
       <Table hover>
         <TableHeader>

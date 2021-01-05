@@ -1,9 +1,12 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import { Pagination } from 'src/components';
+import { useMediaQuery } from 'src/hooks';
 import styled from 'styled-components';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  overflow-y: scroll;
+`;
 
 const TableCol = styled.td`
   font-family: PoppinsRegular;
@@ -62,11 +65,12 @@ const Text = styled.span`
 `;
 
 const BlocksTable = () => {
+  const matches = useMediaQuery('(min-width:600px)');
   return (
     <Wrapper>
       <Header>
         <Text>Block #11540841 to #11540865 (Total of 11,540,866 blocks)</Text>
-        <Pagination />
+        {matches && <Pagination />}
       </Header>
       <Table hover>
         <TableHeader>

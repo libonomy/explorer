@@ -1,12 +1,12 @@
-import React from 'react';
-import Banner from './components/Banner';
-import LandingPage from './components/LandingPage';
+import React, { Fragment } from 'react';
+import { Banner, Main } from './components';
+
 const Landing = () => {
   return (
-    <div>
+    <Fragment>
       <Banner />
-      <LandingPage />
-    </div>
+      <Main />
+    </Fragment>
   );
 };
 

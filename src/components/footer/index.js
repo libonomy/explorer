@@ -22,7 +22,7 @@ const Logo = styled.img`
   object-fit: contain;
   margin: 10px -4px 22px -4px;
 `;
-const ShapeIcon = styled.img`
+const Icon = styled.img`
   width: 13.7px;
   height: 13.7px;
   object-fit: contain;
@@ -32,19 +32,23 @@ const List = styled.ul`
   list-style: none;
   margin-bottom: 0;
 `;
+
 const ListItem = styled.li`
   padding: 8px !important;
   margin-left: 18px !important;
   @media (max-width: 991px) {
     margin-left: 8px !important;
   }
-  a {
+`;
+const ListLink = styled(Link)`
+  color: #092326;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 2;
+  font-weight: 400;
+  &:hover {
     color: #092326;
-    text-decoration: none;
-    font-size: 12px;
-    line-height: 2;
-    font-weight: 400;
-  }
+    text-decoration:none;
 `;
 const Paragraph = styled.p`
   font-family: PoppinsRegular;
@@ -80,7 +84,7 @@ const ListItems = styled.li`
     color: #fff;
   }
 `;
-const CopyRight = styled.p`
+const Text = styled.p`
   font-family: PoppinsRegular;
   font-size: 12px;
   font-weight: normal;
@@ -133,40 +137,40 @@ class Footer extends Component {
               <Col lg="2" md="4" xs="12">
                 <List>
                   <ListItem>
-                    <Link to="#">About Us</Link>
+                    <ListLink to="#">About Us</ListLink>
                   </ListItem>
                   <ListItem>
-                    <Link to="#">Advertise</Link>
+                    <ListLink to="#">Advertise</ListLink>
                   </ListItem>
                   <ListItem>
-                    <Link to="#">Terms & Conditions</Link>
-                  </ListItem>
-                </List>
-              </Col>
-              <Col lg="2" md="4" xs="12">
-                <List>
-                  <ListItem>
-                    <Link to="#">Developers API</Link>
-                  </ListItem>
-                  <ListItem>
-                    <Link href="#">Information Center</Link>
-                  </ListItem>
-                  <ListItem>
-                    <Link to="#">Newsletter</Link>
+                    <ListLink to="#">Terms & Conditions</ListLink>
                   </ListItem>
                 </List>
               </Col>
               <Col lg="2" md="4" xs="12">
                 <List>
                   <ListItem>
-                    <Link to="#">Blockchain</Link>
+                    <ListLink to="#">Developers API</ListLink>
                   </ListItem>
                   <ListItem>
-                    <Link to="#">Wallet</Link>
+                    <ListLink href="#">Information Center</ListLink>
+                  </ListItem>
+                  <ListItem>
+                    <ListLink to="#">Newsletter</ListLink>
+                  </ListItem>
+                </List>
+              </Col>
+              <Col lg="2" md="4" xs="12">
+                <List>
+                  <ListItem>
+                    <ListLink to="#">Blockchain</ListLink>
+                  </ListItem>
+                  <ListItem>
+                    <ListLink to="#">Wallet</ListLink>
                   </ListItem>
 
                   <ListItem>
-                    <Link to="#">Exchange</Link>
+                    <ListLink to="#">Exchange</ListLink>
                   </ListItem>
                 </List>
               </Col>
@@ -179,58 +183,60 @@ class Footer extends Component {
               <FooterColumn>
                 <FooterSocialIcon>
                   <ListItems>
-                    <Link
+                    <ListLink
                       href="#"
                       target="_blank"
                       rel="follow"
                       title="Pinterest">
-                      <ShapeIcon
+                      <Icon
                         src={pinterest}
                         alt="logo-proper-six"
                         class="img-footer"
                       />
-                    </Link>
+                    </ListLink>
                   </ListItems>
                   <ListItems>
-                    <Link
+                    <ListLink
                       href="#"
                       target="_blank"
                       rel="follow"
                       title="Instagram">
-                      <ShapeIcon
+                      <Icon
                         src={instagram}
                         alt="logo-proper-six"
                         class="img-footer"
                       />
-                    </Link>
+                    </ListLink>
                   </ListItems>
 
                   <ListItems>
-                    <Link href="#" target="_blank" rel="follow" title="Twitter">
-                      <ShapeIcon
+                    <ListLink
+                      href="#"
+                      target="_blank"
+                      rel="follow"
+                      title="Twitter">
+                      <Icon
                         src={twitter}
                         alt="logo-proper-six"
                         class="img-footer"
                       />
-                    </Link>
+                    </ListLink>
                   </ListItems>
                   <ListItems>
-                    <Link
+                    <ListLink
                       href="#"
                       target="_blank"
                       rel="follow"
                       title="Facebook">
-                      <ShapeIcon
+                      <Icon
                         src={facebook}
                         alt="logo-proper-six"
                         class="img-footer"
                       />
-                    </Link>
+                    </ListLink>
                   </ListItems>
                 </FooterSocialIcon>
-                <CopyRight>
-                  &copy; Libonomy (2020). All rights reserved.
-                </CopyRight>
+                <Text>&copy; Libonomy (2020). All rights reserved.</Text>
               </FooterColumn>
             </Row>
           </Container>

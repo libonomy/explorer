@@ -13,12 +13,18 @@ import {
   DropdownItem
 } from 'reactstrap';
 import styled from 'styled-components';
+import colors from 'src/vars/colors';
 
 const Wrapper = styled.div`
+  background-color: ${colors.white};
+  padding: 1rem 0rem;
+`;
+const Section = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+
+  background-color: ${colors.white};
   @media (max-width: 576px) {
     display: block;
   }
@@ -54,15 +60,15 @@ const DropdownMenuExp = styled(DropdownMenu)`
   .btn-secondary:not(:disabled):not(.disabled).active:focus,
   .show > .btn-secondary.dropdown-toggle:focus {
     box-shadow: none;
-    background-color: #fff;
-    color: #000;
+    background-color: ${colors.white};
+    color: ${colors.black};
     border: none;
   }
 `;
 const SearchBox = styled(InputGroup)`
   background: white;
   border-radius: 6px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px ${colors.borderGrey};
 
   @media (max-width: 576px) {
     margin: 1.5rem 0px 0px 0px;
@@ -72,7 +78,7 @@ const SearchBox = styled(InputGroup)`
   }
   .form-control {
     padding: 0;
-    border-left: 2px solid #fff !important;
+    border-left: 2px solid ${colors.white} !important;
     font-family: PoppinsRegular;
     opacity: 0.5;
     border: none;
@@ -83,26 +89,26 @@ const SearchBox = styled(InputGroup)`
   .btn-secondary:not(:disabled):not(.disabled):active,
   .btn-secondary:not(:disabled):not(.disabled).active,
   .show > .btn-secondary.dropdown-toggle {
-    color: #000;
-    background-color: #fff;
-    border-color: #fff;
+    color: ${colors.black};
+    background-color: ${colors.white};
+    border-color: ${colors.white};
   }
   .btn-secondary:not(:disabled):not(.disabled):active:focus,
   .btn-secondary:not(:disabled):not(.disabled).active:focus,
   .show > .btn-secondary.dropdown-toggle:focus {
     box-shadow: none !important;
-    color: #000 !important;
+    color: ${colors.black} !important;
   }
   ..btn-secondary.dropdown-toggle:hover,
   .btn-secondary:hover {
-    color: #000;
-    background-color: #fff;
-    border-color: #fff;
+    color: ${colors.black};
+    background-color: ${colors.white};
+    border-color: ${colors.white};
   }
   .btn-secondary {
-    color: #000;
-    background-color: #fff;
-    border-color: #fff;
+    color: ${colors.black};
+    background-color: ${colors.white};
+    border-color: ${colors.white};
   }
   .btn-secondary:focus,
   .btn-secondary.focus {
@@ -114,13 +120,13 @@ const DropDownButton = styled(Button)`
   text-align: left;
   border: none;
   box-shadow: none;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  background-color: #ffffff !important;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  background-color: ${colors.white} !important;
   font-size: 12px;
   line-height: 1.29;
   letter-spacing: 0.63px;
-  color: #000000;
+  color: ${colors.black};
   border: none;
   .btn:focus,
   .btn.focus {
@@ -129,7 +135,7 @@ const DropDownButton = styled(Button)`
   }
   .btn-secondary:focus,
   .btn:hover {
-    color: #000 !important;
+    color: ${colors.black} !important;
     text-decoration: none !important;
   }
   .btn-secondary:focus,
@@ -142,53 +148,55 @@ const IconButton = styled(Button)`
   font-size: 18px;
   line-height: 1.27;
   letter-spacing: 0.66px;
-  color: #ffffff;
+  color: ${colors.white};
   box-shadow: none;
   border: none;
   text-align: center;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 `;
 const Header = (props) => {
   const [splitButtonOpen, setSplitButtonOpen] = useState(false);
 
   const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
   return (
-    <Container>
-      <Wrapper light expand="lg">
-        <RightSection>
-          <Link to="/">
-            <Logo src={logo} alt="logo" />
-          </Link>
-        </RightSection>
-        <LeftSection>
-          <SearchBox>
-            <InputGroupButtonDropdown
-              addonType="prepend"
-              isOpen={splitButtonOpen}
-              toggle={toggleSplit}>
-              <DropdownToggle split>
-                <DropDownButton>All Filter</DropDownButton>
-              </DropdownToggle>
-              <DropdownMenuExp>
-                <DropdownItem>Blockchain</DropdownItem>
-                <DropdownItem>Token</DropdownItem>
-                <DropdownItem>Resources</DropdownItem>
-                {/* <DropdownItem divider /> */}
-                <DropdownItem>Other Action</DropdownItem>
-              </DropdownMenuExp>
-            </InputGroupButtonDropdown>
-            <VerticalLine />
-            <Input placeholder="Search by Address / Txn Hash / Block / Token / Ens" />
-            <InputGroupAddon addonType="append">
-              <IconButton>
-                <SearchIcon src={search} alt="search-logo" />
-              </IconButton>
-            </InputGroupAddon>
-          </SearchBox>
-        </LeftSection>
-      </Wrapper>
-    </Container>
+    <Wrapper>
+      <Container>
+        <Section light expand="lg">
+          <RightSection>
+            <Link to="/">
+              <Logo src={logo} alt="logo" />
+            </Link>
+          </RightSection>
+          <LeftSection>
+            <SearchBox>
+              <InputGroupButtonDropdown
+                addonType="prepend"
+                isOpen={splitButtonOpen}
+                toggle={toggleSplit}>
+                <DropdownToggle split>
+                  <DropDownButton>All Filter</DropDownButton>
+                </DropdownToggle>
+                <DropdownMenuExp>
+                  <DropdownItem>Blockchain</DropdownItem>
+                  <DropdownItem>Token</DropdownItem>
+                  <DropdownItem>Resources</DropdownItem>
+                  {/* <DropdownItem divider /> */}
+                  <DropdownItem>Other Action</DropdownItem>
+                </DropdownMenuExp>
+              </InputGroupButtonDropdown>
+              <VerticalLine />
+              <Input placeholder="Search by Address / Txn Hash / Block / Token / Ens" />
+              <InputGroupAddon addonType="append">
+                <IconButton>
+                  <SearchIcon src={search} alt="search-logo" />
+                </IconButton>
+              </InputGroupAddon>
+            </SearchBox>
+          </LeftSection>
+        </Section>
+      </Container>
+    </Wrapper>
   );
 };
 

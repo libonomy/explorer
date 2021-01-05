@@ -9,18 +9,19 @@ import {
   facebook
 } from 'src/assets/images';
 import styled from 'styled-components';
-const Wrapper = styled.div`
-padding: 2rem;
-padding-bottom: 1rem;
-margin-top:2.5rem;
-background: #fff;
-}
+
+const Wrapper = styled.div``;
+const FooterTop = styled.div`
+  padding: 2rem 0;
+  margin-top: 2.5rem;
+  background: #fff;
 `;
 const Logo = styled.img`
   width: 158px;
-  height: 18px;
+  max-width: 100%;
+  height: auto;
   object-fit: contain;
-  margin: 10px -4px 22px -4px;
+  margin-bottom: 1rem;
 `;
 const Icon = styled.img`
   width: 13.7px;
@@ -34,17 +35,18 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  padding: 8px !important;
-  margin-left: 18px !important;
-  @media (max-width: 991px) {
-    margin-left: 8px !important;
-  }
+  margin-bottom: 1rem;
 `;
 const ListLink = styled(Link)`
   color: #092326;
   text-decoration: none;
-  font-size: 12px;
+  font-family: PoppinsRegular;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
   line-height: 2;
+  letter-spacing: normal;
   font-weight: 400;
   &:hover {
     color: #092326;
@@ -52,28 +54,27 @@ const ListLink = styled(Link)`
 `;
 const Paragraph = styled.p`
   font-family: PoppinsRegular;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 2;
+  line-height: 2.14;
   letter-spacing: normal;
   text-align: left;
-  color: #092326;
 `;
 const FooterTail = styled.div`
-  margin: 3px 0 0;
   background-color: #40b1be;
   color: #fff;
-  padding: 15px;
+  padding: 0.7rem 0;
 `;
-const FooterSocialIcon = styled.ul`
+const IconSection = styled.ul`
   display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-left: 10px;
 `;
+const ContentSection = styled.div``;
+
 const ListItems = styled.li`
   padding-left: 15px;
 
@@ -92,7 +93,7 @@ const Text = styled.p`
   font-style: normal;
   line-height: 1.64;
   letter-spacing: 0.42px;
-  text-align: left;
+  text-align: right;
   padding-left: 15px;
 
   li:first-child {
@@ -102,37 +103,26 @@ const Text = styled.p`
     color: #fff;
   }
 `;
-const FooterColumn = styled(Col)`
-  display: flex;
-  display: flex;
-  justify-content: space-between;
-`;
 class Footer extends Component {
   render() {
     return (
-      <>
-        <Wrapper>
+      <Wrapper>
+        <FooterTop>
           <Container>
             <Row>
               <Col lg="6" md="12" xs="12">
-                <Col lg="12" md="12" xs="12">
-                  <List>
-                    <Link href="#">
-                      <Logo
-                        src={logo}
-                        alt="logo-proper-six"
-                        class="img-footer"
-                      />
-                    </Link>
+                <List>
+                  <Link href="#">
+                    <Logo src={logo} alt="logo-proper-six" />
+                  </Link>
 
-                    <Paragraph>
-                      Libonomy LTD | 483 Green Lanes, N13 4BS | London United
-                      Kingdom
-                    </Paragraph>
-                    <Paragraph>info@libonomy.com</Paragraph>
-                    <Paragraph>+44 742 458 6677</Paragraph>
-                  </List>
-                </Col>
+                  <Paragraph>
+                    Libonomy LTD | 483 Green Lanes, N13 4BS | London United
+                    Kingdom
+                  </Paragraph>
+                  <Paragraph>info@libonomy.com</Paragraph>
+                  <Paragraph>+44 742 458 6677</Paragraph>
+                </List>
               </Col>
               <Col lg="2" md="4" xs="12">
                 <List>
@@ -176,12 +166,12 @@ class Footer extends Component {
               </Col>
             </Row>
           </Container>
-        </Wrapper>
+        </FooterTop>
         <FooterTail>
           <Container>
             <Row>
-              <FooterColumn>
-                <FooterSocialIcon>
+              <Col>
+                <IconSection>
                   <ListItems>
                     <ListLink
                       href="#"
@@ -208,7 +198,6 @@ class Footer extends Component {
                       />
                     </ListLink>
                   </ListItems>
-
                   <ListItems>
                     <ListLink
                       href="#"
@@ -235,13 +224,17 @@ class Footer extends Component {
                       />
                     </ListLink>
                   </ListItems>
-                </FooterSocialIcon>
-                <Text>&copy; Libonomy (2020). All rights reserved.</Text>
-              </FooterColumn>
+                </IconSection>
+              </Col>
+              <Col>
+                <ContentSection>
+                  <Text>&copy; Libonomy (2020). All rights reserved.</Text>
+                </ContentSection>
+              </Col>
             </Row>
           </Container>
         </FooterTail>
-      </>
+      </Wrapper>
     );
   }
 }

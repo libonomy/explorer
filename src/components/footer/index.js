@@ -54,7 +54,6 @@ class Footer extends Component {
                       class="img-footer"
                     />
                   </a>
-
                   <Paragraph>
                     Libonomy LTD | 483 Green Lanes, N13 4BS | London United
                     Kingdom

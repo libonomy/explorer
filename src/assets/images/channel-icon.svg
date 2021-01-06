@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <defs>
+        <style>
+            .cls-2{fill:#fff}
+        </style>
+    </defs>
+    <g id="Group_4093" transform="translate(-841 -423)">
+        <circle id="Ellipse_146" cx="16" cy="16" r="16" fill="#40b1be" transform="translate(841 423)"/>
+        <g id="business-affiliate-network" transform="translate(846.333 428.334)">
+            <g id="Layer_1_110_">
+                <g id="Group_4019">
+                    <path id="Path_16767" d="M11.655 11.029l-1.294-1.223a1.9 1.9 0 0 0 .244-.919 1.933 1.933 0 1 0-.9 1.624l1.293 1.222a4.4 4.4 0 0 1 .657-.704z" class="cls-2" transform="translate(-3.702 -4.226)"/>
+                    <path id="Path_16768" d="M28.658 7.561l1.72-2.894a1.9 1.9 0 1 0-.834-.487l-1.715 2.886a4.3 4.3 0 0 1 .829.495z" class="cls-2" transform="translate(-15.23 -.911)"/>
+                    <path id="Path_16769" d="M37.589 20.952a1.918 1.918 0 0 0-1.8 1.256l-2.39-.236v.053a4.4 4.4 0 0 1-.1.91l2.389.236a1.917 1.917 0 1 0 1.891-2.219z" class="cls-2" transform="translate(-18.229 -11.879)"/>
+                    <path id="Path_16770" d="M25.805 34.8l-.534-2.334a4.374 4.374 0 0 1-.943.218l.535 2.335a1.914 1.914 0 1 0 .942-.218z" class="cls-2" transform="translate(-13.04 -18.181)"/>
+                    <path id="Path_16771" d="M6.5 25.37l-2.975 1a1.916 1.916 0 1 0 .314 1.047c0-.044-.01-.085-.013-.129l2.984-1a4.384 4.384 0 0 1-.31-.918z" class="cls-2" transform="translate(0 -14.296)"/>
+                    <circle id="Ellipse_140" cx="3.292" cy="3.292" r="3.292" class="cls-2" transform="translate(7.497 6.855)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

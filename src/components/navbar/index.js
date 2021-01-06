@@ -4,7 +4,7 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  Nav,
+  Nav as NavBt,
   NavItem,
   NavLink,
   Container
@@ -15,6 +15,9 @@ const bgColor = colors.primary;
 const Wrapper = styled.div``;
 const NavbarExp = styled(Navbar)`
   background-color: ${bgColor};
+`;
+const Nav = styled(NavBt)`
+  margin-left: -5px;
 `;
 const Link = styled(NavLink)`
   font-family: PoppinsRegular;

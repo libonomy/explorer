@@ -5,8 +5,7 @@ import { liboBackground } from 'src/assets/images';
 import colors from 'src/vars/colors';
 
 const Wrapper = styled.div`
-  margin-top: 1px;
-  padding: 1rem 0;
+  padding: 3rem 0 1rem 0;
   background: url(${liboBackground});
   background-repeat: no-repeat;
   background-size: cover;

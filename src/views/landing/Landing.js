@@ -1,12 +1,21 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import styled from 'styled-components';
 import { Banner, Main } from './components';
 
+const Wrapper = styled.div`
+  margin-top: -46px;
+`;
+
 const Landing = () => {
+  useEffect(() => {
+    const element = document.getElementsByClassName('YefZl');
+    element[0].style['background-color'] = 'transparent';
+  }, []);
   return (
-    <Fragment>
+    <Wrapper>
       <Banner />
       <Main />
-    </Fragment>
+    </Wrapper>
   );
 };
 

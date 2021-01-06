@@ -64,7 +64,7 @@ const Text = styled.span`
   text-align: left;
 `;
 
-const BlocksTable = () => {
+const TxsTable = () => {
   const matches = useMediaQuery('(min-width:600px)');
   return (
     <Wrapper>
@@ -141,4 +141,4 @@ const BlocksTable = () => {
   );
 };
 
-export default BlocksTable;
+export default TxsTable;

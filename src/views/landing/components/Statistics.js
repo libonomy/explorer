@@ -192,6 +192,17 @@ const Text = styled(CardText)`
   text-align: left;
   color: ${colors.black};
 `;
+const TextFormat = styled(NumberFormat)`
+  font-family: PoppinsBold;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+  text-align: left;
+  color: ${colors.black};
+`;
 const ToggleCard = styled.div`
   width: 18px;
   height: 17px;
@@ -248,7 +259,7 @@ const Statistics = () => {
                 <Title>Latest Block</Title>
                 <Text>
                   {totalSupply && (
-                    <NumberFormat
+                    <TextFormat
                       value={totalSupply.height}
                       displayType={'text'}
                       thousandSeparator={true}
@@ -295,7 +306,7 @@ const Statistics = () => {
                 <Text>
                   {totalSupply && (
                     <Fragment>
-                      <NumberFormat
+                      <TextFormat
                         value={totalSupply.result[0].amount}
                         displayType={'text'}
                         thousandSeparator={true}

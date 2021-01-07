@@ -57,6 +57,7 @@ const Header = styled.div`
   line-height: 2.5;
   letter-spacing: 0.54px;
   margin-left: 10px;
+  padding: 5px 0px;
 `;
 
 const Icon = styled.img`

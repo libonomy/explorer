@@ -19,7 +19,7 @@ class App extends Component {
             {app.map((route, i) => (
               <Route exact path={route.path} component={route.component} />
             ))}
-            <Redirect to="not_found" />
+            <Redirect to="/not_found" />
           </Switch>
         </Layout>
       </Router>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
   Card,
   CardBody,
@@ -18,8 +18,11 @@ import {
   toggler
 } from 'src/assets/images';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import colors from 'src/vars/colors';
-import { Link } from 'react-router-dom';
+import { getNodeInfo, getTotalSupply } from 'src/redux/actions';
+import NumberFormat from 'react-number-format';
+
 const Wrapper = styled.div``;
 
 const ButtonExp = styled.div`
@@ -90,6 +93,63 @@ const CardExp = styled(Card)`
   margin-bottom: 1rem;
   box-shadow: ${colors.shaddow};
   border: none;
+  ${({ loading }) =>
+    loading &&
+    `
+  position:relative;
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255,.8);
+    width: 100%;
+    height: 100%;
+    border-radius: .28571429rem;
+    z-index: 100;
+    }
+  &:after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    margin: -1.3em 0 0 -1.3em;
+    width: 2.5em;
+    height: 2.5em;
+    -webkit-animation: segment-spin .6s linear;
+    animation: segment-spin .6s linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    border-radius: 500rem;
+    border-color: ${colors.primary} rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.1);
+    border-style: solid;
+    border-width: .2em;
+    -webkit-box-shadow: 0 0 0 1px transparent;
+    box-shadow: 0 0 0 1px transparent;
+    visibility: visible;
+    z-index: 101;
+    }
+  `};
+  @-webkit-keyframes segment-spin {
+    from {
+      -webkit-transform: rotate(0);
+      transform: rotate(0);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes segment-spin {
+    from {
+      -webkit-transform: rotate(0);
+      transform: rotate(0);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
 `;
 const CardContent = styled(CardBody)`
   display: flex;
@@ -148,86 +208,62 @@ const MenuIcon = styled.span`
   right: 2px;
 `;
 
-const ListWrap = styled.div``;
-const List = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0px;
-  margin-top: -5px;
-  position: absolute;
-  top: 22px;
-  right: 2px;
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.16);
-  background-color: #ffffff;
-`;
-const ListItem = styled.li`
-  font-size: 12px;
-  letter-spacing: 0.2px;
-  padding: 0px 8px;
-  font-family: Helvetica;
-  margin: 2px auto;
-  &:hover {
-    background: #d6f7fb;
-  }
-`;
-const LinkList = styled(Link)`
-  color: #347f87;
-  text-decoration: none;
-  background-color: transparent;
-`;
-
 const Statistics = () => {
-  const [state, setState] = React.useState({
-    showPersons: false,
-    showInnerDiv: false,
-    title: 'See More',
-    isOpen: ''
-  });
-  // const [isOpen, setIsOpen] = useState(false);
-  // const toggle = () => setIsOpen(!isOpen);
-  const togglePersonHandler = () => {
-    const doesShow = state.showPersons;
-    setState({ showPersons: !doesShow });
-  };
-  const showToggleDiv = () => {
-    const divShow = state.showInnerDiv;
-    setState({ showInnerDiv: !divShow });
-  };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getNodeInfo());
+    dispatch(getTotalSupply());
+  }, []);
+  const { nodeInfo, nodeInfoLoading } = useSelector((state) => state.info);
+  const { totalSupply, totalSupplyLoading } = useSelector(
+    (state) => state.supply
+  );
+
   return (
     <Wrapper>
       <Row>
         <Col lg="6" md="6" sm="6">
-          <CardExp>
+          <CardExp loading={nodeInfoLoading}>
             <CardContent>
               <Icon src={latestblockheight} alt="latestblockheight" />
               <InnerBody>
-                <Title>Latest Block Height</Title>
-                <Text>2,052,591</Text>
+                <Title>Network</Title>
+                <Text>{nodeInfo && nodeInfo.node_info.network}</Text>
               </InnerBody>
             </CardContent>
             <CardContent>
               <Icon src={latestblockheight} alt="latestblockheight" />
               <InnerBody>
-                <Title>Irreversible Block</Title>
-                <Text>2,052,591</Text>
+                <Title>Version</Title>
+                <Text>{nodeInfo && nodeInfo.node_info.version}</Text>
               </InnerBody>
             </CardContent>
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp>
+          <CardExp loading={totalSupplyLoading}>
             <CardContent>
               <Icon src={transaction} alt="transaction" />
               <InnerBody>
-                <Title>Transactions</Title>
-                <Text>2,052,591</Text>
+                <Title>Latest Block</Title>
+                <Text>
+                  {totalSupply && (
+                    <NumberFormat
+                      value={totalSupply.height}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
+                  )}
+                </Text>
               </InnerBody>
             </CardContent>
             <CardContent>
               <Icon src={transaction} alt="transaction" />
               <InnerBody>
-                <Title>Safe Gas Price</Title>
-                <Text>2,052,591</Text>
+                <Title>Protocol Version</Title>
+                <Text>
+                  {nodeInfo && nodeInfo.node_info.protocol_version.p2p}
+                </Text>
               </InnerBody>
             </CardContent>
           </CardExp>
@@ -237,33 +273,15 @@ const Statistics = () => {
             <CardContent>
               <Icon src={averageblock} alt="averageblock" />
               <InnerBody>
-                <Title>Average Block (1m)</Title>
-                <Text>2,052,591</Text>
+                <Title>Peer Speed</Title>
+                <Text>Calculator Pending</Text>
               </InnerBody>
             </CardContent>
-            <CardContent onClick={showToggleDiv}>
+            <CardContent>
               <InnerBody>
                 <ToggleCard className="toggle-btn">
                   <MenuIcon src={toggler} alt="menuicon" />
                 </ToggleCard>
-                {state.showInnerDiv === true ? (
-                  <ListWrap>
-                    <List>
-                      <ListItem>
-                        <LinkList to="#">All Time</LinkList>
-                      </ListItem>
-                      <ListItem>
-                        <LinkList to="#">Last Minute</LinkList>
-                      </ListItem>
-                      <ListItem>
-                        <LinkList to="#">Last Hour</LinkList>
-                      </ListItem>
-                      <ListItem>
-                        <LinkList to="#">Last Day</LinkList>
-                      </ListItem>
-                    </List>
-                  </ListWrap>
-                ) : null}
               </InnerBody>
             </CardContent>
           </CardExp>
@@ -273,8 +291,19 @@ const Statistics = () => {
             <CardContent>
               <Icon src={marketcap} alt="marketcap" />
               <InnerBody>
-                <Title>Market Cap</Title>
-                <Text>$18,963,382,439.753</Text>
+                <Title>Current Supply</Title>
+                <Text>
+                  {totalSupply && (
+                    <Fragment>
+                      <NumberFormat
+                        value={totalSupply.result[0].amount}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />{' '}
+                      {totalSupply.result[0].denom}
+                    </Fragment>
+                  )}
+                </Text>
               </InnerBody>
             </CardContent>
             <CardContent></CardContent>

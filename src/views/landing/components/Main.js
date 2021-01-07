@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import LatestBlocks from './LatestBlocks';
 import LatestTxs from './LatestTxs';
 import Statistics from './Statistics';
 import ConsensusState from './ConsensusState';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { getNodeInfo } from 'src/redux/actions';
 const Wrapper = styled.div`
   padding: 1rem 0rem;
 `;

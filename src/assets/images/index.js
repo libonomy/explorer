@@ -17,3 +17,5 @@ export { default as marketcap } from './market-cap.svg';
 export { default as accounts } from './accounts.svg';
 export { default as difficulty } from './difficulty.svg';
 export { default as toggler } from './toggler-icon.svg';
+export { default as txIcon } from './tx-icon.svg';
+export { default as blockIcon } from './block-icon.svg';

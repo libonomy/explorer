@@ -123,7 +123,7 @@ const Footer = () => {
                 <Paragraph>+44 742 458 6677</Paragraph>
               </List>
             </Col>
-            <Col lg="2" md="4" xs="12">
+            <Col lg="2" md="4" xs="6">
               <List>
                 <ListItem>
                   <ListLink to="#">About Us</ListLink>
@@ -136,7 +136,7 @@ const Footer = () => {
                 </ListItem>
               </List>
             </Col>
-            <Col lg="2" md="4" xs="12">
+            <Col lg="2" md="4" xs="6">
               <List>
                 <ListItem>
                   <ListLink to="#">Developers API</ListLink>
@@ -149,7 +149,7 @@ const Footer = () => {
                 </ListItem>
               </List>
             </Col>
-            <Col lg="2" md="4" xs="12">
+            <Col lg="2" md="4" xs="6">
               <List>
                 <ListItem>
                   <ListLink to="#">Blockchain</ListLink>

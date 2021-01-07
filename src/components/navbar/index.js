@@ -25,19 +25,20 @@ const NavbarExp = styled(Navbar)`
   }
 `;
 const Nav = styled(NavBt)`
-  margin-left: -5px;
-
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     padding-top: 1rem;
+    margin-left: -10px;
+  }
+  @media (max-width: 576px) {
+    margin-left: -5px;
   }
 `;
 const NavbarTogglers = styled(NavbarToggler)`
   border: none;
   outline: none !important;
   z-index: 1;
-  background-image: url(${menuIcon});
   color: #fff;
   span.navbar-toggler-icon {
     outline: none;

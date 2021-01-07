@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import colors from 'src/vars/colors';
 import styled from 'styled-components';
 import { Banner, Main } from './components';
 
@@ -12,6 +13,9 @@ const Landing = () => {
     if (element) {
       element.style.background = 'transparent';
     }
+    return () => {
+      element.style.background = colors.primary;
+    };
   }, []);
 
   return (

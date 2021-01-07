@@ -50,7 +50,7 @@ const ButtonExp = styled.div`
 `;
 
 const CardButton = styled(Button)`
-  width: 100px;
+  width: auto;
   height: 28px;
   border-radius: 3px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
@@ -59,7 +59,7 @@ const CardButton = styled(Button)`
   align-items: center;
   box-shadow: none;
   font-family: PoppinsRegular;
-  font-size: 8px;
+  font-size: 11px;
   .btn-secondary:hover {
     color: #fff;
     background-color: ##40b1be !important;
@@ -112,18 +112,18 @@ const Icon = styled.img`
 `;
 const Title = styled(CardTitle)`
   font-family: PoppinsRegular;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.26;
   letter-spacing: 0.29px;
-  text-align: center;
+  text-align: left;
   color: ${colors.black};
 `;
 const Text = styled(CardText)`
   font-family: PoppinsBold;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -183,12 +183,7 @@ const Statistics = () => {
     title: 'See More',
     isOpen: ''
   });
-  // const [isOpen, setIsOpen] = useState(false);
-  // const toggle = () => setIsOpen(!isOpen);
-  const togglePersonHandler = () => {
-    const doesShow = state.showPersons;
-    setState({ showPersons: !doesShow });
-  };
+
   const showToggleDiv = () => {
     const divShow = state.showInnerDiv;
     setState({ showInnerDiv: !divShow });
@@ -201,7 +196,7 @@ const Statistics = () => {
             <CardContent>
               <Icon src={latestblockheight} alt="latestblockheight" />
               <InnerBody>
-                <Title>Latest Block Height</Title>
+                <Title>Latest Block</Title>
                 <Text>2,052,591</Text>
               </InnerBody>
             </CardContent>
@@ -238,7 +233,7 @@ const Statistics = () => {
               <Icon src={averageblock} alt="averageblock" />
               <InnerBody>
                 <Title>Average Block (1m)</Title>
-                <Text>2,052,591</Text>
+                <Text>5.83</Text>
               </InnerBody>
             </CardContent>
             <CardContent onClick={showToggleDiv}>

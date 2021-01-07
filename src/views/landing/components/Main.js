@@ -6,7 +6,7 @@ import Statistics from './Statistics';
 import ConsensusState from './ConsensusState';
 import styled from 'styled-components';
 const Wrapper = styled.div`
-  padding: 1rem 0rem;
+  margin: 2rem 0rem;
 `;
 const Main = () => {
   return (

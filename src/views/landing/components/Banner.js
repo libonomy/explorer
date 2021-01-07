@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Col, Container, Row } from 'reactstrap';
 import styled from 'styled-components';
 import { liboBackground } from 'src/assets/images';
+
 import colors from 'src/vars/colors';
 
 const Wrapper = styled.div`
@@ -23,11 +24,14 @@ const Wrapper = styled.div`
 const CardWrapper = styled(Card)`
   width: 345px;
   height: 151px;
-  margin-left: 7.5rem;
+  margin-left: 2.5rem;
   border-radius: 10px;
   background-color: #ffffff;
   @media (max-width: 991px) {
     margin-left: 0rem;
+  }
+  @media (max-width: 480px) {
+    width: auto;
   }
 `;
 
@@ -52,12 +56,11 @@ const Paragraph = styled.p`
   letter-spacing: normal;
   text-align: left;
   color: #ffffff;
+  @media (max-width: 991px) {
+    margin-bottom: 1rem;
+  }
 `;
-
 const Banner = () => {
-  const [splitButtonOpen, setSplitButtonOpen] = useState(false);
-
-  const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
   return (
     <Wrapper>
       <Container>

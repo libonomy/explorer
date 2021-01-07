@@ -6,8 +6,6 @@ import {
   Redirect
 } from 'react-router-dom';
 import { Layout } from 'src/layouts';
-import { Blocks } from 'src/views/blocks';
-import { Landing } from 'src/views/landing';
 import { app } from './Routes';
 
 class App extends Component {

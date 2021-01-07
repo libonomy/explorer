@@ -1,16 +1,19 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Banner, Main } from './components';
 
 const Wrapper = styled.div`
-  margin-top: -46px;
+  margin-top: -38px;
 `;
 
 const Landing = () => {
   useEffect(() => {
-    const element = document.getElementsByClassName('YefZl');
-    element[0].style['background-color'] = 'transparent';
+    const element = document.getElementById('navbar');
+    if (element) {
+      element.style.background = 'transparent';
+    }
   }, []);
+
   return (
     <Wrapper>
       <Banner />

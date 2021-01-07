@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table } from 'reactstrap';
-import { successIcon, failIcon } from 'src/assets/images';
+import { successIcon, failIcon, txIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllTransactions } from 'src/redux/actions';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import { IconText } from 'src/components/typography';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -54,80 +59,68 @@ const Header = styled.div`
   margin-left: 10px;
 `;
 
-const Text = styled.span`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: 0.36px;
-  text-align: left;
-`;
-const FailText = styled.span`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: 0.36px;
-  text-align: left;
-  color: ${colors.red};
-`;
-
-const TextIconWrapper = styled.div``;
 const Icon = styled.img`
   margin-right: 5px;
 `;
 
 const LatestTxs = () => {
+  const dispatch = useDispatch();
+
+  const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
+
+  useEffect(() => {
+    const filter = {
+      'tx.minheight': 1,
+      'tx.maxheight': 1000000,
+      page: 1,
+      limit: 5
+    };
+    dispatch(getAllTransactions(filter));
+  }, []);
   return (
     <Wrapper>
       <Header>Latest Transactions</Header>
       <Table hover>
         <TableHeader>
           <TableRow>
-            <TableHeading>Height</TableHeading>
-            <TableHeading>Block Hash</TableHeading>
+            <TableHeading>Txn Hash</TableHeading>
             <TableHeading>Age</TableHeading>
-            <TableHeading>Status</TableHeading>
             <TableHeading>To</TableHeading>
             <TableHeading>From</TableHeading>
-            <TableHeading>Value</TableHeading>
+            {/* <TableHeading>Amount</TableHeading> */}
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCol>1234841</TableCol>
-            <TableCol>
-              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3{' '}
-            </TableCol>
-            <TableCol>1 min ago</TableCol>
-            <TableCol>
-              <TextIconWrapper>
-                <Icon src={successIcon}></Icon>
-                <Text>success</Text>
-              </TextIconWrapper>
-            </TableCol>
-            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
-            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
-            <TableCol>2 libocoin</TableCol>
-          </TableRow>
-          <TableRow>
-            <TableCol>1234841</TableCol>
-            <TableCol>
-              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3{' '}
-            </TableCol>
-            <TableCol>1 min ago</TableCol>
-            <TableCol>
-              <TextIconWrapper>
-                <Icon src={failIcon}></Icon>
-                <FailText>fail</FailText>
-              </TextIconWrapper>
-            </TableCol>
-            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
-            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
-            <TableCol>2 libocoin</TableCol>
-          </TableRow>
+          {latestTxs &&
+            latestTxs.txs.map((item, index) => (
+              <TableRow key={index}>
+                <TableCol icon>
+                  <IconText>
+                    <Icon src={txIcon} />
+                    <Link to={`/blocks/${item.txhash}`}>{item.txhash}</Link>
+                  </IconText>
+                </TableCol>
+                <TableCol>
+                  {moment(item.timestamp, 'YYYYMMDD').fromNow()}
+                </TableCol>
+                <TableCol>
+                  <Link disabled>
+                    {item.tx.value.msg[0].value.from_address}
+                  </Link>
+                </TableCol>
+                <TableCol>
+                  <Link disabled>{item.tx.value.msg[0].value.to_address}</Link>
+                </TableCol>
+                {/* <TableCol>
+                  {item.tx.value.msg[0].value.amount[0].denom}
+                  <NumberFormat
+                    value={item.tx.value.msg[0].value.amount[0].amount}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                  />
+                </TableCol> */}
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </Wrapper>

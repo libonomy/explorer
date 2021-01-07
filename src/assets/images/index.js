@@ -24,3 +24,5 @@ export { default as facebookcolorIcon } from './facebook-color-icon.svg';
 export { default as googleicon } from './google-icon.svg';
 export { default as discussionIcon } from './discussion-icon.svg';
 export { default as menuIcon } from './menu-icon.svg';
+export { default as txIcon } from './tx-icon.svg';
+export { default as blockIcon } from './block-icon.svg';

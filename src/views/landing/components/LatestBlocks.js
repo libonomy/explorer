@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table } from 'reactstrap';
-import { successIcon, failIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllBlocks, getAllTransactions } from 'src/redux/actions';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import { blockIcon } from 'src/assets/images';
+import { IconText } from 'src/components';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -54,32 +59,21 @@ const Header = styled.div`
   margin-left: 10px;
 `;
 
-const Text = styled.span`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: 0.36px;
-  text-align: left;
-`;
-const FailText = styled.span`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: 0.36px;
-  text-align: left;
-  color: ${colors.red};
-`;
-
-const TextIconWrapper = styled.div``;
 const Icon = styled.img`
   margin-right: 5px;
 `;
 
 const LatestBlocks = () => {
+  const dispatch = useDispatch();
+
+  const { latestBlocks, latestBlocksLoading } = useSelector(
+    (state) => state.blocks
+  );
+
+  useEffect(() => {
+    dispatch(getAllBlocks(218172, 218176));
+  }, []);
+
   return (
     <Wrapper>
       <Header>Latest Blocks</Header>
@@ -87,47 +81,32 @@ const LatestBlocks = () => {
         <TableHeader>
           <TableRow>
             <TableHeading>Height</TableHeading>
-            <TableHeading>Block Hash</TableHeading>
             <TableHeading>Age</TableHeading>
-            <TableHeading>Status</TableHeading>
-            <TableHeading>To</TableHeading>
-            <TableHeading>From</TableHeading>
-            <TableHeading>Value</TableHeading>
+            <TableHeading>Txs</TableHeading>
+            <TableHeading>Miner</TableHeading>
+            <TableHeading>Reward</TableHeading>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCol>1234841</TableCol>
-            <TableCol>
-              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3{' '}
-            </TableCol>
-            <TableCol>1 min ago</TableCol>
-            <TableCol>
-              <TextIconWrapper>
-                <Icon src={successIcon}></Icon>
-                <Text>success</Text>
-              </TextIconWrapper>
-            </TableCol>
-            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
-            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
-            <TableCol>2 libocoin</TableCol>
-          </TableRow>
-          <TableRow>
-            <TableCol>1234841</TableCol>
-            <TableCol>
-              0xc7a5b3d6b969a4d12473acad1b298080e6941fca4dcf63dc7005e2aeb6b53fb3{' '}
-            </TableCol>
-            <TableCol>1 min ago</TableCol>
-            <TableCol>
-              <TextIconWrapper>
-                <Icon src={failIcon}></Icon>
-                <FailText>fail</FailText>
-              </TextIconWrapper>
-            </TableCol>
-            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
-            <TableCol>0xada02c3fe00720a4a204cbb6963af13478167d6b</TableCol>
-            <TableCol>2 libocoin</TableCol>
-          </TableRow>
+          {latestBlocks &&
+            latestBlocks.result.block_metas.map((item, index) => (
+              <TableRow key={index}>
+                <TableCol>
+                  <IconText>
+                    <Icon src={blockIcon} />
+                    <Link to={`/blocks/${item.header.height}`}>
+                      {item.header.height}
+                    </Link>
+                  </IconText>
+                </TableCol>
+                <TableCol>
+                  {moment(item.header.time, 'YYYYMMDD').fromNow()}
+                </TableCol>
+                <TableCol>{item.header.num_txs}</TableCol>
+                <TableCol>{item.header.num_txs}</TableCol>
+                <TableCol>{item.header.num_txs}</TableCol>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </Wrapper>

@@ -50,7 +50,7 @@ const TableBody = styled.tbody``;
 
 const Header = styled.div`
   font-family: PoppinsMedium;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;

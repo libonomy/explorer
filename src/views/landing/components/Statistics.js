@@ -53,7 +53,7 @@ const ButtonExp = styled.div`
 `;
 
 const CardButton = styled(Button)`
-  width: 100px;
+  width: auto;
   height: 28px;
   border-radius: 3px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
@@ -62,7 +62,7 @@ const CardButton = styled(Button)`
   align-items: center;
   box-shadow: none;
   font-family: PoppinsRegular;
-  font-size: 8px;
+  font-size: 11px;
   .btn-secondary:hover {
     color: #fff;
     background-color: ##40b1be !important;
@@ -172,18 +172,18 @@ const Icon = styled.img`
 `;
 const Title = styled(CardTitle)`
   font-family: PoppinsRegular;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.26;
   letter-spacing: 0.29px;
-  text-align: center;
+  text-align: left;
   color: ${colors.black};
 `;
 const Text = styled(CardText)`
   font-family: PoppinsBold;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;

@@ -1,37 +1,19 @@
 import React from 'react';
-import {
-  Card,
-  CardBody,
-  CardTitle,
-  CardText,
-  Col,
-  Row,
-  Button
-} from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText, Col, Row } from 'reactstrap';
 import colors from 'src/vars/colors';
 import { channelIcon } from 'src/assets/images';
 import styled from 'styled-components';
 const Wrapper = styled.div`
   padding: 1rem;
   border-radius: 10px;
-
+  box-shadow: ${colors.shaddow};
   background-color: ${colors.white};
+  height: calc(100% - 64px);
   @media (max-width: 991px) {
     height: auto;
   }
 `;
 
-const CardHeading = styled.h1`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.17;
-  letter-spacing: 0.36px;
-  text-align: left;
-  color: ${colors.black};
-`;
 const CardExp = styled(Card)`
   padding: 1rem;
   display: flex;
@@ -46,7 +28,7 @@ const CardExp = styled(Card)`
 const CardContent = styled(CardBody)`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 0px;
 `;
@@ -54,7 +36,7 @@ const CardContent = styled(CardBody)`
 const InnerBody = styled.div`
   display: flex;
   flex-direction: Column;
-  align-items: flex-start;
+  align-items: center;
 `;
 const Icon = styled.img`
   width: 32px;
@@ -63,30 +45,30 @@ const Icon = styled.img`
 `;
 const Title = styled(CardTitle)`
   font-family: PoppinsRegular;
-  font-size: 9.5px;
+  font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.26;
+  line-height: 1;
   letter-spacing: 0.29px;
   text-align: center;
   color: #000000;
 `;
 const Text = styled(CardText)`
   font-family: PoppinsBold;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.1;
   letter-spacing: 0.3px;
-  text-align: left;
+  text-align: center;
   color: #000000;
 `;
 
 const Heading = styled.div`
   font-family: PoppinsMedium;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -105,7 +87,7 @@ const ConsensusState = () => {
             <CardContent>
               <Icon src={channelIcon} />
               <InnerBody>
-                <Title>Latest Block Height</Title>
+                <Title>Channel</Title>
                 <Text>2,052,591</Text>
               </InnerBody>
             </CardContent>
@@ -116,8 +98,8 @@ const ConsensusState = () => {
             <CardContent>
               <Icon src={channelIcon} />
               <InnerBody>
-                <Title>Latest Block Height</Title>
-                <Text>2,052,591</Text>
+                <Title>Pooling State</Title>
+                <Text>0</Text>
               </InnerBody>
             </CardContent>
           </CardExp>
@@ -127,8 +109,8 @@ const ConsensusState = () => {
             <CardContent>
               <Icon src={channelIcon} />
               <InnerBody>
-                <Title>Latest Block Height</Title>
-                <Text>2,052,591</Text>
+                <Title>Layer level</Title>
+                <Text>1</Text>
               </InnerBody>
             </CardContent>
           </CardExp>
@@ -138,8 +120,8 @@ const ConsensusState = () => {
             <CardContent>
               <Icon src={channelIcon} />
               <InnerBody>
-                <Title>Latest Block Height</Title>
-                <Text>2,052,591</Text>
+                <Title>Peer</Title>
+                <Text>23</Text>
               </InnerBody>
             </CardContent>
           </CardExp>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
 import {
@@ -103,140 +103,138 @@ const Text = styled.p`
     color: #fff;
   }
 `;
-class Footer extends Component {
-  render() {
-    return (
-      <Wrapper>
-        <FooterTop>
-          <Container>
-            <Row>
-              <Col lg="6" md="12" xs="12">
-                <List>
-                  <Link href="#">
-                    <Logo src={logo} alt="logo-proper-six" />
-                  </Link>
+const Footer = () => {
+  return (
+    <Wrapper>
+      <FooterTop>
+        <Container>
+          <Row>
+            <Col lg="6" md="12" xs="12">
+              <List>
+                <Link href="#">
+                  <Logo src={logo} alt="logo-proper-six" />
+                </Link>
 
-                  <Paragraph>
-                    Libonomy LTD | 483 Green Lanes, N13 4BS | London United
-                    Kingdom
-                  </Paragraph>
-                  <Paragraph>info@libonomy.com</Paragraph>
-                  <Paragraph>+44 742 458 6677</Paragraph>
-                </List>
-              </Col>
-              <Col lg="2" md="4" xs="12">
-                <List>
-                  <ListItem>
-                    <ListLink to="#">About Us</ListLink>
-                  </ListItem>
-                  <ListItem>
-                    <ListLink to="#">Advertise</ListLink>
-                  </ListItem>
-                  <ListItem>
-                    <ListLink to="#">Terms & Conditions</ListLink>
-                  </ListItem>
-                </List>
-              </Col>
-              <Col lg="2" md="4" xs="12">
-                <List>
-                  <ListItem>
-                    <ListLink to="#">Developers API</ListLink>
-                  </ListItem>
-                  <ListItem>
-                    <ListLink href="#">Information Center</ListLink>
-                  </ListItem>
-                  <ListItem>
-                    <ListLink to="#">Newsletter</ListLink>
-                  </ListItem>
-                </List>
-              </Col>
-              <Col lg="2" md="4" xs="12">
-                <List>
-                  <ListItem>
-                    <ListLink to="#">Blockchain</ListLink>
-                  </ListItem>
-                  <ListItem>
-                    <ListLink to="#">Wallet</ListLink>
-                  </ListItem>
+                <Paragraph>
+                  Libonomy LTD | 483 Green Lanes, N13 4BS | London United
+                  Kingdom
+                </Paragraph>
+                <Paragraph>info@libonomy.com</Paragraph>
+                <Paragraph>+44 742 458 6677</Paragraph>
+              </List>
+            </Col>
+            <Col lg="2" md="4" xs="12">
+              <List>
+                <ListItem>
+                  <ListLink to="#">About Us</ListLink>
+                </ListItem>
+                <ListItem>
+                  <ListLink to="#">Advertise</ListLink>
+                </ListItem>
+                <ListItem>
+                  <ListLink to="#">Terms & Conditions</ListLink>
+                </ListItem>
+              </List>
+            </Col>
+            <Col lg="2" md="4" xs="12">
+              <List>
+                <ListItem>
+                  <ListLink to="#">Developers API</ListLink>
+                </ListItem>
+                <ListItem>
+                  <ListLink href="#">Information Center</ListLink>
+                </ListItem>
+                <ListItem>
+                  <ListLink to="#">Newsletter</ListLink>
+                </ListItem>
+              </List>
+            </Col>
+            <Col lg="2" md="4" xs="12">
+              <List>
+                <ListItem>
+                  <ListLink to="#">Blockchain</ListLink>
+                </ListItem>
+                <ListItem>
+                  <ListLink to="#">Wallet</ListLink>
+                </ListItem>
 
-                  <ListItem>
-                    <ListLink to="#">Exchange</ListLink>
-                  </ListItem>
-                </List>
-              </Col>
-            </Row>
-          </Container>
-        </FooterTop>
-        <FooterTail>
-          <Container>
-            <Row>
-              <Col>
-                <IconSection>
-                  <ListItems>
-                    <ListLink
-                      href="#"
-                      target="_blank"
-                      rel="follow"
-                      title="Pinterest">
-                      <Icon
-                        src={pinterest}
-                        alt="logo-proper-six"
-                        class="img-footer"
-                      />
-                    </ListLink>
-                  </ListItems>
-                  <ListItems>
-                    <ListLink
-                      href="#"
-                      target="_blank"
-                      rel="follow"
-                      title="Instagram">
-                      <Icon
-                        src={instagram}
-                        alt="logo-proper-six"
-                        class="img-footer"
-                      />
-                    </ListLink>
-                  </ListItems>
-                  <ListItems>
-                    <ListLink
-                      href="#"
-                      target="_blank"
-                      rel="follow"
-                      title="Twitter">
-                      <Icon
-                        src={twitter}
-                        alt="logo-proper-six"
-                        class="img-footer"
-                      />
-                    </ListLink>
-                  </ListItems>
-                  <ListItems>
-                    <ListLink
-                      href="#"
-                      target="_blank"
-                      rel="follow"
-                      title="Facebook">
-                      <Icon
-                        src={facebook}
-                        alt="logo-proper-six"
-                        class="img-footer"
-                      />
-                    </ListLink>
-                  </ListItems>
-                </IconSection>
-              </Col>
-              <Col>
-                <ContentSection>
-                  <Text>&copy; Libonomy (2020). All rights reserved.</Text>
-                </ContentSection>
-              </Col>
-            </Row>
-          </Container>
-        </FooterTail>
-      </Wrapper>
-    );
-  }
-}
+                <ListItem>
+                  <ListLink to="#">Exchange</ListLink>
+                </ListItem>
+              </List>
+            </Col>
+          </Row>
+        </Container>
+      </FooterTop>
+      <FooterTail>
+        <Container>
+          <Row>
+            <Col>
+              <IconSection>
+                <ListItems>
+                  <ListLink
+                    href="#"
+                    target="_blank"
+                    rel="follow"
+                    title="Pinterest">
+                    <Icon
+                      src={pinterest}
+                      alt="logo-proper-six"
+                      class="img-footer"
+                    />
+                  </ListLink>
+                </ListItems>
+                <ListItems>
+                  <ListLink
+                    href="#"
+                    target="_blank"
+                    rel="follow"
+                    title="Instagram">
+                    <Icon
+                      src={instagram}
+                      alt="logo-proper-six"
+                      class="img-footer"
+                    />
+                  </ListLink>
+                </ListItems>
+                <ListItems>
+                  <ListLink
+                    href="#"
+                    target="_blank"
+                    rel="follow"
+                    title="Twitter">
+                    <Icon
+                      src={twitter}
+                      alt="logo-proper-six"
+                      class="img-footer"
+                    />
+                  </ListLink>
+                </ListItems>
+                <ListItems>
+                  <ListLink
+                    href="#"
+                    target="_blank"
+                    rel="follow"
+                    title="Facebook">
+                    <Icon
+                      src={facebook}
+                      alt="logo-proper-six"
+                      class="img-footer"
+                    />
+                  </ListLink>
+                </ListItems>
+              </IconSection>
+            </Col>
+            <Col>
+              <ContentSection>
+                <Text>&copy; Libonomy (2020). All rights reserved.</Text>
+              </ContentSection>
+            </Col>
+          </Row>
+        </Container>
+      </FooterTail>
+    </Wrapper>
+  );
+};
 
 export default Footer;

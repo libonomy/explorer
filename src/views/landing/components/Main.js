@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { getNodeInfo } from 'src/redux/actions';
 const Wrapper = styled.div`
-  padding: 1rem 0rem;
+  margin: 2rem 0rem;
 `;
 const Main = () => {
   return (

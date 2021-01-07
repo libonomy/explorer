@@ -17,7 +17,7 @@ import colors from 'src/vars/colors';
 
 const Wrapper = styled.div`
   background-color: ${colors.white};
-  padding: 1rem 0rem;
+  padding: 1rem 0 3.5rem 0rem;
 `;
 const Section = styled.div`
   display: flex;

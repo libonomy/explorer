@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Table } from 'reactstrap';
+import { getBlocksByHeight } from 'src/redux/actions';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
+import moment from 'moment';
 
 const TableHeading = styled.th`
   width: 25%;
@@ -12,7 +16,7 @@ const HeadingWraper = styled.div`
   align-items: center;
 `;
 
-const TableCol = styled.td`
+const TableCell = styled.td`
   font-family: PoppinsRegular;
   font-size: 12px;
   font-weight: normal;
@@ -46,123 +50,83 @@ const Heading = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
 `;
-const Overview = () => {
+const Overview = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBlocksByHeight(height));
+  }, []);
+
+  const { height } = props.match.params;
+  const { block, blockLoading } = useSelector((state) => state.blocks);
   return (
     <Table responsive>
-      <TableBody>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Height</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>123458</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Timestamp</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2 mins ago (Apr-11-2020 07:02:58 PM +UTC)</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Transactions</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>
-            18 transactions and 5 contract internal transactions in this block{' '}
-          </TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>MInd by</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>Mining-dutcuh</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Block Reward</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Uncle Reward</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>0</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Gas Used</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Gas Limit</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Difficulty</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Total Difficulty</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Size</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Extra data</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-      </TableBody>
+      {block && (
+        <TableBody>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <Icon>?</Icon>
+                <Heading>Height</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{height}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <Icon>?</Icon>
+                <Heading>Timestamp</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>
+              {moment(block.block.header.time).fromNow()} (
+              {new Date(block.block.header.time).toLocaleTimeString()}{' '}
+              {new Date(block.block.header.time).toLocaleDateString()})
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <Icon>?</Icon>
+                <Heading>Transactions</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>
+              {block.block.header.num_txs} transactions in this block{' '}
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <Icon>?</Icon>
+                <Heading>MInd by</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{block.block.header.validators_hash}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <Icon>?</Icon>
+                <Heading>Validator Hash</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{block.block.header.validators_hash}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <Icon>?</Icon>
+                <Heading>Proposer Hash</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{block.block.header.proposer_address}</TableCell>
+          </TableRow>
+        </TableBody>
+      )}
     </Table>
   );
 };
 
-export default Overview;
+export default withRouter(Overview);

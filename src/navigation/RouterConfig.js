@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import { Layout } from 'src/layouts';
+import history from 'src/utils/history';
 import { app } from './Routes';
 
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <Layout>
           <Switch>
             {app.map((route, i) => (

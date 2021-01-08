@@ -14,8 +14,8 @@ const Heading = styled.th`
   border-bottom: 0px !important;
 `;
 
-const TableHeading = ({ children, rest }) => {
-  return <Heading {...rest}>{children}</Heading>;
+const TableHeading = (props) => {
+  return <Heading {...props}>{props.children}</Heading>;
 };
 
 export default TableHeading;

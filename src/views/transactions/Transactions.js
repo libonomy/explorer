@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageContainer } from 'src/components';
-import TxsTable from './components/Table';
+import TxsTable from './components/TxsTable';
 
 const Transactions = () => {
   return (

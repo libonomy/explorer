@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
+  NoData,
   Pagination,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeading,
+  TableLoader,
   TableRow
 } from 'src/components';
 import { useMediaQuery } from 'src/hooks';
@@ -89,6 +91,11 @@ const BlocksTable = () => {
                 <TableCell>{item.header.proposer_address}</TableCell>
               </TableRow>
             ))}
+
+          {!latestBlocksLoading && !latestBlocks && (
+            <NoData colSpan={6} height={200} />
+          )}
+          {latestBlocksLoading && <TableLoader colSpan={6} height={200} />}
         </TableBody>
       </Table>
       <Footer>

@@ -8,8 +8,8 @@ const Footer = styled.div`
   padding: 1rem;
 `;
 
-const TableFooter = ({ children, rest }) => {
-  return <Footer {...rest}>{children}</Footer>;
+const TableFooter = (props) => {
+  return <Footer {...props}>{props.children}</Footer>;
 };
 
 export default TableFooter;

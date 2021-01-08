@@ -14,8 +14,8 @@ const Col = styled.td`
   text-overflow: ellipsis;
 `;
 
-const TableCell = ({ children, rest }) => {
-  return <Col {...rest}>{children}</Col>;
+const TableCell = (props) => {
+  return <Col {...props}>{props.children}</Col>;
 };
 
 export default TableCell;

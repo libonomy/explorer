@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const Body = styled.tbody``;
 
-const TableBody = ({ children, rest }) => {
-  return <Body {...rest}>{children}</Body>;
+const TableBody = (props) => {
+  return <Body {...props}>{props.children}</Body>;
 };
 
 export default TableBody;

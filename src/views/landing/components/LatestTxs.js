@@ -84,7 +84,7 @@ const LatestTxs = () => {
       <Table hover>
         <TableHeader>
           <TableRow>
-            <TableHeading>Txn Hash</TableHeading>
+            <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Age</TableHeading>
             <TableHeading>To</TableHeading>
             <TableHeading>From</TableHeading>

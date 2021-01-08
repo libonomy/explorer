@@ -26,3 +26,4 @@ export { default as discussionIcon } from './discussion-icon.svg';
 export { default as menuIcon } from './menu-icon.svg';
 export { default as txIcon } from './tx-icon.svg';
 export { default as blockIcon } from './block-icon.svg';
+export { default as noData } from './not-found.svg';

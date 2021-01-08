@@ -6,8 +6,8 @@ const Header = styled.thead`
   background-color: rgba(240, 249, 250, 0.8);
 `;
 
-const TableHead = ({ children, rest }) => {
-  return <Header {...rest}>{children}</Header>;
+const TableHead = (props) => {
+  return <Header {...props}>{props.children}</Header>;
 };
 
 export default TableHead;

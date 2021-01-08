@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Row = styled.tr``;
-const TableRow = ({ children, rest }) => {
-  return <Row {...rest}>{children}</Row>;
+const TableRow = (props) => {
+  return <Row {...props}>{props.children}</Row>;
 };
 
 export default TableRow;

@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Table } from 'reactstrap';
+import { failIcon, successIcon } from 'src/assets/images';
+import { IconText } from 'src/components';
+import { getTransectionByHash } from 'src/redux/actions';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
+import moment from 'moment';
+import NumberFormat from 'react-number-format';
 
 const TableHeading = styled.th`
   width: 25%;
@@ -12,7 +19,7 @@ const HeadingWraper = styled.div`
   align-items: center;
 `;
 
-const TableCol = styled.td`
+const TableCell = styled.td`
   font-family: PoppinsRegular;
   font-size: 12px;
   font-weight: normal;
@@ -24,7 +31,7 @@ const TableCol = styled.td`
 const TableRow = styled.tr``;
 const TableBody = styled.tbody``;
 
-const Icon = styled.span`
+const InfoIcon = styled.span`
   background: ${colors.primary};
   border-radius: 50%;
   display: flex;
@@ -36,6 +43,23 @@ const Icon = styled.span`
   width: 16px;
   margin-right: 5px;
 `;
+
+const Icon = styled.img`
+  margin-right: 5px;
+`;
+
+const Text = styled.span`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.36px;
+  text-align: left;
+  ${({ success }) =>
+    success ? `color:${colors.darkerGreen}` : `color:${colors.red}`}
+`;
+
 const Heading = styled.span`
   font-family: PoppinsMedium;
   font-size: 12px;
@@ -46,123 +70,136 @@ const Heading = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
 `;
-const Overview = () => {
+
+const Overview = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTransectionByHash(hash));
+  }, []);
+
+  const { hash } = props.match.params;
+  const { tx, txLoading } = useSelector((state) => state.txs);
   return (
     <Table responsive>
-      <TableBody>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Height</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>123458</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Timestamp</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2 mins ago (Apr-11-2020 07:02:58 PM +UTC)</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Transactions</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>
-            18 transactions and 5 contract internal transactions in this block{' '}
-          </TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>MInd by</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>Mining-dutcuh</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Block Reward</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Uncle Reward</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>0</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Gas Used</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Gas Limit</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Difficulty</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Total Difficulty</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Size</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-        <TableRow>
-          <TableHeading scope="row">
-            <HeadingWraper>
-              <Icon>?</Icon>
-              <Heading>Extra data</Heading>
-            </HeadingWraper>
-          </TableHeading>
-          <TableCol>2.0130382494 Ether (2 + 0.0130382494</TableCol>
-        </TableRow>
-      </TableBody>
+      {tx && (
+        <TableBody>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <InfoIcon>?</InfoIcon>
+                <Heading>Hash</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{tx.txhash}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <InfoIcon>?</InfoIcon>
+                <Heading>Height</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{tx.height}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <InfoIcon>?</InfoIcon>
+                <Heading>Status</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>
+              {tx.logs[0].success ? (
+                <IconText>
+                  <Icon src={successIcon}></Icon>
+                  <Text success>success</Text>
+                </IconText>
+              ) : (
+                <IconText>
+                  <Icon src={failIcon}></Icon>
+                  <Text success={false}>fail</Text>
+                </IconText>
+              )}
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <InfoIcon>?</InfoIcon>
+                <Heading>Timestamp</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>
+              {moment(tx.timestamp).fromNow()} (
+              {new Date(tx.timestamp).toLocaleTimeString()}{' '}
+              {new Date(tx.timestamp).toLocaleDateString()})
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <InfoIcon>?</InfoIcon>
+                <Heading>To</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{tx.tx.value.msg[0].value.to_address}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <InfoIcon>?</InfoIcon>
+                <Heading>From</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{tx.tx.value.msg[0].value.from_address}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <InfoIcon>?</InfoIcon>
+                <Heading>Value</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>
+              <NumberFormat
+                value={tx.tx.value.msg[0].value.amount[0].amount}
+                displayType={'text'}
+                thousandSeparator={true}
+              />{' '}
+              {tx.tx.value.msg[0].value.amount[0].denom}
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <InfoIcon>?</InfoIcon>
+                <Heading>Gas Wanted</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{tx.gas_wanted}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <InfoIcon>?</InfoIcon>
+                <Heading>Gas Used</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{tx.gas_used}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHeading scope="row">
+              <HeadingWraper>
+                <InfoIcon>?</InfoIcon>
+                <Heading>Memo</Heading>
+              </HeadingWraper>
+            </TableHeading>
+            <TableCell>{tx.memo ? tx.memo : '""'}</TableCell>
+          </TableRow>
+        </TableBody>
+      )}
     </Table>
   );
 };
 
-export default Overview;
+export default withRouter(Overview);

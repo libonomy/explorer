@@ -36,7 +36,8 @@ export const app = [
     component: UncleBlocks
   },
   {
-    path: '/blocks/:id',
+    exact: true,
+    path: '/blocks/:height',
     component: ViewBlock
   },
   {

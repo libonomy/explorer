@@ -6,3 +6,4 @@ export { default as Footer } from './footer';
 export { default as Loader } from './loader';
 export { default as PlaceHolder } from './placeholder';
 export { IconText } from './typography';
+export * from './table';

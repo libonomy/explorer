@@ -46,7 +46,7 @@ const ViewBlock = () => {
             onClick={() => {
               toggle('1');
             }}>
-            Tab1
+            Overview
           </NavLinkExp>
         </NavItem>
         <NavItem>
@@ -55,7 +55,7 @@ const ViewBlock = () => {
             onClick={() => {
               toggle('2');
             }}>
-            More Tabs
+            Comments
           </NavLinkExp>
         </NavItem>
       </Nav>

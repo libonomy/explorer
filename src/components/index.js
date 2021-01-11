@@ -7,3 +7,4 @@ export { default as PlaceHolder } from './placeholder';
 export { IconText } from './typography';
 export * from './table';
 export * from './loader';
+export * from './notification';

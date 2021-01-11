@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'reactstrap';
 import styled from 'styled-components';
-import { liboBackground } from 'src/assets/images';
+import { liboBackground, slide1 } from 'src/assets/images';
 
 import colors from 'src/vars/colors';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   padding: 1rem 0 1rem 0;
@@ -60,6 +61,10 @@ const Paragraph = styled.p`
     margin-bottom: 1rem;
   }
 `;
+
+const Image = styled.img`
+  max-width: 100%;
+`;
 const Banner = () => {
   return (
     <Wrapper>
@@ -79,7 +84,9 @@ const Banner = () => {
             </Paragraph>
           </Col>
           <Col lg="5" md="12">
-            <CardWrapper></CardWrapper>
+            <a href="https://libonomy.com/" target="_blank">
+              <Image src={slide1} />
+            </a>
           </Col>
         </Row>
       </Container>

@@ -27,3 +27,4 @@ export { default as txIcon } from './tx-icon.svg';
 export { default as blockIcon } from './block-icon.svg';
 export { default as noData } from './not-found.svg';
 export { default as copyIcon } from './copy-icon.svg';
+export { default as slide1 } from './slide-1.png';

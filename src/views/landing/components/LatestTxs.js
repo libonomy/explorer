@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Table, Button } from 'reactstrap';
-import { successIcon, failIcon, txIcon } from 'src/assets/images';
+import { txIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';

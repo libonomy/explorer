@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import LatestBlocks from './LatestBlocks';
 import LatestTxs from './LatestTxs';
 import Statistics from './Statistics';
 import ConsensusState from './ConsensusState';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { getNodeInfo } from 'src/redux/actions';
+
 const Wrapper = styled.div`
   margin: 2rem 0rem;
 `;
+
 const Main = () => {
   return (
     <Container>

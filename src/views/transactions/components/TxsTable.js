@@ -142,6 +142,7 @@ const TxsTable = () => {
         </TableHeader>
         <TableBody>
           {latestTxs &&
+            !latestTxsLoading &&
             latestTxs.txs.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
@@ -182,9 +183,9 @@ const TxsTable = () => {
               </TableRow>
             ))}
           {!latestTxsLoading && !latestTxs && (
-            <NoData colSpan={6} height={200} />
+            <NoData colSpan={6} height={300} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={200} />}
+          {latestTxsLoading && <TableLoader colSpan={6} height={300} />}
         </TableBody>
       </Table>
       <Footer>

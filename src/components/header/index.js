@@ -18,7 +18,7 @@ import history from 'src/utils/history';
 
 const Wrapper = styled.div`
   background-color: ${colors.white};
-  padding: 1rem 0 3.4rem 0rem;
+  padding: 1rem 0 1rem 0rem;
 `;
 const Section = styled.div`
   display: flex;

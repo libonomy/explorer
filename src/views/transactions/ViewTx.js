@@ -53,7 +53,7 @@ const ViewTx = () => {
             Overview
           </NavLinkExp>
         </NavItem>
-        <NavItem>
+        {/* <NavItem>
           <NavLinkExp
             className={classnames({ active: activeTab === '2' })}
             onClick={() => {
@@ -70,18 +70,18 @@ const ViewTx = () => {
             }}>
             Comments
           </NavLinkExp>
-        </NavItem>
+        </NavItem> */}
       </Nav>
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <Overview />
         </TabPane>
-        <TabPane tabId="2">
+        {/* <TabPane tabId="2">
           <Comments />
         </TabPane>
         <TabPane tabId="3">
           <Comments />
-        </TabPane>
+        </TabPane> */}
       </TabContent>
     </PageContainer>
   );

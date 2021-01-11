@@ -199,18 +199,17 @@ const Header = (props) => {
                 <DropdownToggleBtn split>
                   <DropDownButton>All Filter</DropDownButton>
                 </DropdownToggleBtn>
-                <DropdownMenuExp>
+                {/* <DropdownMenuExp>
                   <DropdownItem>Blockchain</DropdownItem>
                   <DropdownItem>Token</DropdownItem>
                   <DropdownItem>Resources</DropdownItem>
                   <DropdownItem>Other Action</DropdownItem>
-                </DropdownMenuExp>{' '}
+                </DropdownMenuExp>{' '} */}
               </InputGroupButtonDropdown>
               <VerticalLine />
               <Input
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"
                 type="text"
-                placeholder="Search by Txn Hash"
                 value={state.keyword}
                 name="keyword"
                 onChange={handleChange}

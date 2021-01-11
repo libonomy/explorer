@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   border-radius: 10px;
   box-shadow: ${colors.shaddow};
   background-color: ${colors.white};
-  height: calc(100% - 64px);
+  height: calc(100% - 16px);
   @media (max-width: 991px) {
     height: auto;
   }

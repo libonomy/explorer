@@ -6,7 +6,8 @@ import { getBlocksByHeight } from 'src/redux/actions';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
 import moment from 'moment';
-
+import { TableLoader } from 'src/components';
+import { NoData } from 'src/components';
 const TableHeading = styled.th`
   width: 25%;
 `;
@@ -125,6 +126,8 @@ const Overview = (props) => {
           </TableRow>
         </TableBody>
       )}
+      {!blockLoading && !block && <NoData colSpan={6} height={300} />}
+      {blockLoading && <TableLoader colSpan={6} height={300} />}
     </Table>
   );
 };

@@ -18,7 +18,7 @@ import history from 'src/utils/history';
 
 const Wrapper = styled.div`
   background-color: ${colors.white};
-  padding: 1rem 0 3.5rem 0rem;
+  padding: 1rem 0 3.4rem 0rem;
 `;
 const Section = styled.div`
   display: flex;
@@ -153,8 +153,12 @@ const IconButton = styled(Button)`
   box-shadow: none;
   border: none;
   text-align: center;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+`;
+const DropdownToggleBtn = styled(DropdownToggle)`
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
 `;
 const Header = (props) => {
   const [splitButtonOpen, setSplitButtonOpen] = useState(false);
@@ -192,15 +196,15 @@ const Header = (props) => {
                 addonType="prepend"
                 isOpen={splitButtonOpen}
                 toggle={toggleSplit}>
-                <DropdownToggle split>
+                <DropdownToggleBtn split>
                   <DropDownButton>All Filter</DropDownButton>
-                </DropdownToggle>
-                {/* <DropdownMenuExp>
+                </DropdownToggleBtn>
+                <DropdownMenuExp>
                   <DropdownItem>Blockchain</DropdownItem>
                   <DropdownItem>Token</DropdownItem>
                   <DropdownItem>Resources</DropdownItem>
                   <DropdownItem>Other Action</DropdownItem>
-                </DropdownMenuExp> */}
+                </DropdownMenuExp>{' '}
               </InputGroupButtonDropdown>
               <VerticalLine />
               <Input

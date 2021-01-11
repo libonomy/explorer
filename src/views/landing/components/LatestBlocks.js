@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { blockIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
-
+import { TableLoader } from 'src/components';
+import { NoData } from 'src/components';
 const Wrapper = styled.div`
   overflow-y: auto;
   background: ${colors.white};
@@ -66,7 +67,69 @@ const Header = styled.div`
 const Icon = styled.img`
   margin-right: 5px;
 `;
+const ButtonExp = styled.div`
+border-top: 1px solid #dee2e6;
+margin-top: -1rem;
+padding: 1rem;
+display: flex;
+justify-content: center;
 
+  .btn-secondary:hover {
+    color: #fff;
+    background-color: #40B1BE !important;
+    border-color: #40b1be;
+  }
+  .btn-secondary:focus,
+  .btn-secondary.focus {
+    color: #fff;
+    background-color: #40b1be !important;
+    border-color: #40b1be !important;
+    box-shadow: none !important;
+  }
+  .btn-secondary:not(:disabled):not(.disabled):active,
+  .btn-secondary:not(:disabled):not(.disabled).active,
+  .show > .btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #40b1be;
+    border-color: #40b1be;
+  }
+  .btn-secondary {
+    color: #fff;
+    background-color: #40b1be;
+    border-color: #40b1be;
+`;
+
+const TableButton = styled(Button)`
+  width: auto;
+  height: 28px;
+  border-radius: 3px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  background-color: #40b1be;
+  display: flex;
+  align-items: center;
+  box-shadow: none;
+  font-family: PoppinsRegular;
+  font-size: 11px;
+  .btn-secondary:hover {
+    color: #fff;
+    background-color: ##40b1be !important;
+    border-color: ##40b1be !important;
+  }
+  .btn-secondary:focus,
+  .btn-secondary.focus {
+    color: #fff;
+    background-color: #40b1be !important;
+    border-color: #40b1be !important;
+    box-shadow: none !important;
+  }
+  .btn-secondary:not(:disabled):not(.disabled):active,
+  .btn-secondary:not(:disabled):not(.disabled).active,
+  .show > .btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #40b1be;
+    border-color: #40b1be;
+  }
+`;
 const LatestBlocks = () => {
   const dispatch = useDispatch();
 
@@ -111,8 +174,15 @@ const LatestBlocks = () => {
                 <TableCol>{item.header.num_txs}</TableCol>
               </TableRow>
             ))}
+          {!latestBlocksLoading && !latestBlocks && (
+            <NoData colSpan={6} height={200} />
+          )}
+          {latestBlocksLoading && <TableLoader colSpan={6} height={200} />}
         </TableBody>
       </Table>
+      <ButtonExp>
+        <TableButton> Show More Blocks</TableButton>
+      </ButtonExp>
     </Wrapper>
   );
 };

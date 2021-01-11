@@ -29,6 +29,10 @@ const NavLinkExp = styled(NavLink)`
     border-right-color: transparent !important;
     border-top-color: transparent !important;
   }
+  &:hover {
+    color: #40b1be;
+    text-decoration: none;
+  }
 `;
 
 const ViewBlock = () => {

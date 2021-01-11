@@ -47,6 +47,12 @@ const TableHeader = styled.thead`
   border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
   background-color: rgba(240, 249, 250, 0.8);
 `;
+const LinkExp = styled(Link)`
+  text-decoration: none;
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+`;
 const TableRow = styled.tr``;
 const TableBody = styled.tbody``;
 
@@ -157,6 +163,7 @@ const LatestTxs = () => {
         </TableHeader>
         <TableBody>
           {latestTxs &&
+            !latestTxsLoading &&
             latestTxs.txs.map((item, index) => (
               <TableRow key={index}>
                 <TableCol icon>
@@ -187,14 +194,16 @@ const LatestTxs = () => {
               </TableRow>
             ))}
           {!latestTxsLoading && !latestTxs && (
-            <NoData colSpan={6} height={200} />
+            <NoData colSpan={6} height={160} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={200} />}
+          {latestTxsLoading && <TableLoader colSpan={6} height={160} />}
         </TableBody>
       </Table>
-      <ButtonExp>
-        <TableButton> Show More Transaction</TableButton>
-      </ButtonExp>
+      <LinkExp to="/txs">
+        <ButtonExp>
+          <TableButton> Show More Transaction</TableButton>
+        </ButtonExp>
+      </LinkExp>
     </Wrapper>
   );
 };

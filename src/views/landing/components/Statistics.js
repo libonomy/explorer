@@ -25,64 +25,64 @@ import NumberFormat from 'react-number-format';
 
 const Wrapper = styled.div``;
 
-const ButtonExp = styled.div`
-  padding: 10.5px 16px;
-  .btn-secondary:hover {
-    color: #fff;
-    background-color: #40B1BE !important;
-    border-color: #40b1be;
-  }
-  .btn-secondary:focus,
-  .btn-secondary.focus {
-    color: #fff;
-    background-color: #40b1be !important;
-    border-color: #40b1be !important;
-    box-shadow: none !important;
-  }
-  .btn-secondary:not(:disabled):not(.disabled):active,
-  .btn-secondary:not(:disabled):not(.disabled).active,
-  .show > .btn-secondary.dropdown-toggle {
-    color: #fff;
-    background-color: #40b1be;
-    border-color: #40b1be;
-  }
-  .btn-secondary {
-    color: #fff;
-    background-color: #40b1be;
-    border-color: #40b1be;
-`;
+// const ButtonExp = styled.div`
+//   padding: 10.5px 16px;
+//   .btn-secondary:hover {
+//     color: #fff;
+//     background-color: #40B1BE !important;
+//     border-color: #40b1be;
+//   }
+//   .btn-secondary:focus,
+//   .btn-secondary.focus {
+//     color: #fff;
+//     background-color: #40b1be !important;
+//     border-color: #40b1be !important;
+//     box-shadow: none !important;
+//   }
+//   .btn-secondary:not(:disabled):not(.disabled):active,
+//   .btn-secondary:not(:disabled):not(.disabled).active,
+//   .show > .btn-secondary.dropdown-toggle {
+//     color: #fff;
+//     background-color: #40b1be;
+//     border-color: #40b1be;
+//   }
+//   .btn-secondary {
+//     color: #fff;
+//     background-color: #40b1be;
+//     border-color: #40b1be;
+// `;
 
-const CardButton = styled(Button)`
-  width: auto;
-  height: 28px;
-  border-radius: 3px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
-  background-color: #40b1be;
-  display: flex;
-  align-items: center;
-  box-shadow: none;
-  font-family: PoppinsRegular;
-  font-size: 11px;
-  .btn-secondary:hover {
-    color: #fff;
-    background-color: ##40b1be !important;
-    border-color: ##40b1be !important;
-  }
-  .btn-secondary:focus,
-  .btn-secondary.focus {
-    color: #fff;
-    background-color: #40b1be !important;
-    border-color: #40b1be !important;
-    box-shadow: none !important;
-  }
-  .btn-secondary:not(:disabled):not(.disabled):active,
-  .btn-secondary:not(:disabled):not(.disabled).active,
-  .show > .btn-secondary.dropdown-toggle {
-    color: #fff;
-    background-color: #40b1be;
-    border-color: #40b1be;
-  }
-`;
+// const CardButton = styled(Button)`
+//   width: auto;
+//   height: 28px;
+//   border-radius: 3px;
+//   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
+//   background-color: #40b1be;
+//   display: flex;
+//   align-items: center;
+//   box-shadow: none;
+//   font-family: PoppinsRegular;
+//   font-size: 11px;
+//   .btn-secondary:hover {
+//     color: #fff;
+//     background-color: ##40b1be !important;
+//     border-color: ##40b1be !important;
+//   }
+//   .btn-secondary:focus,
+//   .btn-secondary.focus {
+//     color: #fff;
+//     background-color: #40b1be !important;
+//     border-color: #40b1be !important;
+//     box-shadow: none !important;
+//   }
+//   .btn-secondary:not(:disabled):not(.disabled):active,
+//   .btn-secondary:not(:disabled):not(.disabled).active,
+//   .show > .btn-secondary.dropdown-toggle {
+//     color: #fff;
+//     background-color: #40b1be;
+//     border-color: #40b1be;
+//   }
+// `;
 const CardExp = styled(Card)`
   padding: 1rem;
   display: flex;
@@ -350,9 +350,9 @@ const Statistics = () => {
             </CardContent>
           </CardExp>
         </Col>
-        <ButtonExp>
+        {/* <ButtonExp>
           <CardButton>Click To See More</CardButton>
-        </ButtonExp>
+        </ButtonExp> */}
       </Row>
     </Wrapper>
   );

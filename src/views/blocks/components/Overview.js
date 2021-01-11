@@ -62,7 +62,7 @@ const Overview = (props) => {
   const { block, blockLoading } = useSelector((state) => state.blocks);
   return (
     <Table responsive>
-      {block && (
+      {block && !blockLoading && (
         <TableBody>
           <TableRow>
             <TableHeading scope="row">

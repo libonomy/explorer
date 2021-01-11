@@ -199,12 +199,12 @@ const Header = (props) => {
                 <DropdownToggleBtn split>
                   <DropDownButton>All Filter</DropDownButton>
                 </DropdownToggleBtn>
-                <DropdownMenuExp>
+                {/* <DropdownMenuExp>
                   <DropdownItem>Blockchain</DropdownItem>
                   <DropdownItem>Token</DropdownItem>
                   <DropdownItem>Resources</DropdownItem>
                   <DropdownItem>Other Action</DropdownItem>
-                </DropdownMenuExp>{' '}
+                </DropdownMenuExp>{' '} */}
               </InputGroupButtonDropdown>
               <VerticalLine />
               <Input

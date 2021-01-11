@@ -130,6 +130,12 @@ const TableButton = styled(Button)`
     border-color: #40b1be;
   }
 `;
+const LinkExp = styled(Link)`
+  text-decoration: none;
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+`;
 const LatestBlocks = () => {
   const dispatch = useDispatch();
 
@@ -156,6 +162,7 @@ const LatestBlocks = () => {
         </TableHeader>
         <TableBody>
           {latestBlocks &&
+            !latestBlocksLoading &&
             latestBlocks.result.block_metas.map((item, index) => (
               <TableRow key={index}>
                 <TableCol>
@@ -175,16 +182,17 @@ const LatestBlocks = () => {
               </TableRow>
             ))}
           {!latestBlocksLoading && !latestBlocks && (
-            <NoData colSpan={6} height={200} />
+            <NoData colSpan={6} height={160} />
           )}
-          {latestBlocksLoading && <TableLoader colSpan={6} height={200} />}
+          {latestBlocksLoading && <TableLoader colSpan={6} height={160} />}
         </TableBody>
       </Table>
-      <ButtonExp>
-        <TableButton> Show More Blocks</TableButton>
-      </ButtonExp>
+      <LinkExp to="/blocks">
+        <ButtonExp>
+          <TableButton> Show More Blocks</TableButton>
+        </ButtonExp>
+      </LinkExp>
     </Wrapper>
   );
 };
-
 export default LatestBlocks;

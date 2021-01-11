@@ -11,7 +11,7 @@ import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { TableLoader } from 'src/components';
 import { NoData } from 'src/components';
-
+import { SCALE } from 'src/vars/scale';
 const TableHeading = styled.th`
   width: 25%;
 `;
@@ -164,7 +164,7 @@ const Overview = (props) => {
             </TableHeading>
             <TableCell>
               <NumberFormat
-                value={tx.tx.value.msg[0].value.amount[0].amount}
+                value={tx.tx.value.msg[0].value.amount[0].amount / SCALE}
                 displayType={'text'}
                 thousandSeparator={true}
               />{' '}

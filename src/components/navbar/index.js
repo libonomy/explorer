@@ -10,6 +10,7 @@ import {
   Container
 } from 'reactstrap';
 import colors from 'src/vars/colors';
+import { Link } from 'react-router-dom';
 import { menuIcon } from 'src/assets/images';
 const bgColor = colors.primary;
 const Wrapper = styled.div``;
@@ -45,7 +46,7 @@ const NavbarTogglers = styled(NavbarToggler)`
     padding: 0;
   }
 `;
-const Link = styled(NavLink)`
+const NavText = styled(NavLink)`
   font-family: PoppinsRegular;
   font-size: 14px;
   font-weight: normal;
@@ -55,26 +56,35 @@ const Link = styled(NavLink)`
   text-align: left;
   color: ${colors.white};
   &:hover {
-    color: ${colors.black};
+    color: ${colors.white};
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+}
   }
-  padding: 0.5rem 1rem;
-  :first-child {
-    padding-left: 0px;
-  }
-  @media (max-width: 768px) {
-    padding: 0.5rem 1rem;
-    :first-child {
-      padding-left: 1.3rem;
-  }
-  @media (max-width: 576px) {
-    padding: 0.5rem 1rem;
-    :first-child {
-      padding-left: 0.3rem;
-  }
+  // padding: 0.5rem 1rem;
+
+  // @media (max-width: 768px) {
+  //   padding: 0.5rem 1rem;
+  //   :first-child {
+  //     padding-left: 1.3rem;
+  // }
+  // @media (max-width: 576px) {
+  //   padding: 0.5rem 1rem;
+  //   :first-child {
+  //     padding-left: 0.3rem;
+  // }
 `;
 
 const NavContainer = styled(Container)`
   padding: 0rem;
+`;
+const LinkExp = styled(Link)`
+  padding: 0;
+  color: ${colors.white};
+  &:hover {
+    color: ${colors.white};
+    text-decoration: none;
+  }
 `;
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -89,16 +99,14 @@ const NavBar = () => {
             <NavContainer>
               <Nav>
                 <NavItem>
-                  <Link href="/">Dashboard</Link>
+                  <NavText>
+                    <LinkExp to="/blocks">Blocks</LinkExp>
+                  </NavText>
                 </NavItem>
                 <NavItem>
-                  <Link href="txs">Blockchain</Link>
-                </NavItem>
-                <NavItem>
-                  <Link href="#">Token</Link>
-                </NavItem>
-                <NavItem>
-                  <Link href="#">Resources</Link>
+                  <NavText>
+                    <LinkExp to="/txs">Transactions</LinkExp>
+                  </NavText>
                 </NavItem>
               </Nav>
             </NavContainer>

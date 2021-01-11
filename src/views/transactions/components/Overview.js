@@ -77,7 +77,7 @@ const Overview = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTransectionByHash(hash));
-  }, []);
+  }, [props.match.params]);
 
   const { hash } = props.match.params;
   const { tx, txLoading } = useSelector((state) => state.txs);

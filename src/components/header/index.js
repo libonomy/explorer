@@ -14,6 +14,7 @@ import {
 } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
+import history from 'src/utils/history';
 
 const Wrapper = styled.div`
   background-color: ${colors.white};
@@ -157,8 +158,25 @@ const IconButton = styled(Button)`
 `;
 const Header = (props) => {
   const [splitButtonOpen, setSplitButtonOpen] = useState(false);
-
   const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
+
+  const [state, setState] = useState({ keyword: '' });
+
+  const handleSearch = (e) => {
+    if (state.keyword !== '') {
+      history.push(`/txs/${state.keyword}`);
+      setState({ ...state, keyword: '' });
+    }
+  };
+  const handleChange = (e) => {
+    setState({ ...state, keyword: e.target.value });
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && state.keyword !== '') {
+      history.push(`/txs/${state.keyword}`);
+      setState({ ...state, keyword: '' });
+    }
+  };
   return (
     <Wrapper>
       <Container>
@@ -177,17 +195,24 @@ const Header = (props) => {
                 <DropdownToggle split>
                   <DropDownButton>All Filter</DropDownButton>
                 </DropdownToggle>
-                <DropdownMenuExp>
+                {/* <DropdownMenuExp>
                   <DropdownItem>Blockchain</DropdownItem>
                   <DropdownItem>Token</DropdownItem>
                   <DropdownItem>Resources</DropdownItem>
-                  {/* <DropdownItem divider /> */}
                   <DropdownItem>Other Action</DropdownItem>
-                </DropdownMenuExp>
+                </DropdownMenuExp> */}
               </InputGroupButtonDropdown>
               <VerticalLine />
-              <Input placeholder="Search by Address / Txn Hash / Block / Token / Ens" />
-              <InputGroupAddon addonType="append">
+              <Input
+                placeholder="Search by Address / Txn Hash / Block / Token / Ens"
+                type="text"
+                placeholder="Search by Txn Hash"
+                value={state.keyword}
+                name="keyword"
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+              />
+              <InputGroupAddon addonType="append" onClick={handleSearch}>
                 <IconButton>
                   <SearchIcon src={search} alt="search-logo" />
                 </IconButton>

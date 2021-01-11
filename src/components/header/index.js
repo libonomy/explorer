@@ -210,7 +210,7 @@ const Header = (props) => {
               <Input
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"
                 type="text"
-                placeholder="Search by Txn Hash"
+                // placeholder="Search by Txn Hash"
                 value={state.keyword}
                 name="keyword"
                 onChange={handleChange}

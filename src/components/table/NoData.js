@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TableCell, TableRow } from '../table';
 import styled from 'styled-components';
-import { Spinner } from 'reactstrap';
 import { noData } from 'src/assets/images';
 
 const LoaderWrapper = styled.div`

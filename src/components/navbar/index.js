@@ -13,16 +13,9 @@ import colors from 'src/vars/colors';
 import { menuIcon } from 'src/assets/images';
 const bgColor = colors.primary;
 const Wrapper = styled.div``;
+
 const NavbarExp = styled(Navbar)`
   background-color: ${bgColor};
-  position: absolute;
-  top: 76px;
-  left: 0px;
-  right: 0px;
-  z-index: 1;
-  @media (max-width: 576px) {
-    top: 118px;
-  }
 `;
 const Nav = styled(NavBt)`
   @media (max-width: 768px) {
@@ -79,19 +72,7 @@ const Link = styled(NavLink)`
       padding-left: 0.3rem;
   }
 `;
-const NavbarCollapse = styled(Collapse)`
-  @media (max-width: 768px) {
-    position: absolute;
-    background-color: rgb(64, 177, 190);
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    padding: 2rem 0rem;
-  }
-  @media (max-width: 576px) {
-    padding: 2rem 1rem;
-  } ;
-`;
+
 const NavContainer = styled(Container)`
   padding: 0rem;
 `;
@@ -104,7 +85,7 @@ const NavBar = () => {
       <NavbarExp light expand="md" id="navbar">
         <Container>
           <NavbarTogglers onClick={toggle} />
-          <NavbarCollapse isOpen={isOpen} navbar>
+          <Collapse isOpen={isOpen} navbar>
             <NavContainer>
               <Nav>
                 <NavItem>
@@ -121,7 +102,7 @@ const NavBar = () => {
                 </NavItem>
               </Nav>
             </NavContainer>
-          </NavbarCollapse>
+          </Collapse>
         </Container>
       </NavbarExp>
     </Wrapper>

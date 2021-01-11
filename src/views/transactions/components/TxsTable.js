@@ -10,7 +10,7 @@ import { getAllTransactions } from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
-
+import { SCALE } from 'src/vars/scale';
 const Wrapper = styled.div`
   overflow-y: auto;
 `;
@@ -175,7 +175,7 @@ const TxsTable = () => {
                 <TableCell>
                   {item.tx.value.msg[0].value.amount[0].denom}
                   <NumberFormat
-                    value={item.tx.value.msg[0].value.amount[0].amount}
+                    value={item.tx.value.msg[0].value.amount[0].amount / SCALE}
                     displayType={'text'}
                     thousandSeparator={true}
                   />

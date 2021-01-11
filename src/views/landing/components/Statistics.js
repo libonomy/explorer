@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import colors from 'src/vars/colors';
 import { getNodeInfo, getTotalSupply } from 'src/redux/actions';
 import NumberFormat from 'react-number-format';
+import { SCALE } from 'src/vars/scale';
 
 const Wrapper = styled.div``;
 
@@ -307,7 +308,7 @@ const Statistics = () => {
                   {totalSupply && (
                     <Fragment>
                       <TextFormat
-                        value={totalSupply.result[0].amount}
+                        value={totalSupply.result[0].amount / SCALE}
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}

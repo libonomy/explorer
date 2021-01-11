@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Table } from 'reactstrap';
-import { failIcon, successIcon } from 'src/assets/images';
+import { PopoverBody, Table } from 'reactstrap';
+import { failIcon, successIcon, copyIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { getTransectionByHash } from 'src/redux/actions';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
+import copy from 'copy-to-clipboard';
+
 import { TableLoader } from 'src/components';
 import { NoData } from 'src/components';
 
@@ -92,7 +94,10 @@ const Overview = (props) => {
                 <Heading>Hash</Heading>
               </HeadingWraper>
             </TableHeading>
-            <TableCell>{tx.txhash}</TableCell>
+            <TableCell>
+              {tx.txhash}{' '}
+              <Icon src={copyIcon} onClick={() => copy(tx.txhash)} />
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableHeading scope="row">
@@ -144,7 +149,13 @@ const Overview = (props) => {
                 <Heading>To</Heading>
               </HeadingWraper>
             </TableHeading>
-            <TableCell>{tx.tx.value.msg[0].value.to_address}</TableCell>
+            <TableCell>
+              {tx.tx.value.msg[0].value.to_address}{' '}
+              <Icon
+                src={copyIcon}
+                onClick={() => copy(tx.tx.value.msg[0].value.to_address)}
+              />
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableHeading scope="row">
@@ -153,7 +164,13 @@ const Overview = (props) => {
                 <Heading>From</Heading>
               </HeadingWraper>
             </TableHeading>
-            <TableCell>{tx.tx.value.msg[0].value.from_address}</TableCell>
+            <TableCell>
+              {tx.tx.value.msg[0].value.from_address}{' '}
+              <Icon
+                src={copyIcon}
+                onClick={() => copy(tx.tx.value.msg[0].value.from_address)}
+              />
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableHeading scope="row">

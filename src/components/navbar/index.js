@@ -89,10 +89,10 @@ const NavBar = () => {
             <NavContainer>
               <Nav>
                 <NavItem>
-                  <Link href="#">Dashboard</Link>
+                  <Link href="/">Dashboard</Link>
                 </NavItem>
                 <NavItem>
-                  <Link href="#">Blockchain</Link>
+                  <Link href="txs">Blockchain</Link>
                 </NavItem>
                 <NavItem>
                   <Link href="#">Token</Link>

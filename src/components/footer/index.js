@@ -1,13 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
-import {
-  logo,
-  pinterest,
-  instagram,
-  twitter,
-  facebook
-} from 'src/assets/images';
+import { logo, instagram, twitter, facebook } from 'src/assets/images';
 import styled from 'styled-components';
 
 const Wrapper = styled.div``;
@@ -38,6 +32,21 @@ const ListItem = styled.li`
   margin-bottom: 1rem;
 `;
 const ListLink = styled(Link)`
+  color: #092326;
+  text-decoration: none;
+  font-family: PoppinsRegular;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: normal;
+  font-weight: 400;
+  &:hover {
+    color: #092326;
+    text-decoration:none;
+`;
+const SocialLink = styled.a`
   color: #092326;
   text-decoration: none;
   font-family: PoppinsRegular;
@@ -172,21 +181,8 @@ const Footer = () => {
             <Col>
               <IconSection>
                 <ListItems>
-                  <ListLink
-                    href="#"
-                    target="_blank"
-                    rel="follow"
-                    title="Pinterest">
-                    <Icon
-                      src={pinterest}
-                      alt="logo-proper-six"
-                      class="img-footer"
-                    />
-                  </ListLink>
-                </ListItems>
-                <ListItems>
-                  <ListLink
-                    href="#"
+                  <SocialLink
+                    href="https://www.instagram.com/libonomy/"
                     target="_blank"
                     rel="follow"
                     title="Instagram">
@@ -195,11 +191,11 @@ const Footer = () => {
                       alt="logo-proper-six"
                       class="img-footer"
                     />
-                  </ListLink>
+                  </SocialLink>
                 </ListItems>
                 <ListItems>
-                  <ListLink
-                    href="#"
+                  <SocialLink
+                    href="https://twitter.com/LibonomyBlock"
                     target="_blank"
                     rel="follow"
                     title="Twitter">
@@ -208,11 +204,11 @@ const Footer = () => {
                       alt="logo-proper-six"
                       class="img-footer"
                     />
-                  </ListLink>
+                  </SocialLink>
                 </ListItems>
                 <ListItems>
-                  <ListLink
-                    href="#"
+                  <SocialLink
+                    href="https://web.facebook.com/Libonomy/"
                     target="_blank"
                     rel="follow"
                     title="Facebook">
@@ -221,7 +217,7 @@ const Footer = () => {
                       alt="logo-proper-six"
                       class="img-footer"
                     />
-                  </ListLink>
+                  </SocialLink>
                 </ListItems>
               </IconSection>
             </Col>

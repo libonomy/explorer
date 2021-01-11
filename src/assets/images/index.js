@@ -5,7 +5,6 @@ export { default as successIcon } from './success-icon.svg';
 export { default as failIcon } from './fail-icon.svg';
 export { default as fourOFour } from './404.svg';
 export { default as wireBreak } from './wire-break.svg';
-export { default as pinterest } from './pinterest-icon.svg';
 export { default as instagram } from './instagram-icon.svg';
 export { default as twitter } from './twitter-icon.svg';
 export { default as facebook } from './facebook-icon.svg';

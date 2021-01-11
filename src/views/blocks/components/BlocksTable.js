@@ -76,6 +76,7 @@ const BlocksTable = () => {
         </TableHead>
         <TableBody>
           {latestBlocks &&
+            !latestBlocksLoading &&
             latestBlocks.result.block_metas.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
@@ -93,9 +94,9 @@ const BlocksTable = () => {
             ))}
 
           {!latestBlocksLoading && !latestBlocks && (
-            <NoData colSpan={6} height={200} />
+            <NoData colSpan={6} height={300} />
           )}
-          {latestBlocksLoading && <TableLoader colSpan={6} height={200} />}
+          {latestBlocksLoading && <TableLoader colSpan={6} height={300} />}
         </TableBody>
       </Table>
       <Footer>

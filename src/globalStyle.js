@@ -57,7 +57,6 @@ const GlobalStyle = createGlobalStyle`
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      cursor: default;
       font-family: Poppins, sans-serif;
     }
 
@@ -82,6 +81,10 @@ const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
       font-family: Poppins, sans-serif;
       font-weight: normal;
+    }
+
+    a {
+      cursor:pointer;
     }
 `;
 

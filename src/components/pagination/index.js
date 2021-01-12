@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Fragment } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Pagination as RsPagination,
   PaginationItem,
@@ -84,9 +86,9 @@ const DropdownToggleExp = styled(DropdownToggle)`
 
 const Pagination = ({
   count = 100,
-  page = 1,
   limit = 10,
-  handleClick,
+  pageHandler,
+  changeLimit,
   currentPage = 1
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -97,14 +99,14 @@ const Pagination = ({
       <RsPagination aria-label="Page navigation ">
         <Item disabled={currentPage <= 1}>
           <Link
-            onClick={(e) => handleClick(e, currentPage - 1)}
+            onClick={(e) => pageHandler(e, currentPage - 1)}
             previous
             href="#"
           />
         </Item>
         {[...Array(pagesCount)].slice(0, 5).map((page, i) => (
           <Item active={i === currentPage - 1} key={i}>
-            <Link onClick={(e) => handleClick(e, i + 1)} href="#">
+            <Link onClick={(e) => pageHandler(e, i + 1)} href="#">
               {i + 1}
             </Link>
           </Item>
@@ -113,7 +115,7 @@ const Pagination = ({
           <Fragment>
             <Dots>...</Dots>
             <Item active={currentPage === pagesCount}>
-              <Link onClick={(e) => handleClick(e, pagesCount)} href="#">
+              <Link onClick={(e) => pageHandler(e, pagesCount)} href="#">
                 {pagesCount}
               </Link>
             </Item>
@@ -121,7 +123,7 @@ const Pagination = ({
         )}
         <Item disabled={currentPage >= pagesCount}>
           <Link
-            onClick={(e) => handleClick(e, currentPage + 1)}
+            onClick={(e) => pageHandler(e, currentPage + 1)}
             next
             href="#"
           />
@@ -133,9 +135,8 @@ const Pagination = ({
         <DropdownMenu>
           {[10, 20, 30, 40, 50].map((item, i) => (
             <DropdownItemExp
-            // active={item === state.limit}
-            // onClick={() => setState({ ...state, limit: item })}
-            >
+              active={item === limit}
+              onClick={() => changeLimit(item)}>
               {item}/pages
             </DropdownItemExp>
           ))}
@@ -143,6 +144,14 @@ const Pagination = ({
       </DropdownExp>
     </Wrapper>
   );
+};
+
+Pagination.propTypes = {
+  count: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
+  pageHandler: PropTypes.func.isRequired,
+  changeLimit: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired
 };
 
 export default Pagination;

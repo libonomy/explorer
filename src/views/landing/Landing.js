@@ -1,13 +1,15 @@
 import React from 'react';
-import LandingPage from '../landing/components/LandingPage';
-import Banner from './components/Banner';
+import styled from 'styled-components';
+import { Banner, Main } from './components';
+
+const Wrapper = styled.div``;
+
 const Landing = () => {
   return (
-    <div>
+    <Wrapper>
       <Banner />
-
-      <LandingPage />
-    </div>
+      <Main />
+    </Wrapper>
   );
 };
 

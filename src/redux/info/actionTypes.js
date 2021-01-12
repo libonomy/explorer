@@ -1,0 +1,2 @@
+export const GET_NODE_INFO = 'GET_NODE_INFO';
+export const GET_NODE_INFO_LOADING = 'GET_NODE_INFO_LOADING';

@@ -1,31 +1,68 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
-import { Logo } from 'src/assets/images';
+import { logo, instagram, twitter, facebook } from 'src/assets/images';
 import styled from 'styled-components';
-const Logoo = styled.img`
+
+const Wrapper = styled.div``;
+const FooterTop = styled.div`
+  padding: 2rem 0;
+  margin-top: 2.5rem;
+  background: #fff;
+`;
+const Logo = styled.img`
   width: 158px;
-  height: 18px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+`;
+const Icon = styled.img`
+  width: 13.7px;
+  height: 13.7px;
   object-fit: contain;
 `;
-const FooterList = styled.ul`
+const List = styled.ul`
   padding: 0;
   list-style: none;
   margin-bottom: 0;
-  li {
-    padding: 8px !important;
-    margin-left: 18px !important;
-  }
-  li a {
+`;
+
+const ListItem = styled.li`
+  margin-bottom: 1rem;
+`;
+const ListLink = styled(Link)`
+  color: #092326;
+  text-decoration: none;
+  font-family: PoppinsRegular;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: normal;
+  font-weight: 400;
+  &:hover {
     color: #092326;
-    text-decoration: none;
-    font-size: 12px;
-    line-height: 28px;
-    font-weight: 400;
-  }
+    text-decoration:none;
+`;
+const SocialLink = styled.a`
+  color: #092326;
+  text-decoration: none;
+  font-family: PoppinsRegular;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: normal;
+  font-weight: 400;
+  &:hover {
+    color: #092326;
+    text-decoration:none;
 `;
 const Paragraph = styled.p`
-  font-family: Poppins;
+  font-family: PoppinsRegular;
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -33,84 +70,167 @@ const Paragraph = styled.p`
   line-height: 2.14;
   letter-spacing: normal;
   text-align: left;
-  color: #092326;
 `;
-class Footer extends Component {
-  render() {
-    return (
-      <>
+const FooterTail = styled.div`
+  background-color: #40b1be;
+  color: #fff;
+  padding: 0.7rem 0;
+`;
+const IconSection = styled.ul`
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+const ContentSection = styled.div``;
+
+const ListItems = styled.li`
+  padding-left: 15px;
+
+  :first-child {
+    padding-left: 0px;
+  }
+  a {
+    color: #fff;
+  }
+`;
+const Text = styled.p`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.64;
+  letter-spacing: 0.42px;
+  text-align: right;
+  padding-left: 15px;
+
+  li:first-child {
+    padding-left: 6px;
+  }
+  a {
+    color: #fff;
+  }
+`;
+const Footer = () => {
+  return (
+    <Wrapper>
+      <FooterTop>
         <Container>
           <Row>
-            <Col lg="6" md="6" xs="12">
-              <Col lg="12" md="12" xs="12">
-                <FooterList>
-                  <a
-                    href="https://www.libonomy.com/"
-                    target="_blank"
-                    rel="follow">
-                    <Logoo
-                      src={Logo}
-                      alt="logo-proper-six"
-                      class="img-footer"
-                    />
-                  </a>
+            <Col lg="6" md="12" xs="12">
+              <List>
+                <Link href="#">
+                  <Logo src={logo} alt="logo-proper-six" />
+                </Link>
 
-                  <Paragraph>
-                    Libonomy LTD | 483 Green Lanes, N13 4BS | London United
-                    Kingdom
-                  </Paragraph>
-                  <Paragraph>info@libonomy.com</Paragraph>
-                  <Paragraph>+44 742 458 6677</Paragraph>
-                </FooterList>
-              </Col>
+                <Paragraph>
+                  Libonomy LTD | 483 Green Lanes, N13 4BS | London United
+                  Kingdom
+                </Paragraph>
+                <Paragraph>info@libonomy.com</Paragraph>
+                <Paragraph>+44 742 458 6677</Paragraph>
+              </List>
             </Col>
-            <Col lg="2" md="3" xs="12">
-              <FooterList>
-                <li>
-                  <Link to="#">About Us</Link>
-                </li>
-                <li>
-                  <Link to="#">Advertise</Link>
-                </li>
-                <li>
-                  <Link to="#">Terms & Conditions</Link>
-                </li>
-              </FooterList>
+            <Col lg="2" md="4" xs="6">
+              <List>
+                <ListItem>
+                  <ListLink to="#">About Us</ListLink>
+                </ListItem>
+                <ListItem>
+                  <ListLink to="#">Advertise</ListLink>
+                </ListItem>
+                <ListItem>
+                  <ListLink to="#">Terms & Conditions</ListLink>
+                </ListItem>
+              </List>
             </Col>
-            <Col lg="2" md="3" xs="12">
-              <FooterList>
-                <li>
-                  <Link to="#">Developers API</Link>
-                </li>
-                <li>
-                  <Link href="#">Information Center</Link>
-                </li>
-                <li>
-                  <Link to="#">Newsletter</Link>
-                </li>
-              </FooterList>
+            <Col lg="2" md="4" xs="6">
+              <List>
+                <ListItem>
+                  <ListLink to="#">Developers API</ListLink>
+                </ListItem>
+                <ListItem>
+                  <ListLink href="#">Information Center</ListLink>
+                </ListItem>
+                <ListItem>
+                  <ListLink to="#">Newsletter</ListLink>
+                </ListItem>
+              </List>
             </Col>
-            <Col lg="2" md="3" xs="12">
-              <FooterList>
-                <li>
-                  <Link to="#">Blockchain</Link>
-                </li>
-                <li>
-                  <Link to="#">Wallet</Link>
-                </li>
+            <Col lg="2" md="4" xs="6">
+              <List>
+                <ListItem>
+                  <ListLink to="#">Blockchain</ListLink>
+                </ListItem>
+                <ListItem>
+                  <ListLink to="#">Wallet</ListLink>
+                </ListItem>
 
-                <li>
-                  <a href="https://liboex.trade" target="_blank">
-                    Exchange
-                  </a>
-                </li>
-              </FooterList>
+                <ListItem>
+                  <ListLink to="#">Exchange</ListLink>
+                </ListItem>
+              </List>
             </Col>
           </Row>
         </Container>
-      </>
-    );
-  }
-}
+      </FooterTop>
+      <FooterTail>
+        <Container>
+          <Row>
+            <Col>
+              <IconSection>
+                <ListItems>
+                  <SocialLink
+                    href="https://www.instagram.com/libonomy/"
+                    target="_blank"
+                    rel="follow"
+                    title="Instagram">
+                    <Icon
+                      src={instagram}
+                      alt="logo-proper-six"
+                      class="img-footer"
+                    />
+                  </SocialLink>
+                </ListItems>
+                <ListItems>
+                  <SocialLink
+                    href="https://twitter.com/LibonomyBlock"
+                    target="_blank"
+                    rel="follow"
+                    title="Twitter">
+                    <Icon
+                      src={twitter}
+                      alt="logo-proper-six"
+                      class="img-footer"
+                    />
+                  </SocialLink>
+                </ListItems>
+                <ListItems>
+                  <SocialLink
+                    href="https://web.facebook.com/Libonomy/"
+                    target="_blank"
+                    rel="follow"
+                    title="Facebook">
+                    <Icon
+                      src={facebook}
+                      alt="logo-proper-six"
+                      class="img-footer"
+                    />
+                  </SocialLink>
+                </ListItems>
+              </IconSection>
+            </Col>
+            <Col>
+              <ContentSection>
+                <Text>&copy; Libonomy (2020). All rights reserved.</Text>
+              </ContentSection>
+            </Col>
+          </Row>
+        </Container>
+      </FooterTail>
+    </Wrapper>
+  );
+};
 
 export default Footer;

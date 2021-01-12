@@ -29,6 +29,10 @@ const NavLinkExp = styled(NavLink)`
     border-right-color: transparent !important;
     border-top-color: transparent !important;
   }
+  &:hover {
+    color: #40b1be;
+    text-decoration: none;
+  }
 `;
 
 const ViewBlock = () => {
@@ -46,26 +50,26 @@ const ViewBlock = () => {
             onClick={() => {
               toggle('1');
             }}>
-            Tab1
+            Overview
           </NavLinkExp>
         </NavItem>
-        <NavItem>
+        {/* <NavItem>
           <NavLinkExp
             className={classnames({ active: activeTab === '2' })}
             onClick={() => {
               toggle('2');
             }}>
-            More Tabs
+            Comments
           </NavLinkExp>
-        </NavItem>
+        </NavItem> */}
       </Nav>
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <Overview />
         </TabPane>
-        <TabPane tabId="2">
+        {/* <TabPane tabId="2">
           <Comments />
-        </TabPane>
+        </TabPane> */}
       </TabContent>
     </PageContainer>
   );

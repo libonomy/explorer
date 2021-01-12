@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://liboexplorer.com/" rel="noopener" target="_blank"><img width="180" src="http://liboexplorer.com/static/media/app-logo.fda66105.png" alt="Libonomy logo"></a></p>
+  <a href="http://liboexplorer.com/" rel="noopener" target="_blank"><img width="180" src="http://liboexplorer.com/static/media/logo.70760640.png" alt="Libonomy logo"></a></p>
 </p>
 
 <h1 align="center">Libo Explorer</h1>

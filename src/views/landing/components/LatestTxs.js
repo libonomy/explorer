@@ -107,7 +107,7 @@ const TableButton = styled(Button)`
   width: auto;
   height: 28px;
   border-radius: 3px;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: ${colors.shaddow};
   background-color: #40b1be;
   display: flex;
   align-items: center;

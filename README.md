@@ -39,7 +39,7 @@ cd explorer
 git remote add upstream https://github.com/libonomy/explorer.git
 ```
 
-3. Synchronize your local `next` branch with the upstream one:
+3. Synchronize your local `development` branch with the upstream one:
 
 ```sh
 git checkout development

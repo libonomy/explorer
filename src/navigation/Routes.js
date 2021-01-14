@@ -5,7 +5,6 @@ import { InternalTxs, VerifiedContracts } from 'src/views/contracts';
 import { Landing } from 'src/views/landing';
 import { PendingTxs, Transactions, ViewTx } from 'src/views/transactions';
 import { UncleBlocks } from 'src/views/uncles';
-import { ViewAddresses } from 'src/views/addresses';
 import NotFound from './NotFound';
 
 export const app = [
@@ -57,9 +56,5 @@ export const app = [
   {
     path: '/not_found',
     component: NotFound
-  },
-  {
-    path: '/addresses',
-    component: ViewAddresses
   }
 ];

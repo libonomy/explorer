@@ -20,17 +20,17 @@ const CardExp = styled(Card)`
   box-shadow: ${colors.shaddow};
   border: 1px solid #fff;
   justify-content: space-between;
-  width: 350px;
+  width: 300px;
   align-items: center;
   text-align: center;
   border-radius: 8px;
   background-color: ${colors.white};
   @media (max-width: 991px) {
-    width: 300px;
-    margin-bottom: 10px;
+    width: 220px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 776px) {
     width: 350px;
+    margin-bottom: 10px;
   }
 `;
 const CardContent = styled(CardBody)`
@@ -81,7 +81,7 @@ const Cards = () => {
       <Wrapper>
         <CardExp>
           <CardContent>
-            <Icon src={channelIcon} />
+            <Icon src={channelIcon} alt="icon" />
             <InnerBody>
               <Title>Channel</Title>
               <Text>2,052,591</Text>
@@ -91,7 +91,16 @@ const Cards = () => {
 
         <CardExp>
           <CardContent>
-            <Icon src={channelIcon} />
+            <Icon src={channelIcon} alt="icon" />
+            <InnerBody>
+              <Title>Pooling State</Title>
+              <Text>0</Text>
+            </InnerBody>
+          </CardContent>
+        </CardExp>
+        <CardExp>
+          <CardContent>
+            <Icon src={channelIcon} alt="icon" />
             <InnerBody>
               <Title>Pooling State</Title>
               <Text>0</Text>

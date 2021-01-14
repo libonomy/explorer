@@ -148,9 +148,7 @@ const TxsTable = () => {
                 <TableCell>
                   <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
                 </TableCell>
-                <TableCell>
-                  {moment(item.timestamp, 'YYYYMMDD').fromNow()}
-                </TableCell>
+                <TableCell>{moment(item.timestamp).fromNow()}</TableCell>
                 <TableCell>
                   {item.logs[0].success ? (
                     <IconText>

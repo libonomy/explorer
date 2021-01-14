@@ -212,7 +212,7 @@ const Overview = (props) => {
                 <Heading>Memo</Heading>
               </HeadingWraper>
             </TableHeading>
-            <TableCell>{tx.memo ? tx.memo : '""'}</TableCell>
+            <TableCell>{tx.tx.value.memo ? tx.tx.value.memo : '""'}</TableCell>
           </TableRow>
         </TableBody>
       )}

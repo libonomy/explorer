@@ -206,12 +206,12 @@ const Header = (props) => {
                 <DropdownToggleBtn split>
                   <DropDownButton>All Filter</DropDownButton>
                 </DropdownToggleBtn>
-                <DropdownMenuExp>
+                {/* <DropdownMenuExp>
                   <DropdownItem>Transaction</DropdownItem>
                   <DropdownItem>Addresses</DropdownItem>
-                  {/* <DropdownItem>Resources</DropdownItem>
-                  <DropdownItem>Other Action</DropdownItem> */}
-                </DropdownMenuExp>{' '}
+                  <DropdownItem>Resources</DropdownItem>
+                  <DropdownItem>Other Action</DropdownItem>
+                </DropdownMenuExp>{' '} */}
               </InputGroupButtonDropdown>
               <VerticalLine />
               <Input

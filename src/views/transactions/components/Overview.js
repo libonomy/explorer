@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { PopoverBody, Table } from 'reactstrap';
+import { Table } from 'reactstrap';
 import { failIcon, successIcon, copyIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { getTransectionByHash } from 'src/redux/actions';
@@ -10,8 +10,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import copy from 'copy-to-clipboard';
-import { Tooltip } from 'reactstrap';
-import { TableLoader, TooltipContent } from 'src/components';
+// import { Tooltip } from 'reactstrap';
+import { TableLoader, ToolTipExp } from 'src/components';
 import { NoData } from 'src/components';
 import { SCALE } from 'src/vars/scale';
 const TableHeading = styled.th`
@@ -74,20 +74,9 @@ const Heading = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
 `;
-const TooltipExp = styled(Tooltip)`
-  .tooltip-inner {
-    // background: ${colors.primary} !important;
-    // color: ${colors.white};
-    // font-family: PoppinsMedium;
-    // font-size: 14px;
-    // text-align: center;
-    margin-left: 5px;
-  }
-  .tooltip .arrow::before {
-    left: 5px;
-    // color: #fff !importtant;
-  }
-  // .bs-tooltip-right .arrow::before, .bs-tooltip-auto[x-placement]
+const CopyIcon = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
 `;
 const Overview = (props) => {
   const dispatch = useDispatch();
@@ -97,9 +86,6 @@ const Overview = (props) => {
 
   const { hash } = props.match.params;
   const { tx, txLoading } = useSelector((state) => state.txs);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-
-  const toggle = () => setTooltipOpen(!tooltipOpen);
   return (
     <Table responsive>
       {tx && !txLoading && (
@@ -112,14 +98,12 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {tx.txhash}
-
-              <Icon
-                id="lol"
-                src={copyIcon}
-                onClick={() => copy(tx.txhash)}
-                alt="icon"
-              />
+              <Wrapper>
+                {tx.txhash}
+                <CopyIcon onClick={() => copy(tx.txhash)}>
+                  <ToolTipExp />
+                </CopyIcon>
+              </Wrapper>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -172,20 +156,13 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {tx.tx.value.msg[0].value.to_address}{' '}
-              <Icon
-                id="lol"
-                src={copyIcon}
-                onClick={() => copy(tx.tx.value.msg[0].value.to_address)}
-                alt="icon"
-              />
-              <TooltipExp
-                placement="right"
-                target="lol"
-                isOpen={tooltipOpen}
-                toggle={toggle}>
-                Copy
-              </TooltipExp>
+              <Wrapper>
+                {tx.tx.value.msg[0].value.to_address}{' '}
+                <CopyIcon
+                  onClick={() => copy(tx.tx.value.msg[0].value.to_address)}>
+                  <ToolTipExp />
+                </CopyIcon>
+              </Wrapper>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -196,8 +173,13 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {tx.tx.value.msg[0].value.from_address}{' '}
-              <Icon id="lol" src={copyIcon} alt="icon" />
+              <Wrapper>
+                {tx.tx.value.msg[0].value.from_address}{' '}
+                <CopyIcon
+                  onClick={() => copy(tx.tx.value.msg[0].value.from_address)}>
+                  <ToolTipExp />
+                </CopyIcon>
+              </Wrapper>
             </TableCell>
           </TableRow>
           <TableRow>

@@ -82,8 +82,7 @@ const Overview = (props) => {
             </TableHeading>
             <TableCell>
               {moment(block.block.header.time).fromNow()} (
-              {new Date(block.block.header.time).toLocaleTimeString()}{' '}
-              {new Date(block.block.header.time).toLocaleDateString()})
+              {new Date(block.block.header.time).toUTCString()})
             </TableCell>
           </TableRow>
           <TableRow>

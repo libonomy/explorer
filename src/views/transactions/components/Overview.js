@@ -145,8 +145,7 @@ const Overview = (props) => {
             </TableHeading>
             <TableCell>
               {moment(tx.timestamp).fromNow()} (
-              {new Date(tx.timestamp).toLocaleTimeString()}{' '}
-              {new Date(tx.timestamp).toLocaleDateString()})
+              {new Date(tx.timestamp).toUTCString()})
             </TableCell>
           </TableRow>
           <TableRow>
@@ -224,7 +223,7 @@ const Overview = (props) => {
                 <Heading>Memo</Heading>
               </HeadingWraper>
             </TableHeading>
-            <TableCell>{tx.memo ? tx.memo : '""'}</TableCell>
+            <TableCell>{tx.tx.value.memo ? tx.tx.value.memo : '""'}</TableCell>
           </TableRow>
         </TableBody>
       )}

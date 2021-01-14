@@ -8,9 +8,9 @@ import {
   InputGroupButtonDropdown,
   Input,
   Button,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  DropdownToggle
+  // DropdownMenu,
+  // DropdownItem
 } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
@@ -56,16 +56,16 @@ const SearchIcon = styled.img`
   width: 20px;
   height: 20px;
 `;
-const DropdownMenuExp = styled(DropdownMenu)`
-  .btn-secondary:not(:disabled):not(.disabled):active:focus,
-  .btn-secondary:not(:disabled):not(.disabled).active:focus,
-  .show > .btn-secondary.dropdown-toggle:focus {
-    box-shadow: none;
-    background-color: ${colors.white};
-    color: ${colors.black};
-    border: none;
-  }
-`;
+// const DropdownMenuExp = styled(DropdownMenu)`
+//   .btn-secondary:not(:disabled):not(.disabled):active:focus,
+//   .btn-secondary:not(:disabled):not(.disabled).active:focus,
+//   .show > .btn-secondary.dropdown-toggle:focus {
+//     box-shadow: none;
+//     background-color: ${colors.white};
+//     color: ${colors.black};
+//     border: none;
+//   }
+// `;
 const SearchBox = styled(InputGroup)`
   background: white;
   border-radius: 6px;

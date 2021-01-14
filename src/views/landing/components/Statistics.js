@@ -5,8 +5,8 @@ import {
   CardTitle,
   CardText,
   Col,
-  Row,
-  Button
+  Row
+  // Button
 } from 'reactstrap';
 import {
   latestblockheight,
@@ -219,7 +219,10 @@ const MenuIcon = styled.span`
   top: 6px;
   right: 2px;
 `;
-
+const Texts = styled.span`
+  text-transform: uppercase;
+  font-family: PoppinsBold;
+`;
 const Statistics = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -312,7 +315,7 @@ const Statistics = () => {
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
-                      {totalSupply.result[0].denom}
+                      <Texts> {totalSupply.result[0].denom}</Texts>
                     </Fragment>
                   )}
                 </Text>

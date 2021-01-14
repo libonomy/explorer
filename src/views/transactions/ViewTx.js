@@ -5,7 +5,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import Overview from './components/Overview';
-import Comments from './components/Comments';
+// import Comments from './components/Comments';
 
 const NavLinkExp = styled(NavLink)`
   font-family: PoppinsMedium;
@@ -41,6 +41,7 @@ const ViewTx = () => {
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
+
   return (
     <PageContainer heading="Transaction Details">
       <Nav tabs>

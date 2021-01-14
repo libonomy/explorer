@@ -126,8 +126,8 @@ const Overview = (props) => {
           </TableRow>
         </TableBody>
       )}
-      {!blockLoading && !block && <NoData colSpan={6} height={300} />}
-      {blockLoading && <TableLoader colSpan={6} height={300} />}
+      {!blockLoading && !block && <NoData colSpan={6} height={245} />}
+      {blockLoading && <TableLoader colSpan={6} height={245} />}
     </Table>
   );
 };

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <defs>
+        <style>
+            .cls-2{fill:#fff}
+        </style>
+    </defs>
+    <g id="Group_4094" transform="translate(-839 -518)">
+        <circle id="Ellipse_147" cx="16" cy="16" r="16" fill="#40b1be" transform="translate(839 518)"/>
+        <g id="layers" transform="translate(847.482 526.481)">
+            <g id="Group_4021" transform="translate(0 6.691)">
+                <g id="Group_4020">
+                    <path id="Path_16785" d="M15.3 206.277q-.024-.016-.049-.029l-1.1-.594-6.119 3.24a.555.555 0 0 1-.52 0l-6.112-3.24-1.1.594a.55.55 0 0 0-.228.743.536.536 0 0 0 .029.048l7.681 4.066 7.681-4.066a.55.55 0 0 0-.163-.762z" class="cls-2" transform="translate(0 -205.654)"/>
+                </g>
+            </g>
+            <g id="Group_4023" transform="translate(0 10.023)">
+                <g id="Group_4022">
+                    <path id="Path_16786" d="M15.5 308.873a.556.556 0 0 0-.225-.225l-1.1-.594-6.119 3.24a.555.555 0 0 1-.52 0l-6.119-3.24-1.1.594a.555.555 0 0 0 0 .977l7.219 3.887a.555.555 0 0 0 .526 0l7.219-3.887a.555.555 0 0 0 .219-.752z" class="cls-2" transform="translate(-.014 -308.054)"/>
+                </g>
+            </g>
+            <g id="Group_4025">
+                <g id="Group_4024">
+                    <path id="Path_16787" d="M15.3 3.991a.549.549 0 0 0-.049-.029L8.037.075a.555.555 0 0 0-.526 0L.292 3.962a.55.55 0 0 0-.2.792L7.774 8.82l7.681-4.066a.55.55 0 0 0-.155-.763z" class="cls-2" transform="translate(0 -.009)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

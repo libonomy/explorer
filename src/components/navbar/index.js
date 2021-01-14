@@ -108,6 +108,11 @@ const NavBar = () => {
                     <LinkExp to="/txs">Transactions</LinkExp>
                   </NavText>
                 </NavItem>
+                <NavItem>
+                  <NavText>
+                    <LinkExp to="/addresses">Addresses</LinkExp>
+                  </NavText>
+                </NavItem>
               </Nav>
             </NavContainer>
           </Collapse>

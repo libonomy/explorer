@@ -33,10 +33,18 @@ const Link = styled(PaginationLink)`
   font-style: normal;
   line-height: 1.22;
   letter-spacing: 0.27px;
+  color: ${colors.black};
   &:focus {
     z-index: 3;
     outline: 0;
     box-shadow: none;
+  }
+  &:hover {
+    z-index: 2;
+    color: #fff;
+    text-decoration: none;
+    background-color: #40b1be;
+    border-color: #40b1be;
   }
 `;
 

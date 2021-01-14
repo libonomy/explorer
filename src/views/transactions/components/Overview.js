@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { PopoverBody, Table } from 'reactstrap';
+import { Table } from 'reactstrap';
 import { failIcon, successIcon, copyIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { getTransectionByHash } from 'src/redux/actions';
@@ -73,6 +73,9 @@ const Heading = styled.span`
   line-height: 0.83;
   letter-spacing: 0.36px;
   text-align: left;
+`;
+const Texts = styled.span`
+  text-transform: uppercase;
 `;
 
 const Overview = (props) => {
@@ -184,8 +187,8 @@ const Overview = (props) => {
                 value={tx.tx.value.msg[0].value.amount[0].amount / SCALE}
                 displayType={'text'}
                 thousandSeparator={true}
-              />{' '}
-              {tx.tx.value.msg[0].value.amount[0].denom}
+              />
+              <Texts>{tx.tx.value.msg[0].value.amount[0].denom}</Texts>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -217,8 +220,8 @@ const Overview = (props) => {
           </TableRow>
         </TableBody>
       )}
-      {!txLoading && !tx && <NoData colSpan={6} height={300} />}
-      {txLoading && <TableLoader colSpan={6} height={300} />}
+      {!txLoading && !tx && <NoData colSpan={6} height={425} />}
+      {txLoading && <TableLoader colSpan={6} height={425} />}
     </Table>
   );
 };

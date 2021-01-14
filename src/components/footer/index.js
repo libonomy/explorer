@@ -22,6 +22,7 @@ const Icon = styled.img`
   height: 13.7px;
   object-fit: contain;
 `;
+
 const List = styled.ul`
   padding: 0;
   list-style: none;
@@ -31,7 +32,8 @@ const List = styled.ul`
 const ListItem = styled.li`
   margin-bottom: 1rem;
 `;
-const ListLink = styled(Link)`
+
+const ListTag = styled.a`
   color: #092326;
   text-decoration: none;
   font-family: PoppinsRegular;
@@ -135,40 +137,55 @@ const Footer = () => {
             <Col lg="2" md="4" xs="6">
               <List>
                 <ListItem>
-                  <ListLink to="#">About Us</ListLink>
+                  <ListTag
+                    href="https://libonomy.com/about-us"
+                    target="_blank"
+                    rel="follow">
+                    About Us
+                  </ListTag>
                 </ListItem>
                 <ListItem>
-                  <ListLink to="#">Advertise</ListLink>
+                  <ListTag>Advertise</ListTag>
                 </ListItem>
                 <ListItem>
-                  <ListLink to="#">Terms & Conditions</ListLink>
-                </ListItem>
-              </List>
-            </Col>
-            <Col lg="2" md="4" xs="6">
-              <List>
-                <ListItem>
-                  <ListLink to="#">Developers API</ListLink>
-                </ListItem>
-                <ListItem>
-                  <ListLink href="#">Information Center</ListLink>
-                </ListItem>
-                <ListItem>
-                  <ListLink to="#">Newsletter</ListLink>
+                  <ListTag>Terms & Conditions</ListTag>
                 </ListItem>
               </List>
             </Col>
             <Col lg="2" md="4" xs="6">
               <List>
                 <ListItem>
-                  <ListLink to="#">Blockchain</ListLink>
+                  <ListTag>Developers API</ListTag>
                 </ListItem>
                 <ListItem>
-                  <ListLink to="#">Wallet</ListLink>
+                  <ListTag>Information Center</ListTag>
+                </ListItem>
+                <ListItem>
+                  <ListTag>Newsletter</ListTag>
+                </ListItem>
+              </List>
+            </Col>
+            <Col lg="2" md="4" xs="6">
+              <List>
+                <ListItem>
+                  <ListTag
+                    href="https://libonomy.com/"
+                    target="_blank"
+                    rel="follow">
+                    Blockchain
+                  </ListTag>
+                </ListItem>
+                <ListItem>
+                  <ListTag>Wallet</ListTag>
                 </ListItem>
 
                 <ListItem>
-                  <ListLink to="#">Exchange</ListLink>
+                  <ListTag
+                    href=" https://liboex.trade/"
+                    target="_blank"
+                    rel="follow">
+                    Exchange
+                  </ListTag>
                 </ListItem>
               </List>
             </Col>

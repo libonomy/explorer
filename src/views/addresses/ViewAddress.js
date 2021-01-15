@@ -5,7 +5,7 @@ import colors from 'src/vars/colors';
 import { AddressInfo, TabsSection } from './components';
 import { copyIcon } from 'src/assets/images';
 
-const containerStyles = { paddingTop: 0 };
+const containerStyles = { paddingTop: 0, boxShadow: 'none' };
 const SubHeading = styled.h6`
   color: ${colors.black10Alpha};
   font-family: PoppinsMedium;

@@ -27,7 +27,7 @@ const colors = {
   red: '#8b0000',
   dMBlack1: '#323031',
   dmBlack2: '#353439',
-  shaddow: '0 0 10px 0 rgba(18,38,63,0.01)',
+  shaddow: '0 0.75rem 1.5rem rgb(18 38 63 / 10%)',
   borderGrey: 'rgba(90, 90, 90, 0.5)'
 };
 

@@ -107,7 +107,7 @@ const TableButton = styled(Button)`
   width: auto;
   height: 28px;
   border-radius: 3px;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: ${colors.shaddow};
   background-color: #40b1be;
   display: flex;
   align-items: center;
@@ -172,9 +172,7 @@ const LatestTxs = () => {
                     <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
                   </IconText>
                 </TableCol>
-                <TableCol>
-                  {moment(item.timestamp, 'YYYYMMDD').fromNow()}
-                </TableCol>
+                <TableCol>{moment(item.timestamp).fromNow()}</TableCol>
                 <TableCol>
                   <Link disabled>
                     {item.tx.value.msg[0].value.from_address}
@@ -183,14 +181,6 @@ const LatestTxs = () => {
                 <TableCol>
                   <Link disabled>{item.tx.value.msg[0].value.to_address}</Link>
                 </TableCol>
-                {/* <TableCol>
-                  {item.tx.value.msg[0].value.amount[0].denom}
-                  <NumberFormat
-                    value={item.tx.value.msg[0].value.amount[0].amount}
-                    displayType={'text'}
-                    thousandSeparator={true}
-                  />
-                </TableCol> */}
               </TableRow>
             ))}
           {!latestTxsLoading && !latestTxs && (

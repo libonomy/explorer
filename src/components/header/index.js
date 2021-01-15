@@ -67,6 +67,13 @@ const DropdownMenuExp = styled(DropdownMenu)`
     color: ${colors.black};
     border: none;
   }
+  .dropdown-item.active,
+  .dropdown-item:active {
+    color: #000;
+    text-decoration: none;
+    background-color: #f8f9fa;
+    outline: none;
+  }
 `;
 const SearchBox = styled(InputGroup)`
   background: white;
@@ -202,11 +209,9 @@ const Header = (props) => {
                   <DropDownButton>All Filter</DropDownButton>
                 </DropdownToggleBtn>
                 <DropdownMenuExp>
-                  <DropdownItem>Blockchain</DropdownItem>
-                  <DropdownItem>Token</DropdownItem>
-                  <DropdownItem>Resources</DropdownItem>
-                  <DropdownItem>Other Action</DropdownItem>
-                </DropdownMenuExp>{' '}
+                  <DropdownItem>Txs</DropdownItem>
+                  <DropdownItem>Address</DropdownItem>
+                </DropdownMenuExp>
               </InputGroupButtonDropdown>
               <VerticalLine />
               <Input

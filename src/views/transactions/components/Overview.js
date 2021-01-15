@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { PopoverBody, Table } from 'reactstrap';
+import { Table } from 'reactstrap';
 import { failIcon, successIcon, copyIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { getTransectionByHash } from 'src/redux/actions';
@@ -10,8 +10,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import copy from 'copy-to-clipboard';
-
-import { TableLoader } from 'src/components';
+// import { Tooltip } from 'reactstrap';
+import { TableLoader, ToolTipExp } from 'src/components';
 import { NoData } from 'src/components';
 import { SCALE } from 'src/vars/scale';
 const TableHeading = styled.th`
@@ -74,7 +74,10 @@ const Heading = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
 `;
-
+const CopyIcon = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+`;
 const Overview = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -95,8 +98,12 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {tx.txhash}{' '}
-              <Icon src={copyIcon} onClick={() => copy(tx.txhash)} />
+              <Wrapper>
+                {tx.txhash}
+                <CopyIcon onClick={() => copy(tx.txhash)}>
+                  <ToolTipExp />
+                </CopyIcon>
+              </Wrapper>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -149,11 +156,13 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {tx.tx.value.msg[0].value.to_address}{' '}
-              <Icon
-                src={copyIcon}
-                onClick={() => copy(tx.tx.value.msg[0].value.to_address)}
-              />
+              <Wrapper>
+                {tx.tx.value.msg[0].value.to_address}{' '}
+                <CopyIcon
+                  onClick={() => copy(tx.tx.value.msg[0].value.to_address)}>
+                  <ToolTipExp />
+                </CopyIcon>
+              </Wrapper>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -164,11 +173,13 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {tx.tx.value.msg[0].value.from_address}{' '}
-              <Icon
-                src={copyIcon}
-                onClick={() => copy(tx.tx.value.msg[0].value.from_address)}
-              />
+              <Wrapper>
+                {tx.tx.value.msg[0].value.from_address}{' '}
+                <CopyIcon
+                  onClick={() => copy(tx.tx.value.msg[0].value.from_address)}>
+                  <ToolTipExp />
+                </CopyIcon>
+              </Wrapper>
             </TableCell>
           </TableRow>
           <TableRow>

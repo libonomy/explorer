@@ -8,7 +8,9 @@ import {
   InputGroupButtonDropdown,
   Input,
   Button,
-  DropdownToggle
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
   // DropdownMenu,
   // DropdownItem
 } from 'reactstrap';
@@ -56,16 +58,16 @@ const SearchIcon = styled.img`
   width: 20px;
   height: 20px;
 `;
-// const DropdownMenuExp = styled(DropdownMenu)`
-//   .btn-secondary:not(:disabled):not(.disabled):active:focus,
-//   .btn-secondary:not(:disabled):not(.disabled).active:focus,
-//   .show > .btn-secondary.dropdown-toggle:focus {
-//     box-shadow: none;
-//     background-color: ${colors.white};
-//     color: ${colors.black};
-//     border: none;
-//   }
-// `;
+const DropdownMenuExp = styled(DropdownMenu)`
+  .btn-secondary:not(:disabled):not(.disabled):active:focus,
+  .btn-secondary:not(:disabled):not(.disabled).active:focus,
+  .show > .btn-secondary.dropdown-toggle:focus {
+    box-shadow: none;
+    background-color: ${colors.white};
+    color: ${colors.black};
+    border: none;
+  }
+`;
 const SearchBox = styled(InputGroup)`
   background: white;
   border-radius: 6px;
@@ -199,12 +201,12 @@ const Header = (props) => {
                 <DropdownToggleBtn split>
                   <DropDownButton>All Filter</DropDownButton>
                 </DropdownToggleBtn>
-                {/* <DropdownMenuExp>
+                <DropdownMenuExp>
                   <DropdownItem>Blockchain</DropdownItem>
                   <DropdownItem>Token</DropdownItem>
                   <DropdownItem>Resources</DropdownItem>
                   <DropdownItem>Other Action</DropdownItem>
-                </DropdownMenuExp>{' '} */}
+                </DropdownMenuExp>{' '}
               </InputGroupButtonDropdown>
               <VerticalLine />
               <Input

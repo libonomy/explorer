@@ -1,1 +1,1 @@
-export { default as ViewAddresses } from './ViewAddresses';
+export { default as ViewAddress } from './ViewAddress';

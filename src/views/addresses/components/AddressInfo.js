@@ -1,18 +1,20 @@
 import React from 'react';
-import { Card, CardBody, CardTitle, CardText, Container } from 'reactstrap';
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  CardText,
+  Container,
+  Row,
+  Col
+} from 'reactstrap';
 import colors from 'src/vars/colors';
 import { channelIcon } from 'src/assets/images';
 import styled from 'styled-components';
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
-  @media (max-width: 767px) {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-`;
 
+const Wrapper = styled.div`
+  margin-bottom: 2rem;
+`;
 const CardExp = styled(Card)`
   padding: 1rem;
   display: flex;
@@ -20,7 +22,6 @@ const CardExp = styled(Card)`
   box-shadow: ${colors.shaddow};
   border: 1px solid #fff;
   justify-content: space-between;
-  width: 300px;
   align-items: center;
   text-align: center;
   border-radius: 8px;
@@ -74,42 +75,46 @@ const Text = styled(CardText)`
   color: #000000;
 `;
 
-const Cards = () => {
+const AddressInfo = () => {
   return (
-    <Container>
-      {' '}
-      <Wrapper>
-        <CardExp>
-          <CardContent>
-            <Icon src={channelIcon} alt="icon" />
-            <InnerBody>
-              <Title>Channel</Title>
-              <Text>2,052,591</Text>
-            </InnerBody>
-          </CardContent>
-        </CardExp>
-
-        <CardExp>
-          <CardContent>
-            <Icon src={channelIcon} alt="icon" />
-            <InnerBody>
-              <Title>Pooling State</Title>
-              <Text>0</Text>
-            </InnerBody>
-          </CardContent>
-        </CardExp>
-        <CardExp>
-          <CardContent>
-            <Icon src={channelIcon} alt="icon" />
-            <InnerBody>
-              <Title>Pooling State</Title>
-              <Text>0</Text>
-            </InnerBody>
-          </CardContent>
-        </CardExp>
-      </Wrapper>
-    </Container>
+    <Wrapper>
+      <Row>
+        <Col>
+          <CardExp>
+            <CardContent>
+              <Icon src={channelIcon} alt="icon" />
+              <InnerBody>
+                <Title>Channel</Title>
+                <Text>2,052,591</Text>
+              </InnerBody>
+            </CardContent>
+          </CardExp>
+        </Col>
+        <Col>
+          <CardExp>
+            <CardContent>
+              <Icon src={channelIcon} alt="icon" />
+              <InnerBody>
+                <Title>Channel</Title>
+                <Text>2,052,591</Text>
+              </InnerBody>
+            </CardContent>
+          </CardExp>
+        </Col>
+        <Col>
+          <CardExp>
+            <CardContent>
+              <Icon src={channelIcon} alt="icon" />
+              <InnerBody>
+                <Title>Channel</Title>
+                <Text>2,052,591</Text>
+              </InnerBody>
+            </CardContent>
+          </CardExp>
+        </Col>
+      </Row>
+    </Wrapper>
   );
 };
 
-export default Cards;
+export default AddressInfo;

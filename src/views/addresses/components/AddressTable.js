@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   NoData,
   Pagination,
@@ -14,6 +15,8 @@ import {
 import { useMediaQuery } from 'src/hooks';
 import { getAllBlocks } from 'src/redux/actions';
 import styled from 'styled-components';
+import moment from 'moment';
+
 const Wrapper = styled.div`
   overflow-y: auto;
 `;
@@ -21,7 +24,7 @@ const Wrapper = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 1rem;
 `;
 
@@ -32,7 +35,18 @@ const Footer = styled.div`
   padding: 1rem;
 `;
 
-const AddressesTable = () => {
+const Text = styled.span`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.75;
+  letter-spacing: 0.36px;
+  text-align: left;
+`;
+
+const AddressTable = () => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
 
@@ -46,11 +60,19 @@ const AddressesTable = () => {
 
   return (
     <Wrapper>
-      <Header>{matches && <Pagination />}</Header>
+      <Header>
+        <Text> Latest 25 from a total of 286,378 transactions</Text>
+      </Header>
       <Table hover>
         <TableHead>
           <TableRow>
-            <TableHeading>Transaction</TableHeading>
+            <TableHeading>Txn Hash</TableHeading>
+            <TableHeading>Block</TableHeading>
+            <TableHeading>Age</TableHeading>
+            <TableHeading>From</TableHeading>
+            <TableHeading>To</TableHeading>
+            <TableHeading>Value</TableHeading>
+            <TableHeading>Txn Fee</TableHeading>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -58,6 +80,16 @@ const AddressesTable = () => {
             !latestBlocksLoading &&
             latestBlocks.result.block_metas.map((item, index) => (
               <TableRow key={index}>
+                <TableCell>
+                  <Link to={`/blocks/${item.header.height}`}>
+                    {item.header.height}
+                  </Link>
+                </TableCell>
+                <TableCell>{item.block_id.hash}</TableCell>
+                <TableCell>{moment(item.header.time).fromNow()}</TableCell>
+                <TableCell>{item.header.num_txs}</TableCell>
+                <TableCell>{item.header.proposer_address}</TableCell>
+                <TableCell>{item.header.proposer_address}</TableCell>
                 <TableCell>{item.header.proposer_address}</TableCell>
               </TableRow>
             ))}
@@ -68,11 +100,9 @@ const AddressesTable = () => {
           {latestBlocksLoading && <TableLoader colSpan={6} height={300} />}
         </TableBody>
       </Table>
-      <Footer>
-        <Pagination />
-      </Footer>
+      <Footer></Footer>
     </Wrapper>
   );
 };
 
-export default AddressesTable;
+export default AddressTable;

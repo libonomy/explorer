@@ -4,6 +4,7 @@ import { InternalTxs, VerifiedContracts } from 'src/views/contracts';
 import { Landing } from 'src/views/landing';
 import { PendingTxs, Transactions, ViewTx } from 'src/views/transactions';
 import { UncleBlocks } from 'src/views/uncles';
+import { TopAccount } from 'src/views/top-account';
 import NotFound from './NotFound';
 
 export const app = [
@@ -52,6 +53,11 @@ export const app = [
     path: '/internal_txs',
     component: InternalTxs
   },
+  {
+    path: '/top-account',
+    component: TopAccount
+  },
+
   {
     path: '/not_found',
     component: NotFound

@@ -29,7 +29,6 @@ const ListItem = styled.li`
 `;
 const Notification = () => {
   const [visible, setVisible] = useState(true);
-  console.log(visible);
   const onDismiss = () => setVisible(false);
   return (
     <CustomAlert color="info" isOpen={visible} toggle={() => onDismiss()}>

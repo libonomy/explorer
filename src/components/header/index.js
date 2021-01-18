@@ -123,33 +123,16 @@ const SearchBox = styled(InputGroup)`
     box-shadow: none !important;
   }
 `;
-const DropDownButton = styled(Button)`
+const Text = styled.span`
   font-family: PoppinsRegular;
-  text-align: left;
-  border: none;
-  box-shadow: none;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-  background-color: ${colors.white} !important;
   font-size: 12px;
-  line-height: 1.29;
-  letter-spacing: 0.63px;
-  color: ${colors.black};
-  border: none;
-  .btn:focus,
-  .btn.focus {
-    outline: 0 !important;
-    box-shadow: none !important;
-  }
-  .btn-secondary:focus,
-  .btn:hover {
-    color: ${colors.black} !important;
-    text-decoration: none !important;
-  }
-  .btn-secondary:focus,
-  .btn-secondary.focus {
-    box-shadow: none;
-  }
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.25;
+  letter-spacing: 0.36px;
+  text-align: left;
+  color: #000000;
 `;
 const IconButton = styled(Button)`
   background-color: #28a0b0 !important;
@@ -163,9 +146,15 @@ const IconButton = styled(Button)`
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 `;
-const DropdownToggleBtn = styled(DropdownToggle)`
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
+const DropdownToggleExp = styled(DropdownToggle)`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: 0.36px;
+  text-align: left;
 `;
 const Header = (props) => {
   const [splitButtonOpen, setSplitButtonOpen] = useState(false);
@@ -203,9 +192,9 @@ const Header = (props) => {
                 addonType="prepend"
                 isOpen={splitButtonOpen}
                 toggle={toggleSplit}>
-                <DropdownToggleBtn split>
-                  <DropDownButton>All Filter</DropDownButton>
-                </DropdownToggleBtn>
+                <DropdownToggleExp tag="span" className="nav-link" caret>
+                  Filters
+                </DropdownToggleExp>
                 {/* <DropdownMenuExp>
                   <DropdownItem>Transaction</DropdownItem>
                   <DropdownItem>Addresses</DropdownItem>

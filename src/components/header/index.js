@@ -58,6 +58,10 @@ const SearchIcon = styled.img`
   width: 20px;
   height: 20px;
 `;
+const DropdownItemExp = styled(DropdownItem)`
+  font-size: 13px;
+  font-family: PoppinsRegular;
+`;
 const DropdownMenuExp = styled(DropdownMenu)`
   .btn-secondary:not(:disabled):not(.disabled):active:focus,
   .btn-secondary:not(:disabled):not(.disabled).active:focus,
@@ -209,8 +213,8 @@ const Header = (props) => {
                   <DropDownButton>All Filter</DropDownButton>
                 </DropdownToggleBtn>
                 <DropdownMenuExp>
-                  <DropdownItem>Txs</DropdownItem>
-                  <DropdownItem>Address</DropdownItem>
+                  <DropdownItemExp>Txs</DropdownItemExp>
+                  <DropdownItemExp>Address</DropdownItemExp>
                 </DropdownMenuExp>
               </InputGroupButtonDropdown>
               <VerticalLine />

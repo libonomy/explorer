@@ -174,12 +174,16 @@ const LatestTxs = () => {
                 </TableCol>
                 <TableCol>{moment(item.timestamp).fromNow()}</TableCol>
                 <TableCol>
-                  <Link disabled>
+                  <Link
+                    to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
                 </TableCol>
                 <TableCol>
-                  <Link disabled>{item.tx.value.msg[0].value.to_address}</Link>
+                  <Link
+                    to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
+                    {item.tx.value.msg[0].value.to_address}
+                  </Link>
                 </TableCol>
               </TableRow>
             ))}

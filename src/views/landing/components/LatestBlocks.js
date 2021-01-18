@@ -144,7 +144,7 @@ const LatestBlocks = () => {
   );
 
   useEffect(() => {
-    dispatch(getAllBlocks(218172, 218176));
+    dispatch(getAllBlocks(138563, 138567));
   }, []);
 
   return (

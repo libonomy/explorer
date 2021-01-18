@@ -32,3 +32,5 @@ export { default as mailIcon } from './mail-icon.svg';
 export { default as poolingIcon } from './pooling-icon.svg';
 export { default as layerIcon } from './layer-icon.svg';
 export { default as peerIcon } from './peer-icon.svg';
+export { default as balance } from './balance.svg';
+export { default as home } from './home.svg';

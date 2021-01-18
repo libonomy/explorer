@@ -1,1 +1,1 @@
-export const SCALE = 100000;
+export const SCALE = 1000000;

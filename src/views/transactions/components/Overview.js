@@ -2,18 +2,18 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Table } from 'reactstrap';
-import { failIcon, successIcon, copyIcon } from 'src/assets/images';
+import { failIcon, successIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { getTransectionByHash } from 'src/redux/actions';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
-import copy from 'copy-to-clipboard';
 // import { Tooltip } from 'reactstrap';
-import { TableLoader, ToolTipExp } from 'src/components';
+import { TableLoader, Copy } from 'src/components';
 import { NoData } from 'src/components';
 import { SCALE } from 'src/vars/scale';
+import { SYMBOL_REGEX } from 'src/vars/regex';
 const TableHeading = styled.th`
   width: 25%;
 `;
@@ -60,8 +60,13 @@ const Text = styled.span`
   font-style: normal;
   letter-spacing: 0.36px;
   text-align: left;
+  ${({ uppercase }) => uppercase && `text-transform: uppercase;`};
   ${({ success }) =>
-    success ? `color:${colors.darkerGreen}` : `color:${colors.red}`}
+    success && success
+      ? `color:${colors.darkerGreen}`
+      : success === false
+      ? `color:${colors.red}`
+      : 'color: default'};
 `;
 
 const Heading = styled.span`
@@ -74,7 +79,6 @@ const Heading = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
 `;
-const CopyIcon = styled.div``;
 const Wrapper = styled.div`
   display: flex;
 `;
@@ -100,9 +104,7 @@ const Overview = (props) => {
             <TableCell>
               <Wrapper>
                 {tx.txhash}
-                <CopyIcon onClick={() => copy(tx.txhash)}>
-                  <ToolTipExp />
-                </CopyIcon>
+                <Copy id="txhash-copy" value={tx.txhash} />
               </Wrapper>
             </TableCell>
           </TableRow>
@@ -126,7 +128,7 @@ const Overview = (props) => {
               {tx.logs[0].success ? (
                 <IconText>
                   <Icon src={successIcon}></Icon>
-                  <Text success>success</Text>
+                  <Text success={true}>success</Text>
                 </IconText>
               ) : (
                 <IconText>
@@ -158,10 +160,10 @@ const Overview = (props) => {
             <TableCell>
               <Wrapper>
                 {tx.tx.value.msg[0].value.to_address}{' '}
-                <CopyIcon
-                  onClick={() => copy(tx.tx.value.msg[0].value.to_address)}>
-                  <ToolTipExp />
-                </CopyIcon>
+                <Copy
+                  id="to_address-copy"
+                  value={tx.tx.value.msg[0].value.to_address}
+                />
               </Wrapper>
             </TableCell>
           </TableRow>
@@ -175,10 +177,10 @@ const Overview = (props) => {
             <TableCell>
               <Wrapper>
                 {tx.tx.value.msg[0].value.from_address}{' '}
-                <CopyIcon
-                  onClick={() => copy(tx.tx.value.msg[0].value.from_address)}>
-                  <ToolTipExp />
-                </CopyIcon>
+                <Copy
+                  id="from_address-copy"
+                  value={tx.tx.value.msg[0].value.from_address}
+                />
               </Wrapper>
             </TableCell>
           </TableRow>
@@ -195,7 +197,12 @@ const Overview = (props) => {
                 displayType={'text'}
                 thousandSeparator={true}
               />{' '}
-              {tx.tx.value.msg[0].value.amount[0].denom}
+              <Text uppercase>
+                {tx.tx.value.msg[0].value.amount[0].denom.replace(
+                  SYMBOL_REGEX,
+                  ''
+                )}
+              </Text>
             </TableCell>
           </TableRow>
           <TableRow>

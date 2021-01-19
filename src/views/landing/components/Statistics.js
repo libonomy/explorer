@@ -23,6 +23,7 @@ import colors from 'src/vars/colors';
 import { getNodeInfo, getTotalSupply } from 'src/redux/actions';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
+import { SYMBOL_REGEX } from 'src/vars/regex';
 
 const Wrapper = styled.div``;
 
@@ -192,6 +193,7 @@ const Text = styled(CardText)`
   letter-spacing: 0.3px;
   text-align: left;
   color: ${colors.black};
+  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
 const TextFormat = styled(NumberFormat)`
   font-family: PoppinsBold;
@@ -307,7 +309,7 @@ const Statistics = () => {
               <Icon src={marketcap} alt="marketcap" />
               <InnerBody>
                 <Title>Current Supply</Title>
-                <Text>
+                <Text uppercase>
                   {totalSupply && (
                     <Fragment>
                       <TextFormat
@@ -315,7 +317,7 @@ const Statistics = () => {
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
-                      <Texts> {totalSupply.result[0].denom}</Texts>
+                      {totalSupply.result[0].denom.replace(SYMBOL_REGEX, '')}
                     </Fragment>
                   )}
                 </Text>

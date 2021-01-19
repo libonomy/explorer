@@ -52,33 +52,33 @@ const VerticalLine = styled.span`
   opacity: 0.3;
   display: inline-block;
   vertical-align: middle;
-  margin: 8px 0px;
+  margin: 8px 4px;
 `;
 const SearchIcon = styled.img`
   width: 20px;
   height: 20px;
 `;
-const DropdownItemExp = styled(DropdownItem)`
-  font-size: 13px;
-  font-family: PoppinsRegular;
-`;
-const DropdownMenuExp = styled(DropdownMenu)`
-  .btn-secondary:not(:disabled):not(.disabled):active:focus,
-  .btn-secondary:not(:disabled):not(.disabled).active:focus,
-  .show > .btn-secondary.dropdown-toggle:focus {
-    box-shadow: none;
-    background-color: ${colors.white};
-    color: ${colors.black};
-    border: none;
-  }
-  .dropdown-item.active,
-  .dropdown-item:active {
-    color: #000;
-    text-decoration: none;
-    background-color: #f8f9fa;
-    outline: none;
-  }
-`;
+// const DropdownItemExp = styled(DropdownItem)`
+//   font-size: 13px;
+//   font-family: PoppinsRegular;
+// `;
+// const DropdownMenuExp = styled(DropdownMenu)`
+//   .btn-secondary:not(:disabled):not(.disabled):active:focus,
+//   .btn-secondary:not(:disabled):not(.disabled).active:focus,
+//   .show > .btn-secondary.dropdown-toggle:focus {
+//     box-shadow: none;
+//     background-color: ${colors.white};
+//     color: ${colors.black};
+//     border: none;
+//   }
+//   .dropdown-item.active,
+//   .dropdown-item:active {
+//     color: #000;
+//     text-decoration: none;
+//     background-color: #f8f9fa;
+//     outline: none;
+//   }
+// `;
 const SearchBox = styled(InputGroup)`
   background: white;
   border-radius: 6px;
@@ -129,34 +129,17 @@ const SearchBox = styled(InputGroup)`
     box-shadow: none !important;
   }
 `;
-const DropDownButton = styled(Button)`
-  font-family: PoppinsRegular;
-  text-align: left;
-  border: none;
-  box-shadow: none;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-  background-color: ${colors.white} !important;
-  font-size: 12px;
-  line-height: 1.29;
-  letter-spacing: 0.63px;
-  color: ${colors.black};
-  border: none;
-  .btn:focus,
-  .btn.focus {
-    outline: 0 !important;
-    box-shadow: none !important;
-  }
-  .btn-secondary:focus,
-  .btn:hover {
-    color: ${colors.black} !important;
-    text-decoration: none !important;
-  }
-  .btn-secondary:focus,
-  .btn-secondary.focus {
-    box-shadow: none;
-  }
-`;
+// const Text = styled.span`
+//   font-family: PoppinsRegular;
+//   font-size: 12px;
+//   font-weight: normal;
+//   font-stretch: normal;
+//   font-style: normal;
+//   line-height: 2.25;
+//   letter-spacing: 0.36px;
+//   text-align: left;
+//   color: #000000;
+// `;
 const IconButton = styled(Button)`
   background-color: #28a0b0 !important;
   font-size: 18px;
@@ -169,9 +152,60 @@ const IconButton = styled(Button)`
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 `;
-const DropdownToggleBtn = styled(DropdownToggle)`
+// const DropdownToggleExp = styled(DropdownToggle)`
+//   font-family: PoppinsRegular;
+//   font-size: 12px;
+//   font-weight: normal;
+//   font-stretch: normal;
+//   font-style: normal;
+//   line-height: 2;
+//   letter-spacing: 0.36px;
+//   text-align: left;
+// `;
+const InputExp = styled(Input)`
+  max-width: 16% !important ;
+  opacity: 1 !important;
+  font-family: 'PoppinsRegular' !important;
+  font-size: 14px !important;
+  padding: 0 8px !important;
+  color: #495057;
+  background-color: #fff;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
+  margin-top: 4px !important;
+  display: flex;
+  text-align: justify;
+  @media (max-width: 991px) {
+    max-width: 25% !important;
+  }
+  &:focus {
+    color: #000;
+    background-color: #fff;
+    border-color: #f1f1f1;
+    outline: none;
+    box-shadow: none;
+  }
+`;
+const OptionExp = styled.option`
+  font-family: PoppinsRegular;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  &:hover {
+    color: #000;
+    background-color: ${colors.primary};
+  }
+`;
+const OptionExps = styled.option`
+  width: 160px !important;
+  position: absolute;
+  color: ${colors.white};
+  font-size: 0rem;
+  opacity: 1;
+  &:hover {
+    color: transparent !important ;
+    background-color: ${colors.primary};
+  }
 `;
 const Header = (props) => {
   const [splitButtonOpen, setSplitButtonOpen] = useState(false);
@@ -205,18 +239,26 @@ const Header = (props) => {
           </RightSection>
           <LeftSection>
             <SearchBox>
-              <InputGroupButtonDropdown
+              {/* <InputGroupButtonDropdown
                 addonType="prepend"
                 isOpen={splitButtonOpen}
                 toggle={toggleSplit}>
-                <DropdownToggleBtn split>
-                  <DropDownButton>All Filter</DropDownButton>
-                </DropdownToggleBtn>
+                <DropdownToggleExp tag="span" className="nav-link" caret>
+                  Filters
+                </DropdownToggleExp>
                 <DropdownMenuExp>
-                  <DropdownItemExp>Txs</DropdownItemExp>
-                  <DropdownItemExp>Address</DropdownItemExp>
-                </DropdownMenuExp>
-              </InputGroupButtonDropdown>
+                  <DropdownItemExp>Transaction</DropdownItemExp>
+                  <DropdownItemExp>Addresses</DropdownItemExp> */}
+              {/* <DropdownItem>Resources</DropdownItem>
+                  <DropdownItem>Other Action</DropdownItem> */}
+              {/* </DropdownMenuExp>{' '}
+              </InputGroupButtonDropdown> */}
+
+              <InputExp type="select" name="select" id="exampleSelect">
+                <OptionExps style={{ color: '#fff' }}>Filter</OptionExps>
+                <OptionExp>Transaction</OptionExp>
+                <OptionExp>Txs</OptionExp>
+              </InputExp>
               <VerticalLine />
               <Input
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"

@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
+import { SYMBOL_REGEX } from 'src/vars/regex';
+
 const Wrapper = styled.div`
   overflow-y: auto;
 `;
@@ -70,6 +72,7 @@ const Text = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
   ${({ success }) => (success ? `color:${colors.darkerGreen}` : null)}
+  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
 const FailText = styled.span`
   font-family: PoppinsRegular;
@@ -178,7 +181,13 @@ const TxsTable = () => {
                     displayType={'text'}
                     thousandSeparator={true}
                   />
-                  <Texts> {item.tx.value.msg[0].value.amount[0].denom}</Texts>
+                  <Text uppercase={true}>
+                    {' '}
+                    {item.tx.value.msg[0].value.amount[0].denom.replace(
+                      SYMBOL_REGEX,
+                      ''
+                    )}
+                  </Text>
                 </TableCell>
               </TableRow>
             ))}

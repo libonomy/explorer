@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  CardBody,
-  CardTitle,
-  CardText,
-  Container,
-  Row,
-  Col
-} from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText, Row, Col } from 'reactstrap';
 import colors from 'src/vars/colors';
 import { balance, home } from 'src/assets/images';
 import styled from 'styled-components';

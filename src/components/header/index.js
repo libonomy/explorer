@@ -163,7 +163,7 @@ const IconButton = styled(Button)`
 //   text-align: left;
 // `;
 const InputExp = styled(Input)`
-  max-width: 16% !important ;
+  max-width: 18% !important ;
   opacity: 1 !important;
   font-family: 'PoppinsRegular' !important;
   font-size: 14px !important;
@@ -197,8 +197,6 @@ const OptionExp = styled.option`
   }
 `;
 const OptionExps = styled.option`
-  width: 160px !important;
-  position: absolute;
   color: ${colors.white};
   font-size: 0rem;
   opacity: 1;
@@ -256,8 +254,8 @@ const Header = (props) => {
 
               <InputExp type="select" name="select" id="exampleSelect">
                 <OptionExps style={{ color: '#fff' }}>Filter</OptionExps>
-                <OptionExp>Transaction</OptionExp>
                 <OptionExp>Txs</OptionExp>
+                <OptionExp>Address</OptionExp>
               </InputExp>
               <VerticalLine />
               <Input

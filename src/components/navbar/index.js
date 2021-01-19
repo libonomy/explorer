@@ -7,7 +7,11 @@ import {
   Nav as NavBt,
   NavItem,
   NavLink,
-  Container
+  Container,
+  InputGroupButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap';
 import colors from 'src/vars/colors';
 import { Link } from 'react-router-dom';
@@ -80,23 +84,52 @@ const NavContainer = styled(Container)`
 `;
 const LinkExp = styled(Link)`
   font-family: PoppinsRegular;
-  font-size: 14px;
+  color: ${colors.black} !important;
+  &:hover {
+    color: ${colors.black} !important;
+    text-decoration: none;
+  }
+`;
+const DropdownToggleExp = styled(DropdownToggle)`
+  font-family: PoppinsRegular;
+  font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  letter-spacing: 0.42px;
+  line-height: 2;
+  letter-spacing: 0.36px;
   text-align: left;
+  padding: 0px;
   color: ${colors.white};
-  display: block;
-  padding: 0.5rem 1rem;
-  &:hover {
-    color: ${colors.white};
+`;
+
+const DropdownItemExp = styled(DropdownItem)`
+  font-size: 14px;
+  font-family: PoppinsRegular;
+  padding: 0.5rem 1.75rem;
+`;
+const DropdownMenuExp = styled(DropdownMenu)`
+  width: 200px;
+  margin: 8px 0px 0px -12px;
+  .btn-secondary:not(:disabled):not(.disabled):active:focus,
+  .btn-secondary:not(:disabled):not(.disabled).active:focus,
+  .show > .btn-secondary.dropdown-toggle:focus {
+    box-shadow: none;
+    background-color: ${colors.white};
+    color: ${colors.black};
+    border: none;
+  }
+  .dropdown-item.active,
+  .dropdown-item:active {
+    color: #000;
     text-decoration: none;
-    background-color: rgba(0, 0, 0, 0.04);
-    border-radius: 6px;
+    background-color: #f8f9fa;
+    outline: none;
   }
 `;
 const NavBar = () => {
+  const [splitButtonOpen, setSplitButtonOpen] = useState(false);
+  const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -108,11 +141,32 @@ const NavBar = () => {
           <Collapse isOpen={isOpen} navbar>
             <NavContainer>
               <Nav>
-                <NavItem>
+                {/* <NavItem>
                   <LinkExp to="/blocks">Blocks</LinkExp>
                 </NavItem>
                 <NavItem>
                   <LinkExp to="/txs">Transactions</LinkExp>
+                </NavItem> */}
+                <NavItem>
+                  <InputGroupButtonDropdown
+                    addonType="prepend"
+                    isOpen={splitButtonOpen}
+                    toggle={toggleSplit}>
+                    <DropdownToggleExp tag="span" caret>
+                      Blockchain
+                    </DropdownToggleExp>
+                    <DropdownMenuExp>
+                      <LinkExp to="/blocks">
+                        <DropdownItemExp>Blocks</DropdownItemExp>
+                      </LinkExp>
+                      <LinkExp to="/txs">
+                        <DropdownItemExp>Transactions</DropdownItemExp>
+                      </LinkExp>
+                      <LinkExp to="/addresses/address">
+                        <DropdownItemExp>Addresses</DropdownItemExp>
+                      </LinkExp>
+                    </DropdownMenuExp>
+                  </InputGroupButtonDropdown>
                 </NavItem>
               </Nav>
             </NavContainer>

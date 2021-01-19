@@ -28,7 +28,7 @@ const Section = styled.div`
   align-items: center;
 
   background-color: ${colors.white};
-  @media (max-width: 576px) {
+  @media (max-width: 991px) {
     display: block;
   }
 `;
@@ -84,7 +84,7 @@ const SearchBox = styled(InputGroup)`
   border-radius: 6px;
   border: solid 1px ${colors.borderGrey};
 
-  @media (max-width: 576px) {
+  @media (max-width: 991px) {
     margin: 1.5rem 0px 0px 0px;
   }
   input.form-control {
@@ -163,7 +163,7 @@ const IconButton = styled(Button)`
 //   text-align: left;
 // `;
 const InputExp = styled(Input)`
-  max-width: 18% !important ;
+  max-width: 20% !important ;
   opacity: 1 !important;
   font-family: 'PoppinsRegular' !important;
   font-size: 14px !important;
@@ -176,7 +176,7 @@ const InputExp = styled(Input)`
   display: flex;
   text-align: justify;
   @media (max-width: 991px) {
-    max-width: 25% !important;
+    max-width: 20% !important;
   }
   &:focus {
     color: #000;
@@ -253,7 +253,7 @@ const Header = (props) => {
               </InputGroupButtonDropdown> */}
 
               <InputExp type="select" name="select" id="exampleSelect">
-                <OptionExps style={{ color: '#fff' }}>Filter</OptionExps>
+                <OptionExps>Filter</OptionExps>
                 <OptionExp>Txs</OptionExp>
                 <OptionExp>Address</OptionExp>
               </InputExp>

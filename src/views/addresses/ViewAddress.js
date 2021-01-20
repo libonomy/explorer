@@ -1,9 +1,8 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import { PageContainer } from 'src/components';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { AddressInfo, TabsSection } from './components';
-import copy from 'copy-to-clipboard';
 import { Copy } from 'src/components';
 const containerStyles = { paddingTop: 0, boxShadow: 'none' };
 const SubHeading = styled.h6`
@@ -17,10 +16,10 @@ const SubHeading = styled.h6`
   margin-bottom: 10px;
   display: flex;
 `;
-const ViewBlock = () => {
+const ViewAddress = () => {
   return (
     <PageContainer bg="transparent" heading="Address" style={containerStyles}>
-      <SubHeading>
+      <SubHeading hash>
         0x97bb222FC501a01FFDBC52c8C1652981408a6A68
         <Copy
           id="address-copy"
@@ -33,4 +32,4 @@ const ViewBlock = () => {
   );
 };
 
-export default ViewBlock;
+export default ViewAddress;

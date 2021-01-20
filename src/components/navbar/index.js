@@ -50,34 +50,34 @@ const NavbarTogglers = styled(NavbarToggler)`
     padding: 0;
   }
 `;
-const NavLinkExp = styled(NavLink)`
-  font-family: PoppinsRegular;
-  font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: 0.42px;
-  text-align: left;
-  color: ${colors.white};
-  &:hover {
-    color: ${colors.white};
-    background-color: rgba(0, 0, 0, 0.04);
-    border-radius: 6px;
-}
-  }
-  // padding: 0.5rem 1rem;
+// const NavLinkExp = styled(NavLink)`
+//   font-family: PoppinsRegular;
+//   font-size: 14px;
+//   font-weight: normal;
+//   font-stretch: normal;
+//   font-style: normal;
+//   letter-spacing: 0.42px;
+//   text-align: left;
+//   color: ${colors.white};
+//   &:hover {
+//     color: ${colors.white};
+//     background-color: rgba(0, 0, 0, 0.04);
+//     border-radius: 6px;
+// }
+//   }
+//   // padding: 0.5rem 1rem;
 
-  // @media (max-width: 768px) {
-  //   padding: 0.5rem 1rem;
-  //   :first-child {
-  //     padding-left: 1.3rem;
-  // }
-  // @media (max-width: 576px) {
-  //   padding: 0.5rem 1rem;
-  //   :first-child {
-  //     padding-left: 0.3rem;
-  // }
-`;
+//   // @media (max-width: 768px) {
+//   //   padding: 0.5rem 1rem;
+//   //   :first-child {
+//   //     padding-left: 1.3rem;
+//   // }
+//   // @media (max-width: 576px) {
+//   //   padding: 0.5rem 1rem;
+//   //   :first-child {
+//   //     padding-left: 0.3rem;
+//   // }
+// `;
 
 const NavContainer = styled(Container)`
   padding: 0rem;
@@ -85,6 +85,7 @@ const NavContainer = styled(Container)`
 const LinkExp = styled(Link)`
   font-family: PoppinsRegular;
   color: ${colors.black} !important;
+
   &:hover {
     color: ${colors.black} !important;
     text-decoration: none;
@@ -97,12 +98,29 @@ const DropdownToggleExp = styled(DropdownToggle)`
   font-stretch: normal;
   font-style: normal;
   line-height: 2;
+  margin-top: -2px;
   letter-spacing: 0.36px;
   text-align: left;
-  padding: 0px;
+  padding: 0px 10px;
   color: ${colors.white};
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+
+  &:hover {
+    color: ${colors.white};
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+
+    display: block;
+  }
 `;
 
+const InputGroupButtonDropdownExp = styled(InputGroupButtonDropdown)`
+  DropdownMenuExp:hover {
+    display: block !important;
+  }
+`;
 const DropdownItemExp = styled(DropdownItem)`
   font-size: 14px;
   font-family: PoppinsRegular;
@@ -128,11 +146,25 @@ const DropdownMenuExp = styled(DropdownMenu)`
   }
 `;
 const NavBar = () => {
-  const [splitButtonOpen, setSplitButtonOpen] = useState(false);
-  const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
+  const [splitButtonOpen, setSplitButtonOpen] = useState({
+    dropdownOpen: false
+  });
+  const toggleSplit = () => {
+    setSplitButtonOpen((prevState) => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  };
+  const onMouseEnter = () => {
+    setSplitButtonOpen({ dropdownOpen: true });
+  };
+
+  const onMouseLeave = () => {
+    setSplitButtonOpen({ dropdownOpen: true });
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
   return (
     <Wrapper>
       <NavbarExp light expand="md" id="navbar">
@@ -148,25 +180,28 @@ const NavBar = () => {
                   <LinkExp to="/txs">Transactions</LinkExp>
                 </NavItem> */}
                 <NavItem>
-                  <InputGroupButtonDropdown
+                  <InputGroupButtonDropdownExp
                     addonType="prepend"
-                    isOpen={splitButtonOpen}
-                    toggle={toggleSplit}>
+                    toggle={toggleSplit}
+                    onMouseOver={onMouseEnter}
+                    onMouseLeave={onMouseLeave}
+                    isOpen={splitButtonOpen.dropdownOpen}>
                     <DropdownToggleExp tag="span" caret>
                       Blockchain
                     </DropdownToggleExp>
-                    <DropdownMenuExp>
+                    <DropdownMenuExp split>
                       <LinkExp to="/blocks">
                         <DropdownItemExp>Blocks</DropdownItemExp>
                       </LinkExp>
                       <LinkExp to="/txs">
                         <DropdownItemExp>Transactions</DropdownItemExp>
                       </LinkExp>
-                      <LinkExp to="/addresses/address">
+                      {/* <LinkExp
+                        to={`/addresses/${'0x97bb222fc501a01ffdbc52c8c1652981408a6a68'}`}>
                         <DropdownItemExp>Addresses</DropdownItemExp>
-                      </LinkExp>
+                      </LinkExp> */}
                     </DropdownMenuExp>
-                  </InputGroupButtonDropdown>
+                  </InputGroupButtonDropdownExp>
                 </NavItem>
               </Nav>
             </NavContainer>

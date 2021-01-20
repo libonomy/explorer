@@ -48,10 +48,11 @@ const Logo = styled.img`
 
 const VerticalLine = styled.span`
   height: 25px;
-  border: solid black 1px;
+  border: 0.5px solid black;
   opacity: 0.3;
   display: inline-block;
   vertical-align: middle;
+  color: ${colors.black};
   margin: 8px 4px;
 `;
 const SearchIcon = styled.img`

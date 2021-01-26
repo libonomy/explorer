@@ -3,18 +3,38 @@ import { PageContainer } from 'src/components';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { AddressInfo, TabsSection } from './components';
+import { Alert } from 'reactstrap';
+
 import { Copy } from 'src/components';
 const containerStyles = { paddingTop: 0, boxShadow: 'none' };
-const SubHeading = styled.h6`
+// const SubHeading = styled.h6`
+//   color: ${colors.black10Alpha};
+//   font-family: PoppinsMedium;
+//   font-size: 15px;
+//   font-weight: normal;
+//   font-stretch: normal;
+//   font-style: normal;
+//   line-height: 1.33;
+//   margin-bottom: 10px;
+//   display: flex;
+// `;
+const SubHeading = styled(Alert)`
   color: ${colors.black10Alpha};
+  border: 1px solid #dddcdc;
+  background-color: #dddcdc;
   font-family: PoppinsMedium;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.33;
-  margin-bottom: 10px;
+  line-height: 0.6;
   display: flex;
+  height: 32px;
+  width: 420px;
+  @media (max-width: 576px) {
+    width: auto;
+    font-size: 2.5vw;
+  }
 `;
 const ViewAddress = () => {
   return (

@@ -4,6 +4,7 @@ import colors from 'src/vars/colors';
 import { balance, home } from 'src/assets/images';
 import styled from 'styled-components';
 import { Input } from 'reactstrap';
+import SelectBox from './CustomSelect';
 const Wrapper = styled.div`
   margin-bottom: 2rem;
 `;
@@ -142,13 +143,21 @@ const AddressInfo = () => {
                 <Text>$3,32154</Text>
               </InnerBody>
 
-              <InputExp type="select" name="select" id="exampleSelect">
+              {/* <InputExp type="select" name="select" id="exampleSelect">
                 <OptionExp>1</OptionExp>
                 <OptionExp>2</OptionExp>
                 <OptionExp>3</OptionExp>
                 <OptionExp>4</OptionExp>
                 <OptionExp>5</OptionExp>
-              </InputExp>
+              </InputExp> */}
+              <SelectBox
+                items={[
+                  { value: 'United States', id: 1 },
+                  { value: 'Canada', id: 2 },
+                  { value: 'Mexico', id: 3 },
+                  { value: 'Japan', id: 4 }
+                ]}
+              />
             </CardContent>
           </CardExp>
         </Col>

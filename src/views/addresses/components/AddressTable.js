@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -16,7 +16,8 @@ import { useMediaQuery } from 'src/hooks';
 import { getAllBlocks } from 'src/redux/actions';
 import styled from 'styled-components';
 import moment from 'moment';
-
+// import { View } from 'src/components';
+import Tooltip from 'react-simple-tooltip';
 const Wrapper = styled.div`
   overflow-y: auto;
 `;
@@ -45,8 +46,11 @@ const Text = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
 `;
-
-const AddressTable = () => {
+const View = styled(Tooltip)`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+`;
+const AddressTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
 
@@ -57,7 +61,6 @@ const AddressTable = () => {
   const { latestBlocks, latestBlocksLoading } = useSelector(
     (state) => state.blocks
   );
-
   return (
     <Wrapper>
       <Header>
@@ -82,7 +85,14 @@ const AddressTable = () => {
               <TableRow key={index}>
                 <TableCell>
                   <Link to={`/blocks/${item.header.height}`}>
-                    {item.header.height}
+                    <View
+                      content="View"
+                      placement="right"
+                      padding="4"
+                      fontSize="12px"
+                      fontFamily="PoppinsRegular">
+                      {item.header.height}
+                    </View>
                   </Link>
                 </TableCell>
                 <TableCell>{item.block_id.hash}</TableCell>

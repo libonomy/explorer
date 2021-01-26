@@ -15,6 +15,7 @@ import {
   // DropdownItem
 } from 'reactstrap';
 import styled from 'styled-components';
+import MySelect from './selectbox';
 import colors from 'src/vars/colors';
 import history from 'src/utils/history';
 
@@ -54,6 +55,9 @@ const VerticalLine = styled.span`
   vertical-align: middle;
   color: ${colors.black};
   margin: 8px 4px;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const SearchIcon = styled.img`
   width: 20px;
@@ -176,6 +180,7 @@ const InputExp = styled(Input)`
   margin-top: 4px !important;
   display: flex;
   text-align: justify;
+  cursor: pointer;
   @media (max-width: 991px) {
     max-width: 20% !important;
   }
@@ -192,6 +197,7 @@ const OptionExp = styled.option`
   font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
+  cursor: pointer !important;
   &:hover {
     color: #000;
     background-color: ${colors.primary};
@@ -201,6 +207,7 @@ const OptionExps = styled.option`
   color: ${colors.white};
   font-size: 0rem;
   opacity: 1;
+  cursor: pointer !important;
   &:hover {
     color: transparent !important ;
     background-color: ${colors.primary};
@@ -226,6 +233,15 @@ const Header = (props) => {
       history.push(`/txs/${state.keyword}`);
       setState({ ...state, keyword: '' });
     }
+  };
+  const [item, setItem] = useState({
+    selected: null
+  });
+
+  const handleChangeOption = (value) => {
+    setItem({
+      selected: value
+    });
   };
   return (
     <Wrapper>
@@ -253,11 +269,16 @@ const Header = (props) => {
               {/* </DropdownMenuExp>{' '}
               </InputGroupButtonDropdown> */}
 
-              <InputExp type="select" name="select" id="exampleSelect">
+              {/* <InputExp type="select" name="select" id="exampleSelect">
                 <OptionExps>Filter</OptionExps>
                 <OptionExp>Txs</OptionExp>
                 <OptionExp>Address</OptionExp>
-              </InputExp>
+              </InputExp> */}
+              <MySelect
+                options={options}
+                onChange={handleChangeOption}
+                selected={item.selected}
+              />
               <VerticalLine />
               <Input
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"
@@ -281,3 +302,22 @@ const Header = (props) => {
 };
 
 export default Header;
+
+const options = [
+  {
+    value: '1',
+    label: 'Address'
+  },
+  {
+    value: '2',
+    label: 'Two'
+  },
+  {
+    value: '3',
+    label: 'Three'
+  },
+  {
+    value: '4',
+    label: 'Four'
+  }
+];

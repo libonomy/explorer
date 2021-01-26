@@ -23,7 +23,7 @@ const InputExp = styled(Select)`
     border-radius: 0px;
     border-style: none;
     border-width: 0px;
-    cursor: pointer;
+    cursor: pointer !important;
     min-height: 0px;
     outline: 0 !important;
     box-shadow: none;
@@ -35,6 +35,7 @@ const InputExp = styled(Select)`
     border-style: none;
     border-width: 0px;
     min-height: 0px;
+    cursor: pointer;
     box-shadow: none;
     .css-1pahdxg-control:hover: {
       border-color: #fff !important;

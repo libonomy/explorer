@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
@@ -63,7 +63,7 @@ const Wrapper = styled.div`
   } ;
 `;
 
-const NoData = styled.div``;
+// const NoData = styled.div``;
 
 const PlaceHolder = ({ loading, data, children }) => {
   return <Wrapper loading={true}>{children}</Wrapper>;

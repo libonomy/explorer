@@ -1,10 +1,9 @@
 import React from 'react';
-import { Card, Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import styled from 'styled-components';
 import { liboBackground, slide1 } from 'src/assets/images';
 
 import colors from 'src/vars/colors';
-import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   padding: 1rem 0 1rem 0;
@@ -22,19 +21,19 @@ const Wrapper = styled.div`
   }
 `;
 
-const CardWrapper = styled(Card)`
-  width: 345px;
-  height: 151px;
-  margin-left: 2.5rem;
-  border-radius: 10px;
-  background-color: #ffffff;
-  @media (max-width: 991px) {
-    margin-left: 0rem;
-  }
-  @media (max-width: 480px) {
-    width: auto;
-  }
-`;
+// const CardWrapper = styled(Card)`
+//   width: 345px;
+//   height: 151px;
+//   margin-left: 2.5rem;
+//   border-radius: 10px;
+//   background-color: #ffffff;
+//   @media (max-width: 991px) {
+//     margin-left: 0rem;
+//   }
+//   @media (max-width: 480px) {
+//     width: auto;
+//   }
+// `;
 
 const Title = styled.h1`
   font-family: PoppinsBold;
@@ -84,7 +83,7 @@ const Banner = () => {
             </Paragraph>
           </Col>
           <Col lg="5" md="12">
-            <a href="https://libonomy.com/" target="_blank">
+            <a href="https://libonomy.com/" target="_blank" rel="noreferrer">
               <Image src={slide1} />
             </a>
           </Col>

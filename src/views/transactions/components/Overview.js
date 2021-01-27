@@ -234,8 +234,8 @@ const Overview = (props) => {
           </TableRow>
         </TableBody>
       )}
-      {!txLoading && !tx && <NoData colSpan={6} height={300} />}
-      {txLoading && <TableLoader colSpan={6} height={300} />}
+      {!txLoading && !tx && <NoData colSpan={6} height={425} />}
+      {txLoading && <TableLoader colSpan={6} height={425} />}
     </Table>
   );
 };

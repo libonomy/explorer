@@ -87,7 +87,9 @@ const FailText = styled.span`
 const Icon = styled.img`
   margin-right: 5px;
 `;
-
+const Texts = styled.span`
+  text-transform: uppercase;
+`;
 const TxsTable = () => {
   const matches = useMediaQuery('(min-width:600px)');
 
@@ -190,9 +192,9 @@ const TxsTable = () => {
               </TableRow>
             ))}
           {!latestTxsLoading && !latestTxs && (
-            <NoData colSpan={6} height={300} />
+            <NoData colSpan={6} height={345} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={300} />}
+          {latestTxsLoading && <TableLoader colSpan={6} height={345} />}
         </TableBody>
       </Table>
       <Footer>

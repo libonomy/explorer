@@ -1,9 +1,11 @@
 import { Accounts } from 'src/views/accounts';
+
 import { Blocks, ForkedBlocks, ViewBlock } from 'src/views/blocks';
 import { InternalTxs, VerifiedContracts } from 'src/views/contracts';
 import { Landing } from 'src/views/landing';
 import { PendingTxs, Transactions, ViewTx } from 'src/views/transactions';
 import { UncleBlocks } from 'src/views/uncles';
+import { ViewAddress } from 'src/views/addresses';
 import NotFound from './NotFound';
 
 export const app = [
@@ -55,5 +57,9 @@ export const app = [
   {
     path: '/not_found',
     component: NotFound
+  },
+  {
+    path: '/addresses/:hash',
+    component: ViewAddress
   }
 ];

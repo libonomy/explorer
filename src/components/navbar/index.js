@@ -7,7 +7,11 @@ import {
   Nav as NavBt,
   NavItem,
   NavLink,
-  Container
+  Container,
+  InputGroupButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap';
 import colors from 'src/vars/colors';
 import { Link } from 'react-router-dom';
@@ -46,60 +50,121 @@ const NavbarTogglers = styled(NavbarToggler)`
     padding: 0;
   }
 `;
-const NavLinkExp = styled(NavLink)`
-  font-family: PoppinsRegular;
-  font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: 0.42px;
-  text-align: left;
-  color: ${colors.white};
-  &:hover {
-    color: ${colors.white};
-    background-color: rgba(0, 0, 0, 0.04);
-    border-radius: 6px;
-}
-  }
-  // padding: 0.5rem 1rem;
+// const NavLinkExp = styled(NavLink)`
+//   font-family: PoppinsRegular;
+//   font-size: 14px;
+//   font-weight: normal;
+//   font-stretch: normal;
+//   font-style: normal;
+//   letter-spacing: 0.42px;
+//   text-align: left;
+//   color: ${colors.white};
+//   &:hover {
+//     color: ${colors.white};
+//     background-color: rgba(0, 0, 0, 0.04);
+//     border-radius: 6px;
+// }
+//   }
+//   // padding: 0.5rem 1rem;
 
-  // @media (max-width: 768px) {
-  //   padding: 0.5rem 1rem;
-  //   :first-child {
-  //     padding-left: 1.3rem;
-  // }
-  // @media (max-width: 576px) {
-  //   padding: 0.5rem 1rem;
-  //   :first-child {
-  //     padding-left: 0.3rem;
-  // }
-`;
+//   // @media (max-width: 768px) {
+//   //   padding: 0.5rem 1rem;
+//   //   :first-child {
+//   //     padding-left: 1.3rem;
+//   // }
+//   // @media (max-width: 576px) {
+//   //   padding: 0.5rem 1rem;
+//   //   :first-child {
+//   //     padding-left: 0.3rem;
+//   // }
+// `;
 
 const NavContainer = styled(Container)`
   padding: 0rem;
 `;
 const LinkExp = styled(Link)`
   font-family: PoppinsRegular;
-  font-size: 14px;
+  color: ${colors.black} !important;
+
+  &:hover {
+    color: ${colors.black} !important;
+    text-decoration: none;
+  }
+`;
+const DropdownToggleExp = styled(DropdownToggle)`
+  font-family: PoppinsRegular;
+  font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  letter-spacing: 0.42px;
+  line-height: 2;
+  margin-top: -2px;
+  letter-spacing: 0.36px;
   text-align: left;
+  padding: 0px 10px;
   color: ${colors.white};
-  display: block;
-  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+
   &:hover {
     color: ${colors.white};
-    text-decoration: none;
     background-color: rgba(0, 0, 0, 0.04);
     border-radius: 6px;
+
+    display: block;
+  }
+`;
+
+const InputGroupButtonDropdownExp = styled(InputGroupButtonDropdown)`
+  DropdownMenuExp:hover {
+    display: block !important;
+  }
+`;
+const DropdownItemExp = styled(DropdownItem)`
+  font-size: 14px;
+  font-family: PoppinsRegular;
+  padding: 0.5rem 1.75rem;
+`;
+const DropdownMenuExp = styled(DropdownMenu)`
+  width: 200px;
+  margin: 8px 0px 0px -12px;
+  .btn-secondary:not(:disabled):not(.disabled):active:focus,
+  .btn-secondary:not(:disabled):not(.disabled).active:focus,
+  .show > .btn-secondary.dropdown-toggle:focus {
+    box-shadow: none;
+    background-color: ${colors.white};
+    color: ${colors.black};
+    border: none;
+  }
+  .dropdown-item.active,
+  .dropdown-item:active {
+    color: #000;
+    text-decoration: none;
+    background-color: #f8f9fa;
+    outline: none;
   }
 `;
 const NavBar = () => {
+  const [splitButtonOpen, setSplitButtonOpen] = useState({
+    dropdownOpen: false
+  });
+  const toggleSplit = () => {
+    setSplitButtonOpen((prevState) => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  };
+  const onMouseEnter = () => {
+    setSplitButtonOpen({ dropdownOpen: true });
+  };
+
+  const onMouseLeave = () => {
+    setSplitButtonOpen({ dropdownOpen: true });
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
   return (
     <Wrapper>
       <NavbarExp light expand="md" id="navbar">
@@ -108,11 +173,35 @@ const NavBar = () => {
           <Collapse isOpen={isOpen} navbar>
             <NavContainer>
               <Nav>
-                <NavItem>
+                {/* <NavItem>
                   <LinkExp to="/blocks">Blocks</LinkExp>
                 </NavItem>
                 <NavItem>
                   <LinkExp to="/txs">Transactions</LinkExp>
+                </NavItem> */}
+                <NavItem>
+                  <InputGroupButtonDropdownExp
+                    addonType="prepend"
+                    toggle={toggleSplit}
+                    onMouseOver={onMouseEnter}
+                    onMouseLeave={onMouseLeave}
+                    isOpen={splitButtonOpen.dropdownOpen}>
+                    <DropdownToggleExp tag="span" caret>
+                      Blockchain
+                    </DropdownToggleExp>
+                    <DropdownMenuExp split>
+                      <LinkExp to="/blocks">
+                        <DropdownItemExp>Blocks</DropdownItemExp>
+                      </LinkExp>
+                      <LinkExp to="/txs">
+                        <DropdownItemExp>Transactions</DropdownItemExp>
+                      </LinkExp>
+                      {/* <LinkExp
+                        to={`/addresses/${'0x97bb222fc501a01ffdbc52c8c1652981408a6a68'}`}>
+                        <DropdownItemExp>Addresses</DropdownItemExp>
+                      </LinkExp> */}
+                    </DropdownMenuExp>
+                  </InputGroupButtonDropdownExp>
                 </NavItem>
               </Nav>
             </NavContainer>

@@ -18,7 +18,7 @@ const colors = {
   darkerBlue: '#0E4F9A',
   orange: '#EC5C3D',
   realBlack: '#000000',
-  black10Alpha: 'rgba(0, 0, 0, 0.1)',
+  black10Alpha: '#545b62',
   black02Alpha: 'rgba(0, 0, 0, 0.09)',
   darkGray50Alpha: 'rgba(64, 64, 64, 0.5)',
   darkGray10Alpha: 'rgba(64, 64, 64, 0.1)',

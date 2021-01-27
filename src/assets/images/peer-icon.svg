@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <defs>
+        <style>
+            .cls-2{fill:#fff}
+        </style>
+    </defs>
+    <g id="Group_4101" transform="translate(-1060 -516)">
+        <circle id="Ellipse_149" cx="16" cy="16" r="16" fill="#40b1be" transform="translate(1060 516)"/>
+        <g id="peer-to-peer" transform="translate(1068.591 524.591)">
+            <path id="Path_16772" d="M0 0h6.462v4H0zm0 0" class="cls-2"/>
+            <path id="Path_16773" d="M35.769 160v.154a.77.77 0 0 1-.769.769v.923h4.308v-.923a.77.77 0 0 1-.769-.769V160zm0 0" class="cls-2" transform="translate(-33.923 -155.076)"/>
+            <path id="Path_16774" d="M241.908 0v1.846H240v.924h1.908V4h6.462V0zm0 0" class="cls-2" transform="translate(-232.615)"/>
+            <path id="Path_16775" d="M340.539 160.154V160h-2.769v.154a.77.77 0 0 1-.769.769v.923h4.308v-.923a.77.77 0 0 1-.77-.769zm0 0" class="cls-2" transform="translate(-326.63 -155.076)"/>
+            <path id="Path_16776" d="M38.539 452.154V452h-2.77v.154a.77.77 0 0 1-.769.769v.923h4.308v-.923a.77.77 0 0 1-.769-.769zm0 0" class="cls-2" transform="translate(-33.923 -438.091)"/>
+            <path id="Path_16777" d="M3.693 250H2.77v1.292H0v4h6.462v-4H3.693zm0 0" class="cls-2" transform="translate(0 -242.307)"/>
+            <path id="Path_16778" d="M241.923 430.462a.462.462 0 1 1-.461-.462.462.462 0 0 1 .461.462zm0 0" class="cls-2" transform="translate(-233.584 -416.768)"/>
+            <path id="Path_16779" d="M301.923 430.462a.462.462 0 1 1-.462-.462.462.462 0 0 1 .462.462zm0 0" class="cls-2" transform="translate(-291.737 -416.768)"/>
+            <path id="Path_16780" d="M421.923 430.462a.462.462 0 1 1-.462-.462.462.462 0 0 1 .462.462zm0 0" class="cls-2" transform="translate(-408.045 -416.768)"/>
+            <path id="Path_16781" d="M421.923 310.462a.462.462 0 1 1-.462-.462.462.462 0 0 1 .462.462zm0 0" class="cls-2" transform="translate(-408.045 -300.46)"/>
+            <path id="Path_16782" d="M421.923 250.462a.462.462 0 1 1-.462-.462.462.462 0 0 1 .462.462zm0 0" class="cls-2" transform="translate(-408.045 -242.307)"/>
+            <path id="Path_16783" d="M361.923 430.462a.462.462 0 1 1-.462-.462.462.462 0 0 1 .462.462zm0 0" class="cls-2" transform="translate(-349.891 -416.768)"/>
+            <path id="Path_16784" d="M421.923 370.462a.462.462 0 1 1-.462-.461.462.462 0 0 1 .462.461zm0 0" class="cls-2" transform="translate(-408.045 -358.614)"/>
+        </g>
+    </g>
+</svg>

@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { PopoverBody, Table } from 'reactstrap';
-import { failIcon, successIcon, copyIcon } from 'src/assets/images';
+import { Table } from 'reactstrap';
+import { failIcon, successIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { getTransectionByHash } from 'src/redux/actions';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
-import copy from 'copy-to-clipboard';
-
-import { TableLoader } from 'src/components';
+// import { Tooltip } from 'reactstrap';
+import { TableLoader, Copy } from 'src/components';
 import { NoData } from 'src/components';
 import { SCALE } from 'src/vars/scale';
+import { SYMBOL_REGEX } from 'src/vars/regex';
 const TableHeading = styled.th`
   width: 25%;
 `;
@@ -60,8 +60,13 @@ const Text = styled.span`
   font-style: normal;
   letter-spacing: 0.36px;
   text-align: left;
+  ${({ uppercase }) => uppercase && `text-transform: uppercase;`};
   ${({ success }) =>
-    success ? `color:${colors.darkerGreen}` : `color:${colors.red}`}
+    success && success
+      ? `color:${colors.darkerGreen}`
+      : success === false
+      ? `color:${colors.red}`
+      : 'color: default'};
 `;
 
 const Heading = styled.span`
@@ -74,7 +79,9 @@ const Heading = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
 `;
-
+const Wrapper = styled.div`
+  display: flex;
+`;
 const Overview = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -95,8 +102,10 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {tx.txhash}{' '}
-              <Icon src={copyIcon} onClick={() => copy(tx.txhash)} />
+              <Wrapper>
+                {tx.txhash}
+                <Copy id="txhash-copy" value={tx.txhash} />
+              </Wrapper>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -119,7 +128,7 @@ const Overview = (props) => {
               {tx.logs[0].success ? (
                 <IconText>
                   <Icon src={successIcon}></Icon>
-                  <Text success>success</Text>
+                  <Text success={true}>success</Text>
                 </IconText>
               ) : (
                 <IconText>
@@ -138,8 +147,7 @@ const Overview = (props) => {
             </TableHeading>
             <TableCell>
               {moment(tx.timestamp).fromNow()} (
-              {new Date(tx.timestamp).toLocaleTimeString()}{' '}
-              {new Date(tx.timestamp).toLocaleDateString()})
+              {new Date(tx.timestamp).toUTCString()})
             </TableCell>
           </TableRow>
           <TableRow>
@@ -150,11 +158,13 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {tx.tx.value.msg[0].value.to_address}{' '}
-              <Icon
-                src={copyIcon}
-                onClick={() => copy(tx.tx.value.msg[0].value.to_address)}
-              />
+              <Wrapper>
+                {tx.tx.value.msg[0].value.to_address}{' '}
+                <Copy
+                  id="to_address-copy"
+                  value={tx.tx.value.msg[0].value.to_address}
+                />
+              </Wrapper>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -165,11 +175,13 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {tx.tx.value.msg[0].value.from_address}{' '}
-              <Icon
-                src={copyIcon}
-                onClick={() => copy(tx.tx.value.msg[0].value.from_address)}
-              />
+              <Wrapper>
+                {tx.tx.value.msg[0].value.from_address}{' '}
+                <Copy
+                  id="from_address-copy"
+                  value={tx.tx.value.msg[0].value.from_address}
+                />
+              </Wrapper>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -185,7 +197,12 @@ const Overview = (props) => {
                 displayType={'text'}
                 thousandSeparator={true}
               />{' '}
-              {tx.tx.value.msg[0].value.amount[0].denom}
+              <Text uppercase>
+                {tx.tx.value.msg[0].value.amount[0].denom.replace(
+                  SYMBOL_REGEX,
+                  ''
+                )}
+              </Text>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -213,7 +230,7 @@ const Overview = (props) => {
                 <Heading>Memo</Heading>
               </HeadingWraper>
             </TableHeading>
-            <TableCell>{tx.memo ? tx.memo : '""'}</TableCell>
+            <TableCell>{tx.tx.value.memo ? tx.tx.value.memo : '""'}</TableCell>
           </TableRow>
         </TableBody>
       )}

@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
+import { SYMBOL_REGEX } from 'src/vars/regex';
+
 const Wrapper = styled.div`
   overflow-y: auto;
 `;
@@ -70,6 +72,7 @@ const Text = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
   ${({ success }) => (success ? `color:${colors.darkerGreen}` : null)}
+  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
 const FailText = styled.span`
   font-family: PoppinsRegular;
@@ -148,9 +151,7 @@ const TxsTable = () => {
                 <TableCell>
                   <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
                 </TableCell>
-                <TableCell>
-                  {moment(item.timestamp, 'YYYYMMDD').fromNow()}
-                </TableCell>
+                <TableCell>{moment(item.timestamp).fromNow()}</TableCell>
                 <TableCell>
                   {item.logs[0].success ? (
                     <IconText>
@@ -173,12 +174,18 @@ const TxsTable = () => {
                   <Link disabled>{item.tx.value.msg[0].value.to_address}</Link>
                 </TableCell>
                 <TableCell>
-                  {item.tx.value.msg[0].value.amount[0].denom}
                   <NumberFormat
                     value={item.tx.value.msg[0].value.amount[0].amount / SCALE}
                     displayType={'text'}
                     thousandSeparator={true}
                   />
+                  <Text uppercase={true}>
+                    {' '}
+                    {item.tx.value.msg[0].value.amount[0].denom.replace(
+                      SYMBOL_REGEX,
+                      ''
+                    )}
+                  </Text>
                 </TableCell>
               </TableRow>
             ))}

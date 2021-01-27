@@ -46,7 +46,7 @@ const NavbarTogglers = styled(NavbarToggler)`
     padding: 0;
   }
 `;
-const NavText = styled(NavLink)`
+const NavLinkExp = styled(NavLink)`
   font-family: PoppinsRegular;
   font-size: 14px;
   font-weight: normal;
@@ -79,11 +79,21 @@ const NavContainer = styled(Container)`
   padding: 0rem;
 `;
 const LinkExp = styled(Link)`
-  padding: 0;
+  font-family: PoppinsRegular;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.42px;
+  text-align: left;
   color: ${colors.white};
+  display: block;
+  padding: 0.5rem 1rem;
   &:hover {
     color: ${colors.white};
     text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
   }
 `;
 const NavBar = () => {
@@ -99,14 +109,10 @@ const NavBar = () => {
             <NavContainer>
               <Nav>
                 <NavItem>
-                  <NavText>
-                    <LinkExp to="/blocks">Blocks</LinkExp>
-                  </NavText>
+                  <LinkExp to="/blocks">Blocks</LinkExp>
                 </NavItem>
                 <NavItem>
-                  <NavText>
-                    <LinkExp to="/txs">Transactions</LinkExp>
-                  </NavText>
+                  <LinkExp to="/txs">Transactions</LinkExp>
                 </NavItem>
               </Nav>
             </NavContainer>

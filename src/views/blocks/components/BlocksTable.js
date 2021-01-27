@@ -61,8 +61,19 @@ const BlocksTable = () => {
   return (
     <Wrapper>
       <Header>
-        <Text>Block #11540841 to #11540865 (Total of 11,540,866 blocks)</Text>
-        {matches && <Pagination />}
+        {latestBlocks && (
+          <Text>
+            Block #{latestBlocks.result.block_metas[0].header.height} to #
+            {
+              latestBlocks.result.block_metas[
+                latestBlocks.result.block_metas.length - 1
+              ].header.height
+            }{' '}
+            (Total of {latestBlocks.result.block_metas.length} blocks)
+          </Text>
+        )}
+
+        {/* {matches && <Pagination />} */}
       </Header>
       <Table hover>
         <TableHead>
@@ -99,9 +110,7 @@ const BlocksTable = () => {
           {latestBlocksLoading && <TableLoader colSpan={6} height={300} />}
         </TableBody>
       </Table>
-      <Footer>
-        <Pagination />
-      </Footer>
+      <Footer>{/* <Pagination /> */}</Footer>
     </Wrapper>
   );
 };

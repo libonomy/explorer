@@ -180,8 +180,8 @@ const Pagination = ({
           />
         </Item>
       </RsPagination>
-
-      <DropdownExp isOpen={dropdownOpen} toggle={toggle}>
+      {/* Temporary: i will be uncomment in future */}
+      {/* <DropdownExp isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggleExp caret>{limit}/Page</DropdownToggleExp>
         <DropdownMenu>
           {[10, 20, 30, 40, 50].map((item, i) => (
@@ -192,7 +192,7 @@ const Pagination = ({
             </DropdownItemExp>
           ))}
         </DropdownMenu>
-      </DropdownExp>
+      </DropdownExp> */}
     </Wrapper>
   );
 };

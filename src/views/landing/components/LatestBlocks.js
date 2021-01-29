@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table, Button } from 'reactstrap';
+import { Table, Button, UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { blockIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { TableLoader } from 'src/components';
 import { NoData } from 'src/components';
+
 const Wrapper = styled.div`
   overflow-y: auto;
   background: ${colors.white};
@@ -136,6 +137,10 @@ const LinkExp = styled(Link)`
     color: #fff;
     text-decoration: none;
 `;
+const Tooltip = styled(UncontrolledTooltip)`
+  font-size: 10px;
+  font-family: PoppinsRegular;
+`;
 const LatestBlocks = () => {
   const dispatch = useDispatch();
 
@@ -163,14 +168,19 @@ const LatestBlocks = () => {
         <TableBody>
           {latestBlocks &&
             !latestBlocksLoading &&
-            latestBlocks.result.block_metas.map((item, index) => (
-              <TableRow key={index}>
+            latestBlocks.result.block_metas.map((item, i) => (
+              <TableRow key={i}>
                 <TableCol>
                   <IconText>
                     <Icon src={blockIcon} />
-                    <Link to={`/blocks/${item.header.height}`}>
+                    <Link
+                      to={`/blocks/${item.header.height}`}
+                      id={`height_exp_alpha${i}`}>
                       {item.header.height}
                     </Link>
+                    <Tooltip placement="right" target={`height_exp_alpha${i}`}>
+                      view block by height!
+                    </Tooltip>
                   </IconText>
                 </TableCol>
                 <TableCol>

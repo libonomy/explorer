@@ -13,7 +13,7 @@ import {
   TableRow
 } from 'src/components';
 import { useMediaQuery } from 'src/hooks';
-import { getAllBlocks } from 'src/redux/actions';
+import { getAllBlocks, getTotalSupply } from 'src/redux/actions';
 import styled from 'styled-components';
 import moment from 'moment';
 
@@ -50,8 +50,14 @@ const BlocksTable = () => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
 
+  const supply = useSelector((state) => state.supply.totalSupply);
+
   useEffect(() => {
-    dispatch(getAllBlocks());
+    supply && dispatch(getAllBlocks(supply.height - 19, supply.height));
+  }, [supply]);
+
+  useEffect(() => {
+    dispatch(getTotalSupply());
   }, []);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(
@@ -96,9 +102,7 @@ const BlocksTable = () => {
                   </Link>
                 </TableCell>
                 <TableCell>{item.block_id.hash}</TableCell>
-                <TableCell>
-                  {moment(item.header.time, 'YYYYMMDD').fromNow()}
-                </TableCell>
+                <TableCell>{moment(item.header.time).fromNow()}</TableCell>
                 <TableCell>{item.header.num_txs}</TableCell>
                 <TableCell>{item.header.proposer_address}</TableCell>
               </TableRow>

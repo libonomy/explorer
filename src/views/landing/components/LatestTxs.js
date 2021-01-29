@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table, Button } from 'reactstrap';
+import { Table, Button, UncontrolledTooltip } from 'reactstrap';
 import { txIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
@@ -103,6 +103,11 @@ justify-content: center;
     border-color: #40b1be;
 `;
 
+const Tooltip = styled(UncontrolledTooltip)`
+  font-size: 10px;
+  font-family: PoppinsRegular;
+`;
+
 const TableButton = styled(Button)`
   width: auto;
   height: 28px;
@@ -164,26 +169,41 @@ const LatestTxs = () => {
         <TableBody>
           {latestTxs &&
             !latestTxsLoading &&
-            latestTxs.txs.map((item, index) => (
-              <TableRow key={index}>
+            latestTxs.txs.map((item, i) => (
+              <TableRow key={i}>
                 <TableCol icon>
                   <IconText>
                     <Icon src={txIcon} />
-                    <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
+                    <Link
+                      to={`/txs/${item.txhash}`}
+                      id={`txhash_exp_alpha${i}`}>
+                      {item.txhash}
+                    </Link>
+                    <Tooltip placement="right" target={`txhash_exp_alpha${i}`}>
+                      view tx by hash!
+                    </Tooltip>
                   </IconText>
                 </TableCol>
                 <TableCol>{moment(item.timestamp).fromNow()}</TableCol>
                 <TableCol>
                   <Link
-                    to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
+                    to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
+                    id={`from_address_alpha${i}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
+                  <Tooltip placement="right" target={`from_address_alpha${i}`}>
+                    view details
+                  </Tooltip>
                 </TableCol>
                 <TableCol>
                   <Link
-                    to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
+                    to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
+                    id={`to_address_alpha${i}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
+                  <Tooltip placement="right" target={`to_address_alpha${i}`}>
+                    view details
+                  </Tooltip>
                 </TableCol>
               </TableRow>
             ))}

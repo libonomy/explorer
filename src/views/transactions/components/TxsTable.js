@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table } from 'reactstrap';
+import { Table, UncontrolledTooltip } from 'reactstrap';
 import { IconText, NoData, Pagination, TableLoader } from 'src/components';
 import { successIcon, failIcon } from 'src/assets/images';
 import styled from 'styled-components';
@@ -87,9 +87,12 @@ const FailText = styled.span`
 const Icon = styled.img`
   margin-right: 5px;
 `;
-const Texts = styled.span`
-  text-transform: uppercase;
+
+const Tooltip = styled(UncontrolledTooltip)`
+  font-size: 10px;
+  font-family: PoppinsRegular;
 `;
+
 const TxsTable = () => {
   const matches = useMediaQuery('(min-width:600px)');
 
@@ -150,8 +153,13 @@ const TxsTable = () => {
             !latestTxsLoading &&
             latestTxs.txs.map((item, index) => (
               <TableRow key={index}>
-                <TableCell>
+                <TableCell id={`txhash_exp_alpha${index}`}>
                   <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
+                  <Tooltip
+                    placement="right"
+                    target={`txhash_exp_alpha${index}`}>
+                    view tx by hash
+                  </Tooltip>
                 </TableCell>
                 <TableCell>{moment(item.timestamp).fromNow()}</TableCell>
                 <TableCell>
@@ -167,13 +175,27 @@ const TxsTable = () => {
                     </IconText>
                   )}
                 </TableCell>
-                <TableCell>
-                  <Link disabled>
+                <TableCell id={`from_address_alpha${index}`}>
+                  <Link
+                    to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
+                  <Tooltip
+                    placement="right"
+                    target={`from_address_alpha${index}`}>
+                    view details
+                  </Tooltip>
                 </TableCell>
-                <TableCell>
-                  <Link disabled>{item.tx.value.msg[0].value.to_address}</Link>
+                <TableCell id={`to_address_alpha${index}`}>
+                  <Link
+                    to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
+                    {item.tx.value.msg[0].value.to_address}
+                  </Link>
+                  <Tooltip
+                    placement="right"
+                    target={`to_address_alpha${index}`}>
+                    view details
+                  </Tooltip>
                 </TableCell>
                 <TableCell>
                   <NumberFormat

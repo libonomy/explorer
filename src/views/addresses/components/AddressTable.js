@@ -11,10 +11,10 @@ import {
   TableRow,
   IconText
 } from 'src/components';
+import { UncontrolledTooltip } from 'reactstrap';
 import { useMediaQuery } from 'src/hooks';
 import styled from 'styled-components';
 // import { View } from 'src/components';
-import Tooltip from 'react-simple-tooltip';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTransactionsByAddresses } from 'src/redux/actions';
 import { Link } from 'react-router-dom';
@@ -43,10 +43,10 @@ const Footer = styled.div`
   padding: 1rem;
 `;
 
-const View = styled(Tooltip)`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-`;
+// const View = styled(Tooltip)`
+//   font-family: PoppinsRegular;
+//   font-size: 12px;
+// `;
 
 const TableHeader = styled.thead`
   border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
@@ -64,6 +64,10 @@ const Text = styled.span`
   ${({ success }) => (success ? `color:${colors.darkerGreen}` : null)}
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
+const Tooltip = styled(UncontrolledTooltip)`
+  font-size: 10px;
+  font-family: PoppinsRegular;
+`;
 const FailText = styled.span`
   font-family: PoppinsRegular;
   font-size: 12px;
@@ -77,6 +81,7 @@ const FailText = styled.span`
 const Icon = styled.img`
   margin-right: 5px;
 `;
+
 const AddressTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
@@ -87,11 +92,11 @@ const AddressTable = (props) => {
   } = useSelector((state) => state.addresses);
   useEffect(() => {
     const filter = {
-      'transfer.recipient': params.address
-      // 'message.sender': params.addresse
+      'transfer.recipient': params.address,
+      'message.sender': params.addresses
     };
     dispatch(getTransactionsByAddresses(filter));
-  }, [params.address]);
+  }, [params.address, params.addresses]);
 
   return (
     <Wrapper>
@@ -119,7 +124,12 @@ const AddressTable = (props) => {
             transactionsByAddresses.txs.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
-                  <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
+                  <Link to={`/txs/${item.txhash}`} id={`txhash${index}`}>
+                    {item.txhash}
+                  </Link>
+                  <Tooltip placement="bottom-start" target={`txhash${index}`}>
+                    view detail
+                  </Tooltip>
                 </TableCell>
                 <TableCell>{moment(item.timestamp).fromNow()}</TableCell>
                 <TableCell>
@@ -136,12 +146,28 @@ const AddressTable = (props) => {
                   )}
                 </TableCell>
                 <TableCell>
-                  <Link disabled>
+                  <Link
+                    to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
+                    id={`from_address${index}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
+                  <Tooltip
+                    placement="bottom-start"
+                    target={`from_address${index}`}>
+                    {item.tx.value.msg[0].value.from_address}
+                  </Tooltip>
                 </TableCell>
                 <TableCell>
-                  <Link disabled>{item.tx.value.msg[0].value.to_address}</Link>
+                  <Link
+                    to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
+                    id={`to_address${index}`}>
+                    {item.tx.value.msg[0].value.to_address}
+                  </Link>
+                  <Tooltip
+                    placement="bottom-start"
+                    target={`to_address${index}`}>
+                    {item.tx.value.msg[0].value.to_address}
+                  </Tooltip>
                 </TableCell>
                 <TableCell>
                   <NumberFormat

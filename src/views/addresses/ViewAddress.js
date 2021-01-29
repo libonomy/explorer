@@ -33,7 +33,7 @@ const SubHeading = styled(Alert)`
   line-height: 0.6;
   display: flex;
   height: 32px;
-  width: 420px;
+  width: 500px;
   @media (max-width: 576px) {
     width: auto;
     font-size: 2.5vw;
@@ -42,7 +42,6 @@ const SubHeading = styled(Alert)`
 const ViewAddress = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(props.location.params, 'adressupdate');
     dispatch(getAccountDetailAddress(address));
   }, [props.location.addresses]);
 
@@ -61,6 +60,7 @@ const ViewAddress = (props) => {
       </SubHeading> */}
       <SubHeading address>
         {accountDetailAddress && accountDetailAddress.result.value.address}
+
         <Copy
           id="address-copy"
           value={

@@ -188,8 +188,6 @@ const AddressInfo = (props) => {
     dispatch(getAccountDetailAddress());
   }, []);
 
-  // const { address } = props.match.params;
-
   const { accountDetailAddress, accountDetailAddressLoading } = useSelector(
     (state) => state.addresses
   );
@@ -207,7 +205,11 @@ const AddressInfo = (props) => {
                       <TextFormat
                         value={
                           accountDetailAddress.result.value.coins[0].amount /
-                          SCALE
+                            SCALE ===
+                          0
+                            ? '0'
+                            : accountDetailAddress.result.value.coins[0]
+                                .amount / SCALE
                         }
                         displayType={'text'}
                         thousandSeparator={true}

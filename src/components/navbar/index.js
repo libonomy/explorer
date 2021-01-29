@@ -94,7 +94,7 @@ const LinkExp = styled(Link)`
   color: ${colors.white} !important;
   font-size: 15px;
   padding: 10px;
-  line-height: 1.7;
+  line-height: 1.75;
 
   &:hover {
     color: ${colors.white} !important;

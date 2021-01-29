@@ -86,10 +86,7 @@ const AddressTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
   const params = useParams();
-  const {
-    transactionsByAddresses,
-    transactionsByAddressesLoading
-  } = useSelector((state) => state.addresses);
+  const { txs, txsLoading } = useSelector((state) => state.addresses);
   useEffect(() => {
     const filter = {
       'transfer.recipient': params.address,
@@ -101,11 +98,7 @@ const AddressTable = (props) => {
   return (
     <Wrapper>
       <Header>
-        <Text>
-          A total of{' '}
-          {transactionsByAddresses && transactionsByAddresses.total_count}{' '}
-          transactions found
-        </Text>
+        <Text>A total of {txs && txs.total_count} transactions found</Text>
       </Header>
       <Table hover>
         <TableHeader>
@@ -119,9 +112,9 @@ const AddressTable = (props) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {transactionsByAddresses &&
-            !transactionsByAddressesLoading &&
-            transactionsByAddresses.txs.map((item, index) => (
+          {txs &&
+            !txsLoading &&
+            txs.txs.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <Link to={`/txs/${item.txhash}`} id={`txhash${index}`}>
@@ -185,12 +178,8 @@ const AddressTable = (props) => {
                 </TableCell>
               </TableRow>
             ))}
-          {!transactionsByAddressesLoading && !transactionsByAddresses && (
-            <NoData colSpan={6} height={345} />
-          )}
-          {transactionsByAddressesLoading && (
-            <TableLoader colSpan={6} height={345} />
-          )}
+          {!txsLoading && !txs && <NoData colSpan={6} height={345} />}
+          {txsLoading && <TableLoader colSpan={6} height={345} />}
         </TableBody>
       </Table>
 

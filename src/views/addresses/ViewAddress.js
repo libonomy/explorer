@@ -3,9 +3,9 @@ import { PageContainer } from 'src/components';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { AddressInfo, TabsSection } from './components';
-import { Alert } from 'reactstrap';
+import { Alert, Badge } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccountDetailAddress } from 'src/redux/actions';
+import { getAccountDetails } from 'src/redux/actions';
 import { Copy } from 'src/components';
 import { withRouter } from 'react-router-dom';
 const containerStyles = { paddingTop: 0, boxShadow: 'none' };
@@ -21,19 +21,22 @@ const containerStyles = { paddingTop: 0, boxShadow: 'none' };
 //   margin-bottom: 10px;
 //   display: flex;
 // `;
-const SubHeading = styled(Alert)`
+const SubHeading = styled.div`
   color: ${colors.black10Alpha};
   border: 1px solid #dddcdc;
   background-color: #dddcdc;
   font-family: PoppinsMedium;
   font-size: 12px;
+  padding: 0px 15px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 0.6;
+  line-height: 2.6;
   display: flex;
-  height: 32px;
-  width: 500px;
+  margin-bottom: 10px;
+  height: 30px;
+  max-width: 500px;
+  border-radius: 6px;
   @media (max-width: 576px) {
     width: auto;
     font-size: 2.5vw;
@@ -42,13 +45,11 @@ const SubHeading = styled(Alert)`
 const ViewAddress = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAccountDetailAddress(address));
+    dispatch(getAccountDetails(address));
   }, [props.location.addresses]);
 
   const { address } = props.match.params;
-  const { accountDetailAddress, accountDetailAddressLoading } = useSelector(
-    (state) => state.addresses
-  );
+
   return (
     <PageContainer bg="transparent" heading="Address" style={containerStyles}>
       {/* <SubHeading address>
@@ -58,15 +59,9 @@ const ViewAddress = (props) => {
           value={'0x97bb222fc501a01ffdbc52c8c1652981408a6a68'}
         />
       </SubHeading> */}
-      <SubHeading address>
-        {accountDetailAddress && accountDetailAddress.result.value.address}
-
-        <Copy
-          id="address-copy"
-          value={
-            accountDetailAddress && accountDetailAddress.result.value.address
-          }
-        />
+      <SubHeading>
+        {address}
+        <Copy id="address-copy" value={address} />
       </SubHeading>
       <AddressInfo />
       <TabsSection />

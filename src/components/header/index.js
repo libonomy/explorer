@@ -304,10 +304,10 @@ const Header = (props) => {
 export default Header;
 
 const options = [
-  {
-    value: '1',
-    label: 'Address'
-  },
+  // {
+  //   value: '1',
+  //   label: 'Address'
+  // },
   {
     value: '2',
     label: 'Txs'

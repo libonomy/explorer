@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -102,6 +101,66 @@ const Pagination = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const pagesCount = Math.ceil(count / limit);
+
+  function paginationItem(index) {
+    return (
+      <Item active={index === currentPage} key={index}>
+        <Link onClick={(e) => pageHandler(e, index)} href="#">
+          {index}
+        </Link>
+      </Item>
+    );
+  }
+  function dotsItem() {
+    return <Dots>...</Dots>;
+  }
+
+  function displayPagination() {
+    let resultArray = [];
+    if (pagesCount === 1) {
+      resultArray.push(paginationItem(1));
+    } else if (pagesCount < 8 && pagesCount > 1) {
+      for (let i = 1; i <= pagesCount; i++) {
+        console.log(i);
+        resultArray.push(paginationItem(i));
+      }
+    } else if (pagesCount >= 8) {
+      if (currentPage - 1 > 2 && currentPage + 2 < pagesCount - 1) {
+        resultArray.push(
+          paginationItem(1),
+          dotsItem(),
+          paginationItem(currentPage - 1),
+          paginationItem(currentPage),
+          paginationItem(currentPage + 1),
+          paginationItem(currentPage + 2),
+          dotsItem(),
+          paginationItem(pagesCount)
+        );
+      } else if (currentPage <= 3) {
+        resultArray.push(
+          paginationItem(1),
+          paginationItem(2),
+          paginationItem(3),
+          paginationItem(4),
+          paginationItem(5),
+          dotsItem(),
+          paginationItem(pagesCount)
+        );
+      } else if (currentPage >= pagesCount - 3) {
+        resultArray.push(
+          paginationItem(1),
+          dotsItem(),
+          paginationItem(pagesCount - 4),
+          paginationItem(pagesCount - 3),
+          paginationItem(pagesCount - 2),
+          paginationItem(pagesCount - 1),
+          paginationItem(pagesCount)
+        );
+      }
+    }
+    return resultArray;
+  }
+
   return (
     <Wrapper>
       <RsPagination aria-label="Page navigation ">
@@ -112,23 +171,7 @@ const Pagination = ({
             href="#"
           />
         </Item>
-        {[...Array(pagesCount)].slice(0, 5).map((page, i) => (
-          <Item active={i === currentPage - 1} key={i}>
-            <Link onClick={(e) => pageHandler(e, i + 1)} href="#">
-              {i + 1}
-            </Link>
-          </Item>
-        ))}
-        {pagesCount > 5 && (
-          <Fragment>
-            <Dots>...</Dots>
-            <Item active={currentPage === pagesCount}>
-              <Link onClick={(e) => pageHandler(e, pagesCount)} href="#">
-                {pagesCount}
-              </Link>
-            </Item>
-          </Fragment>
-        )}
+        {pagesCount !== 0 ? displayPagination() : ''}
         <Item disabled={currentPage >= pagesCount}>
           <Link
             onClick={(e) => pageHandler(e, currentPage + 1)}

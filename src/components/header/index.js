@@ -310,14 +310,6 @@ const options = [
   },
   {
     value: '2',
-    label: 'Two'
-  },
-  {
-    value: '3',
-    label: 'Three'
-  },
-  {
-    value: '4',
-    label: 'Four'
+    label: 'Txs'
   }
 ];

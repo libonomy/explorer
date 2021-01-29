@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import {
   NoData,
   Pagination,
@@ -10,14 +8,23 @@ import {
   TableHead,
   TableHeading,
   TableLoader,
-  TableRow
+  TableRow,
+  IconText
 } from 'src/components';
 import { useMediaQuery } from 'src/hooks';
-import { getAllBlocks } from 'src/redux/actions';
 import styled from 'styled-components';
-import moment from 'moment';
 // import { View } from 'src/components';
 import Tooltip from 'react-simple-tooltip';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTransactionsByAddresses } from 'src/redux/actions';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import NumberFormat from 'react-number-format';
+import { SCALE } from 'src/vars/scale';
+import { SYMBOL_REGEX } from 'src/vars/regex';
+import { successIcon, failIcon } from 'src/assets/images';
+import colors from 'src/vars/colors';
+import { withRouter, useParams } from 'react-router-dom';
 const Wrapper = styled.div`
   overflow-y: auto;
 `;
@@ -36,83 +43,134 @@ const Footer = styled.div`
   padding: 1rem;
 `;
 
+const View = styled(Tooltip)`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+`;
+
+const TableHeader = styled.thead`
+  border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
+  background-color: rgba(240, 249, 250, 0.8);
+`;
+
 const Text = styled.span`
   font-family: PoppinsRegular;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.75;
   letter-spacing: 0.36px;
   text-align: left;
+  ${({ success }) => (success ? `color:${colors.darkerGreen}` : null)}
+  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
-const View = styled(Tooltip)`
+const FailText = styled.span`
   font-family: PoppinsRegular;
   font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.36px;
+  text-align: left;
+  color: ${colors.red};
+`;
+const Icon = styled.img`
+  margin-right: 5px;
 `;
 const AddressTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
-
+  const params = useParams();
+  const {
+    transactionsByAddresses,
+    transactionsByAddressesLoading
+  } = useSelector((state) => state.addresses);
   useEffect(() => {
-    dispatch(getAllBlocks());
-  }, []);
+    const filter = {
+      'transfer.recipient': params.address
+      // 'message.sender': params.addresse
+    };
+    dispatch(getTransactionsByAddresses(filter));
+  }, [params.address]);
 
-  const { latestBlocks, latestBlocksLoading } = useSelector(
-    (state) => state.blocks
-  );
   return (
     <Wrapper>
       <Header>
-        <Text> Latest 25 from a total of 286,378 transactions</Text>
+        <Text>
+          A total of{' '}
+          {transactionsByAddresses && transactionsByAddresses.total_count}{' '}
+          transactions found
+        </Text>
       </Header>
       <Table hover>
-        <TableHead>
+        <TableHeader>
           <TableRow>
-            <TableHeading>Txn Hash</TableHeading>
-            <TableHeading>Block</TableHeading>
+            <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Age</TableHeading>
-            <TableHeading>From</TableHeading>
+            <TableHeading>Status</TableHeading>
             <TableHeading>To</TableHeading>
+            <TableHeading>From</TableHeading>
             <TableHeading>Value</TableHeading>
-            <TableHeading>Txn Fee</TableHeading>
           </TableRow>
-        </TableHead>
+        </TableHeader>
         <TableBody>
-          {latestBlocks &&
-            !latestBlocksLoading &&
-            latestBlocks.result.block_metas.map((item, index) => (
+          {transactionsByAddresses &&
+            !transactionsByAddressesLoading &&
+            transactionsByAddresses.txs.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
-                  <Link to={`/blocks/${item.header.height}`}>
-                    <View
-                      content="View"
-                      placement="right"
-                      padding="4"
-                      fontSize="12px"
-                      fontFamily="PoppinsRegular">
-                      {item.header.height}
-                    </View>
+                  <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
+                </TableCell>
+                <TableCell>{moment(item.timestamp).fromNow()}</TableCell>
+                <TableCell>
+                  {item.logs[0].success ? (
+                    <IconText>
+                      <Icon src={successIcon}></Icon>
+                      <Text success>success</Text>
+                    </IconText>
+                  ) : (
+                    <IconText>
+                      <Icon src={failIcon}></Icon>
+                      <FailText>fail</FailText>
+                    </IconText>
+                  )}
+                </TableCell>
+                <TableCell>
+                  <Link disabled>
+                    {item.tx.value.msg[0].value.from_address}
                   </Link>
                 </TableCell>
-                <TableCell>{item.block_id.hash}</TableCell>
-                <TableCell>{moment(item.header.time).fromNow()}</TableCell>
-                <TableCell>{item.header.num_txs}</TableCell>
-                <TableCell>{item.header.proposer_address}</TableCell>
-                <TableCell>{item.header.proposer_address}</TableCell>
-                <TableCell>{item.header.proposer_address}</TableCell>
+                <TableCell>
+                  <Link disabled>{item.tx.value.msg[0].value.to_address}</Link>
+                </TableCell>
+                <TableCell>
+                  <NumberFormat
+                    value={item.tx.value.msg[0].value.amount[0].amount / SCALE}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                  />
+                  <Text uppercase={true}>
+                    {' '}
+                    {item.tx.value.msg[0].value.amount[0].denom.replace(
+                      SYMBOL_REGEX,
+                      ''
+                    )}
+                  </Text>
+                </TableCell>
               </TableRow>
             ))}
-
-          {!latestBlocksLoading && !latestBlocks && (
-            <NoData colSpan={6} height={300} />
+          {!transactionsByAddressesLoading && !transactionsByAddresses && (
+            <NoData colSpan={6} height={345} />
           )}
-          {latestBlocksLoading && <TableLoader colSpan={6} height={300} />}
+          {transactionsByAddressesLoading && (
+            <TableLoader colSpan={6} height={345} />
+          )}
         </TableBody>
       </Table>
+
       <Footer></Footer>
     </Wrapper>
   );
 };
 
-export default AddressTable;
+export default withRouter(AddressTable);

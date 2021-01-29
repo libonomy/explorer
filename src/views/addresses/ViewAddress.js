@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PageContainer } from 'src/components';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { AddressInfo, TabsSection } from './components';
 import { Alert } from 'reactstrap';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getAccountDetailAddress } from 'src/redux/actions';
 import { Copy } from 'src/components';
+import { withRouter } from 'react-router-dom';
 const containerStyles = { paddingTop: 0, boxShadow: 'none' };
+
 // const SubHeading = styled.h6`
 //   color: ${colors.black10Alpha};
 //   font-family: PoppinsMedium;
@@ -36,14 +39,33 @@ const SubHeading = styled(Alert)`
     font-size: 2.5vw;
   }
 `;
-const ViewAddress = () => {
+const ViewAddress = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(props.location.params, 'adressupdate');
+    dispatch(getAccountDetailAddress(address));
+  }, [props.location.addresses]);
+
+  const { address } = props.match.params;
+  const { accountDetailAddress, accountDetailAddressLoading } = useSelector(
+    (state) => state.addresses
+  );
   return (
     <PageContainer bg="transparent" heading="Address" style={containerStyles}>
-      <SubHeading hash>
+      {/* <SubHeading address>
         0x97bb222FC501a01FFDBC52c8C1652981408a6A68
         <Copy
           id="address-copy"
           value={'0x97bb222fc501a01ffdbc52c8c1652981408a6a68'}
+        />
+      </SubHeading> */}
+      <SubHeading address>
+        {accountDetailAddress && accountDetailAddress.result.value.address}
+        <Copy
+          id="address-copy"
+          value={
+            accountDetailAddress && accountDetailAddress.result.value.address
+          }
         />
       </SubHeading>
       <AddressInfo />
@@ -52,4 +74,4 @@ const ViewAddress = () => {
   );
 };
 
-export default ViewAddress;
+export default withRouter(ViewAddress);

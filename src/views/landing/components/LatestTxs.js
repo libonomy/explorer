@@ -146,13 +146,15 @@ const LatestTxs = () => {
 
   useEffect(() => {
     const filter = {
-      'tx.minheight': 1,
-      'tx.maxheight': 1000000,
+      'tx.minheight': 360058,
       page: 1,
-      limit: 5
+      limit: 500
     };
     dispatch(getAllTransactions(filter));
   }, []);
+
+  let txs =
+    latestTxs && latestTxs.txs.sort((a, b) => b.height - a.height).slice(0, 5);
   return (
     <Wrapper>
       <Header>Latest Transactions</Header>
@@ -167,9 +169,9 @@ const LatestTxs = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {latestTxs &&
+          {txs &&
             !latestTxsLoading &&
-            latestTxs.txs.map((item, i) => (
+            txs.map((item, i) => (
               <TableRow key={i}>
                 <TableCol icon>
                   <IconText>

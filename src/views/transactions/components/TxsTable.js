@@ -98,36 +98,48 @@ const TxsTable = () => {
 
   const [state, setState] = useState({ limit: 10, currentPage: 1 });
   const dispatch = useDispatch();
+
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
+
   useEffect(() => {
     const filter = {
-      'tx.minheight': 1,
-      'tx.maxheight': 1000000,
-      page: state.currentPage,
-      limit: state.limit
+      'tx.minheight': 360058,
+      page: 1,
+      limit: 500
     };
     dispatch(getAllTransactions(filter));
-  }, [state.limit, state.currentPage]);
+  }, []);
 
-  const pageHandler = (e, index) => {
-    e.preventDefault();
-    setState({
-      ...state,
-      currentPage: index
-    });
-  };
+  let txs =
+    latestTxs && latestTxs.txs.sort((a, b) => b.height - a.height).slice(0, 20);
 
-  const changeLimit = (limit) => {
-    setState({ ...state, limit });
-  };
+  // useEffect(() => {
+  //   const filter = {
+  //     'tx.minheight': 1,
+  //     'tx.maxheight': 1000000,
+  //     page: state.currentPage,
+  //     limit: state.limit
+  //   };
+  //   dispatch(getAllTransactions(filter));
+  // }, [state.limit, state.currentPage]);
+
+  // const pageHandler = (e, index) => {
+  //   e.preventDefault();
+  //   setState({
+  //     ...state,
+  //     currentPage: index
+  //   });
+  // };
+
+  // const changeLimit = (limit) => {
+  //   setState({ ...state, limit });
+  // };
 
   return (
     <Wrapper>
       <Header>
-        <Text>
-          A total of {latestTxs && latestTxs.total_count} transactions found
-        </Text>
-        {matches && (
+        <Text>A total of {txs && txs.length} latest transactions</Text>
+        {/* {matches && (
           <Pagination
             pageHandler={pageHandler}
             changeLimit={changeLimit}
@@ -135,7 +147,7 @@ const TxsTable = () => {
             limit={state.limit}
             currentPage={state.currentPage}
           />
-        )}
+        )} */}
       </Header>
       <Table hover>
         <TableHeader>
@@ -149,9 +161,9 @@ const TxsTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {latestTxs &&
+          {txs &&
             !latestTxsLoading &&
-            latestTxs.txs.map((item, index) => (
+            txs.map((item, index) => (
               <TableRow key={index}>
                 <TableCell id={`txhash_exp_alpha${index}`}>
                   <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
@@ -220,13 +232,13 @@ const TxsTable = () => {
         </TableBody>
       </Table>
       <Footer>
-        <Pagination
+        {/* <Pagination
           pageHandler={pageHandler}
           changeLimit={changeLimit}
           count={latestTxs && latestTxs.total_count}
           limit={state.limit}
           currentPage={state.currentPage}
-        />
+        /> */}
       </Footer>
     </Wrapper>
   );

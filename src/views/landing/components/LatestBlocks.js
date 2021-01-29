@@ -3,7 +3,11 @@ import { Table, Button, UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllBlocks, getAllTransactions } from 'src/redux/actions';
+import {
+  getAllBlocks,
+  getAllTransactions,
+  getTotalSupply
+} from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { blockIcon } from 'src/assets/images';
@@ -33,6 +37,7 @@ const TableCol = styled.td`
   max-width: 80px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 const TableHeading = styled.th`
   font-family: PoppinsBold;
@@ -144,13 +149,15 @@ const Tooltip = styled(UncontrolledTooltip)`
 const LatestBlocks = () => {
   const dispatch = useDispatch();
 
+  const supply = useSelector((state) => state.supply.totalSupply);
+
+  useEffect(() => {
+    supply && dispatch(getAllBlocks(supply.height - 4, supply.height));
+  }, [supply]);
+
   const { latestBlocks, latestBlocksLoading } = useSelector(
     (state) => state.blocks
   );
-
-  useEffect(() => {
-    dispatch(getAllBlocks(138563, 138567));
-  }, []);
 
   return (
     <Wrapper>
@@ -161,8 +168,7 @@ const LatestBlocks = () => {
             <TableHeading>Height</TableHeading>
             <TableHeading>Age</TableHeading>
             <TableHeading>Txs</TableHeading>
-            <TableHeading>Miner</TableHeading>
-            <TableHeading>Reward</TableHeading>
+            <TableHeading>Prev_Commit</TableHeading>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -183,12 +189,9 @@ const LatestBlocks = () => {
                     </Tooltip>
                   </IconText>
                 </TableCol>
-                <TableCol>
-                  {moment(item.header.time, 'YYYYMMDD').fromNow()}
-                </TableCol>
+                <TableCol>{moment(item.header.time).fromNow()}</TableCol>
                 <TableCol>{item.header.num_txs}</TableCol>
-                <TableCol>{item.header.num_txs}</TableCol>
-                <TableCol>{item.header.num_txs}</TableCol>
+                <TableCol>{item.header.last_commit_hash}</TableCol>
               </TableRow>
             ))}
           {!latestBlocksLoading && !latestBlocks && (

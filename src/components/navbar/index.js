@@ -187,6 +187,12 @@ const NavBar = () => {
                   <LinkExp to="/">Home</LinkExp>
                 </NavItems>
                 <NavItems>
+                  <LinkExp to="/blocks">Blocks</LinkExp>
+                </NavItems>
+                <NavItems>
+                  <LinkExp to="/txs">Transaction</LinkExp>
+                </NavItems>
+                {/* <NavItems>
                   <InputGroupButtonDropdownExp
                     addonType="prepend"
                     toggle={toggleSplit}
@@ -203,13 +209,13 @@ const NavBar = () => {
                       <LinkExp to="/txs">
                         <DropdownItemExp>Transactions</DropdownItemExp>
                       </LinkExp>
-                      {/* <LinkExp
+                      <LinkExp
                         to={`/addresses/${'0x97bb222fc501a01ffdbc52c8c1652981408a6a68'}`}>
                         <DropdownItemExp>Addresses</DropdownItemExp>
-                      </LinkExp> */}
+                      </LinkExp>
                     </DropdownMenuExp>
                   </InputGroupButtonDropdownExp>
-                </NavItems>
+                </NavItems> */}
               </Nav>
             </NavContainer>
           </Collapse>

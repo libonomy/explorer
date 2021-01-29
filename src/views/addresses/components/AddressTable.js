@@ -22,7 +22,7 @@ import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
-import { successIcon, failIcon } from 'src/assets/images';
+import { successIcon, failIcon, noData } from 'src/assets/images';
 import colors from 'src/vars/colors';
 import { withRouter, useParams } from 'react-router-dom';
 const Wrapper = styled.div`
@@ -178,7 +178,9 @@ const AddressTable = (props) => {
                 </TableCell>
               </TableRow>
             ))}
-          {!txsLoading && !txs && <NoData colSpan={6} height={345} />}
+          {!txsLoading && txs?.txs?.length === 0 && (
+            <NoData colSpan={6} height={345} />
+          )}
           {txsLoading && <TableLoader colSpan={6} height={345} />}
         </TableBody>
       </Table>

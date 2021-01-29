@@ -192,7 +192,7 @@ const AddressInfo = (props) => {
               <InnerBody>
                 <Title>Balance</Title>
                 <Text uppercase>
-                  {details && (
+                  {details ? (
                     <Fragment>
                       <TextFormat
                         value={details.result.value.coins[0].amount / SCALE}
@@ -204,6 +204,8 @@ const AddressInfo = (props) => {
                         ''
                       )}
                     </Fragment>
+                  ) : (
+                    0
                   )}
                 </Text>
               </InnerBody>
@@ -228,7 +230,7 @@ const AddressInfo = (props) => {
           <CardExp>
             <CardContent>
               <InnerBody>
-                <Title>Token</Title>
+                <Title>Other Assets</Title>
                 <Text>0</Text>
               </InnerBody>
 

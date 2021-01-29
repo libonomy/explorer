@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { Input } from 'reactstrap';
 import SelectBox from './CustomSelect';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccountDetailAddress } from 'src/redux/actions';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
@@ -183,36 +182,24 @@ const OptionExp = styled.option`
 `;
 
 const AddressInfo = (props) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAccountDetailAddress());
-  }, []);
-
-  // const { address } = props.match.params;
-
-  const { accountDetailAddress, accountDetailAddressLoading } = useSelector(
-    (state) => state.addresses
-  );
+  const { details, detailsLoading } = useSelector((state) => state.addresses);
   return (
     <Wrapper>
       <Row>
         <Col>
-          <CardExp loading={accountDetailAddressLoading}>
+          <CardExp loading={detailsLoading}>
             <CardContent>
               <InnerBody>
                 <Title>Balance</Title>
                 <Text uppercase>
-                  {accountDetailAddress && (
+                  {details && (
                     <Fragment>
                       <TextFormat
-                        value={
-                          accountDetailAddress.result.value.coins[0].amount /
-                          SCALE
-                        }
+                        value={details.result.value.coins[0].amount / SCALE}
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
-                      {accountDetailAddress.result.value.coins[0].denom.replace(
+                      {details.result.value.coins[0].denom.replace(
                         SYMBOL_REGEX,
                         ''
                       )}
@@ -229,8 +216,8 @@ const AddressInfo = (props) => {
           <CardExp>
             <CardContent>
               <InnerBody>
-                <Title>Ether Value</Title>
-                <Text>$8.30(@ $1,210.17/ETH)</Text>
+                <Title>LBY Value</Title>
+                <Text>$8.30</Text>
               </InnerBody>
 
               <IconExp src={home} alt="icon" />

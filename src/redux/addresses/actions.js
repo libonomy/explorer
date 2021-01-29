@@ -1,33 +1,32 @@
 import axios from 'axios';
 import {
-  GET_ACCOUNTS_DETAIL_ADDRESS,
-  GET_ACCOUNTS_DETAIL_ADDRESS_LOADING,
-  GET_TRANSACTIONS_BY_ADDRESSES,
-  GET_TRANSACTIONS_BY_ADDRESSES_LOADING
+  GET_ACCOUNT_DETAILS,
+  GET_ACCOUNT_DETAILS_LOADING,
+  GET_TRANSACTIONS_BY_ADDRESS,
+  GET_TRANSACTIONS_BY_ADDRESS_LOADING
 } from './actionTypes';
 
-export const getAccountDetailAddress = (address) => (dispatch) => {
-  dispatch(getAccountDetailAddressLoading());
+export const getAccountDetails = (address) => (dispatch) => {
+  dispatch(getAccountDetailsLoading());
   axios
     .get(`${process.env.REACT_APP_REST_API}/auth/accounts/${address}`)
 
     .then((res) => {
       dispatch({
-        type: GET_ACCOUNTS_DETAIL_ADDRESS,
+        type: GET_ACCOUNT_DETAILS,
         payload: res.data
       });
-      console.log('this is then');
     })
     .catch((err) => {
       dispatch({
-        type: GET_ACCOUNTS_DETAIL_ADDRESS,
+        type: GET_ACCOUNT_DETAILS,
         payload: null
       });
     });
 };
 
-export const getAccountDetailAddressLoading = () => ({
-  type: GET_ACCOUNTS_DETAIL_ADDRESS_LOADING
+export const getAccountDetailsLoading = () => ({
+  type: GET_ACCOUNT_DETAILS_LOADING
 });
 export const getTransactionsByAddresses = (address) => (dispatch) => {
   dispatch(getTransactionsByAddressesLoading());
@@ -35,17 +34,17 @@ export const getTransactionsByAddresses = (address) => (dispatch) => {
     .get(`${process.env.REACT_APP_REST_API}/txs`, { params: address })
     .then((res) => {
       dispatch({
-        type: GET_TRANSACTIONS_BY_ADDRESSES,
+        type: GET_TRANSACTIONS_BY_ADDRESS,
         payload: res.data
       });
     })
     .catch((err) => {
       dispatch({
-        type: GET_TRANSACTIONS_BY_ADDRESSES,
+        type: GET_TRANSACTIONS_BY_ADDRESS,
         payload: null
       });
     });
 };
 export const getTransactionsByAddressesLoading = () => ({
-  type: GET_TRANSACTIONS_BY_ADDRESSES_LOADING
+  type: GET_TRANSACTIONS_BY_ADDRESS_LOADING
 });

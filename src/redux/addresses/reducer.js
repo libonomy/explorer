@@ -1,36 +1,36 @@
 import {
-  GET_ACCOUNTS_DETAIL_ADDRESS,
-  GET_ACCOUNTS_DETAIL_ADDRESS_LOADING,
-  GET_TRANSACTIONS_BY_ADDRESSES,
-  GET_TRANSACTIONS_BY_ADDRESSES_LOADING
+  GET_ACCOUNT_DETAILS,
+  GET_ACCOUNT_DETAILS_LOADING,
+  GET_TRANSACTIONS_BY_ADDRESS,
+  GET_TRANSACTIONS_BY_ADDRESS_LOADING
 } from './actionTypes';
 
 const initialState = {
-  accountDetailAddress: null,
-  accountDetailAddressLoading: false,
-  transactionsByAddresses: null,
-  transactionsByAddressesLoading: false
+  details: null,
+  detailsLoading: false,
+  txs: null,
+  txsLoading: false
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case GET_ACCOUNTS_DETAIL_ADDRESS:
+    case GET_ACCOUNT_DETAILS:
       return {
         ...state,
-        accountDetailAddress: payload,
-        accountDetailAddressLoading: false
+        details: payload,
+        detailsLoading: false
       };
-    case GET_ACCOUNTS_DETAIL_ADDRESS_LOADING:
-      return { ...state, accountDetailAddressLoading: true };
+    case GET_ACCOUNT_DETAILS_LOADING:
+      return { ...state, detailsLoading: true };
 
-    case GET_TRANSACTIONS_BY_ADDRESSES:
+    case GET_TRANSACTIONS_BY_ADDRESS:
       return {
         ...state,
-        transactionsByAddresses: payload,
-        transactionsByAddressesLoading: false
+        txs: payload,
+        txsLoading: false
       };
-    case GET_TRANSACTIONS_BY_ADDRESSES_LOADING:
-      return { ...state, transactionsByAddressesLoading: true };
+    case GET_TRANSACTIONS_BY_ADDRESS_LOADING:
+      return { ...state, txsLoading: true };
     default:
       return state;
   }

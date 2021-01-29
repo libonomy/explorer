@@ -64,6 +64,6 @@ git checkout -b my-topic-branch
 git push -u origin HEAD
 ```
 
-7. Go to [the repository](https://github.com/libonomy/explorer) and make a Pull Request.
+7. Go to [the repository](https://github.com/libonomy/explorer) and make a Pull Request for development branch.
 
 The core team is monitoring for Pull Requests. We will review your Pull Request and either merge it, request changes to it, or close it with an explanation.

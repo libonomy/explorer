@@ -26,8 +26,8 @@ const SubHeading = styled.h6`
 `;
 const Icon = styled.h6`
   color: ${colors.black10Alpha};
-  border: 1px solid #dddcdc;
-  background-color: #dddcdc;
+  border: 1px solid ${colors.chipColor};
+  background-color: ${colors.chipColor};
   font-family: PoppinsMedium;
   font-size: 12px;
   padding: 0px 15px;

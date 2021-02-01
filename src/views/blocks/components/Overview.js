@@ -41,6 +41,11 @@ const Icon = styled.span`
   width: 16px;
   margin-right: 5px;
 `;
+const Text = styled.span`
+  background: ${colors.chipColor};
+  border-radius: 5px;
+  padding: 6px;
+`;
 const Heading = styled.span`
   font-family: PoppinsMedium;
   font-size: 12px;
@@ -93,7 +98,8 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {block.block.header.num_txs} transactions in this block{' '}
+              <Text> {block.block.header.num_txs} transactions </Text> &nbsp; in
+              this block{' '}
             </TableCell>
           </TableRow>
           <TableRow>

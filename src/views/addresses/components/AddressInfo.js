@@ -192,7 +192,7 @@ const AddressInfo = (props) => {
               <InnerBody>
                 <Title>Balance</Title>
                 <Text uppercase>
-                  {details ? (
+                  {details || details ? (
                     <Fragment>
                       <TextFormat
                         value={details.result.value.coins[0].amount / SCALE}

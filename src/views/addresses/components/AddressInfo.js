@@ -183,6 +183,7 @@ const OptionExp = styled.option`
 
 const AddressInfo = (props) => {
   const { details, detailsLoading } = useSelector((state) => state.addresses);
+
   return (
     <Wrapper>
       <Row>
@@ -192,14 +193,14 @@ const AddressInfo = (props) => {
               <InnerBody>
                 <Title>Balance</Title>
                 <Text uppercase>
-                  {details || details ? (
+                  {details ? (
                     <Fragment>
                       <TextFormat
-                        value={details.result.value.coins[0].amount / SCALE}
+                        value={details?.result?.value?.coins[0]?.amount / SCALE}
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
-                      {details.result.value.coins[0].denom.replace(
+                      {details?.result?.value?.coins[0]?.denom.replace(
                         SYMBOL_REGEX,
                         ''
                       )}

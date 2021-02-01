@@ -21,24 +21,24 @@ const containerStyles = { paddingTop: 0, boxShadow: 'none' };
 //   margin-bottom: 10px;
 //   display: flex;
 // `;
-const SubHeading = styled.div`
+const SubHeading = styled.h6`
+  display: inline-block;
+`;
+const Icon = styled.h6`
   color: ${colors.black10Alpha};
   border: 1px solid #dddcdc;
   background-color: #dddcdc;
   font-family: PoppinsMedium;
   font-size: 12px;
   padding: 0px 15px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 2.6;
   display: flex;
+  line-height: 2;
+
   margin-bottom: 10px;
-  height: 30px;
-  max-width: 500px;
+  width: auto;
   border-radius: 6px;
   @media (max-width: 576px) {
-    width: auto;
+    width: auto !important;
     font-size: 2.5vw;
   }
 `;
@@ -52,16 +52,11 @@ const ViewAddress = (props) => {
 
   return (
     <PageContainer bg="transparent" heading="Address" style={containerStyles}>
-      {/* <SubHeading address>
-        0x97bb222FC501a01FFDBC52c8C1652981408a6A68
-        <Copy
-          id="address-copy"
-          value={'0x97bb222fc501a01ffdbc52c8c1652981408a6a68'}
-        />
-      </SubHeading> */}
       <SubHeading>
-        {address}
-        <Copy id="address-copy" value={address} />
+        <Icon>
+          {address}
+          <Copy id="address-copy" value={address} />
+        </Icon>
       </SubHeading>
       <AddressInfo />
       <TabsSection />

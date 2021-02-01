@@ -28,7 +28,8 @@ const colors = {
   dMBlack1: '#323031',
   dmBlack2: '#353439',
   shaddow: '0 0.75rem 1.5rem rgb(18 38 63 / 10%)',
-  borderGrey: 'rgba(90, 90, 90, 0.5)'
+  borderGrey: 'rgba(90, 90, 90, 0.5)',
+  chipColor: '#40b1be42'
 };
 
 export default colors;

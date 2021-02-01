@@ -5,20 +5,24 @@ import { UncontrolledTooltip } from 'reactstrap';
 import copy from 'copy-to-clipboard';
 
 const Icon = styled.img`
-  margin-right: 5px;
+  cursor: pointer;
 `;
 const Wrapper = styled.div`
   margin-left: 4px;
 `;
 const CopyText = styled.span`
-  font-family: PoppinsMedium;
-  font-size: 12px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 0.83;
-  letter-spacing: 0.36px;
-  text-align: left;
+font-family: PoppinsMedium;
+font-size: 12px;
+font-weight: 500;
+font-stretch: normal;
+position: absolute;
+font-style: normal;
+line-height: 2;
+letter-spacing: 0.36px;
+text-align: left;
+margin: -6px 8px 0px 20px;
+} 
+  
 `;
 
 const Copy = ({ id, value }) => {

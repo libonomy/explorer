@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PageContainer } from 'src/components';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { AddressInfo, TabsSection } from './components';
-import { Alert } from 'reactstrap';
-
+import { Alert, Badge } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAccountDetails } from 'src/redux/actions';
 import { Copy } from 'src/components';
+import { withRouter } from 'react-router-dom';
 const containerStyles = { paddingTop: 0, boxShadow: 'none' };
+
 // const SubHeading = styled.h6`
 //   color: ${colors.black10Alpha};
 //   font-family: PoppinsMedium;
@@ -18,33 +21,42 @@ const containerStyles = { paddingTop: 0, boxShadow: 'none' };
 //   margin-bottom: 10px;
 //   display: flex;
 // `;
-const SubHeading = styled(Alert)`
+const SubHeading = styled.h6`
+  display: inline-block;
+`;
+const Icon = styled.h6`
   color: ${colors.black10Alpha};
-  border: 1px solid #dddcdc;
-  background-color: #dddcdc;
+  border: 1px solid ${colors.chipColor};
+  background-color: ${colors.chipColor};
   font-family: PoppinsMedium;
   font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 0.6;
+  padding: 0px 15px;
   display: flex;
-  height: 32px;
-  width: 420px;
+  line-height: 2;
+
+  margin-bottom: 10px;
+  width: auto;
+  border-radius: 6px;
   @media (max-width: 576px) {
-    width: auto;
+    width: auto !important;
     font-size: 2.5vw;
   }
 `;
-const ViewAddress = () => {
+const ViewAddress = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAccountDetails(address));
+  }, [props.location.addresses]);
+
+  const { address } = props.match.params;
+
   return (
     <PageContainer bg="transparent" heading="Address" style={containerStyles}>
-      <SubHeading hash>
-        0x97bb222FC501a01FFDBC52c8C1652981408a6A68
-        <Copy
-          id="address-copy"
-          value={'0x97bb222fc501a01ffdbc52c8c1652981408a6a68'}
-        />
+      <SubHeading>
+        <Icon>
+          {address}
+          <Copy id="address-copy" value={address} />
+        </Icon>
       </SubHeading>
       <AddressInfo />
       <TabsSection />
@@ -52,4 +64,4 @@ const ViewAddress = () => {
   );
 };
 
-export default ViewAddress;
+export default withRouter(ViewAddress);

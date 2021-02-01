@@ -59,7 +59,7 @@ export const app = [
     component: NotFound
   },
   {
-    path: '/addresses/:hash',
+    path: '/addresses/:address',
     component: ViewAddress
   }
 ];

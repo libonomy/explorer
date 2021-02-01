@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Table } from 'reactstrap';
 import { failIcon, successIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
+import { Link } from 'react-router-dom';
 import { getTransectionByHash } from 'src/redux/actions';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
@@ -14,6 +15,7 @@ import { TableLoader, Copy } from 'src/components';
 import { NoData } from 'src/components';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
+import { UncontrolledTooltip } from 'reactstrap';
 const TableHeading = styled.th`
   width: 25%;
 `;
@@ -22,7 +24,11 @@ const HeadingWraper = styled.div`
   flex-direction: row;
   align-items: center;
 `;
-
+const Tooltip = styled(UncontrolledTooltip)`
+  font-size: 10px !important;
+  font-family: PoppinsRegular;
+  padding: 20px;
+`;
 const TableCell = styled.td`
   font-family: PoppinsRegular;
   font-size: 12px;
@@ -115,7 +121,17 @@ const Overview = (props) => {
                 <Heading>Height</Heading>
               </HeadingWraper>
             </TableHeading>
-            <TableCell>{tx.height}</TableCell>
+            <TableCell>
+              <Link to={`/blocks/${tx.height}`} id={`txheight`}>
+                {tx.height}
+              </Link>
+            </TableCell>
+            <Tooltip
+              placement="right"
+              target={`txheight`}
+              arrowClassName="disabled">
+              view blocks by height
+            </Tooltip>
           </TableRow>
           <TableRow>
             <TableHeading scope="row">

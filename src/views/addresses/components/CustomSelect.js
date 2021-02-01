@@ -12,6 +12,7 @@ const SelectExp = styled.div`
   width: 100%;
   margin: 0;
   padding: 0;
+  border-radius: 6px;
 `;
 
 const SelectItem = styled.div`
@@ -31,19 +32,19 @@ const Arrow = styled.div`
   display: flex;
   justify-content: flex-end;
   cursor: pointer;
-  margin-top: -18px;
-  margin-right: 8px;
+  margin-top: -17px;
+  margin-right: 18px;
 
   .select-box--arrow-down {
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 8px solid black;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 7px solid black;
   }
 
   .select-box--arrow-up {
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 8px solid Black;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 7px solid Black;
   }
 `;
 const WrapExp = styled.div`

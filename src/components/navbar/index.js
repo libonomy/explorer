@@ -18,7 +18,14 @@ import { Link } from 'react-router-dom';
 import { menuIcon } from 'src/assets/images';
 const bgColor = colors.primary;
 const Wrapper = styled.div``;
-
+const NavItems = styled(NavItem)`
+  &:hover {
+    color: ${colors.white} !important;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+  }
+`;
 const NavbarExp = styled(Navbar)`
   background-color: ${bgColor};
 `;
@@ -84,10 +91,13 @@ const NavContainer = styled(Container)`
 `;
 const LinkExp = styled(Link)`
   font-family: PoppinsRegular;
-  color: ${colors.black} !important;
+  color: ${colors.white} !important;
+  font-size: 15px;
+  padding: 10px;
+  line-height: 1.75;
 
   &:hover {
-    color: ${colors.black} !important;
+    color: ${colors.white} !important;
     text-decoration: none;
   }
 `;
@@ -109,10 +119,6 @@ const DropdownToggleExp = styled(DropdownToggle)`
 
   &:hover {
     color: ${colors.white};
-    background-color: rgba(0, 0, 0, 0.04);
-    border-radius: 6px;
-
-    display: block;
   }
 `;
 
@@ -125,10 +131,11 @@ const DropdownItemExp = styled(DropdownItem)`
   font-size: 14px;
   font-family: PoppinsRegular;
   padding: 0.5rem 1.75rem;
+  margin: -14px 0px;
 `;
 const DropdownMenuExp = styled(DropdownMenu)`
-  width: 200px;
-  margin: 8px 0px 0px -12px;
+  width: 175px;
+  margin: 8px 0px 0px 8px;
   .btn-secondary:not(:disabled):not(.disabled):active:focus,
   .btn-secondary:not(:disabled):not(.disabled).active:focus,
   .show > .btn-secondary.dropdown-toggle:focus {
@@ -175,11 +182,17 @@ const NavBar = () => {
               <Nav>
                 {/* <NavItem>
                   <LinkExp to="/blocks">Blocks</LinkExp>
-                </NavItem>
-                <NavItem>
-                  <LinkExp to="/txs">Transactions</LinkExp>
-                </NavItem> */}
-                <NavItem>
+                </NavItem>*/}
+                <NavItems>
+                  <LinkExp to="/">Home</LinkExp>
+                </NavItems>
+                <NavItems>
+                  <LinkExp to="/blocks">Blocks</LinkExp>
+                </NavItems>
+                <NavItems>
+                  <LinkExp to="/txs">Transaction</LinkExp>
+                </NavItems>
+                {/* <NavItems>
                   <InputGroupButtonDropdownExp
                     addonType="prepend"
                     toggle={toggleSplit}
@@ -196,13 +209,13 @@ const NavBar = () => {
                       <LinkExp to="/txs">
                         <DropdownItemExp>Transactions</DropdownItemExp>
                       </LinkExp>
-                      {/* <LinkExp
+                      <LinkExp
                         to={`/addresses/${'0x97bb222fc501a01ffdbc52c8c1652981408a6a68'}`}>
                         <DropdownItemExp>Addresses</DropdownItemExp>
-                      </LinkExp> */}
+                      </LinkExp>
                     </DropdownMenuExp>
                   </InputGroupButtonDropdownExp>
-                </NavItem>
+                </NavItems> */}
               </Nav>
             </NavContainer>
           </Collapse>

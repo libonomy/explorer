@@ -44,7 +44,8 @@ const Icon = styled.span`
 const Text = styled.span`
   background: ${colors.chipColor};
   border-radius: 5px;
-  padding: 6px;
+  padding: 4px;
+  font-family: PoppinsMedium;
 `;
 const Heading = styled.span`
   font-family: PoppinsMedium;

@@ -4,7 +4,7 @@ import colors from 'src/vars/colors';
 import { balance, home } from 'src/assets/images';
 import styled from 'styled-components';
 import { Input } from 'reactstrap';
-import SelectBox from './CustomSelect';
+// import SelectBox from './CustomSelect';
 import { useDispatch, useSelector } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
@@ -180,6 +180,17 @@ const OptionExp = styled.option`
     background-color: ${colors.primary};
   }
 `;
+const Exp = styled.span`
+  font-family: PoppinsBold;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+  text-align: left;
+  color: ${colors.black};
+`;
 
 const AddressInfo = (props) => {
   const { details, detailsLoading } = useSelector((state) => state.addresses);
@@ -193,8 +204,10 @@ const AddressInfo = (props) => {
               <InnerBody>
                 <Title>Balance</Title>
                 <Text uppercase>
-                  {details ? (
+                  {details && details?.result?.value?.coins[0]?.amount ? (
                     <Fragment>
+                      {' '}
+                      {/* <Exp>0 </Exp> */}
                       <TextFormat
                         value={details?.result?.value?.coins[0]?.amount / SCALE}
                         displayType={'text'}
@@ -202,11 +215,12 @@ const AddressInfo = (props) => {
                       />{' '}
                       {details?.result?.value?.coins[0]?.denom.replace(
                         SYMBOL_REGEX,
+
                         ''
                       )}
                     </Fragment>
                   ) : (
-                    0
+                    <Exp>0</Exp>
                   )}
                 </Text>
               </InnerBody>

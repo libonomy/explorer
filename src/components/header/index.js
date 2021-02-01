@@ -13,7 +13,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import styled from 'styled-components';
-import MySelect from './selectbox';
+// import MySelect from './selectbox';
 import colors from 'src/vars/colors';
 import history from 'src/utils/history';
 

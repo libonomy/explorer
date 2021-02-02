@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
+import { getMarketPrice } from 'src/redux/actions';
 const Wrapper = styled.div`
   margin-bottom: 2rem;
 `;
@@ -211,7 +212,11 @@ const AddressInfo = (props) => {
   const { marketPrice, marketPriceLoading } = useSelector(
     (state) => state.price
   );
-  var x = marketPrice.data.usd;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMarketPrice());
+  }, []);
+  var x = marketPrice?.data?.usd;
   return (
     <Wrapper>
       <Row>
@@ -251,19 +256,25 @@ const AddressInfo = (props) => {
             <CardContent>
               <InnerBody>
                 <Title> Value</Title>
-                <Text>
-                  <NumExp>
-                    $
-                    <TextFormat
-                      value={
-                        (details?.result?.value?.coins[0]?.amount * x) / SCALE
-                      }
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
-                  </NumExp>
-                  (@ ${marketPrice.data.usd}/LBY)
-                </Text>
+
+                {details &&
+                marketPrice?.data?.usd &&
+                details?.result?.value?.coins[0]?.amount ? (
+                  <Text>
+                    <NumExp>
+                      <TextFormat
+                        value={
+                          (details?.result?.value?.coins[0]?.amount * x) / SCALE
+                        }
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    </NumExp>
+                    (@ ${marketPrice?.data?.usd}/LBY)
+                  </Text>
+                ) : (
+                  <Exp>0</Exp>
+                )}
               </InnerBody>
 
               <IconExp src={home} alt="icon" />

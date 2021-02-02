@@ -147,6 +147,20 @@ const Text = styled(CardText)`
   color: #000000;
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
+const NumExp = styled.span`
+  font-family: PoppinsBold;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+  text-align: left;
+  color: #000000;
+  margin-right: 5px;
+  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
+`;
+
 const InputExp = styled(Input)`
   display: block;
   width: 60%;
@@ -194,7 +208,10 @@ const Exp = styled.span`
 
 const AddressInfo = (props) => {
   const { details, detailsLoading } = useSelector((state) => state.addresses);
-
+  const { marketPrice, marketPriceLoading } = useSelector(
+    (state) => state.price
+  );
+  var x = marketPrice.data.usd;
   return (
     <Wrapper>
       <Row>
@@ -233,8 +250,20 @@ const AddressInfo = (props) => {
           <CardExp>
             <CardContent>
               <InnerBody>
-                <Title>LBY Value</Title>
-                <Text>$8.30</Text>
+                <Title> Value</Title>
+                <Text>
+                  <NumExp>
+                    $
+                    <TextFormat
+                      value={
+                        (details?.result?.value?.coins[0]?.amount * x) / SCALE
+                      }
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
+                  </NumExp>
+                  (@ ${marketPrice.data.usd}/LBY)
+                </Text>
               </InnerBody>
 
               <IconExp src={home} alt="icon" />

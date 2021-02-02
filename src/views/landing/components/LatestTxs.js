@@ -163,8 +163,8 @@ const LatestTxs = () => {
           <TableRow>
             <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Age</TableHeading>
-            <TableHeading>To</TableHeading>
             <TableHeading>From</TableHeading>
+            <TableHeading>To</TableHeading>
             {/* <TableHeading>Amount</TableHeading> */}
           </TableRow>
         </TableHeader>

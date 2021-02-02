@@ -155,8 +155,8 @@ const TxsTable = () => {
             <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Age</TableHeading>
             <TableHeading>Status</TableHeading>
-            <TableHeading>To</TableHeading>
             <TableHeading>From</TableHeading>
+            <TableHeading>To</TableHeading>
             <TableHeading>Value</TableHeading>
           </TableRow>
         </TableHeader>

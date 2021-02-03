@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
-import { logo, instagram, twitter, facebook } from 'src/assets/images';
+import {
+  logo,
+  instagram,
+  twitter,
+  facebook,
+  telegram,
+  discord
+} from 'src/assets/images';
 import styled from 'styled-components';
 
 const Wrapper = styled.div``;
@@ -199,19 +206,6 @@ const Footer = () => {
               <IconSection>
                 <ListItems>
                   <SocialLink
-                    href="https://www.instagram.com/libonomy/"
-                    target="_blank"
-                    rel="follow"
-                    title="Instagram">
-                    <Icon
-                      src={instagram}
-                      alt="logo-proper-six"
-                      class="img-footer"
-                    />
-                  </SocialLink>
-                </ListItems>
-                <ListItems>
-                  <SocialLink
                     href="https://twitter.com/LibonomyBlock"
                     target="_blank"
                     rel="follow"
@@ -225,12 +219,25 @@ const Footer = () => {
                 </ListItems>
                 <ListItems>
                   <SocialLink
-                    href="https://web.facebook.com/Libonomy/"
+                    href="https://t.me/libonomyblockchain"
                     target="_blank"
                     rel="follow"
-                    title="Facebook">
+                    title="Telegram">
                     <Icon
-                      src={facebook}
+                      src={telegram}
+                      alt="logo-proper-six"
+                      class="img-footer"
+                    />
+                  </SocialLink>
+                </ListItems>
+                <ListItems>
+                  <SocialLink
+                    href="https://discord.com/invite/6P9SX5c"
+                    target="_blank"
+                    rel="follow"
+                    title="Discord">
+                    <Icon
+                      src={discord}
                       alt="logo-proper-six"
                       class="img-footer"
                     />

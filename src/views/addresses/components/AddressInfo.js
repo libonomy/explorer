@@ -228,8 +228,6 @@ const AddressInfo = (props) => {
                 <Text uppercase>
                   {details && details?.result?.value?.coins[0]?.amount ? (
                     <Fragment>
-                      {' '}
-                      {/* <Exp>0 </Exp> */}
                       <TextFormat
                         value={details?.result?.value?.coins[0]?.amount / SCALE}
                         displayType={'text'}

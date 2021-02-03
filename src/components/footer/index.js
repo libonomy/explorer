@@ -219,7 +219,7 @@ const Footer = () => {
                 </ListItems>
                 <ListItems>
                   <SocialLink
-                    href="https://t.me/libonomyblockchain"
+                    href="https://t.me/libonomyblockchaingit"
                     target="_blank"
                     rel="follow"
                     title="Telegram">

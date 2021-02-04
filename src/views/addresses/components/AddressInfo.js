@@ -162,39 +162,39 @@ const NumExp = styled.span`
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
 
-const InputExp = styled(Input)`
-  display: block;
-  width: 60%;
-  height: 32px;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
+// const InputExp = styled(Input)`
+//   display: block;
+//   width: 60%;
+//   height: 32px;
+//   padding: 0.375rem 0.75rem;
+//   font-size: 1rem;
+//   font-weight: 400;
+//   line-height: 1.5;
+//   color: #495057;
+//   background-color: #fff;
+//   background-clip: padding-box;
+//   border: 1px solid #ced4da;
+//   border-radius: 0.25rem;
 
-  &:focus {
-    color: #000;
-    background-color: #fff;
-    border-color: #f1f1f1;
-    outline: none;
-    box-shadow: none;
-  }
-`;
-const OptionExp = styled.option`
-  font-family: PoppinsRegular;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
+//   &:focus {
+//     color: #000;
+//     background-color: #fff;
+//     border-color: #f1f1f1;
+//     outline: none;
+//     box-shadow: none;
+//   }
+// `;
+// const OptionExp = styled.option`
+//   font-family: PoppinsRegular;
+//   font-size: 14px;
+//   font-weight: 400;
+//   line-height: 1.5;
 
-  &:hover {
-    color: #000;
-    background-color: ${colors.primary};
-  }
-`;
+//   &:hover {
+//     color: #000;
+//     background-color: ${colors.primary};
+//   }
+// `;
 const Exp = styled.span`
   font-family: PoppinsBold;
   font-size: 13px;

@@ -261,9 +261,10 @@ const AddressInfo = (props) => {
                   <Text>
                     <NumExp>
                       <TextFormat
-                        value={
-                          (details?.result?.value?.coins[0]?.amount * x) / SCALE
-                        }
+                        value={(
+                          (details?.result?.value?.coins[0]?.amount * x) /
+                          SCALE
+                        ).toFixed(6)}
                         displayType={'text'}
                         thousandSeparator={true}
                       />

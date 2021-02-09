@@ -46,7 +46,7 @@ const ViewAddress = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAccountDetails(address));
-  }, [props.location.addresses]);
+  }, [props.match.params, props.addresses]);
 
   const { address } = props.match.params;
 

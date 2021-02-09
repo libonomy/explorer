@@ -10,6 +10,7 @@ import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
 import { getMarketPrice } from 'src/redux/actions';
+import { TableLoader } from 'src/components';
 const Wrapper = styled.div`
   margin-bottom: 2rem;
 `;
@@ -162,39 +163,39 @@ const NumExp = styled.span`
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
 
-// const InputExp = styled(Input)`
-//   display: block;
-//   width: 60%;
-//   height: 32px;
-//   padding: 0.375rem 0.75rem;
-//   font-size: 1rem;
-//   font-weight: 400;
-//   line-height: 1.5;
-//   color: #495057;
-//   background-color: #fff;
-//   background-clip: padding-box;
-//   border: 1px solid #ced4da;
-//   border-radius: 0.25rem;
+const InputExp = styled(Input)`
+  display: block;
+  width: 60%;
+  height: 32px;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
 
-//   &:focus {
-//     color: #000;
-//     background-color: #fff;
-//     border-color: #f1f1f1;
-//     outline: none;
-//     box-shadow: none;
-//   }
-// `;
-// const OptionExp = styled.option`
-//   font-family: PoppinsRegular;
-//   font-size: 14px;
-//   font-weight: 400;
-//   line-height: 1.5;
+  &:focus {
+    color: #000;
+    background-color: #fff;
+    border-color: #f1f1f1;
+    outline: none;
+    box-shadow: none;
+  }
+`;
+const OptionExp = styled.option`
+  font-family: PoppinsRegular;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
 
-//   &:hover {
-//     color: #000;
-//     background-color: ${colors.primary};
-//   }
-// `;
+  &:hover {
+    color: #000;
+    background-color: ${colors.primary};
+  }
+`;
 const Exp = styled.span`
   font-family: PoppinsBold;
   font-size: 13px;
@@ -212,11 +213,14 @@ const AddressInfo = (props) => {
   const { marketPrice, marketPriceLoading } = useSelector(
     (state) => state.price
   );
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMarketPrice());
   }, []);
+
   var x = marketPrice?.data?.usd;
+
   return (
     <Wrapper>
       <Row>
@@ -241,7 +245,7 @@ const AddressInfo = (props) => {
                     </Fragment>
                   ) : (
                     <Exp>0</Exp>
-                  )}
+                  )}{' '}
                 </Text>
               </InnerBody>
 
@@ -250,7 +254,7 @@ const AddressInfo = (props) => {
           </CardExp>
         </Col>
         <Col>
-          <CardExp>
+          <CardExp loading={detailsLoading && marketPriceLoading}>
             <CardContent>
               <InnerBody>
                 <Title> Value</Title>
@@ -260,6 +264,7 @@ const AddressInfo = (props) => {
                 details?.result?.value?.coins[0]?.amount ? (
                   <Text>
                     <NumExp>
+                      $
                       <TextFormat
                         value={(
                           (details?.result?.value?.coins[0]?.amount * x) /
@@ -272,7 +277,7 @@ const AddressInfo = (props) => {
                     (@ ${marketPrice?.data?.usd}/LBY)
                   </Text>
                 ) : (
-                  <Exp>0</Exp>
+                  <Exp>$0</Exp>
                 )}
               </InnerBody>
 
@@ -281,20 +286,54 @@ const AddressInfo = (props) => {
           </CardExp>
         </Col>
         <Col>
-          <CardExp>
+          <CardExp loading={detailsLoading}>
             <CardContent>
               <InnerBody>
                 <Title>Other Assets</Title>
-                <Text>0</Text>
+
+                <Text uppercase>
+                  {details && details?.result?.value?.coins[1]?.amount ? (
+                    <Fragment>
+                      <TextFormat
+                        value={details?.result?.value?.coins[1]?.amount / SCALE}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />{' '}
+                      {details?.result?.value?.coins[1]?.denom.replace(
+                        SYMBOL_REGEX,
+
+                        ''
+                      )}
+                    </Fragment>
+                  ) : (
+                    <Exp>0</Exp>
+                  )}
+                </Text>
               </InnerBody>
 
-              {/* <InputExp type="select" name="select" id="exampleSelect">
-                <OptionExp>1</OptionExp>
-                <OptionExp>2</OptionExp>
-                <OptionExp>3</OptionExp>
-                <OptionExp>4</OptionExp>
-                <OptionExp>5</OptionExp>
-              </InputExp> */}
+              {details &&
+              details?.result?.value?.coins[1]?.amount &&
+              details?.result?.value?.coins[1]?.denom &&
+              details?.result?.value?.coins?.amount > 1 &&
+              details?.result?.value?.coins[1]?.denom > 1 ? (
+                <InputExp type="select" name="select" id="exampleSelect">
+                  {details &&
+                    !detailsLoading &&
+                    details.result.value.coins.slice(1).map((item, i) => (
+                      <OptionExp>
+                        {item.amount / SCALE}
+
+                        {item.denom.replace(
+                          SYMBOL_REGEX,
+
+                          ''
+                        )}
+                      </OptionExp>
+                    ))}
+                </InputExp>
+              ) : (
+                ''
+              )}
               {/* <SelectBox
                 items={[
                   { value: 'United States', id: 1 },

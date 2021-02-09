@@ -118,8 +118,8 @@ const RecievedAddressTable = (props) => {
           {recievedTxs &&
             !recievedTxsLoading &&
             recievedTxs.txs.map((item, index) => (
-              <TableRow key={index}>
-                <TableCell>
+              <TableRow>
+                <TableCell key={index}>
                   <Link to={`/txs/${item.txhash}`} id={`txhash${index}`}>
                     {item.txhash}
                   </Link>
@@ -141,27 +141,27 @@ const RecievedAddressTable = (props) => {
                     </IconText>
                   )}
                 </TableCell>
-                <TableCell>
+                <TableCell key={index}>
                   <Link
                     to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
-                    id={`from_address${index}`}>
+                    id={`from_address${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
                   <Tooltip
                     placement="bottom-start"
-                    target={`from_address${index}`}>
+                    target={`from_address${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCell>
-                <TableCell>
+                <TableCell key={index}>
                   <Link
                     to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
-                    id={`to_address${index}`}>
+                    id={`to_address${item.tx.value.msg[0].value.to_address}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
                   <Tooltip
                     placement="bottom-start"
-                    target={`to_address${index}`}>
+                    target={`to_address${item.tx.value.msg[0].value.to_address}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCell>

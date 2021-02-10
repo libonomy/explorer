@@ -321,7 +321,7 @@ const Statistics = () => {
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp>
+          <CardExp loading={totalSupplyLoading}>
             <CardContent>
               <Icon src={marketcap} alt="marketcap" />
               <InnerBody>
@@ -344,7 +344,7 @@ const Statistics = () => {
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp>
+          <CardExp loading={marketPriceLoading}>
             <CardContent>
               <Icon src={accounts} alt="accounts" />
               <InnerBody>

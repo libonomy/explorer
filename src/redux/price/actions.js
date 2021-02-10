@@ -11,7 +11,6 @@ export const getMarketPrice = () => (dispatch) => {
         type: GET_MARKET_PRICE,
         payload: res.data
       });
-      dispatch(getMarketPrice());
     })
 
     .catch((err) => {

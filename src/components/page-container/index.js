@@ -8,7 +8,8 @@ const Wrapper = styled.div`
   border-radius: 8px;
   box-shadow: ${colors.shaddow};
   ${({ bg }) => `
-  background-color:${bg ? bg : colors.white}
+  background-color:${bg ? bg : colors.white};
+  min-height: 500px  ;
   `}
 `;
 const Heading = styled.h1`

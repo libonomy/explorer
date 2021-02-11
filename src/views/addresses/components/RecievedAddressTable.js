@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   NoData,
-  Pagination,
+  // Pagination,
   Table,
   TableBody,
   TableCell,
-  TableHead,
+  // TableHead,
   TableHeading,
   TableLoader,
   TableRow,
   IconText
 } from 'src/components';
 import { UncontrolledTooltip } from 'reactstrap';
-import { useMediaQuery } from 'src/hooks';
+// import { useMediaQuery } from 'src/hooks';
 import styled from 'styled-components';
 // import { View } from 'src/components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,7 +22,7 @@ import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
-import { successIcon, failIcon, noData } from 'src/assets/images';
+import { successIcon, failIcon } from 'src/assets/images';
 import colors from 'src/vars/colors';
 import { withRouter, useParams } from 'react-router-dom';
 const Wrapper = styled.div`
@@ -83,7 +83,7 @@ const Icon = styled.img`
 `;
 
 const RecievedAddressTable = (props) => {
-  const matches = useMediaQuery('(min-width:600px)');
+  // const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
   const params = useParams();
   const { recievedTxs, recievedTxsLoading } = useSelector(
@@ -118,8 +118,8 @@ const RecievedAddressTable = (props) => {
           {recievedTxs &&
             !recievedTxsLoading &&
             recievedTxs.txs.map((item, index) => (
-              <TableRow>
-                <TableCell key={index}>
+              <TableRow key={index}>
+                <TableCell>
                   <Link to={`/txs/${item.txhash}`} id={`txhash${index}`}>
                     {item.txhash}
                   </Link>
@@ -141,7 +141,7 @@ const RecievedAddressTable = (props) => {
                     </IconText>
                   )}
                 </TableCell>
-                <TableCell key={index}>
+                <TableCell>
                   <Link
                     to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
                     id={`from_address${item.tx.value.msg[0].value.from_address}`}>
@@ -153,7 +153,7 @@ const RecievedAddressTable = (props) => {
                     {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCell>
-                <TableCell key={index}>
+                <TableCell>
                   <Link
                     to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
                     id={`to_address${item.tx.value.msg[0].value.to_address}`}>

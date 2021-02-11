@@ -204,7 +204,7 @@ const TextExp = styled.span`
   line-height: 1.1;
   letter-spacing: 0.3px;
   text-align: left;
-  margin-left: 5px;
+  margin-left: 4px;
   color: ${colors.black};
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
@@ -234,12 +234,13 @@ const MenuIcon = styled.span`
   top: 6px;
   right: 2px;
 `;
-const Texts = styled.span`
-  text-transform: uppercase;
-  font-family: PoppinsBold;
-`;
+// const Texts = styled.span`
+//   text-transform: uppercase;
+//   font-family: PoppinsBold;
+// `;
 const Statistics = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getNodeInfo());
     dispatch(getTotalSupply());

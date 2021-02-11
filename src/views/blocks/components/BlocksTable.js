@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   NoData,
-  Pagination,
+  // Pagination,
   Table,
   TableBody,
   TableCell,
@@ -12,7 +12,7 @@ import {
   TableLoader,
   TableRow
 } from 'src/components';
-import { useMediaQuery } from 'src/hooks';
+// import { useMediaQuery } from 'src/hooks';
 import { getAllBlocks, getTotalSupply } from 'src/redux/actions';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -47,7 +47,7 @@ const Text = styled.span`
 `;
 
 const BlocksTable = () => {
-  const matches = useMediaQuery('(min-width:600px)');
+  // const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
 
   const supply = useSelector((state) => state.supply.totalSupply);

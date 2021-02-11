@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Table, UncontrolledTooltip } from 'reactstrap';
-import { IconText, NoData, Pagination, TableLoader } from 'src/components';
+import { IconText, NoData, TableLoader } from 'src/components';
 import { successIcon, failIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
-import { useMediaQuery } from 'src/hooks';
+// import { useMediaQuery } from 'src/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTransactions } from 'src/redux/actions';
 import { Link } from 'react-router-dom';
@@ -94,9 +94,9 @@ const Tooltip = styled(UncontrolledTooltip)`
 `;
 
 const TxsTable = () => {
-  const matches = useMediaQuery('(min-width:600px)');
+  // const matches = useMediaQuery('(min-width:600px)');
 
-  const [state, setState] = useState({ limit: 10, currentPage: 1 });
+  // const [state, setState] = useState({ limit: 10, currentPage: 1 });
   const dispatch = useDispatch();
 
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
 import {
   logo,
-  instagram,
+  // instagram,
   twitter,
-  facebook,
+  // facebook,
   telegram,
   discord
 } from 'src/assets/images';
@@ -129,7 +129,7 @@ const Footer = () => {
           <Row>
             <Col lg="6" md="12" xs="12">
               <List>
-                <Link href="#">
+                <Link to="/">
                   <Logo src={logo} alt="logo-proper-six" />
                 </Link>
 
@@ -210,11 +210,7 @@ const Footer = () => {
                     target="_blank"
                     rel="follow"
                     title="Twitter">
-                    <Icon
-                      src={twitter}
-                      alt="logo-proper-six"
-                      class="img-footer"
-                    />
+                    <Icon src={twitter} alt="logo-proper-six" />
                   </SocialLink>
                 </ListItems>
                 <ListItems>
@@ -223,11 +219,7 @@ const Footer = () => {
                     target="_blank"
                     rel="follow"
                     title="Telegram">
-                    <Icon
-                      src={telegram}
-                      alt="logo-proper-six"
-                      class="img-footer"
-                    />
+                    <Icon src={telegram} alt="logo-proper-six" />
                   </SocialLink>
                 </ListItems>
                 <ListItems>
@@ -236,11 +228,7 @@ const Footer = () => {
                     target="_blank"
                     rel="follow"
                     title="Discord">
-                    <Icon
-                      src={discord}
-                      alt="logo-proper-six"
-                      class="img-footer"
-                    />
+                    <Icon src={discord} alt="logo-proper-six" />
                   </SocialLink>
                 </ListItems>
               </IconSection>

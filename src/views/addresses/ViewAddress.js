@@ -3,8 +3,11 @@ import { PageContainer } from 'src/components';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { AddressInfo, TabsSection } from './components';
-import { Alert, Badge } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
+// import { Alert, Badge } from 'reactstrap';
+import {
+  useDispatch
+  // , useSelector
+} from 'react-redux';
 import { getAccountDetails } from 'src/redux/actions';
 import { Copy } from 'src/components';
 import { withRouter } from 'react-router-dom';
@@ -21,7 +24,7 @@ const containerStyles = { paddingTop: 0, boxShadow: 'none' };
 //   margin-bottom: 10px;
 //   display: flex;
 // `;
-const SubHeading = styled.h6`
+const SubHeading = styled.div`
   display: inline-block;
 `;
 const Icon = styled.h6`

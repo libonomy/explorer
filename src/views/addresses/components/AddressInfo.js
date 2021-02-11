@@ -10,7 +10,6 @@ import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
 import { getMarketPrice } from 'src/redux/actions';
-import { TableLoader } from 'src/components';
 const Wrapper = styled.div`
   margin-bottom: 2rem;
 `;
@@ -116,11 +115,11 @@ const InnerBody = styled.div`
   flex-direction: Column;
   align-items: left;
 `;
-const Icon = styled.img`
-  width: 32px;
-  height: 32px;
-  margin-right: 1rem;
-`;
+// const Icon = styled.img`
+//   width: 32px;
+//   height: 32px;
+//   margin-right: 1rem;
+// `;
 const IconExp = styled.img`
   width: 40px;
   height: 40px;

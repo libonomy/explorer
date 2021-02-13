@@ -7,7 +7,7 @@ import colors from 'src/vars/colors';
 import { useMediaQuery } from 'src/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTransactions } from 'src/redux/actions';
-import { Link } from 'react-router-dom';
+import { Link, useParams, withRouter } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
@@ -93,61 +93,62 @@ const Tooltip = styled(UncontrolledTooltip)`
   font-family: PoppinsRegular;
 `;
 
-const TxsTable = () => {
+const TxsTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
 
-  const [state, setState] = useState({ limit: 10, currentPage: 1 });
+  const [state, setState] = useState({ limit: 10, currentPage: 0 });
   const dispatch = useDispatch();
 
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
 
-  useEffect(() => {
-    const filter = {
-      'tx.minheight': 360058,
-      page: 1,
-      limit: 500
-    };
-    dispatch(getAllTransactions(filter));
-  }, []);
-
-  let txs =
-    latestTxs && latestTxs.txs.sort((a, b) => b.height - a.height).slice(0, 20);
-
   // useEffect(() => {
   //   const filter = {
   //     'tx.minheight': 1,
-  //     'tx.maxheight': 1000000,
-  //     page: state.currentPage,
-  //     limit: state.limit
+  //     'tx.maxheight': 1000000
+  //     // page: 0,
+  //     // limit: 458
   //   };
   //   dispatch(getAllTransactions(filter));
-  // }, [state.limit, state.currentPage]);
+  // }, []);
+  const queryString = require('query-string');
+  const { block } = queryString.parse(props.location.search);
+  console.log(block, 'Api call height');
 
-  // const pageHandler = (e, index) => {
-  //   e.preventDefault();
-  //   setState({
-  //     ...state,
-  //     currentPage: index
-  //   });
-  // };
+  let txs = latestTxs && latestTxs.data.txs;
+  useEffect(() => {
+    const filter = {
+      page: state.currentPage,
+      limit: state.limit,
+      blockHeight: block
+    };
 
-  // const changeLimit = (limit) => {
-  //   setState({ ...state, limit });
-  // };
+    dispatch(getAllTransactions(filter));
+  }, [state.limit, state.currentPage]);
+  const pageHandler = (e, index) => {
+    e.preventDefault();
+    setState({
+      ...state,
+      currentPage: index - 1
+    });
+  };
+  console.log(state.currentPage, 'currentpage');
+  const changeLimit = (limit) => {
+    setState({ ...state, limit });
+  };
 
   return (
     <Wrapper>
       <Header>
         <Text>A total of {txs && txs.length} latest transactions</Text>
-        {/* {matches && (
+        {matches && (
           <Pagination
             pageHandler={pageHandler}
             changeLimit={changeLimit}
-            count={latestTxs && latestTxs.total_count}
+            count={latestTxs && latestTxs.data.total_count}
             limit={state.limit}
             currentPage={state.currentPage}
           />
-        )} */}
+        )}
       </Header>
       <Table hover>
         <TableHeader>
@@ -174,6 +175,7 @@ const TxsTable = () => {
                   </Tooltip>
                 </TableCell>
                 <TableCell>{moment(item.timestamp).fromNow()}</TableCell>
+
                 <TableCell>
                   {item.logs[0].success ? (
                     <IconText>
@@ -232,16 +234,16 @@ const TxsTable = () => {
         </TableBody>
       </Table>
       <Footer>
-        {/* <Pagination
+        <Pagination
           pageHandler={pageHandler}
           changeLimit={changeLimit}
-          count={latestTxs && latestTxs.total_count}
+          count={latestTxs && latestTxs.data.total_count}
           limit={state.limit}
           currentPage={state.currentPage}
-        /> */}
+        />
       </Footer>
     </Wrapper>
   );
 };
 
-export default TxsTable;
+export default withRouter(TxsTable);

@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter, useParams } from 'react-router-dom';
 import { Table } from 'reactstrap';
-import { getBlocksByHeight } from 'src/redux/actions';
+import { getBlocksByHeight, getAllTransactions } from 'src/redux/actions';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
 import moment from 'moment';
 import { TableLoader } from 'src/components';
+
 import { NoData } from 'src/components';
 const TableHeading = styled.th`
   width: 25%;
@@ -59,13 +60,18 @@ const Heading = styled.span`
 `;
 const Overview = (props) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getBlocksByHeight(height));
-  }, []);
-
+  const params = useParams();
   const { height } = props.match.params;
   const { block, blockLoading } = useSelector((state) => state.blocks);
+  useEffect(() => {
+    const filter = {
+      blockHeight: params.height
+    };
+
+    dispatch(getBlocksByHeight(height));
+    dispatch(getAllTransactions(filter));
+  }, [params.height]);
+  console.log(params.height, 'transaction');
   return (
     <Table responsive>
       {block && !blockLoading && (
@@ -99,15 +105,18 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              <Text> {block.block.header.num_txs} transactions </Text> &nbsp; in
-              this block{' '}
+              <Link to={`/txs?block=${height}`}>
+                {/* {console.log(height, ' height data')} */}
+                <Text> {block.block.header.num_txs} transactions </Text>
+              </Link>{' '}
+              &nbsp; in this block{' '}
             </TableCell>
           </TableRow>
           <TableRow>
             <TableHeading scope="row">
               <HeadingWraper>
                 <Icon>?</Icon>
-                <Heading>MInd by</Heading>
+                <Heading>Mind by</Heading>
               </HeadingWraper>
             </TableHeading>
             <TableCell>{block.block.header.validators_hash}</TableCell>

@@ -146,15 +146,13 @@ const LatestTxs = () => {
 
   useEffect(() => {
     const filter = {
-      'tx.minheight': 360058,
-      page: 1,
-      limit: 500
+      page: 0,
+      limit: 5
     };
     dispatch(getAllTransactions(filter));
   }, []);
 
-  let txs =
-    latestTxs && latestTxs.txs.sort((a, b) => b.height - a.height).slice(0, 5);
+  let txs = latestTxs && latestTxs.data.txs;
   return (
     <Wrapper>
       <Header>Latest Transactions</Header>
@@ -187,6 +185,7 @@ const LatestTxs = () => {
                   </IconText>
                 </TableCol>
                 <TableCol>{moment(item.timestamp).fromNow()}</TableCol>
+
                 <TableCol>
                   <Link
                     to={`/addresses/${item.tx.value.msg[0].value.from_address}`}

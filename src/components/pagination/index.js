@@ -100,13 +100,14 @@ const Pagination = ({
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const pagesCount = Math.ceil(count / limit);
+  const pagesCount = Math.floor(count / limit);
 
   function paginationItem(index) {
     return (
-      <Item active={index === currentPage} key={index}>
+      <Item active={index - 1 === currentPage} key={index}>
         <Link onClick={(e) => pageHandler(e, index)} href="#">
           {index}
+          {console.log(index, 'pagecheck')}
         </Link>
       </Item>
     );

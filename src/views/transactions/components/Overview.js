@@ -109,8 +109,8 @@ const Overview = (props) => {
             </TableHeading>
             <TableCell>
               <Wrapper>
-                {tx.txhash}
-                <Copy id="txhash-copy" value={tx.txhash} />
+                {tx.data.txhash}
+                <Copy id="txhash-copy" value={tx.data.txhash} />
               </Wrapper>
             </TableCell>
           </TableRow>
@@ -122,8 +122,8 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              <Link to={`/blocks/${tx.height}`} id={`txheight`}>
-                {tx.height}
+              <Link to={`/blocks/${tx.data.height}`} id={`txheight`}>
+                {tx.data.height}
               </Link>
             </TableCell>
             <Tooltip
@@ -141,7 +141,7 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {tx.logs[0].success ? (
+              {tx.data.logs[0].success ? (
                 <IconText>
                   <Icon src={successIcon}></Icon>
                   <Text success={true}>success</Text>
@@ -162,8 +162,8 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {moment(tx.timestamp).fromNow()} (
-              {new Date(tx.timestamp).toUTCString()})
+              {moment(tx.data.timestamp).fromNow()} (
+              {new Date(tx.data.timestamp).toUTCString()})
             </TableCell>
           </TableRow>
           <TableRow>
@@ -175,10 +175,10 @@ const Overview = (props) => {
             </TableHeading>
             <TableCell>
               <Wrapper>
-                {tx.tx.value.msg[0].value.to_address}{' '}
+                {tx.data.tx.value.msg[0].value.to_address}{' '}
                 <Copy
                   id="to_address-copy"
-                  value={tx.tx.value.msg[0].value.to_address}
+                  value={tx.data.tx.value.msg[0].value.to_address}
                 />
               </Wrapper>
             </TableCell>
@@ -192,10 +192,10 @@ const Overview = (props) => {
             </TableHeading>
             <TableCell>
               <Wrapper>
-                {tx.tx.value.msg[0].value.from_address}{' '}
+                {tx.data.tx.value.msg[0].value.from_address}{' '}
                 <Copy
                   id="from_address-copy"
-                  value={tx.tx.value.msg[0].value.from_address}
+                  value={tx.data.tx.value.msg[0].value.from_address}
                 />
               </Wrapper>
             </TableCell>
@@ -209,12 +209,12 @@ const Overview = (props) => {
             </TableHeading>
             <TableCell>
               <NumberFormat
-                value={tx.tx.value.msg[0].value.amount[0].amount / SCALE}
+                value={tx.data.tx.value.msg[0].value.amount[0].amount / SCALE}
                 displayType={'text'}
                 thousandSeparator={true}
               />{' '}
               <Text uppercase>
-                {tx.tx.value.msg[0].value.amount[0].denom.replace(
+                {tx.data.tx.value.msg[0].value.amount[0].denom.replace(
                   SYMBOL_REGEX,
                   ''
                 )}
@@ -228,7 +228,7 @@ const Overview = (props) => {
                 <Heading>Gas Wanted</Heading>
               </HeadingWraper>
             </TableHeading>
-            <TableCell>{tx.gas_wanted}</TableCell>
+            <TableCell>{tx.data.gas_wanted}</TableCell>
           </TableRow>
           <TableRow>
             <TableHeading scope="row">
@@ -237,7 +237,7 @@ const Overview = (props) => {
                 <Heading>Gas Used</Heading>
               </HeadingWraper>
             </TableHeading>
-            <TableCell>{tx.gas_used}</TableCell>
+            <TableCell>{tx.data.gas_used}</TableCell>
           </TableRow>
           <TableRow>
             <TableHeading scope="row">
@@ -246,7 +246,9 @@ const Overview = (props) => {
                 <Heading>Memo</Heading>
               </HeadingWraper>
             </TableHeading>
-            <TableCell>{tx.tx.value.memo ? tx.tx.value.memo : '""'}</TableCell>
+            <TableCell>
+              {tx.data.tx.value.memo ? tx.data.tx.value.memo : '""'}
+            </TableCell>
           </TableRow>
         </TableBody>
       )}

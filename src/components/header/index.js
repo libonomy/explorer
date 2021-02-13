@@ -13,7 +13,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import styled from 'styled-components';
-import MySelect from './selectbox';
+// import MySelect from './selectbox';
 import colors from 'src/vars/colors';
 import history from 'src/utils/history';
 
@@ -220,6 +220,7 @@ const Header = (props) => {
   const handleSearch = (e) => {
     if (state.keyword !== '') {
       history.push(`/txs/${state.keyword}`);
+      history.push(`/addresses/${state.keyword}`);
       setState({ ...state, keyword: '' });
     }
   };
@@ -229,6 +230,7 @@ const Header = (props) => {
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && state.keyword !== '') {
       history.push(`/txs/${state.keyword}`);
+      history.push(`/addresses/${state.keyword}`);
       setState({ ...state, keyword: '' });
     }
   };

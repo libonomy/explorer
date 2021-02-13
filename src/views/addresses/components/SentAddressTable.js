@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   NoData,
-  Pagination,
+  // Pagination,
   Table,
   TableBody,
   TableCell,
-  TableHead,
+  // TableHead,
   TableHeading,
   TableLoader,
   TableRow,
   IconText
 } from 'src/components';
 import { UncontrolledTooltip } from 'reactstrap';
-import { useMediaQuery } from 'src/hooks';
+// import { useMediaQuery } from 'src/hooks';
 import styled from 'styled-components';
 // import { View } from 'src/components';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTransactionsByAddresses } from 'src/redux/actions';
+import { getSentTxsByAddresses } from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
-import { successIcon, failIcon, noData } from 'src/assets/images';
+import { successIcon, failIcon } from 'src/assets/images';
 import colors from 'src/vars/colors';
 import { withRouter, useParams } from 'react-router-dom';
 const Wrapper = styled.div`
@@ -82,23 +82,24 @@ const Icon = styled.img`
   margin-right: 5px;
 `;
 
-const AddressTable = (props) => {
-  const matches = useMediaQuery('(min-width:600px)');
+const SentAddressTable = (props) => {
+  // const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
   const params = useParams();
-  const { txs, txsLoading } = useSelector((state) => state.addresses);
+  const { sentTxs, sentTxsLoading } = useSelector((state) => state.addresses);
   useEffect(() => {
     const filter = {
-      'transfer.recipient': params.address,
-      'message.sender': params.addresses
+      'message.sender': params.address
     };
-    dispatch(getTransactionsByAddresses(filter));
-  }, [params.address, params.addresses]);
+    dispatch(getSentTxsByAddresses(filter));
+  }, [params.address]);
 
   return (
     <Wrapper>
       <Header>
-        <Text>A total of {txs && txs.total_count} transactions found</Text>
+        <Text>
+          A total of {sentTxs && sentTxs.total_count} transactions found
+        </Text>
       </Header>
       <Table hover>
         <TableHeader>
@@ -106,15 +107,15 @@ const AddressTable = (props) => {
             <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Age</TableHeading>
             <TableHeading>Status</TableHeading>
-            <TableHeading>To</TableHeading>
             <TableHeading>From</TableHeading>
+            <TableHeading>To</TableHeading>
             <TableHeading>Value</TableHeading>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {txs &&
-            !txsLoading &&
-            txs.txs.map((item, index) => (
+          {sentTxs &&
+            !sentTxsLoading &&
+            sentTxs.txs.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <Link to={`/txs/${item.txhash}`} id={`txhash${index}`}>
@@ -141,24 +142,24 @@ const AddressTable = (props) => {
                 <TableCell>
                   <Link
                     to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
-                    id={`from_address${index}`}>
+                    id={`from_address${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
                   <Tooltip
                     placement="bottom-start"
-                    target={`from_address${index}`}>
+                    target={`from_address${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell>
                   <Link
                     to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
-                    id={`to_address${index}`}>
+                    id={`to_address${item.tx.value.msg[0].value.to_address}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
                   <Tooltip
                     placement="bottom-start"
-                    target={`to_address${index}`}>
+                    target={`to_address${item.tx.value.msg[0].value.to_address}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCell>
@@ -178,10 +179,10 @@ const AddressTable = (props) => {
                 </TableCell>
               </TableRow>
             ))}
-          {!txsLoading && txs?.txs?.length === 0 && (
+          {!sentTxsLoading && sentTxs?.sentTxs?.length === 0 && (
             <NoData colSpan={6} height={345} />
           )}
-          {txsLoading && <TableLoader colSpan={6} height={345} />}
+          {sentTxsLoading && <TableLoader colSpan={6} height={345} />}
         </TableBody>
       </Table>
 
@@ -190,4 +191,4 @@ const AddressTable = (props) => {
   );
 };
 
-export default withRouter(AddressTable);
+export default withRouter(SentAddressTable);

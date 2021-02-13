@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  getAllBlocks,
-  getAllTransactions,
-  getTotalSupply
+  getAllBlocks
+  // getAllTransactions,
+  // getTotalSupply
 } from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';

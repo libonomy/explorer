@@ -4,11 +4,12 @@ import colors from 'src/vars/colors';
 import { balance, home } from 'src/assets/images';
 import styled from 'styled-components';
 import { Input } from 'reactstrap';
-import SelectBox from './CustomSelect';
+// import SelectBox from './CustomSelect';
 import { useDispatch, useSelector } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
+import { getMarketPrice } from 'src/redux/actions';
 const Wrapper = styled.div`
   margin-bottom: 2rem;
 `;
@@ -114,11 +115,11 @@ const InnerBody = styled.div`
   flex-direction: Column;
   align-items: left;
 `;
-const Icon = styled.img`
-  width: 32px;
-  height: 32px;
-  margin-right: 1rem;
-`;
+// const Icon = styled.img`
+//   width: 32px;
+//   height: 32px;
+//   margin-right: 1rem;
+// `;
 const IconExp = styled.img`
   width: 40px;
   height: 40px;
@@ -147,6 +148,20 @@ const Text = styled(CardText)`
   color: #000000;
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
+const NumExp = styled.span`
+  font-family: PoppinsBold;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+  text-align: left;
+  color: #000000;
+  margin-right: 5px;
+  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
+`;
+
 const InputExp = styled(Input)`
   display: block;
   width: 60%;
@@ -180,9 +195,30 @@ const OptionExp = styled.option`
     background-color: ${colors.primary};
   }
 `;
+const Exp = styled.span`
+  font-family: PoppinsBold;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+  text-align: left;
+  color: ${colors.black};
+`;
 
 const AddressInfo = (props) => {
   const { details, detailsLoading } = useSelector((state) => state.addresses);
+  const { marketPrice, marketPriceLoading } = useSelector(
+    (state) => state.price
+  );
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMarketPrice());
+  }, []);
+
+  var x = marketPrice?.data?.usd;
 
   return (
     <Wrapper>
@@ -193,7 +229,7 @@ const AddressInfo = (props) => {
               <InnerBody>
                 <Title>Balance</Title>
                 <Text uppercase>
-                  {details ? (
+                  {details && details?.result?.value?.coins[0]?.amount ? (
                     <Fragment>
                       <TextFormat
                         value={details?.result?.value?.coins[0]?.amount / SCALE}
@@ -202,12 +238,13 @@ const AddressInfo = (props) => {
                       />{' '}
                       {details?.result?.value?.coins[0]?.denom.replace(
                         SYMBOL_REGEX,
+
                         ''
                       )}
                     </Fragment>
                   ) : (
-                    0
-                  )}
+                    <Exp>0</Exp>
+                  )}{' '}
                 </Text>
               </InnerBody>
 
@@ -216,11 +253,31 @@ const AddressInfo = (props) => {
           </CardExp>
         </Col>
         <Col>
-          <CardExp>
+          <CardExp loading={detailsLoading && marketPriceLoading}>
             <CardContent>
               <InnerBody>
-                <Title>LBY Value</Title>
-                <Text>$8.30</Text>
+                <Title> Value</Title>
+
+                {details &&
+                marketPrice?.data?.usd &&
+                details?.result?.value?.coins[0]?.amount ? (
+                  <Text>
+                    <NumExp>
+                      $
+                      <TextFormat
+                        value={(
+                          (details?.result?.value?.coins[0]?.amount * x) /
+                          SCALE
+                        ).toFixed(6)}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    </NumExp>
+                    (@ ${marketPrice?.data?.usd}/LBY)
+                  </Text>
+                ) : (
+                  <Exp>$0</Exp>
+                )}
               </InnerBody>
 
               <IconExp src={home} alt="icon" />
@@ -228,20 +285,54 @@ const AddressInfo = (props) => {
           </CardExp>
         </Col>
         <Col>
-          <CardExp>
+          <CardExp loading={detailsLoading}>
             <CardContent>
               <InnerBody>
                 <Title>Other Assets</Title>
-                <Text>0</Text>
+
+                <Text uppercase>
+                  {details && details?.result?.value?.coins[1]?.amount ? (
+                    <Fragment>
+                      <TextFormat
+                        value={details?.result?.value?.coins[1]?.amount / SCALE}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />{' '}
+                      {details?.result?.value?.coins[1]?.denom.replace(
+                        SYMBOL_REGEX,
+
+                        ''
+                      )}
+                    </Fragment>
+                  ) : (
+                    <Exp>0</Exp>
+                  )}
+                </Text>
               </InnerBody>
 
-              {/* <InputExp type="select" name="select" id="exampleSelect">
-                <OptionExp>1</OptionExp>
-                <OptionExp>2</OptionExp>
-                <OptionExp>3</OptionExp>
-                <OptionExp>4</OptionExp>
-                <OptionExp>5</OptionExp>
-              </InputExp> */}
+              {details &&
+              details?.result?.value?.coins[1]?.amount &&
+              details?.result?.value?.coins[1]?.denom &&
+              details?.result?.value?.coins?.amount > 1 &&
+              details?.result?.value?.coins[1]?.denom > 1 ? (
+                <InputExp type="select" name="select" id="exampleSelect">
+                  {details &&
+                    !detailsLoading &&
+                    details.result.value.coins.slice(1).map((item, i) => (
+                      <OptionExp>
+                        {item.amount / SCALE}
+
+                        {item.denom.replace(
+                          SYMBOL_REGEX,
+
+                          ''
+                        )}
+                      </OptionExp>
+                    ))}
+                </InputExp>
+              ) : (
+                ''
+              )}
               {/* <SelectBox
                 items={[
                   { value: 'United States', id: 1 },

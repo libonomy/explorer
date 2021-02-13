@@ -6,12 +6,12 @@ import {
   NavbarToggler,
   Nav as NavBt,
   NavItem,
-  NavLink,
-  Container,
-  InputGroupButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  // NavLink,
+  Container
+  // InputGroupButtonDropdown,
+  // DropdownToggle,
+  // DropdownMenu,
+  // DropdownItem
 } from 'reactstrap';
 import colors from 'src/vars/colors';
 import { Link } from 'react-router-dom';
@@ -101,73 +101,73 @@ const LinkExp = styled(Link)`
     text-decoration: none;
   }
 `;
-const DropdownToggleExp = styled(DropdownToggle)`
-  font-family: PoppinsRegular;
-  font-size: 15px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 2;
-  margin-top: -2px;
-  letter-spacing: 0.36px;
-  text-align: left;
-  padding: 0px 10px;
-  color: ${colors.white};
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
+// const DropdownToggleExp = styled(DropdownToggle)`
+//   font-family: PoppinsRegular;
+//   font-size: 15px;
+//   font-weight: normal;
+//   font-stretch: normal;
+//   font-style: normal;
+//   line-height: 2;
+//   margin-top: -2px;
+//   letter-spacing: 0.36px;
+//   text-align: left;
+//   padding: 0px 10px;
+//   color: ${colors.white};
+//   cursor: pointer;
+//   display: inline-block;
+//   position: relative;
 
-  &:hover {
-    color: ${colors.white};
-  }
-`;
+//   &:hover {
+//     color: ${colors.white};
+//   }
+// `;
 
-const InputGroupButtonDropdownExp = styled(InputGroupButtonDropdown)`
-  DropdownMenuExp:hover {
-    display: block !important;
-  }
-`;
-const DropdownItemExp = styled(DropdownItem)`
-  font-size: 14px;
-  font-family: PoppinsRegular;
-  padding: 0.5rem 1.75rem;
-  margin: -14px 0px;
-`;
-const DropdownMenuExp = styled(DropdownMenu)`
-  width: 175px;
-  margin: 8px 0px 0px 8px;
-  .btn-secondary:not(:disabled):not(.disabled):active:focus,
-  .btn-secondary:not(:disabled):not(.disabled).active:focus,
-  .show > .btn-secondary.dropdown-toggle:focus {
-    box-shadow: none;
-    background-color: ${colors.white};
-    color: ${colors.black};
-    border: none;
-  }
-  .dropdown-item.active,
-  .dropdown-item:active {
-    color: #000;
-    text-decoration: none;
-    background-color: #f8f9fa;
-    outline: none;
-  }
-`;
+// const InputGroupButtonDropdownExp = styled(InputGroupButtonDropdown)`
+//   DropdownMenuExp:hover {
+//     display: block !important;
+//   }
+// `;
+// const DropdownItemExp = styled(DropdownItem)`
+//   font-size: 14px;
+//   font-family: PoppinsRegular;
+//   padding: 0.5rem 1.75rem;
+//   margin: -14px 0px;
+// `;
+// const DropdownMenuExp = styled(DropdownMenu)`
+//   width: 175px;
+//   margin: 8px 0px 0px 8px;
+//   .btn-secondary:not(:disabled):not(.disabled):active:focus,
+//   .btn-secondary:not(:disabled):not(.disabled).active:focus,
+//   .show > .btn-secondary.dropdown-toggle:focus {
+//     box-shadow: none;
+//     background-color: ${colors.white};
+//     color: ${colors.black};
+//     border: none;
+//   }
+//   .dropdown-item.active,
+//   .dropdown-item:active {
+//     color: #000;
+//     text-decoration: none;
+//     background-color: #f8f9fa;
+//     outline: none;
+//   }
+// `;
 const NavBar = () => {
-  const [splitButtonOpen, setSplitButtonOpen] = useState({
-    dropdownOpen: false
-  });
-  const toggleSplit = () => {
-    setSplitButtonOpen((prevState) => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }));
-  };
-  const onMouseEnter = () => {
-    setSplitButtonOpen({ dropdownOpen: true });
-  };
+  // const [splitButtonOpen, setSplitButtonOpen] = useState({
+  //   dropdownOpen: false
+  // });
+  // const toggleSplit = () => {
+  //   setSplitButtonOpen((prevState) => ({
+  //     dropdownOpen: !prevState.dropdownOpen
+  //   }));
+  // };
+  // const onMouseEnter = () => {
+  //   setSplitButtonOpen({ dropdownOpen: true });
+  // };
 
-  const onMouseLeave = () => {
-    setSplitButtonOpen({ dropdownOpen: true });
-  };
+  // const onMouseLeave = () => {
+  //   setSplitButtonOpen({ dropdownOpen: true });
+  // };
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);

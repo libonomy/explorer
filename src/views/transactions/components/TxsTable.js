@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, UncontrolledTooltip } from 'reactstrap';
-import { IconText, NoData, Pagination, TableLoader } from 'src/components';
+import { IconText, NoData, TableLoader, Pagination } from 'src/components';
 import { successIcon, failIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
@@ -156,8 +156,8 @@ const TxsTable = (props) => {
             <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Age</TableHeading>
             <TableHeading>Status</TableHeading>
-            <TableHeading>To</TableHeading>
             <TableHeading>From</TableHeading>
+            <TableHeading>To</TableHeading>
             <TableHeading>Value</TableHeading>
           </TableRow>
         </TableHeader>

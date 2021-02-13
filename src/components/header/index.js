@@ -215,22 +215,43 @@ const Header = (props) => {
   const [splitButtonOpen, setSplitButtonOpen] = useState(false);
   const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
 
-  const [state, setState] = useState({ keyword: '' });
+  const [state, setState] = useState({ filterName: 'Filter', keyword: '' });
 
   const handleSearch = (e) => {
     if (state.keyword !== '') {
-      history.push(`/txs/${state.keyword}`);
-      history.push(`/addresses/${state.keyword}`);
+      if (state.filterName == 'Txs') history.push(`/txs/${state.keyword}`);
+      else if (state.filterName == 'Address')
+        history.push(`/addresses/${state.keyword}`);
+      else {
+        if (state.keyword.includes('libonomy'))
+          history.push(`/addresses/${state.keyword}`);
+        else history.push(`/txs/${state.keyword}`);
+      }
+      // history.push(`/txs/${state.keyword}`);
+      // history.push(`/addresses/${state.keyword}`);
       setState({ ...state, keyword: '' });
     }
   };
+
+  const hanldeDropDown = (e) => {
+    setState({ ...state, filterName: e.target.value });
+  };
+
   const handleChange = (e) => {
+    console.log('eeee', e.target);
     setState({ ...state, keyword: e.target.value });
   };
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && state.keyword !== '') {
-      history.push(`/txs/${state.keyword}`);
-      history.push(`/addresses/${state.keyword}`);
+      console.log('state.keyword', state.keyword.includes('libonomy'));
+      if (state.filterName == 'Txs') history.push(`/txs/${state.keyword}`);
+      else if (state.filterName == 'Address')
+        history.push(`/addresses/${state.keyword}`);
+      else {
+        if (state.keyword.includes('libonomy'))
+          history.push(`/addresses/${state.keyword}`);
+        else history.push(`/txs/${state.keyword}`);
+      } // history.push(`/addresses/${state.keyword}`);
       setState({ ...state, keyword: '' });
     }
   };
@@ -254,30 +275,29 @@ const Header = (props) => {
           </RightSection>
           <LeftSection>
             <SearchBox>
-              <InputGroupButtonDropdown
-              // addonType="prepend"
-              // isOpen={splitButtonOpen}
-              // toggle={toggleSplit}
-              >
-                <DropdownToggleExp
-                //  tag="span" className="nav-link" caret
-                >
-                  Txs
+              {/* <InputGroupButtonDropdown
+                addonType="prepend"
+                isOpen={splitButtonOpen}
+                toggle={toggleSplit}>
+                <DropdownToggleExp tag="span" className="nav-link" caret>
+                  Filter
                 </DropdownToggleExp>
-                {/* <DropdownMenuExp> */}
-                {/* <DropdownItemExp>Transaction</DropdownItemExp>
-                  <DropdownItemExp>Addresses</DropdownItemExp> */}
-                {/* <DropdownItem>Resources</DropdownItem>
-                  <DropdownItem>Other Action</DropdownItem> */}
-                {/* </DropdownMenuExp> */}
-              </InputGroupButtonDropdown>
-
-              {/* <InputExp type="select" name="select" id="exampleSelect">
-                <OptionExps>Filter</OptionExps>
+                <DropdownMenuExp>
+                  <DropdownItemExp>Transaction</DropdownItemExp>
+                  <DropdownItemExp>Addresses</DropdownItemExp>
+                </DropdownMenuExp>
+              </InputGroupButtonDropdown> */}
+              <InputExp
+                type="select"
+                name={state.filterName}
+                value={state.filterName}
+                id="exampleSelect"
+                onChange={(value) => hanldeDropDown(value)}>
+                <OptionExp>Filter</OptionExp>
                 <OptionExp>Txs</OptionExp>
                 <OptionExp>Address</OptionExp>
-              </InputExp> */}
-              {/* <MySelect
+              </InputExp>{' '}
+              {/* {/* <MySelect
                 options={options}
                 onChange={handleChangeOption}
                 selected={item.selected}
@@ -287,7 +307,7 @@ const Header = (props) => {
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"
                 type="text"
                 value={state.keyword}
-                name="keyword"
+                name="Txs"
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
               />

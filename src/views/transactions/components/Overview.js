@@ -98,7 +98,6 @@ const Overview = (props) => {
   const { tx, txLoading } = useSelector((state) => state.txs);
   return (
     <Table responsive>
-      {console.log('tx', tx)}
       {tx && tx.data == null ? (
         <NoData colSpan={1} height={425} />
       ) : (

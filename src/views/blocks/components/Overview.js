@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, withRouter, useParams } from 'react-router-dom';
 import { Table } from 'reactstrap';
@@ -71,7 +71,6 @@ const Overview = (props) => {
     dispatch(getBlocksByHeight(height));
     dispatch(getAllTransactions(filter));
   }, [params.height]);
-  console.log(params.height, 'transaction');
   return (
     <Table responsive>
       {block && !blockLoading && (

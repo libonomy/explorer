@@ -1,4 +1,4 @@
-import React, { Fragment, StrictMode, useState } from 'react';
+import React, { useState } from 'react';
 import { Alert } from 'reactstrap';
 import styled from 'styled-components';
 

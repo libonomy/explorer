@@ -7,7 +7,7 @@ import colors from 'src/vars/colors';
 import { useMediaQuery } from 'src/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTransactions } from 'src/redux/actions';
-import { Link, useParams, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
@@ -112,7 +112,6 @@ const TxsTable = (props) => {
   // }, []);
   const queryString = require('query-string');
   const { block } = queryString.parse(props.location.search);
-  console.log(block, 'Api call height');
 
   let txs = latestTxs && latestTxs.data.txs;
   useEffect(() => {

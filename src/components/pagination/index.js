@@ -95,19 +95,19 @@ const Pagination = ({
   count = 100,
   limit = 10,
   pageHandler,
-  changeLimit,
+  // changeLimit,
   currentPage = 1
 }) => {
   // const [dropdownOpen, setDropdownOpen] = useState(false);
   // const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const pagesCount = Math.floor(count / limit);
+  const pagesCount = Math.ceil(count / limit);
 
   function paginationItem(index) {
     return (
       <Item active={index - 1 === currentPage} key={index}>
         <Link onClick={(e) => pageHandler(e, index)} href="#">
           {index}
-          {console.log(index, 'pagecheck')}
+          {/* {console.log(index, 'pagecheck')} */}
         </Link>
       </Item>
     );
@@ -122,7 +122,7 @@ const Pagination = ({
       resultArray.push(paginationItem(1));
     } else if (pagesCount < 8 && pagesCount > 1) {
       for (let i = 1; i <= pagesCount; i++) {
-        console.log(i);
+        // console.log(i);
         resultArray.push(paginationItem(i));
       }
     } else if (pagesCount >= 8) {
@@ -165,17 +165,17 @@ const Pagination = ({
   return (
     <Wrapper>
       <RsPagination aria-label="Page navigation ">
-        <Item disabled={currentPage <= 1}>
+        <Item disabled={currentPage + 1 <= 1}>
           <Link
-            onClick={(e) => pageHandler(e, currentPage - 1)}
+            onClick={(e) => pageHandler(e, currentPage)}
             previous
             href="#"
           />
         </Item>
         {pagesCount !== 0 ? displayPagination() : ''}
-        <Item disabled={currentPage >= pagesCount}>
+        <Item disabled={currentPage >= pagesCount - 1}>
           <Link
-            onClick={(e) => pageHandler(e, currentPage + 1)}
+            onClick={(e) => pageHandler(e, currentPage + 2)}
             next
             href="#"
           />
@@ -199,7 +199,7 @@ const Pagination = ({
 };
 
 Pagination.propTypes = {
-  count: PropTypes.number.isRequired,
+  // count: PropTypes.number.isRequired,
   limit: PropTypes.number.isRequired,
   pageHandler: PropTypes.func.isRequired,
   changeLimit: PropTypes.func.isRequired,

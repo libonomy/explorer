@@ -9,7 +9,7 @@ import {
 export const getAllTransactions = (filter) => (dispatch) => {
   dispatch(getAllTransactionsLoading());
   axios
-    .get(`http://3.236.221.38:8501/api/transaction/txs`, {
+    .get(`${process.env.REACT_APP_REST_API_LATEST}/api/transaction/txs`, {
       params: filter
     })
     .then((res) => {
@@ -33,7 +33,7 @@ export const getAllTransactionsLoading = () => ({
 export const getTransectionByHash = (hash) => (dispatch) => {
   dispatch(getTransectionByHashLoading());
   axios
-    .get(`http://3.236.221.38:8501/api/transaction/txs/${hash}`)
+    .get(`${process.env.REACT_APP_REST_API_LATEST}/api/transaction/txs/${hash}`)
     .then((res) => {
       dispatch({
         type: GET_TRANSACTIONS_BY_HASH,

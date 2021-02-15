@@ -46,8 +46,17 @@ const TableHeader = styled.thead`
   border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
   background-color: rgba(240, 249, 250, 0.8);
 `;
-const TableRow = styled.tr``;
-const TableBody = styled.tbody``;
+const TableRow = styled.tr`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
+const TableBody = styled.tbody`
+  height: 405px;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
 
 const Header = styled.div`
   display: flex;
@@ -101,15 +110,6 @@ const TxsTable = (props) => {
 
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
 
-  // useEffect(() => {
-  //   const filter = {
-  //     'tx.minheight': 1,
-  //     'tx.maxheight': 1000000
-  //     // page: 0,
-  //     // limit: 458
-  //   };
-  //   dispatch(getAllTransactions(filter));
-  // }, []);
   const queryString = require('query-string');
   const { block } = queryString.parse(props.location.search);
 
@@ -130,7 +130,6 @@ const TxsTable = (props) => {
       currentPage: index - 1
     });
   };
-  console.log(state.currentPage, 'currentpage');
   const changeLimit = (limit) => {
     setState({ ...state, limit });
   };
@@ -143,7 +142,7 @@ const TxsTable = (props) => {
           <Pagination
             pageHandler={pageHandler}
             changeLimit={changeLimit}
-            count={latestTxs && latestTxs.data.total_count}
+            count={latestTxs && latestTxs.data.count}
             limit={state.limit}
             currentPage={state.currentPage}
           />
@@ -227,16 +226,16 @@ const TxsTable = (props) => {
               </TableRow>
             ))}
           {!latestTxsLoading && !latestTxs && (
-            <NoData colSpan={6} height={345} />
+            <NoData colSpan={6} height={360} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={345} />}
+          {latestTxsLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
       <Footer>
         <Pagination
           pageHandler={pageHandler}
           changeLimit={changeLimit}
-          count={latestTxs && latestTxs.data.total_count}
+          count={latestTxs && latestTxs.data.count}
           limit={state.limit}
           currentPage={state.currentPage}
         />

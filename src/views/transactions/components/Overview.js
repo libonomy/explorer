@@ -88,6 +88,21 @@ const Heading = styled.span`
 const Wrapper = styled.div`
   display: flex;
 `;
+const TextNumber = styled.span`
+  background: ${colors.chipColor};
+  background: #40b1be42;
+  border-radius: 5px;
+  padding: 6px 11px;
+  font-family: PoppinsMedium;
+  color: #000;
+  &:hover {
+    color: #fff;
+    background: ${colors.primary};
+  }
+`;
+const LinkExp = styled(Link)`
+  text-decoration: none !important;
+`;
 const Overview = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -126,9 +141,9 @@ const Overview = (props) => {
                   </HeadingWraper>
                 </TableHeading>
                 <TableCell>
-                  <Link to={`/blocks/${tx.data.height}`} id={`txheight`}>
-                    {tx.data.height}
-                  </Link>
+                  <LinkExp to={`/blocks/${tx.data.height}`} id={`txheight`}>
+                    <TextNumber> {tx.data.height}</TextNumber>
+                  </LinkExp>
                 </TableCell>
                 <Tooltip
                   placement="right"

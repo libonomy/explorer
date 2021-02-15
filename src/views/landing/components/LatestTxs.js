@@ -53,8 +53,16 @@ const LinkExp = styled(Link)`
     color: #fff;
     text-decoration: none;
 `;
-const TableRow = styled.tr``;
-const TableBody = styled.tbody``;
+const TableRow = styled.tr`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
+const TableBody = styled.tbody`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
 
 const Header = styled.div`
   font-family: PoppinsMedium;
@@ -209,9 +217,11 @@ const LatestTxs = () => {
               </TableRow>
             ))}
           {!latestTxsLoading && !latestTxs && (
-            <NoData colSpan={6} height={160} />
+            <NoData colSpan={4} height={160} width={510} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={160} />}
+          {latestTxsLoading && (
+            <TableLoader colSpan={4} height={160} width={510} />
+          )}
         </TableBody>
       </Table>
       <LinkExp to="/txs">

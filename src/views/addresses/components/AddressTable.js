@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   NoData,
-  // Pagination,
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -12,11 +12,11 @@ import {
   IconText
 } from 'src/components';
 import { UncontrolledTooltip } from 'reactstrap';
-// import { useMediaQuery } from 'src/hooks';
+import { useMediaQuery } from 'src/hooks';
 import styled from 'styled-components';
 // import { View } from 'src/components';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRecievedTxsByAddresses } from 'src/redux/actions';
+import { getTransactionsByAddresses } from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
@@ -82,26 +82,48 @@ const Icon = styled.img`
   margin-right: 5px;
 `;
 
-const RecievedAddressTable = (props) => {
-  // const matches = useMediaQuery('(min-width:600px)');
+const AddressTable = (props) => {
+  const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
   const params = useParams();
-  const { recievedTxs, recievedTxsLoading } = useSelector(
-    (state) => state.addresses
-  );
+  const { txs, txsLoading } = useSelector((state) => state.addresses);
+  const [state, setState] = useState({ limit: 10, currentPage: 0 });
+  const pageHandler = (e, index) => {
+    e.preventDefault();
+    setState({
+      ...state,
+      currentPage: index - 1
+    });
+  };
+  const changeLimit = (limit) => {
+    setState({ ...state, limit });
+  };
   useEffect(() => {
     const filter = {
-      'transfer.recipient': params.address
+      // 'transfer.recipient': params.address,
+      // 'message.sender': params.address,
+      address: params.address,
+      page: state.currentPage,
+      limit: state.limit
     };
-    dispatch(getRecievedTxsByAddresses(filter));
-  }, [params.address]);
+    dispatch(getTransactionsByAddresses(filter));
+  }, [params.address, state.limit, state.currentPage]);
+  // console.log(state.limit, params.address, 'check');
 
   return (
     <Wrapper>
       <Header>
-        <Text>
-          A total of {recievedTxs && recievedTxs.total_count} transactions found
-        </Text>
+        <Text>A total of {txs && txs.data.count} transactions found</Text>
+        {/* {console.log(txs && txs.data.count, 'totalcount')} */}
+        {matches && (
+          <Pagination
+            pageHandler={pageHandler}
+            changeLimit={changeLimit}
+            count={txs && txs.data.count}
+            limit={state.limit}
+            currentPage={state.currentPage}
+          />
+        )}
       </Header>
       <Table hover>
         <TableHeader>
@@ -115,15 +137,13 @@ const RecievedAddressTable = (props) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {recievedTxs &&
-            !recievedTxsLoading &&
-            recievedTxs.txs.map((item, index) => (
+          {txs &&
+            !txsLoading &&
+            txs.data.txs.map((item, index) => (
               <TableRow key={index}>
-                <TableCell>
-                  <Link to={`/txs/${item.txhash}`} id={`txhash${index}`}>
-                    {item.txhash}
-                  </Link>
-                  <Tooltip placement="bottom-start" target={`txhash${index}`}>
+                <TableCell id={`txhash${index}`}>
+                  <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
+                  <Tooltip placement="right" target={`txhash${index}`}>
                     view detail
                   </Tooltip>
                 </TableCell>
@@ -141,27 +161,25 @@ const RecievedAddressTable = (props) => {
                     </IconText>
                   )}
                 </TableCell>
-                <TableCell>
+                <TableCell id={`from_address${index}`}>
                   <Link
-                    to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
-                    id={`from_address${item.tx.value.msg[0].value.from_address}`}>
+                    to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
                   <Tooltip
                     placement="bottom-start"
-                    target={`from_address${item.tx.value.msg[0].value.from_address}`}>
+                    target={`from_address${index}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCell>
-                <TableCell>
+                <TableCell id={`to_address${index}`}>
                   <Link
-                    to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
-                    id={`to_address${item.tx.value.msg[0].value.to_address}`}>
+                    to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
                   <Tooltip
                     placement="bottom-start"
-                    target={`to_address${item.tx.value.msg[0].value.to_address}`}>
+                    target={`to_address${index}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCell>
@@ -181,16 +199,24 @@ const RecievedAddressTable = (props) => {
                 </TableCell>
               </TableRow>
             ))}
-          {!recievedTxsLoading && recievedTxs?.recievedTxs?.length === 0 && (
-            <NoData colSpan={6} height={345} />
+          {!txsLoading && txs?.data.txs?.length === 0 && (
+            <NoData colSpan={6} height={360} />
           )}
-          {recievedTxsLoading && <TableLoader colSpan={6} height={345} />}
+          {txsLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
 
-      <Footer></Footer>
+      <Footer>
+        <Pagination
+          pageHandler={pageHandler}
+          changeLimit={changeLimit}
+          count={txs && txs.data.count}
+          limit={state.limit}
+          currentPage={state.currentPage}
+        />
+      </Footer>
     </Wrapper>
   );
 };
 
-export default withRouter(RecievedAddressTable);
+export default withRouter(AddressTable);

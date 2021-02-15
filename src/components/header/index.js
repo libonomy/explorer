@@ -5,15 +5,10 @@ import {
   Container,
   InputGroup,
   InputGroupAddon,
-  // InputGroupButtonDropdown,
   Input,
-  Button,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  Button
 } from 'reactstrap';
 import styled from 'styled-components';
-// import MySelect from './selectbox';
 import colors from 'src/vars/colors';
 import history from 'src/utils/history';
 
@@ -61,27 +56,6 @@ const SearchIcon = styled.img`
   width: 20px;
   height: 20px;
 `;
-// const DropdownItemExp = styled(DropdownItem)`
-//   font-size: 13px;
-//   font-family: PoppinsRegular;
-// `;
-// const DropdownMenuExp = styled(DropdownMenu)`
-//   .btn-secondary:not(:disabled):not(.disabled):active:focus,
-//   .btn-secondary:not(:disabled):not(.disabled).active:focus,
-//   .show > .btn-secondary.dropdown-toggle:focus {
-//     box-shadow: none;
-//     background-color: ${colors.white};
-//     color: ${colors.black};
-//     border: none;
-//   }
-//   .dropdown-item.active,
-//   .dropdown-item:active {
-//     color: #000;
-//     text-decoration: none;
-//     background-color: #f8f9fa;
-//     outline: none;
-//   }
-// `;
 const SearchBox = styled(InputGroup)`
   background: white;
   border-radius: 6px;
@@ -132,17 +106,6 @@ const SearchBox = styled(InputGroup)`
     box-shadow: none !important;
   }
 `;
-// const Text = styled.span`
-//   font-family: PoppinsRegular;
-//   font-size: 12px;
-//   font-weight: normal;
-//   font-stretch: normal;
-//   font-style: normal;
-//   line-height: 2.25;
-//   letter-spacing: 0.36px;
-//   text-align: left;
-//   color: #000000;
-// `;
 const IconButton = styled(Button)`
   background-color: #28a0b0 !important;
   font-size: 18px;
@@ -155,16 +118,6 @@ const IconButton = styled(Button)`
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 `;
-// const DropdownToggleExp = styled(DropdownToggle)`
-//   font-family: PoppinsRegular;
-//   font-size: 12px;
-//   font-weight: normal;
-//   font-stretch: normal;
-//   font-style: normal;
-//   line-height: 2;
-//   letter-spacing: 0.36px;
-//   text-align: left;
-// `;
 const InputExp = styled(Input)`
   max-width: 20% !important ;
   opacity: 1 !important;
@@ -195,6 +148,7 @@ const OptionExp = styled.option`
   font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
+
   cursor: pointer !important;
   &:hover {
     color: #000;
@@ -212,9 +166,6 @@ const OptionExps = styled.option`
   }
 `;
 const Header = (props) => {
-  // const [splitButtonOpen, setSplitButtonOpen] = useState(false);
-  // const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
-
   const [state, setState] = useState({ filterName: 'Filter', keyword: '' });
 
   const handleSearch = (e) => {
@@ -227,8 +178,6 @@ const Header = (props) => {
           history.push(`/addresses/${state.keyword}`);
         else history.push(`/txs/${state.keyword}`);
       }
-      // history.push(`/txs/${state.keyword}`);
-      // history.push(`/addresses/${state.keyword}`);
       setState({ ...state, keyword: '' });
     }
   };
@@ -238,12 +187,12 @@ const Header = (props) => {
   };
 
   const handleChange = (e) => {
-    console.log('eeee', e.target);
+    // console.log('eeee', e.target);
     setState({ ...state, keyword: e.target.value });
   };
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && state.keyword !== '') {
-      console.log('state.keyword', state.keyword.includes('libonomy'));
+      // console.log('state.keyword', state.keyword.includes('libonomy'));
       if (state.filterName === 'Txs') history.push(`/txs/${state.keyword}`);
       else if (state.filterName === 'Address')
         history.push(`/addresses/${state.keyword}`);
@@ -251,19 +200,10 @@ const Header = (props) => {
         if (state.keyword.includes('libonomy'))
           history.push(`/addresses/${state.keyword}`);
         else history.push(`/txs/${state.keyword}`);
-      } // history.push(`/addresses/${state.keyword}`);
+      }
       setState({ ...state, keyword: '' });
     }
   };
-  // const [item, setItem] = useState({
-  //   selected: null
-  // });
-
-  // const handleChangeOption = (value) => {
-  //   setItem({
-  //     selected: value
-  //   });
-  // };
   return (
     <Wrapper>
       <Container>
@@ -275,18 +215,6 @@ const Header = (props) => {
           </RightSection>
           <LeftSection>
             <SearchBox>
-              {/* <InputGroupButtonDropdown
-                addonType="prepend"
-                isOpen={splitButtonOpen}
-                toggle={toggleSplit}>
-                <DropdownToggleExp tag="span" className="nav-link" caret>
-                  Filter
-                </DropdownToggleExp>
-                <DropdownMenuExp>
-                  <DropdownItemExp>Transaction</DropdownItemExp>
-                  <DropdownItemExp>Addresses</DropdownItemExp>
-                </DropdownMenuExp>
-              </InputGroupButtonDropdown> */}
               <InputExp
                 type="select"
                 name={state.filterName}
@@ -296,12 +224,7 @@ const Header = (props) => {
                 <OptionExp>Filter</OptionExp>
                 <OptionExp>Txs</OptionExp>
                 <OptionExp>Address</OptionExp>
-              </InputExp>{' '}
-              {/* {/* <MySelect
-                options={options}
-                onChange={handleChangeOption}
-                selected={item.selected}
-              /> */}
+              </InputExp>
               <VerticalLine />
               <Input
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"
@@ -325,14 +248,3 @@ const Header = (props) => {
 };
 
 export default Header;
-
-// const options = [
-//   // {
-//   //   value: '1',
-//   //   label: 'Address'
-//   // },
-//   {
-//     value: '2',
-//     label: 'Txs'
-//   }
-// ];

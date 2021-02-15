@@ -109,9 +109,9 @@ const BlocksTable = () => {
             ))}
 
           {!latestBlocksLoading && !latestBlocks && (
-            <NoData colSpan={6} height={300} />
+            <NoData colSpan={6} height={360} />
           )}
-          {latestBlocksLoading && <TableLoader colSpan={6} height={300} />}
+          {latestBlocksLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
       <Footer>{/* <Pagination /> */}</Footer>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, withRouter, useParams } from 'react-router-dom';
+import { withRouter, useParams, Link } from 'react-router-dom';
 import { Table } from 'reactstrap';
 import { getBlocksByHeight, getAllTransactions } from 'src/redux/actions';
 import colors from 'src/vars/colors';
@@ -44,9 +44,15 @@ const Icon = styled.span`
 `;
 const Text = styled.span`
   background: ${colors.chipColor};
+  background: #40b1be42;
   border-radius: 5px;
-  padding: 4px;
+  padding: 6px 11px;
   font-family: PoppinsMedium;
+  color: #000;
+  &:hover {
+    color: #fff;
+    background: ${colors.primary};
+  }
 `;
 const Heading = styled.span`
   font-family: PoppinsMedium;
@@ -57,6 +63,9 @@ const Heading = styled.span`
   line-height: 0.83;
   letter-spacing: 0.36px;
   text-align: left;
+`;
+const LinkExp = styled(Link)`
+  text-decoration: none !important;
 `;
 const Overview = (props) => {
   const dispatch = useDispatch();
@@ -104,10 +113,10 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              <Link to={`/txs?block=${height}`}>
+              <LinkExp to={`/txs?block=${height}`}>
                 {/* {console.log(height, ' height data')} */}
                 <Text> {block.block.header.num_txs} transactions </Text>
-              </Link>{' '}
+              </LinkExp>{' '}
               &nbsp; in this block{' '}
             </TableCell>
           </TableRow>

@@ -4,7 +4,6 @@ import colors from 'src/vars/colors';
 import { balance, home } from 'src/assets/images';
 import styled from 'styled-components';
 import { Input } from 'reactstrap';
-// import SelectBox from './CustomSelect';
 import { useDispatch, useSelector } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
@@ -115,11 +114,7 @@ const InnerBody = styled.div`
   flex-direction: Column;
   align-items: left;
 `;
-// const Icon = styled.img`
-//   width: 32px;
-//   height: 32px;
-//   margin-right: 1rem;
-// `;
+
 const IconExp = styled.img`
   width: 40px;
   height: 40px;
@@ -195,7 +190,7 @@ const OptionExp = styled.option`
     background-color: ${colors.primary};
   }
 `;
-const Exp = styled.span`
+const TextExp = styled.span`
   font-family: PoppinsBold;
   font-size: 13px;
   font-weight: normal;
@@ -243,7 +238,7 @@ const AddressInfo = (props) => {
                       )}
                     </Fragment>
                   ) : (
-                    <Exp>0</Exp>
+                    <TextExp>0</TextExp>
                   )}{' '}
                 </Text>
               </InnerBody>
@@ -276,7 +271,7 @@ const AddressInfo = (props) => {
                     (@ ${marketPrice?.data?.usd}/LBY)
                   </Text>
                 ) : (
-                  <Exp>$0</Exp>
+                  <TextExp>$0</TextExp>
                 )}
               </InnerBody>
 
@@ -305,19 +300,15 @@ const AddressInfo = (props) => {
                       )}
                     </Fragment>
                   ) : (
-                    <Exp>0</Exp>
+                    <TextExp>0</TextExp>
                   )}
                 </Text>
               </InnerBody>
 
-              {details &&
-              details?.result?.value?.coins[1]?.amount &&
-              details?.result?.value?.coins[1]?.denom &&
-              details?.result?.value?.coins?.amount > 1 &&
-              details?.result?.value?.coins[1]?.denom > 1 ? (
+              {details?.result?.value?.coins?.amount > 1 &&
+              details?.result?.value?.coins?.denom > 1 ? (
                 <InputExp type="select" name="select" id="exampleSelect">
                   {details &&
-                    !detailsLoading &&
                     details.result.value.coins.slice(1).map((item, i) => (
                       <OptionExp>
                         {item.amount / SCALE}
@@ -333,14 +324,6 @@ const AddressInfo = (props) => {
               ) : (
                 ''
               )}
-              {/* <SelectBox
-                items={[
-                  { value: 'United States', id: 1 },
-                  { value: 'Canada', id: 2 },
-                  { value: 'Mexico', id: 3 },
-                  { value: 'Japan', id: 4 }
-                ]}
-              /> */}
             </CardContent>
           </CardExp>
         </Col>

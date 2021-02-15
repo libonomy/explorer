@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
-import { RecievedAddressTable, SentAddressTable } from '.';
+import { AddressTable } from '.';
 import classNames from 'classnames';
 
 const Wrapper = styled.div`
@@ -54,25 +54,13 @@ const TabsSection = () => {
             onClick={() => {
               toggle('1');
             }}>
-            Recieved Txs
-          </NavLinkExp>
-        </NavItem>
-        <NavItem>
-          <NavLinkExp
-            className={classNames({ active: activeTab === '2' })}
-            onClick={() => {
-              toggle('2');
-            }}>
-            Sent Txs
+            Transactions
           </NavLinkExp>
         </NavItem>
       </Nav>
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
-          <RecievedAddressTable />
-        </TabPane>
-        <TabPane tabId="2">
-          <SentAddressTable />
+          <AddressTable />
         </TabPane>
       </TabContent>
     </Wrapper>

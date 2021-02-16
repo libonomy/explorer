@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Table, UncontrolledTooltip } from 'reactstrap';
-import { IconText, NoData, Pagination, TableLoader } from 'src/components';
+import { IconText, NoData, TableLoader, Pagination } from 'src/components';
 import { successIcon, failIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useMediaQuery } from 'src/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTransactions } from 'src/redux/actions';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
@@ -46,8 +46,17 @@ const TableHeader = styled.thead`
   border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
   background-color: rgba(240, 249, 250, 0.8);
 `;
-const TableRow = styled.tr``;
-const TableBody = styled.tbody``;
+const TableRow = styled.tr`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
+const TableBody = styled.tbody`
+  height: 405px;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
 
 const Header = styled.div`
   display: flex;
@@ -93,70 +102,66 @@ const Tooltip = styled(UncontrolledTooltip)`
   font-family: PoppinsRegular;
 `;
 
-const TxsTable = () => {
+const TxsTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
 
-  const [state, setState] = useState({ limit: 10, currentPage: 1 });
+  const [state, setState] = useState({ limit: 10, currentPage: 0 });
   const dispatch = useDispatch();
 
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
 
+  const queryString = require('query-string');
+  const { block } = queryString.parse(props.location.search);
+
+  let txs = latestTxs && latestTxs.data.txs;
   useEffect(() => {
     const filter = {
-      'tx.minheight': 360058,
-      page: 1,
-      limit: 500
+      page: state.currentPage,
+      limit: state.limit,
+      blockHeight: block
     };
+
     dispatch(getAllTransactions(filter));
-  }, []);
-
-  let txs =
-    latestTxs && latestTxs.txs.sort((a, b) => b.height - a.height).slice(0, 20);
-
-  // useEffect(() => {
-  //   const filter = {
-  //     'tx.minheight': 1,
-  //     'tx.maxheight': 1000000,
-  //     page: state.currentPage,
-  //     limit: state.limit
-  //   };
-  //   dispatch(getAllTransactions(filter));
-  // }, [state.limit, state.currentPage]);
-
-  // const pageHandler = (e, index) => {
-  //   e.preventDefault();
-  //   setState({
-  //     ...state,
-  //     currentPage: index
-  //   });
-  // };
-
-  // const changeLimit = (limit) => {
-  //   setState({ ...state, limit });
-  // };
+  }, [state.limit, state.currentPage]);
+  const pageHandler = (e, index) => {
+    e.preventDefault();
+    setState({
+      ...state,
+      currentPage: index - 1
+    });
+  };
+  const changeLimit = (limit) => {
+    setState({ ...state, limit });
+  };
 
   return (
     <Wrapper>
-      <Header>
-        <Text>A total of {txs && txs.length} latest transactions</Text>
-        {/* {matches && (
-          <Pagination
-            pageHandler={pageHandler}
-            changeLimit={changeLimit}
-            count={latestTxs && latestTxs.total_count}
-            limit={state.limit}
-            currentPage={state.currentPage}
-          />
-        )} */}
-      </Header>
+      {txs && txs.length >= 1 ? (
+        <Header>
+          <Text>A total of {txs && txs.length} latest transactions</Text>
+          {matches && (
+            <Pagination
+              pageHandler={pageHandler}
+              changeLimit={changeLimit}
+              count={latestTxs && latestTxs.data.count}
+              limit={state.limit}
+              currentPage={state.currentPage}
+            />
+          )}
+        </Header>
+      ) : (
+        <Header>
+          <Text>A total of {txs && txs.length} latest transactions</Text>
+        </Header>
+      )}
       <Table hover>
         <TableHeader>
           <TableRow>
             <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Age</TableHeading>
             <TableHeading>Status</TableHeading>
-            <TableHeading>To</TableHeading>
             <TableHeading>From</TableHeading>
+            <TableHeading>To</TableHeading>
             <TableHeading>Value</TableHeading>
           </TableRow>
         </TableHeader>
@@ -174,6 +179,7 @@ const TxsTable = () => {
                   </Tooltip>
                 </TableCell>
                 <TableCell>{moment(item.timestamp).fromNow()}</TableCell>
+
                 <TableCell>
                   {item.logs[0].success ? (
                     <IconText>
@@ -215,7 +221,7 @@ const TxsTable = () => {
                     displayType={'text'}
                     thousandSeparator={true}
                   />
-                  <Text uppercase={true}>
+                  <Text uppercase>
                     {' '}
                     {item.tx.value.msg[0].value.amount[0].denom.replace(
                       SYMBOL_REGEX,
@@ -225,23 +231,27 @@ const TxsTable = () => {
                 </TableCell>
               </TableRow>
             ))}
-          {!latestTxsLoading && !latestTxs && (
-            <NoData colSpan={6} height={345} />
+          {!latestTxsLoading && !txs?.length && (
+            <NoData colSpan={6} height={360} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={345} />}
+          {latestTxsLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
-      <Footer>
-        {/* <Pagination
-          pageHandler={pageHandler}
-          changeLimit={changeLimit}
-          count={latestTxs && latestTxs.total_count}
-          limit={state.limit}
-          currentPage={state.currentPage}
-        /> */}
-      </Footer>
+      {txs && txs.length >= 1 ? (
+        <Footer>
+          <Pagination
+            pageHandler={pageHandler}
+            changeLimit={changeLimit}
+            count={latestTxs && latestTxs.data.count}
+            limit={state.limit}
+            currentPage={state.currentPage}
+          />
+        </Footer>
+      ) : (
+        ''
+      )}
     </Wrapper>
   );
 };
 
-export default TxsTable;
+export default withRouter(TxsTable);

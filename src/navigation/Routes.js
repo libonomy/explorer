@@ -21,6 +21,7 @@ export const app = [
     path: '/txs/:hash',
     component: ViewTx
   },
+
   {
     path: '/pending_txs',
     component: PendingTxs

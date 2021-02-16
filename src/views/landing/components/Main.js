@@ -24,10 +24,10 @@ const Main = () => {
         </Row>
       </Wrapper>
       <Row>
-        <Col>
+        <Col lg="6">
           <LatestBlocks />
         </Col>
-        <Col>
+        <Col lg="6">
           <LatestTxs />
         </Col>
       </Row>

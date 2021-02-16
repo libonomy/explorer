@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  getAllBlocks,
-  getAllTransactions,
-  getTotalSupply
+  getAllBlocks
+  // getAllTransactions,
+  // getTotalSupply
 } from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   background: ${colors.white};
   border-radius: 10px;
   box-shadow: ${colors.shaddow};
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     margin-bottom: 2rem;
   }
 `;
@@ -55,8 +55,16 @@ const TableHeader = styled.thead`
   border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
   background-color: rgba(240, 249, 250, 0.8);
 `;
-const TableRow = styled.tr``;
-const TableBody = styled.tbody``;
+const TableRow = styled.tr`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
+const TableBody = styled.tbody`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
 
 const Header = styled.div`
   font-family: PoppinsMedium;
@@ -195,9 +203,9 @@ const LatestBlocks = () => {
               </TableRow>
             ))}
           {!latestBlocksLoading && !latestBlocks && (
-            <NoData colSpan={6} height={160} />
+            <NoData colSpan={4} height={160} />
           )}
-          {latestBlocksLoading && <TableLoader colSpan={6} height={160} />}
+          {latestBlocksLoading && <TableLoader colSpan={4} height={160} />}
         </TableBody>
       </Table>
       <LinkExp to="/blocks">

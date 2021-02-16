@@ -72,14 +72,15 @@ const Banner = () => {
           <Col lg="7" md="12">
             <Title>Libonomy Explorer</Title>
             <Paragraph>
-              Libonomy is an interoperable, scalable and AI based blockchain
-              technology allowing communities and companies to create faster,
-              secure and cross chain solutions - digital asset lending and
-              borrowing, virtual storage, hedging and even power-sharing between
-              units. All users need to do is connect to our decentralized
-              application of their choice and they can utilize complex smart
-              contracts, trace packages and use our aphelion protocol to develop
-              their own crypto-currencies or blockchains on top of libonomy.
+              Libonomy is an interoperable, scalable AI based blockchain
+              technology that allows communities and companies to create faster
+              and more secure decentralized cross chain solutions - digital
+              asset lending and borrowing, virtual storage, hedging and even
+              power-sharing between units. All users need to do is connect to
+              the decentralized application of their choice and they can utilize
+              complex smart contracts, trace packages and use our Aphelion
+              protocol to develop their own crypto-currencies or blockchains on
+              top of Libonomy.
             </Paragraph>
           </Col>
           <Col lg="5" md="12">

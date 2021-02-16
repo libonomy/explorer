@@ -88,6 +88,21 @@ const Heading = styled.span`
 const Wrapper = styled.div`
   display: flex;
 `;
+const TextNumber = styled.span`
+  background: ${colors.chipColor};
+
+  border-radius: 5px;
+  padding: 4px 11px;
+  font-family: PoppinsMedium;
+  color: #000;
+  &:hover {
+    color: #fff;
+    background: ${colors.primary};
+  }
+`;
+const LinkExp = styled(Link)`
+  text-decoration: none !important;
+`;
 const Overview = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -98,160 +113,170 @@ const Overview = (props) => {
   const { tx, txLoading } = useSelector((state) => state.txs);
   return (
     <Table responsive>
-      {tx && !txLoading && (
-        <TableBody>
-          <TableRow>
-            <TableHeading scope="row">
-              <HeadingWraper>
-                <InfoIcon>?</InfoIcon>
-                <Heading>Hash</Heading>
-              </HeadingWraper>
-            </TableHeading>
-            <TableCell>
-              <Wrapper>
-                {tx.txhash}
-                <Copy id="txhash-copy" value={tx.txhash} />
-              </Wrapper>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableHeading scope="row">
-              <HeadingWraper>
-                <InfoIcon>?</InfoIcon>
-                <Heading>Height</Heading>
-              </HeadingWraper>
-            </TableHeading>
-            <TableCell>
-              <Link to={`/blocks/${tx.height}`} id={`txheight`}>
-                {tx.height}
-              </Link>
-            </TableCell>
-            <Tooltip
-              placement="right"
-              target={`txheight`}
-              arrowClassName="disabled">
-              view blocks by height
-            </Tooltip>
-          </TableRow>
-          <TableRow>
-            <TableHeading scope="row">
-              <HeadingWraper>
-                <InfoIcon>?</InfoIcon>
-                <Heading>Status</Heading>
-              </HeadingWraper>
-            </TableHeading>
-            <TableCell>
-              {tx.logs[0].success ? (
-                <IconText>
-                  <Icon src={successIcon}></Icon>
-                  <Text success={true}>success</Text>
-                </IconText>
-              ) : (
-                <IconText>
-                  <Icon src={failIcon}></Icon>
-                  <Text success={false}>fail</Text>
-                </IconText>
-              )}
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableHeading scope="row">
-              <HeadingWraper>
-                <InfoIcon>?</InfoIcon>
-                <Heading>Timestamp</Heading>
-              </HeadingWraper>
-            </TableHeading>
-            <TableCell>
-              {moment(tx.timestamp).fromNow()} (
-              {new Date(tx.timestamp).toUTCString()})
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableHeading scope="row">
-              <HeadingWraper>
-                <InfoIcon>?</InfoIcon>
-                <Heading>To</Heading>
-              </HeadingWraper>
-            </TableHeading>
-            <TableCell>
-              <Wrapper>
-                {tx.tx.value.msg[0].value.to_address}{' '}
-                <Copy
-                  id="to_address-copy"
-                  value={tx.tx.value.msg[0].value.to_address}
-                />
-              </Wrapper>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableHeading scope="row">
-              <HeadingWraper>
-                <InfoIcon>?</InfoIcon>
-                <Heading>From</Heading>
-              </HeadingWraper>
-            </TableHeading>
-            <TableCell>
-              <Wrapper>
-                {tx.tx.value.msg[0].value.from_address}{' '}
-                <Copy
-                  id="from_address-copy"
-                  value={tx.tx.value.msg[0].value.from_address}
-                />
-              </Wrapper>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableHeading scope="row">
-              <HeadingWraper>
-                <InfoIcon>?</InfoIcon>
-                <Heading>Value</Heading>
-              </HeadingWraper>
-            </TableHeading>
-            <TableCell>
-              <NumberFormat
-                value={tx.tx.value.msg[0].value.amount[0].amount / SCALE}
-                displayType={'text'}
-                thousandSeparator={true}
-              />{' '}
-              <Text uppercase>
-                {tx.tx.value.msg[0].value.amount[0].denom.replace(
-                  SYMBOL_REGEX,
-                  ''
-                )}
-              </Text>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableHeading scope="row">
-              <HeadingWraper>
-                <InfoIcon>?</InfoIcon>
-                <Heading>Gas Wanted</Heading>
-              </HeadingWraper>
-            </TableHeading>
-            <TableCell>{tx.gas_wanted}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableHeading scope="row">
-              <HeadingWraper>
-                <InfoIcon>?</InfoIcon>
-                <Heading>Gas Used</Heading>
-              </HeadingWraper>
-            </TableHeading>
-            <TableCell>{tx.gas_used}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableHeading scope="row">
-              <HeadingWraper>
-                <InfoIcon>?</InfoIcon>
-                <Heading>Memo</Heading>
-              </HeadingWraper>
-            </TableHeading>
-            <TableCell>{tx.tx.value.memo ? tx.tx.value.memo : '""'}</TableCell>
-          </TableRow>
-        </TableBody>
+      {tx && tx.data == null ? (
+        <NoData colSpan={1} height={425} />
+      ) : (
+        <>
+          {tx && !txLoading && (
+            <TableBody>
+              <TableRow>
+                <TableHeading scope="row">
+                  <HeadingWraper>
+                    <InfoIcon>?</InfoIcon>
+                    <Heading>Hash</Heading>
+                  </HeadingWraper>
+                </TableHeading>
+                <TableCell>
+                  <Wrapper>
+                    {tx.data.txhash}
+                    <Copy id="txhash-copy" value={tx.data.txhash} />
+                  </Wrapper>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableHeading scope="row">
+                  <HeadingWraper>
+                    <InfoIcon>?</InfoIcon>
+                    <Heading>Height</Heading>
+                  </HeadingWraper>
+                </TableHeading>
+                <TableCell>
+                  <LinkExp to={`/blocks/${tx.data.height}`} id={`txheight`}>
+                    <TextNumber> {tx.data.height}</TextNumber>
+                  </LinkExp>
+                </TableCell>
+                <Tooltip
+                  placement="right"
+                  target={`txheight`}
+                  arrowClassName="disabled">
+                  view blocks by height
+                </Tooltip>
+              </TableRow>
+              <TableRow>
+                <TableHeading scope="row">
+                  <HeadingWraper>
+                    <InfoIcon>?</InfoIcon>
+                    <Heading>Status</Heading>
+                  </HeadingWraper>
+                </TableHeading>
+                <TableCell>
+                  {tx.data.logs[0].success ? (
+                    <IconText>
+                      <Icon src={successIcon}></Icon>
+                      <Text success={true}>success</Text>
+                    </IconText>
+                  ) : (
+                    <IconText>
+                      <Icon src={failIcon}></Icon>
+                      <Text success={false}>fail</Text>
+                    </IconText>
+                  )}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableHeading scope="row">
+                  <HeadingWraper>
+                    <InfoIcon>?</InfoIcon>
+                    <Heading>Timestamp</Heading>
+                  </HeadingWraper>
+                </TableHeading>
+                <TableCell>
+                  {moment(tx.data.timestamp).fromNow()} (
+                  {new Date(tx.data.timestamp).toUTCString()})
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableHeading scope="row">
+                  <HeadingWraper>
+                    <InfoIcon>?</InfoIcon>
+                    <Heading>To</Heading>
+                  </HeadingWraper>
+                </TableHeading>
+                <TableCell>
+                  <Wrapper>
+                    {tx.data.tx.value.msg[0].value.to_address}{' '}
+                    <Copy
+                      id="to_address-copy"
+                      value={tx.data.tx.value.msg[0].value.to_address}
+                    />
+                  </Wrapper>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableHeading scope="row">
+                  <HeadingWraper>
+                    <InfoIcon>?</InfoIcon>
+                    <Heading>From</Heading>
+                  </HeadingWraper>
+                </TableHeading>
+                <TableCell>
+                  <Wrapper>
+                    {tx.data.tx.value.msg[0].value.from_address}{' '}
+                    <Copy
+                      id="from_address-copy"
+                      value={tx.data.tx.value.msg[0].value.from_address}
+                    />
+                  </Wrapper>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableHeading scope="row">
+                  <HeadingWraper>
+                    <InfoIcon>?</InfoIcon>
+                    <Heading>Value</Heading>
+                  </HeadingWraper>
+                </TableHeading>
+                <TableCell>
+                  <NumberFormat
+                    value={
+                      tx.data.tx.value.msg[0].value.amount[0].amount / SCALE
+                    }
+                    displayType={'text'}
+                    thousandSeparator={true}
+                  />{' '}
+                  <Text uppercase>
+                    {tx.data.tx.value.msg[0].value.amount[0].denom.replace(
+                      SYMBOL_REGEX,
+                      ''
+                    )}
+                  </Text>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableHeading scope="row">
+                  <HeadingWraper>
+                    <InfoIcon>?</InfoIcon>
+                    <Heading>Gas Wanted</Heading>
+                  </HeadingWraper>
+                </TableHeading>
+                <TableCell>{tx.data.gas_wanted}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableHeading scope="row">
+                  <HeadingWraper>
+                    <InfoIcon>?</InfoIcon>
+                    <Heading>Gas Used</Heading>
+                  </HeadingWraper>
+                </TableHeading>
+                <TableCell>{tx.data.gas_used}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableHeading scope="row">
+                  <HeadingWraper>
+                    <InfoIcon>?</InfoIcon>
+                    <Heading>Memo</Heading>
+                  </HeadingWraper>
+                </TableHeading>
+                <TableCell>
+                  {tx.data.tx.value.memo ? tx.data.tx.value.memo : '""'}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          )}
+          {!txLoading && !tx && <NoData colSpan={6} height={425} />}
+          {txLoading && <TableLoader colSpan={6} height={425} />}
+        </>
       )}
-      {!txLoading && !tx && <NoData colSpan={6} height={425} />}
-      {txLoading && <TableLoader colSpan={6} height={425} />}
     </Table>
   );
 };

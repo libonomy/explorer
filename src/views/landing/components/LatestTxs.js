@@ -53,8 +53,16 @@ const LinkExp = styled(Link)`
     color: #fff;
     text-decoration: none;
 `;
-const TableRow = styled.tr``;
-const TableBody = styled.tbody``;
+const TableRow = styled.tr`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
+const TableBody = styled.tbody`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
 
 const Header = styled.div`
   font-family: PoppinsMedium;
@@ -146,15 +154,13 @@ const LatestTxs = () => {
 
   useEffect(() => {
     const filter = {
-      'tx.minheight': 360058,
-      page: 1,
-      limit: 500
+      page: 0,
+      limit: 5
     };
     dispatch(getAllTransactions(filter));
   }, []);
 
-  let txs =
-    latestTxs && latestTxs.txs.sort((a, b) => b.height - a.height).slice(0, 5);
+  let txs = latestTxs && latestTxs.data.txs;
   return (
     <Wrapper>
       <Header>Latest Transactions</Header>
@@ -163,8 +169,8 @@ const LatestTxs = () => {
           <TableRow>
             <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Age</TableHeading>
-            <TableHeading>To</TableHeading>
             <TableHeading>From</TableHeading>
+            <TableHeading>To</TableHeading>
             {/* <TableHeading>Amount</TableHeading> */}
           </TableRow>
         </TableHeader>
@@ -187,6 +193,7 @@ const LatestTxs = () => {
                   </IconText>
                 </TableCol>
                 <TableCol>{moment(item.timestamp).fromNow()}</TableCol>
+
                 <TableCol>
                   <Link
                     to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
@@ -210,9 +217,11 @@ const LatestTxs = () => {
               </TableRow>
             ))}
           {!latestTxsLoading && !latestTxs && (
-            <NoData colSpan={6} height={160} />
+            <NoData colSpan={4} height={160} width={510} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={160} />}
+          {latestTxsLoading && (
+            <TableLoader colSpan={4} height={160} width={510} />
+          )}
         </TableBody>
       </Table>
       <LinkExp to="/txs">

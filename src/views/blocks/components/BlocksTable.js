@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   NoData,
-  Pagination,
+  // Pagination,
   Table,
   TableBody,
   TableCell,
@@ -12,7 +12,7 @@ import {
   TableLoader,
   TableRow
 } from 'src/components';
-import { useMediaQuery } from 'src/hooks';
+// import { useMediaQuery } from 'src/hooks';
 import { getAllBlocks, getTotalSupply } from 'src/redux/actions';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -47,7 +47,7 @@ const Text = styled.span`
 `;
 
 const BlocksTable = () => {
-  const matches = useMediaQuery('(min-width:600px)');
+  // const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
 
   const supply = useSelector((state) => state.supply.totalSupply);
@@ -109,9 +109,9 @@ const BlocksTable = () => {
             ))}
 
           {!latestBlocksLoading && !latestBlocks && (
-            <NoData colSpan={6} height={300} />
+            <NoData colSpan={6} height={360} />
           )}
-          {latestBlocksLoading && <TableLoader colSpan={6} height={300} />}
+          {latestBlocksLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
       <Footer>{/* <Pagination /> */}</Footer>

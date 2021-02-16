@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   border-radius: 8px;
   box-shadow: ${colors.shaddow};
   background-color: ${colors.white};
+  min-height: 500px;
 `;
 const NavLinkExp = styled(NavLink)`
   font-family: PoppinsMedium;

@@ -31,7 +31,9 @@ export const getAccountDetailsLoading = () => ({
 export const getTransactionsByAddresses = (address) => (dispatch) => {
   dispatch(getTransactionsByAddressesLoading());
   axios
-    .get(`${process.env.REACT_APP_REST_API}/txs`, { params: address })
+    .get(`${process.env.REACT_APP_EXPLORER_API}/api/transaction/txs`, {
+      params: address
+    })
     .then((res) => {
       dispatch({
         type: GET_TRANSACTIONS_BY_ADDRESS,

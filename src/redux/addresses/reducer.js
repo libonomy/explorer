@@ -31,6 +31,7 @@ export default (state = initialState, { type, payload }) => {
       };
     case GET_TRANSACTIONS_BY_ADDRESS_LOADING:
       return { ...state, txsLoading: true };
+
     default:
       return state;
   }

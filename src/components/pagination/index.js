@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
   Pagination as RsPagination,
   PaginationItem,
-  PaginationLink,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  PaginationLink
+  // Dropdown,
+  // DropdownToggle,
+  // DropdownMenu,
+  // DropdownItem
 } from 'reactstrap';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
@@ -55,56 +55,56 @@ const Item = styled(PaginationItem)`
   }
 `;
 
-const DropdownExp = styled(Dropdown)`
-  box-shadow: 0 0 4px 0 rgba(18, 38, 63, 0.1);
-`;
+// const DropdownExp = styled(Dropdown)`
+//   box-shadow: 0 0 4px 0 rgba(18, 38, 63, 0.1);
+// `;
 
-const DropdownItemExp = styled(DropdownItem)`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: 0.27px;
-  text-align: left;
-`;
+// const DropdownItemExp = styled(DropdownItem)`
+//   font-family: PoppinsRegular;
+//   font-size: 12px;
+//   font-weight: normal;
+//   font-stretch: normal;
+//   font-style: normal;
+//   line-height: 1;
+//   letter-spacing: 0.27px;
+//   text-align: left;
+// `;
 
-const DropdownToggleExp = styled(DropdownToggle)`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: 0.27px;
-  text-align: left;
-  background: none !important;
-  line-height: 1.3;
-  border: none;
-  color: ${colors.black} !important;
-  &:focus {
-    outline: 0;
-    box-shadow: none !important;
-  }
-  &:hover {
-    background: none;
-  }
-`;
+// const DropdownToggleExp = styled(DropdownToggle)`
+//   font-family: PoppinsRegular;
+//   font-size: 12px;
+//   font-weight: normal;
+//   font-stretch: normal;
+//   font-style: normal;
+//   letter-spacing: 0.27px;
+//   text-align: left;
+//   background: none !important;
+//   line-height: 1.3;
+//   border: none;
+//   color: ${colors.black} !important;
+//   &:focus {
+//     outline: 0;
+//     box-shadow: none !important;
+//   }
+//   &:hover {
+//     background: none;
+//   }
+// `;
 
 const Pagination = ({
   count = 100,
   limit = 10,
   pageHandler,
-  changeLimit,
+  // changeLimit,
   currentPage = 1
 }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  // const [dropdownOpen, setDropdownOpen] = useState(false);
+  // const toggle = () => setDropdownOpen((prevState) => !prevState);
   const pagesCount = Math.ceil(count / limit);
 
   function paginationItem(index) {
     return (
-      <Item active={index === currentPage} key={index}>
+      <Item active={index - 1 === currentPage} key={index}>
         <Link onClick={(e) => pageHandler(e, index)} href="#">
           {index}
         </Link>
@@ -121,7 +121,6 @@ const Pagination = ({
       resultArray.push(paginationItem(1));
     } else if (pagesCount < 8 && pagesCount > 1) {
       for (let i = 1; i <= pagesCount; i++) {
-        console.log(i);
         resultArray.push(paginationItem(i));
       }
     } else if (pagesCount >= 8) {
@@ -164,17 +163,17 @@ const Pagination = ({
   return (
     <Wrapper>
       <RsPagination aria-label="Page navigation ">
-        <Item disabled={currentPage <= 1}>
+        <Item disabled={currentPage + 1 <= 1}>
           <Link
-            onClick={(e) => pageHandler(e, currentPage - 1)}
+            onClick={(e) => pageHandler(e, currentPage)}
             previous
             href="#"
           />
         </Item>
         {pagesCount !== 0 ? displayPagination() : ''}
-        <Item disabled={currentPage >= pagesCount}>
+        <Item disabled={currentPage >= pagesCount - 1}>
           <Link
-            onClick={(e) => pageHandler(e, currentPage + 1)}
+            onClick={(e) => pageHandler(e, currentPage + 2)}
             next
             href="#"
           />

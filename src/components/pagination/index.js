@@ -107,7 +107,6 @@ const Pagination = ({
       <Item active={index - 1 === currentPage} key={index}>
         <Link onClick={(e) => pageHandler(e, index)} href="#">
           {index}
-          {/* {console.log(index, 'pagecheck')} */}
         </Link>
       </Item>
     );
@@ -122,7 +121,6 @@ const Pagination = ({
       resultArray.push(paginationItem(1));
     } else if (pagesCount < 8 && pagesCount > 1) {
       for (let i = 1; i <= pagesCount; i++) {
-        // console.log(i);
         resultArray.push(paginationItem(i));
       }
     } else if (pagesCount >= 8) {
@@ -199,7 +197,7 @@ const Pagination = ({
 };
 
 Pagination.propTypes = {
-  // count: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
   limit: PropTypes.number.isRequired,
   pageHandler: PropTypes.func.isRequired,
   changeLimit: PropTypes.func.isRequired,

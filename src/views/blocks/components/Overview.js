@@ -114,7 +114,6 @@ const Overview = (props) => {
             </TableHeading>
             <TableCell>
               <LinkExp to={`/txs?block=${height}`}>
-                {/* {console.log(height, ' height data')} */}
                 <Text> {block.block.header.num_txs} transactions </Text>
               </LinkExp>{' '}
               &nbsp; in this block{' '}

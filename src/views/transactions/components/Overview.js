@@ -90,9 +90,9 @@ const Wrapper = styled.div`
 `;
 const TextNumber = styled.span`
   background: ${colors.chipColor};
-  background: #40b1be42;
+
   border-radius: 5px;
-  padding: 6px 11px;
+  padding: 4px 11px;
   font-family: PoppinsMedium;
   color: #000;
   &:hover {

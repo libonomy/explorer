@@ -100,31 +100,31 @@ const AddressTable = (props) => {
   };
   useEffect(() => {
     const filter = {
-      // 'transfer.recipient': params.address,
-      // 'message.sender': params.address,
       address: params.address,
       page: state.currentPage,
       limit: state.limit
     };
     dispatch(getTransactionsByAddresses(filter));
   }, [params.address, state.limit, state.currentPage]);
-  // console.log(state.limit, params.address, 'check');
 
   return (
     <Wrapper>
-      <Header>
-        <Text>A total of {txs && txs.data.count} transactions found</Text>
-        {/* {console.log(txs && txs.data.count, 'totalcount')} */}
-        {matches && (
-          <Pagination
-            pageHandler={pageHandler}
-            changeLimit={changeLimit}
-            count={txs && txs.data.count}
-            limit={state.limit}
-            currentPage={state.currentPage}
-          />
-        )}
-      </Header>
+      {txs && txs.data.count >= 1 ? (
+        <Header>
+          <Text>A total of {txs && txs.data.count} transactions found</Text>
+          {matches && (
+            <Pagination
+              pageHandler={pageHandler}
+              changeLimit={changeLimit}
+              count={txs && txs.data.count}
+              limit={state.limit}
+              currentPage={state.currentPage}
+            />
+          )}
+        </Header>
+      ) : (
+        ''
+      )}
       <Table hover>
         <TableHeader>
           <TableRow>
@@ -189,7 +189,7 @@ const AddressTable = (props) => {
                     displayType={'text'}
                     thousandSeparator={true}
                   />
-                  <Text uppercase={true}>
+                  <Text uppercase>
                     {' '}
                     {item.tx.value.msg[0].value.amount[0].denom.replace(
                       SYMBOL_REGEX,
@@ -205,16 +205,19 @@ const AddressTable = (props) => {
           {txsLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
-
-      <Footer>
-        <Pagination
-          pageHandler={pageHandler}
-          changeLimit={changeLimit}
-          count={txs && txs.data.count}
-          limit={state.limit}
-          currentPage={state.currentPage}
-        />
-      </Footer>
+      {txs && txs.data.count >= 1 ? (
+        <Footer>
+          <Pagination
+            pageHandler={pageHandler}
+            changeLimit={changeLimit}
+            count={txs && txs.data.count}
+            limit={state.limit}
+            currentPage={state.currentPage}
+          />
+        </Footer>
+      ) : (
+        ''
+      )}
     </Wrapper>
   );
 };

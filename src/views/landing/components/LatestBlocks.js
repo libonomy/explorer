@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   background: ${colors.white};
   border-radius: 10px;
   box-shadow: ${colors.shaddow};
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     margin-bottom: 2rem;
   }
 `;
@@ -203,11 +203,9 @@ const LatestBlocks = () => {
               </TableRow>
             ))}
           {!latestBlocksLoading && !latestBlocks && (
-            <NoData colSpan={4} height={160} width={510} />
+            <NoData colSpan={4} height={160} />
           )}
-          {latestBlocksLoading && (
-            <TableLoader colSpan={4} height={160} width={510} />
-          )}
+          {latestBlocksLoading && <TableLoader colSpan={4} height={160} />}
         </TableBody>
       </Table>
       <LinkExp to="/blocks">

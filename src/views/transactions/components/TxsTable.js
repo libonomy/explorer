@@ -136,18 +136,22 @@ const TxsTable = (props) => {
 
   return (
     <Wrapper>
-      <Header>
-        <Text>A total of {txs && txs.length} latest transactions</Text>
-        {matches && (
-          <Pagination
-            pageHandler={pageHandler}
-            changeLimit={changeLimit}
-            count={latestTxs && latestTxs.data.count}
-            limit={state.limit}
-            currentPage={state.currentPage}
-          />
-        )}
-      </Header>
+      {txs && txs.length >= 1 ? (
+        <Header>
+          <Text>A total of {txs && txs.length} latest transactions</Text>
+          {matches && (
+            <Pagination
+              pageHandler={pageHandler}
+              changeLimit={changeLimit}
+              count={latestTxs && latestTxs.data.count}
+              limit={state.limit}
+              currentPage={state.currentPage}
+            />
+          )}
+        </Header>
+      ) : (
+        ''
+      )}
       <Table hover>
         <TableHeader>
           <TableRow>
@@ -215,7 +219,7 @@ const TxsTable = (props) => {
                     displayType={'text'}
                     thousandSeparator={true}
                   />
-                  <Text uppercase={true}>
+                  <Text uppercase>
                     {' '}
                     {item.tx.value.msg[0].value.amount[0].denom.replace(
                       SYMBOL_REGEX,
@@ -225,21 +229,25 @@ const TxsTable = (props) => {
                 </TableCell>
               </TableRow>
             ))}
-          {!latestTxsLoading && !latestTxs && (
+          {!latestTxsLoading && !txs?.length && (
             <NoData colSpan={6} height={360} />
           )}
           {latestTxsLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
-      <Footer>
-        <Pagination
-          pageHandler={pageHandler}
-          changeLimit={changeLimit}
-          count={latestTxs && latestTxs.data.count}
-          limit={state.limit}
-          currentPage={state.currentPage}
-        />
-      </Footer>
+      {txs && txs.length >= 1 ? (
+        <Footer>
+          <Pagination
+            pageHandler={pageHandler}
+            changeLimit={changeLimit}
+            count={latestTxs && latestTxs.data.count}
+            limit={state.limit}
+            currentPage={state.currentPage}
+          />
+        </Footer>
+      ) : (
+        ''
+      )}
     </Wrapper>
   );
 };

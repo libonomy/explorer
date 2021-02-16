@@ -187,12 +187,10 @@ const Header = (props) => {
   };
 
   const handleChange = (e) => {
-    // console.log('eeee', e.target);
     setState({ ...state, keyword: e.target.value });
   };
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && state.keyword !== '') {
-      // console.log('state.keyword', state.keyword.includes('libonomy'));
       if (state.filterName === 'Txs') history.push(`/txs/${state.keyword}`);
       else if (state.filterName === 'Address')
         history.push(`/addresses/${state.keyword}`);

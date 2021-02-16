@@ -238,7 +238,7 @@ const AddressInfo = (props) => {
                       )}
                     </Fragment>
                   ) : (
-                    <TextExp>0</TextExp>
+                    <TextExp>0 LBY</TextExp>
                   )}{' '}
                 </Text>
               </InnerBody>

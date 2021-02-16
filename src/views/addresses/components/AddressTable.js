@@ -64,6 +64,12 @@ const Text = styled.span`
   ${({ success }) => (success ? `color:${colors.darkerGreen}` : null)}
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
+const TextExp = styled.span`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+  text-align: left;
+  margin: 12px 0px;
+`;
 const Tooltip = styled(UncontrolledTooltip)`
   font-size: 10px;
   font-family: PoppinsRegular;
@@ -123,7 +129,9 @@ const AddressTable = (props) => {
           )}
         </Header>
       ) : (
-        ''
+        <Header>
+          <Text>A total of {txs && txs.data.count} transactions found</Text>
+        </Header>
       )}
       <Table hover>
         <TableHeader>
@@ -166,10 +174,8 @@ const AddressTable = (props) => {
                     to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
-                  <Tooltip
-                    placement="bottom-start"
-                    target={`from_address${index}`}>
-                    {item.tx.value.msg[0].value.from_address}
+                  <Tooltip placement="right" target={`from_address${index}`}>
+                    view details
                   </Tooltip>
                 </TableCell>
                 <TableCell id={`to_address${index}`}>
@@ -177,10 +183,8 @@ const AddressTable = (props) => {
                     to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
-                  <Tooltip
-                    placement="bottom-start"
-                    target={`to_address${index}`}>
-                    {item.tx.value.msg[0].value.to_address}
+                  <Tooltip placement="right" target={`to_address${index}`}>
+                    view details
                   </Tooltip>
                 </TableCell>
                 <TableCell>

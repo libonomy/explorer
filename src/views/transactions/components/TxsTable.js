@@ -150,7 +150,9 @@ const TxsTable = (props) => {
           )}
         </Header>
       ) : (
-        ''
+        <Header>
+          <Text>A total of {txs && txs.length} latest transactions</Text>
+        </Header>
       )}
       <Table hover>
         <TableHeader>

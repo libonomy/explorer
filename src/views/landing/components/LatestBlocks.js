@@ -1,21 +1,26 @@
 import React, { useEffect } from 'react';
-import { Table, Button } from 'reactstrap';
+import { Table, Button, UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllBlocks, getAllTransactions } from 'src/redux/actions';
+import {
+  getAllBlocks
+  // getAllTransactions,
+  // getTotalSupply
+} from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { blockIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { TableLoader } from 'src/components';
 import { NoData } from 'src/components';
+
 const Wrapper = styled.div`
   overflow-y: auto;
   background: ${colors.white};
   border-radius: 10px;
   box-shadow: ${colors.shaddow};
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     margin-bottom: 2rem;
   }
 `;
@@ -32,6 +37,7 @@ const TableCol = styled.td`
   max-width: 80px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 const TableHeading = styled.th`
   font-family: PoppinsBold;
@@ -49,8 +55,16 @@ const TableHeader = styled.thead`
   border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
   background-color: rgba(240, 249, 250, 0.8);
 `;
-const TableRow = styled.tr``;
-const TableBody = styled.tbody``;
+const TableRow = styled.tr`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
+const TableBody = styled.tbody`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
 
 const Header = styled.div`
   font-family: PoppinsMedium;
@@ -136,16 +150,22 @@ const LinkExp = styled(Link)`
     color: #fff;
     text-decoration: none;
 `;
+const Tooltip = styled(UncontrolledTooltip)`
+  font-size: 10px;
+  font-family: PoppinsRegular;
+`;
 const LatestBlocks = () => {
   const dispatch = useDispatch();
+
+  const supply = useSelector((state) => state.supply.totalSupply);
+
+  useEffect(() => {
+    supply && dispatch(getAllBlocks(supply.height - 4, supply.height));
+  }, [supply]);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(
     (state) => state.blocks
   );
-
-  useEffect(() => {
-    dispatch(getAllBlocks(138563, 138567));
-  }, []);
 
   return (
     <Wrapper>
@@ -156,35 +176,36 @@ const LatestBlocks = () => {
             <TableHeading>Height</TableHeading>
             <TableHeading>Age</TableHeading>
             <TableHeading>Txs</TableHeading>
-            <TableHeading>Miner</TableHeading>
-            <TableHeading>Reward</TableHeading>
+            <TableHeading>Prev_Commit</TableHeading>
           </TableRow>
         </TableHeader>
         <TableBody>
           {latestBlocks &&
             !latestBlocksLoading &&
-            latestBlocks.result.block_metas.map((item, index) => (
-              <TableRow key={index}>
+            latestBlocks.result.block_metas.map((item, i) => (
+              <TableRow key={i}>
                 <TableCol>
                   <IconText>
                     <Icon src={blockIcon} />
-                    <Link to={`/blocks/${item.header.height}`}>
+                    <Link
+                      to={`/blocks/${item.header.height}`}
+                      id={`height_exp_alpha${i}`}>
                       {item.header.height}
                     </Link>
+                    <Tooltip placement="right" target={`height_exp_alpha${i}`}>
+                      view block by height!
+                    </Tooltip>
                   </IconText>
                 </TableCol>
-                <TableCol>
-                  {moment(item.header.time, 'YYYYMMDD').fromNow()}
-                </TableCol>
+                <TableCol>{moment(item.header.time).fromNow()}</TableCol>
                 <TableCol>{item.header.num_txs}</TableCol>
-                <TableCol>{item.header.num_txs}</TableCol>
-                <TableCol>{item.header.num_txs}</TableCol>
+                <TableCol>{item.header.last_commit_hash}</TableCol>
               </TableRow>
             ))}
           {!latestBlocksLoading && !latestBlocks && (
-            <NoData colSpan={6} height={160} />
+            <NoData colSpan={4} height={160} />
           )}
-          {latestBlocksLoading && <TableLoader colSpan={6} height={160} />}
+          {latestBlocksLoading && <TableLoader colSpan={4} height={160} />}
         </TableBody>
       </Table>
       <LinkExp to="/blocks">

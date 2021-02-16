@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table, Button } from 'reactstrap';
+import { Table, Button, UncontrolledTooltip } from 'reactstrap';
 import { txIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
@@ -53,8 +53,16 @@ const LinkExp = styled(Link)`
     color: #fff;
     text-decoration: none;
 `;
-const TableRow = styled.tr``;
-const TableBody = styled.tbody``;
+const TableRow = styled.tr`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
+const TableBody = styled.tbody`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
 
 const Header = styled.div`
   font-family: PoppinsMedium;
@@ -103,6 +111,11 @@ justify-content: center;
     border-color: #40b1be;
 `;
 
+const Tooltip = styled(UncontrolledTooltip)`
+  font-size: 10px;
+  font-family: PoppinsRegular;
+`;
+
 const TableButton = styled(Button)`
   width: auto;
   height: 28px;
@@ -141,13 +154,13 @@ const LatestTxs = () => {
 
   useEffect(() => {
     const filter = {
-      'tx.minheight': 1,
-      'tx.maxheight': 1000000,
-      page: 1,
+      page: 0,
       limit: 5
     };
     dispatch(getAllTransactions(filter));
   }, []);
+
+  let txs = latestTxs && latestTxs.data.txs;
   return (
     <Wrapper>
       <Header>Latest Transactions</Header>
@@ -156,37 +169,59 @@ const LatestTxs = () => {
           <TableRow>
             <TableHeading>Tx Hash</TableHeading>
             <TableHeading>Age</TableHeading>
-            <TableHeading>To</TableHeading>
             <TableHeading>From</TableHeading>
+            <TableHeading>To</TableHeading>
             {/* <TableHeading>Amount</TableHeading> */}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {latestTxs &&
+          {txs &&
             !latestTxsLoading &&
-            latestTxs.txs.map((item, index) => (
-              <TableRow key={index}>
+            txs.map((item, i) => (
+              <TableRow key={i}>
                 <TableCol icon>
                   <IconText>
                     <Icon src={txIcon} />
-                    <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
+                    <Link
+                      to={`/txs/${item.txhash}`}
+                      id={`txhash_exp_alpha${i}`}>
+                      {item.txhash}
+                    </Link>
+                    <Tooltip placement="right" target={`txhash_exp_alpha${i}`}>
+                      view tx by hash!
+                    </Tooltip>
                   </IconText>
                 </TableCol>
                 <TableCol>{moment(item.timestamp).fromNow()}</TableCol>
+
                 <TableCol>
-                  <Link disabled>
+                  <Link
+                    to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
+                    id={`from_address_alpha${i}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
+                  <Tooltip placement="right" target={`from_address_alpha${i}`}>
+                    view details
+                  </Tooltip>
                 </TableCol>
                 <TableCol>
-                  <Link disabled>{item.tx.value.msg[0].value.to_address}</Link>
+                  <Link
+                    to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
+                    id={`to_address_alpha${i}`}>
+                    {item.tx.value.msg[0].value.to_address}
+                  </Link>
+                  <Tooltip placement="right" target={`to_address_alpha${i}`}>
+                    view details
+                  </Tooltip>
                 </TableCol>
               </TableRow>
             ))}
           {!latestTxsLoading && !latestTxs && (
-            <NoData colSpan={6} height={160} />
+            <NoData colSpan={4} height={160} width={510} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={160} />}
+          {latestTxsLoading && (
+            <TableLoader colSpan={4} height={160} width={510} />
+          )}
         </TableBody>
       </Table>
       <LinkExp to="/txs">

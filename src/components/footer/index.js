@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
-import { logo, instagram, twitter, facebook } from 'src/assets/images';
+import {
+  logo,
+  // instagram,
+  twitter,
+  // facebook,
+  telegram,
+  discord
+} from 'src/assets/images';
 import styled from 'styled-components';
 
 const Wrapper = styled.div``;
@@ -22,6 +29,7 @@ const Icon = styled.img`
   height: 13.7px;
   object-fit: contain;
 `;
+
 const List = styled.ul`
   padding: 0;
   list-style: none;
@@ -31,7 +39,8 @@ const List = styled.ul`
 const ListItem = styled.li`
   margin-bottom: 1rem;
 `;
-const ListLink = styled(Link)`
+
+const ListTag = styled.a`
   color: #092326;
   text-decoration: none;
   font-family: PoppinsRegular;
@@ -120,7 +129,7 @@ const Footer = () => {
           <Row>
             <Col lg="6" md="12" xs="12">
               <List>
-                <Link href="#">
+                <Link to="/">
                   <Logo src={logo} alt="logo-proper-six" />
                 </Link>
 
@@ -135,40 +144,55 @@ const Footer = () => {
             <Col lg="2" md="4" xs="6">
               <List>
                 <ListItem>
-                  <ListLink to="#">About Us</ListLink>
+                  <ListTag
+                    href="https://libonomy.com/about-us"
+                    target="_blank"
+                    rel="follow">
+                    About Us
+                  </ListTag>
                 </ListItem>
                 <ListItem>
-                  <ListLink to="#">Advertise</ListLink>
+                  <ListTag>Advertise</ListTag>
                 </ListItem>
                 <ListItem>
-                  <ListLink to="#">Terms & Conditions</ListLink>
-                </ListItem>
-              </List>
-            </Col>
-            <Col lg="2" md="4" xs="6">
-              <List>
-                <ListItem>
-                  <ListLink to="#">Developers API</ListLink>
-                </ListItem>
-                <ListItem>
-                  <ListLink href="#">Information Center</ListLink>
-                </ListItem>
-                <ListItem>
-                  <ListLink to="#">Newsletter</ListLink>
+                  <ListTag>Terms & Conditions</ListTag>
                 </ListItem>
               </List>
             </Col>
             <Col lg="2" md="4" xs="6">
               <List>
                 <ListItem>
-                  <ListLink to="#">Blockchain</ListLink>
+                  <ListTag>Developers API</ListTag>
                 </ListItem>
                 <ListItem>
-                  <ListLink to="#">Wallet</ListLink>
+                  <ListTag>Information Center</ListTag>
+                </ListItem>
+                <ListItem>
+                  <ListTag>Newsletter</ListTag>
+                </ListItem>
+              </List>
+            </Col>
+            <Col lg="2" md="4" xs="6">
+              <List>
+                <ListItem>
+                  <ListTag
+                    href="https://libonomy.com/"
+                    target="_blank"
+                    rel="follow">
+                    Blockchain
+                  </ListTag>
+                </ListItem>
+                <ListItem>
+                  <ListTag>Wallet</ListTag>
                 </ListItem>
 
                 <ListItem>
-                  <ListLink to="#">Exchange</ListLink>
+                  <ListTag
+                    href=" https://liboex.trade/"
+                    target="_blank"
+                    rel="follow">
+                    Exchange
+                  </ListTag>
                 </ListItem>
               </List>
             </Col>
@@ -182,41 +206,29 @@ const Footer = () => {
               <IconSection>
                 <ListItems>
                   <SocialLink
-                    href="https://www.instagram.com/libonomy/"
-                    target="_blank"
-                    rel="follow"
-                    title="Instagram">
-                    <Icon
-                      src={instagram}
-                      alt="logo-proper-six"
-                      class="img-footer"
-                    />
-                  </SocialLink>
-                </ListItems>
-                <ListItems>
-                  <SocialLink
-                    href="https://twitter.com/LibonomyBlock"
+                    href="https://twitter.com/libonomy"
                     target="_blank"
                     rel="follow"
                     title="Twitter">
-                    <Icon
-                      src={twitter}
-                      alt="logo-proper-six"
-                      class="img-footer"
-                    />
+                    <Icon src={twitter} alt="logo-proper-six" />
                   </SocialLink>
                 </ListItems>
                 <ListItems>
                   <SocialLink
-                    href="https://web.facebook.com/Libonomy/"
+                    href="https://t.me/libonomyblockchain"
                     target="_blank"
                     rel="follow"
-                    title="Facebook">
-                    <Icon
-                      src={facebook}
-                      alt="logo-proper-six"
-                      class="img-footer"
-                    />
+                    title="Telegram">
+                    <Icon src={telegram} alt="logo-proper-six" />
+                  </SocialLink>
+                </ListItems>
+                <ListItems>
+                  <SocialLink
+                    href="https://discord.com/invite/6P9SX5c"
+                    target="_blank"
+                    rel="follow"
+                    title="Discord">
+                    <Icon src={discord} alt="logo-proper-six" />
                   </SocialLink>
                 </ListItems>
               </IconSection>

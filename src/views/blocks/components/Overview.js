@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useParams, Link } from 'react-router-dom';
 import { Table } from 'reactstrap';
-import { getBlocksByHeight } from 'src/redux/actions';
+import { getBlocksByHeight, getAllTransactions } from 'src/redux/actions';
 import colors from 'src/vars/colors';
 import styled from 'styled-components';
 import moment from 'moment';
 import { TableLoader } from 'src/components';
+
 import { NoData } from 'src/components';
 const TableHeading = styled.th`
   width: 25%;
@@ -41,6 +42,17 @@ const Icon = styled.span`
   width: 16px;
   margin-right: 5px;
 `;
+const Text = styled.span`
+  background: ${colors.chipColor};
+  border-radius: 5px;
+  padding: 4px 11px;
+  font-family: PoppinsMedium;
+  color: #000;
+  &:hover {
+    color: #fff;
+    background: ${colors.primary};
+  }
+`;
 const Heading = styled.span`
   font-family: PoppinsMedium;
   font-size: 12px;
@@ -51,15 +63,22 @@ const Heading = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
 `;
+const LinkExp = styled(Link)`
+  text-decoration: none !important;
+`;
 const Overview = (props) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getBlocksByHeight(height));
-  }, []);
-
+  const params = useParams();
   const { height } = props.match.params;
   const { block, blockLoading } = useSelector((state) => state.blocks);
+  useEffect(() => {
+    const filter = {
+      blockHeight: params.height
+    };
+
+    dispatch(getBlocksByHeight(height));
+    dispatch(getAllTransactions(filter));
+  }, [params.height]);
   return (
     <Table responsive>
       {block && !blockLoading && (
@@ -93,14 +112,17 @@ const Overview = (props) => {
               </HeadingWraper>
             </TableHeading>
             <TableCell>
-              {block.block.header.num_txs} transactions in this block{' '}
+              <LinkExp to={`/txs?block=${height}`}>
+                <Text> {block.block.header.num_txs} transactions </Text>
+              </LinkExp>{' '}
+              &nbsp; in this block{' '}
             </TableCell>
           </TableRow>
           <TableRow>
             <TableHeading scope="row">
               <HeadingWraper>
                 <Icon>?</Icon>
-                <Heading>MInd by</Heading>
+                <Heading>Mind by</Heading>
               </HeadingWraper>
             </TableHeading>
             <TableCell>{block.block.header.validators_hash}</TableCell>
@@ -125,8 +147,8 @@ const Overview = (props) => {
           </TableRow>
         </TableBody>
       )}
-      {!blockLoading && !block && <NoData colSpan={6} height={300} />}
-      {blockLoading && <TableLoader colSpan={6} height={300} />}
+      {!blockLoading && !block && <NoData colSpan={6} height={245} />}
+      {blockLoading && <TableLoader colSpan={6} height={245} />}
     </Table>
   );
 };

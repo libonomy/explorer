@@ -1,7 +1,12 @@
 import React from 'react';
 import { Card, CardBody, CardTitle, CardText, Col, Row } from 'reactstrap';
 import colors from 'src/vars/colors';
-import { channelIcon } from 'src/assets/images';
+import {
+  channelIcon,
+  peerIcon,
+  layerIcon,
+  poolingIcon
+} from 'src/assets/images';
 import styled from 'styled-components';
 const Wrapper = styled.div`
   padding: 1rem;
@@ -85,7 +90,7 @@ const ConsensusState = () => {
         <Col lg="6" md="6" sm="6">
           <CardExp>
             <CardContent>
-              <Icon src={channelIcon} />
+              <Icon src={channelIcon} alt="channel" />
               <InnerBody>
                 <Title>Channel</Title>
                 <Text>2,052,591</Text>
@@ -96,7 +101,7 @@ const ConsensusState = () => {
         <Col lg="6" md="6" sm="6">
           <CardExp>
             <CardContent>
-              <Icon src={channelIcon} />
+              <Icon src={poolingIcon} alt="pooling" />
               <InnerBody>
                 <Title>Pooling State</Title>
                 <Text>0</Text>
@@ -107,7 +112,7 @@ const ConsensusState = () => {
         <Col lg="6" md="6" sm="6">
           <CardExp>
             <CardContent>
-              <Icon src={channelIcon} />
+              <Icon src={layerIcon} alt="layer" />
               <InnerBody>
                 <Title>Layer level</Title>
                 <Text>1</Text>
@@ -118,7 +123,7 @@ const ConsensusState = () => {
         <Col lg="6" md="6" sm="6">
           <CardExp>
             <CardContent>
-              <Icon src={channelIcon} />
+              <Icon src={peerIcon} alt="peer" />
               <InnerBody>
                 <Title>Peer</Title>
                 <Text>23</Text>

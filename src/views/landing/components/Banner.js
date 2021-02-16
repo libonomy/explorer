@@ -1,10 +1,9 @@
 import React from 'react';
-import { Card, Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import styled from 'styled-components';
 import { liboBackground, slide1 } from 'src/assets/images';
 
 import colors from 'src/vars/colors';
-import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   padding: 1rem 0 1rem 0;
@@ -22,19 +21,19 @@ const Wrapper = styled.div`
   }
 `;
 
-const CardWrapper = styled(Card)`
-  width: 345px;
-  height: 151px;
-  margin-left: 2.5rem;
-  border-radius: 10px;
-  background-color: #ffffff;
-  @media (max-width: 991px) {
-    margin-left: 0rem;
-  }
-  @media (max-width: 480px) {
-    width: auto;
-  }
-`;
+// const CardWrapper = styled(Card)`
+//   width: 345px;
+//   height: 151px;
+//   margin-left: 2.5rem;
+//   border-radius: 10px;
+//   background-color: #ffffff;
+//   @media (max-width: 991px) {
+//     margin-left: 0rem;
+//   }
+//   @media (max-width: 480px) {
+//     width: auto;
+//   }
+// `;
 
 const Title = styled.h1`
   font-family: PoppinsBold;
@@ -73,18 +72,19 @@ const Banner = () => {
           <Col lg="7" md="12">
             <Title>Libonomy Explorer</Title>
             <Paragraph>
-              Libonomy is an interoperable, scalable and AI based blockchain
-              technology allowing communities and companies to create faster,
-              secure and cross chain solutions - digital asset lending and
-              borrowing, virtual storage, hedging and even power-sharing between
-              units. All users need to do is connect to our decentralized
-              application of their choice and they can utilize complex smart
-              contracts, trace packages and use our aphelion protocol to develop
-              their own crypto-currencies or blockchains on top of libonomy.
+              Libonomy is an interoperable, scalable AI based blockchain
+              technology that allows communities and companies to create faster
+              and more secure decentralized cross chain solutions - digital
+              asset lending and borrowing, virtual storage, hedging and even
+              power-sharing between units. All users need to do is connect to
+              the decentralized application of their choice and they can utilize
+              complex smart contracts, trace packages and use our Aphelion
+              protocol to develop their own crypto-currencies or blockchains on
+              top of Libonomy.
             </Paragraph>
           </Col>
           <Col lg="5" md="12">
-            <a href="https://libonomy.com/" target="_blank">
+            <a href="https://libonomy.com/" target="_blank" rel="noreferrer">
               <Image src={slide1} />
             </a>
           </Col>

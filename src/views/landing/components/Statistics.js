@@ -5,8 +5,8 @@ import {
   CardTitle,
   CardText,
   Col,
-  Row,
-  Button
+  Row
+  // Button
 } from 'reactstrap';
 import {
   latestblockheight,
@@ -20,7 +20,7 @@ import {
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import colors from 'src/vars/colors';
-import { getNodeInfo, getTotalSupply } from 'src/redux/actions';
+import { getNodeInfo, getTotalSupply, getMarketPrice } from 'src/redux/actions';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
@@ -195,6 +195,19 @@ const Text = styled(CardText)`
   color: ${colors.black};
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
+const TextExp = styled.span`
+  font-family: PoppinsBold;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+  text-align: left;
+  margin-left: 4px;
+  color: ${colors.black};
+  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
+`;
 const TextFormat = styled(NumberFormat)`
   font-family: PoppinsBold;
   font-size: 13px;
@@ -221,16 +234,24 @@ const MenuIcon = styled.span`
   top: 6px;
   right: 2px;
 `;
-
+// const Texts = styled.span`
+//   text-transform: uppercase;
+//   font-family: PoppinsBold;
+// `;
 const Statistics = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getNodeInfo());
     dispatch(getTotalSupply());
+    dispatch(getMarketPrice());
   }, []);
   const { nodeInfo, nodeInfoLoading } = useSelector((state) => state.info);
   const { totalSupply, totalSupplyLoading } = useSelector(
     (state) => state.supply
+  );
+  const { marketPrice, marketPriceLoading } = useSelector(
+    (state) => state.price
   );
 
   return (
@@ -301,7 +322,7 @@ const Statistics = () => {
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp>
+          <CardExp loading={totalSupplyLoading}>
             <CardContent>
               <Icon src={marketcap} alt="marketcap" />
               <InnerBody>
@@ -324,7 +345,7 @@ const Statistics = () => {
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp>
+          <CardExp loading={marketPriceLoading}>
             <CardContent>
               <Icon src={accounts} alt="accounts" />
               <InnerBody>
@@ -332,7 +353,16 @@ const Statistics = () => {
                 <Text>2,052,591</Text>
               </InnerBody>
             </CardContent>
-            <CardContent></CardContent>
+            <CardContent>
+              <Icon src={latestblockheight} alt="latestblockheight" />
+              <InnerBody>
+                <Title>LBY Price</Title>
+                <Text>
+                  {marketPrice && marketPrice.data.usd}
+                  <TextExp>USD</TextExp>
+                </Text>
+              </InnerBody>
+            </CardContent>
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">

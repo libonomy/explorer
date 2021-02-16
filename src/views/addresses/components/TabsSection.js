@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { PageContainer } from 'src/components';
-import classnames from 'classnames';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
-import styled from 'styled-components';
 import colors from 'src/vars/colors';
-import Overview from './components/Overview';
-// import Comments from './components/Comments';
+import styled from 'styled-components';
+import { AddressTable } from '.';
+import classNames from 'classnames';
 
+const Wrapper = styled.div`
+  padding: 22px 0 18.9px 0px;
+  border-radius: 8px;
+  box-shadow: ${colors.shaddow};
+  background-color: ${colors.white};
+  min-height: 500px;
+`;
 const NavLinkExp = styled(NavLink)`
   font-family: PoppinsMedium;
   font-size: 12px;
@@ -34,58 +39,32 @@ const NavLinkExp = styled(NavLink)`
     text-decoration: none;
   }
 `;
-
-const ViewTx = () => {
+const TabsSection = () => {
   const [activeTab, setActiveTab] = useState('1');
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
-
   return (
-    <PageContainer heading="Transaction Details">
+    <Wrapper>
       <Nav tabs>
         <NavItem>
           <NavLinkExp
-            className={classnames({ active: activeTab === '1' })}
+            className={classNames({ active: activeTab === '1' })}
             onClick={() => {
               toggle('1');
             }}>
-            Overview
+            Transactions
           </NavLinkExp>
         </NavItem>
-        {/* <NavItem>
-          <NavLinkExp
-            className={classnames({ active: activeTab === '2' })}
-            onClick={() => {
-              toggle('2');
-            }}>
-            Stage Change
-          </NavLinkExp>
-        </NavItem>
-        <NavItem>
-          <NavLinkExp
-            className={classnames({ active: activeTab === '3' })}
-            onClick={() => {
-              toggle('3');
-            }}>
-            Comments
-          </NavLinkExp>
-        </NavItem> */}
       </Nav>
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
-          <Overview />
+          <AddressTable />
         </TabPane>
-        {/* <TabPane tabId="2">
-          <Comments />
-        </TabPane>
-        <TabPane tabId="3">
-          <Comments />
-        </TabPane> */}
       </TabContent>
-    </PageContainer>
+    </Wrapper>
   );
 };
 
-export default ViewTx;
+export default TabsSection;

@@ -5,12 +5,8 @@ import {
   Container,
   InputGroup,
   InputGroupAddon,
-  InputGroupButtonDropdown,
   Input,
-  Button,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  Button
 } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
@@ -26,7 +22,7 @@ const Section = styled.div`
   align-items: center;
 
   background-color: ${colors.white};
-  @media (max-width: 576px) {
+  @media (max-width: 991px) {
     display: block;
   }
 `;
@@ -46,39 +42,26 @@ const Logo = styled.img`
 
 const VerticalLine = styled.span`
   height: 25px;
-  border: solid black 1px;
+  border: 0.5px solid black;
   opacity: 0.3;
   display: inline-block;
   vertical-align: middle;
-  margin: 8px 0px;
+  color: ${colors.black};
+  margin: 8px 4px;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const SearchIcon = styled.img`
   width: 20px;
   height: 20px;
-`;
-const DropdownMenuExp = styled(DropdownMenu)`
-  .btn-secondary:not(:disabled):not(.disabled):active:focus,
-  .btn-secondary:not(:disabled):not(.disabled).active:focus,
-  .show > .btn-secondary.dropdown-toggle:focus {
-    box-shadow: none;
-    background-color: ${colors.white};
-    color: ${colors.black};
-    border: none;
-  }
-  .dropdown-item.active,
-  .dropdown-item:active {
-    color: #000;
-    text-decoration: none;
-    background-color: #f8f9fa;
-    outline: none;
-  }
 `;
 const SearchBox = styled(InputGroup)`
   background: white;
   border-radius: 6px;
   border: solid 1px ${colors.borderGrey};
 
-  @media (max-width: 576px) {
+  @media (max-width: 991px) {
     margin: 1.5rem 0px 0px 0px;
   }
   input.form-control {
@@ -123,17 +106,6 @@ const SearchBox = styled(InputGroup)`
     box-shadow: none !important;
   }
 `;
-const Text = styled.span`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 2.25;
-  letter-spacing: 0.36px;
-  text-align: left;
-  color: #000000;
-`;
 const IconButton = styled(Button)`
   background-color: #28a0b0 !important;
   font-size: 18px;
@@ -146,34 +118,87 @@ const IconButton = styled(Button)`
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 `;
-const DropdownToggleExp = styled(DropdownToggle)`
+const InputExp = styled(Input)`
+  max-width: 20% !important ;
+  opacity: 1 !important;
+  font-family: 'PoppinsRegular' !important;
+  font-size: 14px !important;
+  padding: 0 8px !important;
+  color: #495057;
+  background-color: #fff;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  margin-top: 4px !important;
+  display: flex;
+  text-align: justify;
+  cursor: pointer;
+  @media (max-width: 991px) {
+    max-width: 20% !important;
+  }
+  &:focus {
+    color: #000;
+    background-color: #fff;
+    border-color: #f1f1f1;
+    outline: none;
+    box-shadow: none;
+  }
+`;
+const OptionExp = styled.option`
   font-family: PoppinsRegular;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 2;
-  letter-spacing: 0.36px;
-  text-align: left;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+
+  cursor: pointer !important;
+  &:hover {
+    color: #000;
+    background-color: ${colors.primary};
+  }
+`;
+const OptionExps = styled.option`
+  color: ${colors.white};
+  font-size: 0rem;
+  opacity: 1;
+  cursor: pointer !important;
+  &:hover {
+    color: transparent !important ;
+    background-color: ${colors.primary};
+  }
 `;
 const Header = (props) => {
-  const [splitButtonOpen, setSplitButtonOpen] = useState(false);
-  const toggleSplit = () => setSplitButtonOpen(!splitButtonOpen);
-
-  const [state, setState] = useState({ keyword: '' });
+  const [state, setState] = useState({ filterName: 'Filter', keyword: '' });
 
   const handleSearch = (e) => {
     if (state.keyword !== '') {
-      history.push(`/txs/${state.keyword}`);
+      if (state.filterName === 'Txs') history.push(`/txs/${state.keyword}`);
+      else if (state.filterName === 'Address')
+        history.push(`/addresses/${state.keyword}`);
+      else {
+        if (state.keyword.includes('libonomy'))
+          history.push(`/addresses/${state.keyword}`);
+        else history.push(`/txs/${state.keyword}`);
+      }
       setState({ ...state, keyword: '' });
     }
   };
+
+  const hanldeDropDown = (e) => {
+    setState({ ...state, filterName: e.target.value });
+  };
+
   const handleChange = (e) => {
     setState({ ...state, keyword: e.target.value });
   };
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && state.keyword !== '') {
-      history.push(`/txs/${state.keyword}`);
+      if (state.filterName === 'Txs') history.push(`/txs/${state.keyword}`);
+      else if (state.filterName === 'Address')
+        history.push(`/addresses/${state.keyword}`);
+      else {
+        if (state.keyword.includes('libonomy'))
+          history.push(`/addresses/${state.keyword}`);
+        else history.push(`/txs/${state.keyword}`);
+      }
       setState({ ...state, keyword: '' });
     }
   };
@@ -188,26 +213,22 @@ const Header = (props) => {
           </RightSection>
           <LeftSection>
             <SearchBox>
-              <InputGroupButtonDropdown
-                addonType="prepend"
-                isOpen={splitButtonOpen}
-                toggle={toggleSplit}>
-                <DropdownToggleExp tag="span" className="nav-link" caret>
-                  Filters
-                </DropdownToggleExp>
-                {/* <DropdownMenuExp>
-                  <DropdownItem>Transaction</DropdownItem>
-                  <DropdownItem>Addresses</DropdownItem>
-                  <DropdownItem>Resources</DropdownItem>
-                  <DropdownItem>Other Action</DropdownItem>
-                </DropdownMenuExp>{' '} */}
-              </InputGroupButtonDropdown>
+              <InputExp
+                type="select"
+                name={state.filterName}
+                value={state.filterName}
+                id="exampleSelect"
+                onChange={(value) => hanldeDropDown(value)}>
+                <OptionExp>Filter</OptionExp>
+                <OptionExp>Txs</OptionExp>
+                <OptionExp>Address</OptionExp>
+              </InputExp>
               <VerticalLine />
               <Input
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"
                 type="text"
                 value={state.keyword}
-                name="keyword"
+                name="Txs"
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
               />

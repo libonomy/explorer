@@ -1,61 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { Table, UncontrolledTooltip } from 'reactstrap';
-import { IconText, NoData, TableLoader, Pagination } from 'src/components';
-import { successIcon, failIcon } from 'src/assets/images';
-import styled from 'styled-components';
-import colors from 'src/vars/colors';
+import {
+  NoData,
+  Pagination,
+  Table,
+  TableBody,
+  TableCell,
+  // TableHead,
+  TableHeading,
+  TableLoader,
+  TableRow,
+  IconText
+} from 'src/components';
+import { UncontrolledTooltip } from 'reactstrap';
 import { useMediaQuery } from 'src/hooks';
+import styled from 'styled-components';
+// import { View } from 'src/components';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTransactions } from 'src/redux/actions';
-import { Link, withRouter } from 'react-router-dom';
+import { getTransactionsByAddresses } from 'src/redux/actions';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
-
+import { successIcon, failIcon } from 'src/assets/images';
+import colors from 'src/vars/colors';
+import { withRouter, useParams } from 'react-router-dom';
 const Wrapper = styled.div`
   overflow-y: auto;
-`;
-
-const TableCell = styled.td`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: 0.36px;
-  text-align: left;
-  max-width: 80px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-const TableHeading = styled.th`
-  font-family: PoppinsBold;
-  font-size: 12px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 0.83;
-  letter-spacing: 0.36px;
-  text-align: left;
-  color: #000000;
-  border-bottom: 0px !important;
-`;
-const TableHeader = styled.thead`
-  border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
-  background-color: rgba(240, 249, 250, 0.8);
-`;
-const TableRow = styled.tr`
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-`;
-const TableBody = styled.tbody`
-  height: 405px;
-  display: table;
-  width: 100%;
-  table-layout: fixed;
 `;
 
 const Header = styled.div`
@@ -72,6 +43,16 @@ const Footer = styled.div`
   padding: 1rem;
 `;
 
+// const View = styled(Tooltip)`
+//   font-family: PoppinsRegular;
+//   font-size: 12px;
+// `;
+
+const TableHeader = styled.thead`
+  border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
+  background-color: rgba(240, 249, 250, 0.8);
+`;
+
 const Text = styled.span`
   font-family: PoppinsRegular;
   font-size: 12px;
@@ -82,6 +63,16 @@ const Text = styled.span`
   text-align: left;
   ${({ success }) => (success ? `color:${colors.darkerGreen}` : null)}
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
+`;
+const TextExp = styled.span`
+  font-family: PoppinsRegular;
+  font-size: 12px;
+  text-align: left;
+  margin: 12px 0px;
+`;
+const Tooltip = styled(UncontrolledTooltip)`
+  font-size: 10px;
+  font-family: PoppinsRegular;
 `;
 const FailText = styled.span`
   font-family: PoppinsRegular;
@@ -97,32 +88,12 @@ const Icon = styled.img`
   margin-right: 5px;
 `;
 
-const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px;
-  font-family: PoppinsRegular;
-`;
-
-const TxsTable = (props) => {
+const AddressTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
-
-  const [state, setState] = useState({ limit: 10, currentPage: 0 });
   const dispatch = useDispatch();
-
-  const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
-
-  const queryString = require('query-string');
-  const { block } = queryString.parse(props.location.search);
-
-  let txs = latestTxs && latestTxs.data.txs;
-  useEffect(() => {
-    const filter = {
-      page: state.currentPage,
-      limit: state.limit,
-      blockHeight: block
-    };
-
-    dispatch(getAllTransactions(filter));
-  }, [state.limit, state.currentPage]);
+  const params = useParams();
+  const { txs, txsLoading } = useSelector((state) => state.addresses);
+  const [state, setState] = useState({ limit: 10, currentPage: 0 });
   const pageHandler = (e, index) => {
     e.preventDefault();
     setState({
@@ -133,17 +104,25 @@ const TxsTable = (props) => {
   const changeLimit = (limit) => {
     setState({ ...state, limit });
   };
+  useEffect(() => {
+    const filter = {
+      address: params.address,
+      page: state.currentPage,
+      limit: state.limit
+    };
+    dispatch(getTransactionsByAddresses(filter));
+  }, [params.address, state.limit, state.currentPage]);
 
   return (
     <Wrapper>
-      {txs && txs.length >= 1 ? (
+      {txs && txs.data.count >= 1 ? (
         <Header>
-          <Text>A total of {txs && txs.length} latest transactions</Text>
+          <Text>A total of {txs && txs.data.count} transactions found</Text>
           {matches && (
             <Pagination
               pageHandler={pageHandler}
               changeLimit={changeLimit}
-              count={latestTxs && latestTxs.data.count}
+              count={txs && txs.data.count}
               limit={state.limit}
               currentPage={state.currentPage}
             />
@@ -151,7 +130,7 @@ const TxsTable = (props) => {
         </Header>
       ) : (
         <Header>
-          <Text>A total of {txs && txs.length} latest transactions</Text>
+          <Text>A total of {txs && txs.data.count} transactions found</Text>
         </Header>
       )}
       <Table hover>
@@ -167,19 +146,16 @@ const TxsTable = (props) => {
         </TableHeader>
         <TableBody>
           {txs &&
-            !latestTxsLoading &&
-            txs.map((item, index) => (
+            !txsLoading &&
+            txs.data.txs.map((item, index) => (
               <TableRow key={index}>
-                <TableCell id={`txhash_exp_alpha${index}`}>
+                <TableCell id={`txhash${index}`}>
                   <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
-                  <Tooltip
-                    placement="right"
-                    target={`txhash_exp_alpha${index}`}>
-                    view tx by hash
+                  <Tooltip placement="right" target={`txhash${index}`}>
+                    view detail
                   </Tooltip>
                 </TableCell>
                 <TableCell>{moment(item.timestamp).fromNow()}</TableCell>
-
                 <TableCell>
                   {item.logs[0].success ? (
                     <IconText>
@@ -193,25 +169,21 @@ const TxsTable = (props) => {
                     </IconText>
                   )}
                 </TableCell>
-                <TableCell id={`from_address_alpha${index}`}>
+                <TableCell id={`from_address${index}`}>
                   <Link
                     to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
-                  <Tooltip
-                    placement="right"
-                    target={`from_address_alpha${index}`}>
+                  <Tooltip placement="right" target={`from_address${index}`}>
                     view details
                   </Tooltip>
                 </TableCell>
-                <TableCell id={`to_address_alpha${index}`}>
+                <TableCell id={`to_address${index}`}>
                   <Link
                     to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
-                  <Tooltip
-                    placement="right"
-                    target={`to_address_alpha${index}`}>
+                  <Tooltip placement="right" target={`to_address${index}`}>
                     view details
                   </Tooltip>
                 </TableCell>
@@ -231,18 +203,18 @@ const TxsTable = (props) => {
                 </TableCell>
               </TableRow>
             ))}
-          {!latestTxsLoading && !txs?.length && (
+          {!txsLoading && txs?.data.txs?.length === 0 && (
             <NoData colSpan={6} height={360} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={360} />}
+          {txsLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
-      {txs && txs.length >= 1 ? (
+      {txs && txs.data.count >= 1 ? (
         <Footer>
           <Pagination
             pageHandler={pageHandler}
             changeLimit={changeLimit}
-            count={latestTxs && latestTxs.data.count}
+            count={txs && txs.data.count}
             limit={state.limit}
             currentPage={state.currentPage}
           />
@@ -254,4 +226,4 @@ const TxsTable = (props) => {
   );
 };
 
-export default withRouter(TxsTable);
+export default withRouter(AddressTable);

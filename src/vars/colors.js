@@ -18,7 +18,7 @@ const colors = {
   darkerBlue: '#0E4F9A',
   orange: '#EC5C3D',
   realBlack: '#000000',
-  black10Alpha: 'rgba(0, 0, 0, 0.1)',
+  black10Alpha: '#545b62',
   black02Alpha: 'rgba(0, 0, 0, 0.09)',
   darkGray50Alpha: 'rgba(64, 64, 64, 0.5)',
   darkGray10Alpha: 'rgba(64, 64, 64, 0.1)',
@@ -28,7 +28,8 @@ const colors = {
   dMBlack1: '#323031',
   dmBlack2: '#353439',
   shaddow: '0 0.75rem 1.5rem rgb(18 38 63 / 10%)',
-  borderGrey: 'rgba(90, 90, 90, 0.5)'
+  borderGrey: 'rgba(90, 90, 90, 0.5)',
+  chipColor: '#40b1be42'
 };
 
 export default colors;

@@ -27,14 +27,20 @@ const ListItem = styled.li`
   letter-spacing: normal;
   text-align: left;
 `;
+const Link = styled.a`
+  padding: 0px 6px;
+`;
 const Notification = () => {
   const [visible, setVisible] = useState(true);
   const onDismiss = () => setVisible(false);
   return (
     <CustomAlert color="info" isOpen={visible} toggle={() => onDismiss()}>
-      <Heading className="alert-heading">Information !</Heading>
+      <Heading className="alert-heading">
+        Important: Explorer is currently under maintenance, you might face some
+        service issues until our next upgrade is released.
+      </Heading>
       <List>
-        <ListItem>
+        {/* <ListItem>
           Please be informed that Libocoin (LBY) is in the public offering stage
           at the moment. As there are not many blockchain transactions during
           the offering stage, there will be less activity on Libonomy Explorer.
@@ -45,9 +51,15 @@ const Notification = () => {
           </a>
         </ListItem>
         <ListItem>
-          The explorer is currently under heavy improvements; in case of any
-          issues feel free to contact us on our{' '}
+          The explorer is currently operating with minimal functionalities, new
+          features will be made available as soon as they are ready for public
+          release. For latest updates join our{' '}
           <a href="https://discord.gg/6P9SX5c">Community Group</a>
+        </ListItem> */}
+        <ListItem>
+          If you have any questions feel free to contact us on our Community
+          Group
+          <Link href="https://discord.com/invite/6P9SX5c">Community Group</Link>
         </ListItem>
       </List>
     </CustomAlert>

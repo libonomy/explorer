@@ -93,7 +93,7 @@ const ConsensusState = () => {
               <Icon src={channelIcon} alt="channel" />
               <InnerBody>
                 <Title>Channel</Title>
-                <Text>2,052,591</Text>
+                {/* <Text>2,052,591</Text> */}
               </InnerBody>
             </CardContent>
           </CardExp>
@@ -104,7 +104,7 @@ const ConsensusState = () => {
               <Icon src={poolingIcon} alt="pooling" />
               <InnerBody>
                 <Title>Pooling State</Title>
-                <Text>0</Text>
+                {/* <Text>0</Text> */}
               </InnerBody>
             </CardContent>
           </CardExp>
@@ -115,7 +115,7 @@ const ConsensusState = () => {
               <Icon src={layerIcon} alt="layer" />
               <InnerBody>
                 <Title>Layer level</Title>
-                <Text>1</Text>
+                {/* <Text>1</Text> */}
               </InnerBody>
             </CardContent>
           </CardExp>
@@ -126,7 +126,7 @@ const ConsensusState = () => {
               <Icon src={peerIcon} alt="peer" />
               <InnerBody>
                 <Title>Peer</Title>
-                <Text>23</Text>
+                {/* <Text>23</Text> */}
               </InnerBody>
             </CardContent>
           </CardExp>

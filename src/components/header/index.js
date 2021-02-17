@@ -155,16 +155,7 @@ const OptionExp = styled.option`
     background-color: ${colors.primary};
   }
 `;
-const OptionExps = styled.option`
-  color: ${colors.white};
-  font-size: 0rem;
-  opacity: 1;
-  cursor: pointer !important;
-  &:hover {
-    color: transparent !important ;
-    background-color: ${colors.primary};
-  }
-`;
+
 const Header = (props) => {
   const [state, setState] = useState({ filterName: 'Filter', keyword: '' });
 

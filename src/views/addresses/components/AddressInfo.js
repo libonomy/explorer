@@ -78,7 +78,7 @@ position:relative;
   visibility: visible;
   z-index: 101;
   }
-`};
+
   @-webkit-keyframes segment-spin {
     from {
       -webkit-transform: rotate(0);
@@ -98,7 +98,7 @@ position:relative;
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
-  }
+  }`};
 `;
 const CardContent = styled(CardBody)`
   display: flex;
@@ -141,7 +141,7 @@ const Text = styled(CardText)`
   letter-spacing: 0.3px;
   text-align: left;
   color: #000000;
-  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
+  text-transform: uppercase;
 `;
 const NumExp = styled.span`
   font-family: PoppinsBold;
@@ -154,7 +154,7 @@ const NumExp = styled.span`
   text-align: left;
   color: #000000;
   margin-right: 5px;
-  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
+  text-transform: uppercase;
 `;
 
 const InputExp = styled(Input)`
@@ -219,11 +219,11 @@ const AddressInfo = (props) => {
     <Wrapper>
       <Row>
         <Col>
-          <CardExp loading={detailsLoading}>
+          <CardExp loading={+detailsLoading}>
             <CardContent>
               <InnerBody>
                 <Title>Balance</Title>
-                <Text uppercase>
+                <Text>
                   {details && details?.result?.value?.coins[0]?.amount ? (
                     <Fragment>
                       <TextFormat
@@ -248,7 +248,7 @@ const AddressInfo = (props) => {
           </CardExp>
         </Col>
         <Col>
-          <CardExp loading={detailsLoading && marketPriceLoading}>
+          <CardExp loading={+detailsLoading && +marketPriceLoading}>
             <CardContent>
               <InnerBody>
                 <Title> Value</Title>
@@ -280,12 +280,12 @@ const AddressInfo = (props) => {
           </CardExp>
         </Col>
         <Col>
-          <CardExp loading={detailsLoading}>
+          <CardExp loading={+detailsLoading}>
             <CardContent>
               <InnerBody>
                 <Title>Other Assets</Title>
 
-                <Text uppercase>
+                <Text>
                   {details && details?.result?.value?.coins[1]?.amount ? (
                     <Fragment>
                       <TextFormat

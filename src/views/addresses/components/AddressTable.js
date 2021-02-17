@@ -132,7 +132,7 @@ const TextSelf = styled.span`
     margin-left: 10px;
   }
   @media (max-width: 576px) {
-    margin-left: 0px;
+    margin-left: 0rem;
   }
 `;
 const AddressTable = (props) => {

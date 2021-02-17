@@ -87,7 +87,54 @@ const FailText = styled.span`
 const Icon = styled.img`
   margin-right: 5px;
 `;
-
+const TextFrom = styled.span`
+  color: #b47d00;
+  background-color: rgba(219, 154, 4, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: 'PoppinsMedium';
+  text-transform: uppercase;
+  font-size: 9.5px;
+  margin-left: 40px;
+  @media (max-width: 991px) {
+    margin-left: 10px;
+  }
+  @media (max-width: 576px) {
+    margin-left: 0px;
+  }
+`;
+const TextTo = styled.span`
+  background-color: ${colors.chipColor};
+  color: ${colors.black};
+  padding: 4px 13px;
+  border-radius: 4px;
+  font-family: 'PoppinsMedium';
+  text-transform: uppercase;
+  font-size: 9.5px;
+  margin-left: 40px;
+  @media (max-width: 991px) {
+    margin-left: 10px;
+  }
+  @media (max-width: 576px) {
+    margin-left: 0px;
+  }
+`;
+const TextSelf = styled.span`
+  color: #524848;
+  background-color: rgb(225 232 241);
+  padding: 4px 7px;
+  border-radius: 4px;
+  font-family: 'PoppinsMedium';
+  text-transform: uppercase;
+  font-size: 9.5px;
+  margin-left: 40px;
+  @media (max-width: 991px) {
+    margin-left: 10px;
+  }
+  @media (max-width: 576px) {
+    margin-left: 0px;
+  }
+`;
 const AddressTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
@@ -112,6 +159,19 @@ const AddressTable = (props) => {
     };
     dispatch(getTransactionsByAddresses(filter));
   }, [params.address, state.limit, state.currentPage]);
+  const { address } = props.match.params;
+
+  const getType = (to, from) => {
+    const type =
+      to === from ? (
+        <TextSelf>self</TextSelf>
+      ) : address === to ? (
+        <TextTo>in</TextTo>
+      ) : address === from ? (
+        <TextFrom>out</TextFrom>
+      ) : null;
+    return type;
+  };
 
   return (
     <Wrapper>
@@ -140,6 +200,7 @@ const AddressTable = (props) => {
             <TableHeading>Age</TableHeading>
             <TableHeading>Status</TableHeading>
             <TableHeading>From</TableHeading>
+            <TableHeading></TableHeading>
             <TableHeading>To</TableHeading>
             <TableHeading>Value</TableHeading>
           </TableRow>
@@ -157,7 +218,7 @@ const AddressTable = (props) => {
                 </TableCell>
                 <TableCell>{moment(item.timestamp).fromNow()}</TableCell>
                 <TableCell>
-                  {item.logs[0].success ? (
+                  {item.logs && item.logs[0].success ? (
                     <IconText>
                       <Icon src={successIcon}></Icon>
                       <Text success>success</Text>
@@ -177,6 +238,12 @@ const AddressTable = (props) => {
                   <Tooltip placement="right" target={`from_address${index}`}>
                     view details
                   </Tooltip>
+                </TableCell>
+                <TableCell>
+                  {getType(
+                    item.tx.value.msg[0].value.to_address,
+                    item.tx.value.msg[0].value.from_address
+                  )}
                 </TableCell>
                 <TableCell id={`to_address${index}`}>
                   <Link
@@ -204,9 +271,9 @@ const AddressTable = (props) => {
               </TableRow>
             ))}
           {!txsLoading && txs?.data.txs?.length === 0 && (
-            <NoData colSpan={6} height={360} />
+            <NoData colSpan={7} height={360} />
           )}
-          {txsLoading && <TableLoader colSpan={6} height={360} />}
+          {txsLoading && <TableLoader colSpan={7} height={360} />}
         </TableBody>
       </Table>
       {txs && txs.data.count >= 1 ? (

@@ -200,7 +200,7 @@ Pagination.propTypes = {
   count: PropTypes.number.isRequired,
   limit: PropTypes.number.isRequired,
   pageHandler: PropTypes.func.isRequired,
-  changeLimit: PropTypes.func.isRequired,
+  // changeLimit: PropTypes.func.isRequired,
   currentPage: PropTypes.number.isRequired
 };
 

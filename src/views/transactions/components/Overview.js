@@ -160,7 +160,7 @@ const Overview = (props) => {
                   </HeadingWraper>
                 </TableHeading>
                 <TableCell>
-                  {tx.data.logs[0].success ? (
+                  {tx.data.logs && tx.data.logs[0].success ? (
                     <IconText>
                       <Icon src={successIcon}></Icon>
                       <Text success={true}>success</Text>

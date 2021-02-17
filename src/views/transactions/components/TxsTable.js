@@ -120,9 +120,9 @@ const TxsTable = (props) => {
       limit: state.limit,
       blockHeight: block
     };
-
     dispatch(getAllTransactions(filter));
-  }, [state.limit, state.currentPage]);
+  }, [block, state.currentPage, state.limit]);
+
   const pageHandler = (e, index) => {
     e.preventDefault();
     setState({
@@ -181,7 +181,7 @@ const TxsTable = (props) => {
                 <TableCell>{moment(item.timestamp).fromNow()}</TableCell>
 
                 <TableCell>
-                  {item.logs[0].success ? (
+                  {item.logs && item.logs[0].success ? (
                     <IconText>
                       <Icon src={successIcon}></Icon>
                       <Text success>success</Text>

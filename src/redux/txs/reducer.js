@@ -10,6 +10,9 @@ const initialState = {
   latestTxsLoading: false,
 
   tx: null,
+  // txs: {
+  //   latestTxs: []
+  // },
   txLoading: false
 };
 

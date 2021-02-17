@@ -193,7 +193,6 @@ const Text = styled(CardText)`
   letter-spacing: 0.3px;
   text-align: left;
   color: ${colors.black};
-  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
 const TextExp = styled.span`
   font-family: PoppinsBold;
@@ -204,9 +203,8 @@ const TextExp = styled.span`
   line-height: 1.1;
   letter-spacing: 0.3px;
   text-align: left;
-  margin-left: 4px;
   color: ${colors.black};
-  ${({ uppercase }) => uppercase && `text-transform: uppercase `}
+  text-transform: uppercase;
 `;
 const TextFormat = styled(NumberFormat)`
   font-family: PoppinsBold;
@@ -258,7 +256,7 @@ const Statistics = () => {
     <Wrapper>
       <Row>
         <Col lg="6" md="6" sm="6">
-          <CardExp loading={nodeInfoLoading}>
+          <CardExp loading={+nodeInfoLoading}>
             <CardContent>
               <Icon src={latestblockheight} alt="latestblockheight" />
               <InnerBody>
@@ -276,7 +274,7 @@ const Statistics = () => {
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp loading={totalSupplyLoading}>
+          <CardExp loading={+totalSupplyLoading}>
             <CardContent>
               <Icon src={transaction} alt="transaction" />
               <InnerBody>
@@ -309,7 +307,7 @@ const Statistics = () => {
               <Icon src={averageblock} alt="averageblock" />
               <InnerBody>
                 <Title>Peer Speed</Title>
-                <Text>Calculator Pending</Text>
+                <Text>Not Loaded</Text>
               </InnerBody>
             </CardContent>
             <CardContent>
@@ -322,12 +320,12 @@ const Statistics = () => {
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp loading={totalSupplyLoading}>
+          <CardExp loading={+totalSupplyLoading}>
             <CardContent>
               <Icon src={marketcap} alt="marketcap" />
               <InnerBody>
                 <Title>Current Supply</Title>
-                <Text uppercase>
+                <Text>
                   {totalSupply && (
                     <Fragment>
                       <TextFormat
@@ -335,7 +333,10 @@ const Statistics = () => {
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
-                      {totalSupply.result[0].denom.replace(SYMBOL_REGEX, '')}
+                      <TextExp>
+                        {' '}
+                        {totalSupply.result[0].denom.replace(SYMBOL_REGEX, '')}
+                      </TextExp>
                     </Fragment>
                   )}
                 </Text>
@@ -345,12 +346,12 @@ const Statistics = () => {
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp loading={marketPriceLoading}>
+          <CardExp loading={+marketPriceLoading}>
             <CardContent>
               <Icon src={accounts} alt="accounts" />
               <InnerBody>
                 <Title>Accounts</Title>
-                <Text>2,052,591</Text>
+                <Text>Not Loaded</Text>
               </InnerBody>
             </CardContent>
             <CardContent>
@@ -358,7 +359,7 @@ const Statistics = () => {
               <InnerBody>
                 <Title>LBY Price</Title>
                 <Text>
-                  {marketPrice && marketPrice.data.usd}
+                  {marketPrice && marketPrice.data.usd} &nbsp;
                   <TextExp>USD</TextExp>
                 </Text>
               </InnerBody>
@@ -371,14 +372,14 @@ const Statistics = () => {
               <Icon src={difficulty} alt="difficulty" />
               <InnerBody>
                 <Title>Difficulty</Title>
-                <Text>2,052,591</Text>
+                <Text>Not Loaded</Text>
               </InnerBody>
             </CardContent>
             <CardContent>
               <Icon src={difficulty} />
               <InnerBody>
                 <Title>Hash Rate</Title>
-                <Text>2,052,591</Text>
+                <Text>Not Loaded</Text>
               </InnerBody>
             </CardContent>
           </CardExp>

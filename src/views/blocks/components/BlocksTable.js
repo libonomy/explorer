@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   NoData,
-  // Pagination,
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -12,7 +12,7 @@ import {
   TableLoader,
   TableRow
 } from 'src/components';
-// import { useMediaQuery } from 'src/hooks';
+import { useMediaQuery } from 'src/hooks';
 import { getAllBlocks, getTotalSupply } from 'src/redux/actions';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -47,39 +47,66 @@ const Text = styled.span`
 `;
 
 const BlocksTable = () => {
-  // const matches = useMediaQuery('(min-width:600px)');
+  const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
 
-  const supply = useSelector((state) => state.supply.totalSupply);
+  const [state, setState] = useState({ limit: 10, currentPage: 0 });
+  // const supply = useSelector((state) => state.supply.totalSupply);
 
   useEffect(() => {
-    supply && dispatch(getAllBlocks(supply.height - 19, supply.height));
-  }, [supply]);
+    dispatch(getAllBlocks(state.currentPage, state.limit));
+  }, [state.currentPage, state.limit]);
 
-  useEffect(() => {
-    dispatch(getTotalSupply());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getTotalSupply());
+  // }, []);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(
     (state) => state.blocks
   );
+  const pageHandler = (e, index) => {
+    e.preventDefault();
+    setState({
+      ...state,
+      currentPage: index - 1
+    });
+  };
+  const changeLimit = (limit) => {
+    let totalCount = (state.currentPage + 1) * state.limit;
+    if (totalCount > latestBlocks.data.total_count) {
+      totalCount = latestBlocks.data.total_count;
+    }
+    let currentPage = totalCount / limit;
+    currentPage = Math.ceil(currentPage);
+    if (currentPage) {
+      setState({ ...state, limit, currentPage: currentPage - 1 });
+    }
+  };
 
   return (
     <Wrapper>
       <Header>
         {latestBlocks && (
           <Text>
-            Block #{latestBlocks.result.block_metas[0].header.height} to #
+            Block #{latestBlocks.data.blocks[0].block_meta.header.height} to #
             {
-              latestBlocks.result.block_metas[
-                latestBlocks.result.block_metas.length - 1
-              ].header.height
+              latestBlocks.data.blocks[latestBlocks.data.blocks.length - 1]
+                .block_meta.header.height
             }{' '}
-            (Total of {latestBlocks.result.block_metas.length} blocks)
+            ( Total of {latestBlocks.data.blocks.length} blocks)
           </Text>
         )}
 
-        {/* {matches && <Pagination />} */}
+        {matches && (
+          <Pagination
+            pageHandler={pageHandler}
+            changeLimit={changeLimit}
+            limit={state.limit}
+            count={latestBlocks && latestBlocks.data.total_count}
+            currentPage={state.currentPage}
+          />
+        )}
+        {/* {console.log(latestBlocks.data.total_count, 'count')} */}
       </Header>
       <Table hover>
         <TableHead>
@@ -94,17 +121,19 @@ const BlocksTable = () => {
         <TableBody>
           {latestBlocks &&
             !latestBlocksLoading &&
-            latestBlocks.result.block_metas.map((item, index) => (
+            latestBlocks.data.blocks.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
-                  <Link to={`/blocks/${item.header.height}`}>
-                    {item.header.height}
+                  <Link to={`/blocks/${item.block_meta.header.height}`}>
+                    {item.block_meta.header.height}
                   </Link>
                 </TableCell>
-                <TableCell>{item.block_id.hash}</TableCell>
-                <TableCell>{moment(item.header.time).fromNow()}</TableCell>
-                <TableCell>{item.header.num_txs}</TableCell>
-                <TableCell>{item.header.proposer_address}</TableCell>
+                <TableCell>{item.block_meta.block_id.hash}</TableCell>
+                <TableCell>
+                  {moment(item.block_meta.header.time).fromNow()}
+                </TableCell>
+                <TableCell>{item.block_meta.header.num_txs}</TableCell>
+                <TableCell>{item.block_meta.header.proposer_address}</TableCell>
               </TableRow>
             ))}
 
@@ -114,7 +143,16 @@ const BlocksTable = () => {
           {latestBlocksLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
-      <Footer>{/* <Pagination /> */}</Footer>
+      <Footer>
+        {' '}
+        <Pagination
+          pageHandler={pageHandler}
+          changeLimit={changeLimit}
+          count={latestBlocks && latestBlocks.data.total_count}
+          limit={state.limit}
+          currentPage={state.currentPage}
+        />
+      </Footer>
     </Wrapper>
   );
 };

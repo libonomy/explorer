@@ -118,7 +118,7 @@ const InnerBody = styled.div`
 const IconExp = styled.img`
   width: 40px;
   height: 40px;
-  margin-left: 3rem;
+  justify-content: space-between;
 `;
 const Title = styled(CardTitle)`
   font-family: PoppinsBold;

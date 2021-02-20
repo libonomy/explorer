@@ -85,29 +85,35 @@ const BlocksTable = () => {
 
   return (
     <Wrapper>
-      <Header>
-        {latestBlocks && (
-          <Text>
-            Block #{latestBlocks.data.blocks[0].block_meta.header.height} to #
-            {
-              latestBlocks.data.blocks[latestBlocks.data.blocks.length - 1]
-                .block_meta.header.height
-            }{' '}
-            ( Total of {latestBlocks.data.blocks.length} blocks)
-          </Text>
-        )}
+      {latestBlocks && latestBlocks.data.blocks.length >= 1 ? (
+        <Header>
+          {latestBlocks && (
+            <Text>
+              Block #{latestBlocks.data.blocks[0].block_meta.header.height} to #
+              {
+                latestBlocks.data.blocks[latestBlocks.data.blocks.length - 1]
+                  .block_meta.header.height
+              }{' '}
+              ( Total of {latestBlocks.data.blocks.length} blocks)
+            </Text>
+          )}
 
-        {matches && (
-          <Pagination
-            pageHandler={pageHandler}
-            changeLimit={changeLimit}
-            limit={state.limit}
-            count={latestBlocks && latestBlocks.data.total_count}
-            currentPage={state.currentPage}
-          />
-        )}
-        {/* {console.log(latestBlocks.data.total_count, 'count')} */}
-      </Header>
+          {matches && (
+            <Pagination
+              pageHandler={pageHandler}
+              changeLimit={changeLimit}
+              limit={state.limit}
+              count={latestBlocks && latestBlocks.data.total_count}
+              currentPage={state.currentPage}
+            />
+          )}
+          {/* {console.log(latestBlocks.data.total_count, 'count')} */}
+        </Header>
+      ) : (
+        <Header>
+          <Text>Total of 0 blocks</Text>
+        </Header>
+      )}
       <Table hover>
         <TableHead>
           <TableRow>
@@ -143,16 +149,20 @@ const BlocksTable = () => {
           {latestBlocksLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
-      <Footer>
-        {' '}
-        <Pagination
-          pageHandler={pageHandler}
-          changeLimit={changeLimit}
-          count={latestBlocks && latestBlocks.data.total_count}
-          limit={state.limit}
-          currentPage={state.currentPage}
-        />
-      </Footer>
+      {latestBlocks && latestBlocks.data.blocks.length >= 1 ? (
+        <Footer>
+          {' '}
+          <Pagination
+            pageHandler={pageHandler}
+            changeLimit={changeLimit}
+            count={latestBlocks && latestBlocks.data.total_count}
+            limit={state.limit}
+            currentPage={state.currentPage}
+          />
+        </Footer>
+      ) : (
+        ''
+      )}
     </Wrapper>
   );
 };

@@ -165,7 +165,6 @@ const OptionExp = styled.option`
 `;
 
 const SelectExp = styled(Select)`
-
   .css-1layoqn-control {
     opacity: 1 !important;
     font-family: 'PoppinsRegular' !important;
@@ -186,7 +185,7 @@ const SelectExp = styled(Select)`
     border-color: transparent !important;
     border-radius: 7px;
     caret-color: transparent;
-    z-index:4 !important;
+    z-index: 4 !important;
     font-family: 'PoppinsRegular' !important;
     font-size: 14px !important;
     color: #495057;
@@ -201,13 +200,17 @@ const SelectExp = styled(Select)`
     box-sizing: border-box;
   }
   .css-1uccc91-singleValue {
-   
     opacity: 1 !important;
     font-family: 'PoppinsMedium' !important;
     font-size: 14px !important;
-    
+
     color: #495057;
     background-color: #fff;
+  }
+  ,
+  .css-15habef-control:hover {
+    color: #fff !important;
+  }
 `;
 
 const style = {
@@ -218,7 +221,14 @@ const style = {
     boxShadow: 'none',
     borderRadius: '7px',
     marginTop: ' 2px !important'
-  })
+  }),
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    return {
+      ...styles,
+      backgroundColor: isFocused ? '#93e7eb' : null,
+      color: '#333333'
+    };
+  }
 };
 
 const Header = (props) => {
@@ -240,9 +250,7 @@ const Header = (props) => {
 
   const hanldeDropDown = (e) => {
     setState({ ...state, filterName: e.target.value });
-    console.log(e.target.value, 'shhs');
   };
-  console.log('shhsbhrse');
   const handleChange = (e) => {
     setState({ ...state, keyword: e.target.value });
     console.log(e.target.value, 'shhs');

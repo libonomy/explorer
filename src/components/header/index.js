@@ -190,6 +190,7 @@ const SelectExp = styled(Select)`
     font-size: 14px !important;
     color: #495057;
     background-color: #fff;
+    cursor: pointer !important;
   }
   ,
   .css-1okebmr-indicatorSeparator {
@@ -207,10 +208,6 @@ const SelectExp = styled(Select)`
     color: #495057;
     background-color: #fff;
   }
-  ,
-  .css-15habef-control:hover {
-    color: #fff !important;
-  }
 `;
 
 const style = {
@@ -220,12 +217,19 @@ const style = {
     // This line disable the blue border
     boxShadow: 'none',
     borderRadius: '7px',
-    marginTop: ' 2px !important'
+    marginTop: ' 2px !important',
+    cursor: 'pointer'
   }),
-  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+  option: (styles, { data, isDisabled, isFocused, isSelected, isActive }) => {
     return {
       ...styles,
-      backgroundColor: isFocused ? '#93e7eb' : null,
+      backgroundColor: isFocused
+        ? '#e9f6ff !important'
+        : isSelected
+        ? 'none !important'
+        : isActive
+        ? '95e7ec'
+        : null,
       color: '#333333'
     };
   }

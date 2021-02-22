@@ -127,11 +127,20 @@ const TxsTable = (props) => {
     e.preventDefault();
     setState({
       ...state,
+
       currentPage: index - 1
     });
   };
   const changeLimit = (limit) => {
-    setState({ ...state, limit });
+    let totalCount = (state.currentPage + 1) * state.limit;
+    if (totalCount > latestTxs.data.total_count) {
+      totalCount = latestTxs.data.total_count;
+    }
+    let currentPage = totalCount / limit;
+    currentPage = Math.ceil(currentPage);
+    if (currentPage) {
+      setState({ ...state, limit, currentPage: currentPage - 1 });
+    }
   };
 
   return (

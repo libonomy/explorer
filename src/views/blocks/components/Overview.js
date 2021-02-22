@@ -82,74 +82,89 @@ const Overview = (props) => {
   return (
     <Table responsive>
       <TableBody>
-        {block && !blockLoading && (
+        {block && block?.data == null ? (
+          <NoData colSpan={1} height={425} />
+        ) : (
           <>
-            <TableRow>
-              <TableHeading scope="row">
-                <HeadingWraper>
-                  <Icon>?</Icon>
-                  <Heading>Height</Heading>
-                </HeadingWraper>
-              </TableHeading>
-              <TableCell>{height}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableHeading scope="row">
-                <HeadingWraper>
-                  <Icon>?</Icon>
-                  <Heading>Timestamp</Heading>
-                </HeadingWraper>
-              </TableHeading>
-              <TableCell>
-                {moment(block.block.header.time).fromNow()} (
-                {new Date(block.block.header.time).toUTCString()})
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableHeading scope="row">
-                <HeadingWraper>
-                  <Icon>?</Icon>
-                  <Heading>Transactions</Heading>
-                </HeadingWraper>
-              </TableHeading>
-              <TableCell>
-                <LinkExp to={`/txs?block=${height}`}>
-                  <Text> {block.block.header.num_txs} transactions </Text>
-                </LinkExp>{' '}
-                &nbsp; in this block{' '}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableHeading scope="row">
-                <HeadingWraper>
-                  <Icon>?</Icon>
-                  <Heading>Mind by</Heading>
-                </HeadingWraper>
-              </TableHeading>
-              <TableCell>{block.block.header.validators_hash}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableHeading scope="row">
-                <HeadingWraper>
-                  <Icon>?</Icon>
-                  <Heading>Validator Hash</Heading>
-                </HeadingWraper>
-              </TableHeading>
-              <TableCell>{block.block.header.validators_hash}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableHeading scope="row">
-                <HeadingWraper>
-                  <Icon>?</Icon>
-                  <Heading>Proposer Hash</Heading>
-                </HeadingWraper>
-              </TableHeading>
-              <TableCell>{block.block.header.proposer_address}</TableCell>
-            </TableRow>
+            {block && !blockLoading && (
+              <>
+                <TableRow>
+                  <TableHeading scope="row">
+                    <HeadingWraper>
+                      <Icon>?</Icon>
+                      <Heading>Height</Heading>
+                    </HeadingWraper>
+                  </TableHeading>
+                  <TableCell>{height}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableHeading scope="row">
+                    <HeadingWraper>
+                      <Icon>?</Icon>
+                      <Heading>Timestamp</Heading>
+                    </HeadingWraper>
+                  </TableHeading>
+                  <TableCell>
+                    {moment(block.data.block.header.time).fromNow()} (
+                    {new Date(block.data.block.header.time).toUTCString()})
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableHeading scope="row">
+                    <HeadingWraper>
+                      <Icon>?</Icon>
+                      <Heading>Transactions</Heading>
+                    </HeadingWraper>
+                  </TableHeading>
+                  <TableCell>
+                    <LinkExp to={`/txs?block=${height}`}>
+                      <Text>
+                        {' '}
+                        {block.data.block.header.num_txs} transactions{' '}
+                      </Text>
+                    </LinkExp>{' '}
+                    &nbsp; in this block{' '}
+                  </TableCell>
+                </TableRow>
+                {/* <TableRow>
+                  <TableHeading scope="row">
+                    <HeadingWraper>
+                      <Icon>?</Icon>
+                      <Heading>Mind by</Heading>
+                    </HeadingWraper>
+                  </TableHeading>
+                  <TableCell>
+                    {block.data.block.header.validators_hash}
+                  </TableCell>
+                </TableRow> */}
+                <TableRow>
+                  <TableHeading scope="row">
+                    <HeadingWraper>
+                      <Icon>?</Icon>
+                      <Heading>Validator Hash</Heading>
+                    </HeadingWraper>
+                  </TableHeading>
+                  <TableCell>
+                    {block.data.block.header.validators_hash}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableHeading scope="row">
+                    <HeadingWraper>
+                      <Icon>?</Icon>
+                      <Heading>Proposer Hash</Heading>
+                    </HeadingWraper>
+                  </TableHeading>
+                  <TableCell>
+                    {block.data.block.header.proposer_address}
+                  </TableCell>
+                </TableRow>
+              </>
+            )}
+            {!blockLoading && !block && <NoData colSpan={6} height={245} />}
+            {blockLoading && <TableLoader colSpan={6} height={245} />}
           </>
         )}
-        {!blockLoading && !block && <NoData colSpan={6} height={245} />}
-        {blockLoading && <TableLoader colSpan={6} height={245} />}
       </TableBody>
     </Table>
   );

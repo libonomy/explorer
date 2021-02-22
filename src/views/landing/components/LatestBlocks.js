@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  getAllBlocks
+  getAllBlocks,
+  getAllBlocksLoading
   // getAllTransactions,
   // getTotalSupply
 } from 'src/redux/actions';
@@ -157,11 +158,14 @@ const Tooltip = styled(UncontrolledTooltip)`
 const LatestBlocks = () => {
   const dispatch = useDispatch();
 
-  const supply = useSelector((state) => state.supply.totalSupply);
+  // const supply = useSelector((state) => state.supply.totalSupply);
 
   useEffect(() => {
-    supply && dispatch(getAllBlocks(supply.height - 4, supply.height));
-  }, [supply]);
+    // supply &&
+    // dispatch(getAllBlocks(supply.height - 4, supply.height));
+
+    dispatch(getAllBlocks());
+  }, []);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(
     (state) => state.blocks
@@ -182,24 +186,26 @@ const LatestBlocks = () => {
         <TableBody>
           {latestBlocks &&
             !latestBlocksLoading &&
-            latestBlocks.result.block_metas.map((item, i) => (
+            latestBlocks.data.blocks.slice(0, 5).map((item, i) => (
               <TableRow key={i}>
                 <TableCol>
                   <IconText>
                     <Icon src={blockIcon} />
                     <Link
-                      to={`/blocks/${item.header.height}`}
+                      to={`/blocks/${item.block_meta.header.height}`}
                       id={`height_exp_alpha${i}`}>
-                      {item.header.height}
+                      {item.block_meta.header.height}
                     </Link>
                     <Tooltip placement="right" target={`height_exp_alpha${i}`}>
                       view block by height!
                     </Tooltip>
                   </IconText>
                 </TableCol>
-                <TableCol>{moment(item.header.time).fromNow()}</TableCol>
-                <TableCol>{item.header.num_txs}</TableCol>
-                <TableCol>{item.header.last_commit_hash}</TableCol>
+                <TableCol>
+                  {moment(item.block_meta.header.time).fromNow()}
+                </TableCol>
+                <TableCol>{item.block_meta.header.num_txs}</TableCol>
+                <TableCol>{item.block_meta.header.last_commit_hash}</TableCol>
               </TableRow>
             ))}
           {!latestBlocksLoading && !latestBlocks && (

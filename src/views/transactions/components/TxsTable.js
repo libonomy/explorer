@@ -208,9 +208,9 @@ const TxsTable = (props) => {
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
                   <Tooltip
-                    placement="right"
+                    placement="bottom"
                     target={`from_address_alpha${index}`}>
-                    view details
+                    {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell id={`to_address_alpha${index}`}>
@@ -219,9 +219,9 @@ const TxsTable = (props) => {
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
                   <Tooltip
-                    placement="right"
+                    placement="bottom"
                     target={`to_address_alpha${index}`}>
-                    view details
+                    {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell>

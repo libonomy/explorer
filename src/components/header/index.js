@@ -11,7 +11,8 @@ import {
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import history from 'src/utils/history';
-
+import MySelect from './selectbox';
+import Select from 'react-select';
 const Wrapper = styled.div`
   background-color: ${colors.white};
   padding: 1rem 0 1rem 0rem;
@@ -119,7 +120,7 @@ const IconButton = styled(Button)`
   border-bottom-left-radius: 6px;
 `;
 const InputExp = styled(Input)`
-  max-width: 20% !important ;
+  max-width: 22% !important ;
   opacity: 1 !important;
   font-family: 'PoppinsRegular' !important;
   font-size: 14px !important;
@@ -132,6 +133,7 @@ const InputExp = styled(Input)`
   display: flex;
   text-align: justify;
   cursor: pointer;
+
   @media (max-width: 991px) {
     max-width: 20% !important;
   }
@@ -145,9 +147,15 @@ const InputExp = styled(Input)`
 `;
 const OptionExp = styled.option`
   font-family: PoppinsRegular;
-  font-size: 13px;
+  font-size: 13.5px !important;
   font-weight: 400;
   line-height: 1.5;
+  background: transparent;
+  width: 150px;
+  padding-right: 100px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  height: 34px;
 
   cursor: pointer !important;
   &:hover {
@@ -155,6 +163,63 @@ const OptionExp = styled.option`
     background-color: ${colors.primary};
   }
 `;
+
+const SelectExp = styled(Select)`
+
+  .css-1layoqn-control {
+    opacity: 1 !important;
+    font-family: 'PoppinsRegular' !important;
+    font-size: 14px !important;
+    color: #495057;
+    background-color: #fff;
+    cursor: pointer;
+    width: 116px;
+  }
+  ,
+  .css-1layoqn-control:hover {
+    border-color: transparent !important;
+  }
+  ,
+  .css-15habef-control {
+    width: 116px !important;
+    outline: none;
+    border-color: transparent !important;
+    border-radius: 7px;
+    caret-color: transparent;
+    z-index:4 !important;
+    font-family: 'PoppinsRegular' !important;
+    font-size: 14px !important;
+    color: #495057;
+    background-color: #fff;
+  }
+  ,
+  .css-1okebmr-indicatorSeparator {
+    background-color: #fff;
+    margin-bottom: 0;
+    margin-top: 0;
+    width: 0px;
+    box-sizing: border-box;
+  }
+  .css-1uccc91-singleValue {
+   
+    opacity: 1 !important;
+    font-family: 'PoppinsMedium' !important;
+    font-size: 14px !important;
+    
+    color: #495057;
+    background-color: #fff;
+`;
+
+const style = {
+  control: (base) => ({
+    ...base,
+    border: 0,
+    // This line disable the blue border
+    boxShadow: 'none',
+    borderRadius: '7px',
+    marginTop: ' 2px !important'
+  })
+};
 
 const Header = (props) => {
   const [state, setState] = useState({ filterName: 'Filter', keyword: '' });
@@ -175,11 +240,14 @@ const Header = (props) => {
 
   const hanldeDropDown = (e) => {
     setState({ ...state, filterName: e.target.value });
+    console.log(e.target.value, 'shhs');
   };
-
+  console.log('shhsbhrse');
   const handleChange = (e) => {
     setState({ ...state, keyword: e.target.value });
+    console.log(e.target.value, 'shhs');
   };
+  console.log('shhsbhrse2');
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && state.keyword !== '') {
       if (state.filterName === 'Txs') history.push(`/txs/${state.keyword}`);
@@ -204,7 +272,7 @@ const Header = (props) => {
           </RightSection>
           <LeftSection>
             <SearchBox>
-              <InputExp
+              {/* <InputExp
                 type="select"
                 name={state.filterName}
                 value={state.filterName}
@@ -213,7 +281,15 @@ const Header = (props) => {
                 <OptionExp>Filter</OptionExp>
                 <OptionExp>Txs</OptionExp>
                 <OptionExp>Address</OptionExp>
-              </InputExp>
+              </InputExp> */}
+
+              <SelectExp
+                defaultValue={Options[0]}
+                styles={style}
+                options={Options}
+
+                // })}
+              />
               <VerticalLine />
               <Input
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"
@@ -237,3 +313,18 @@ const Header = (props) => {
 };
 
 export default Header;
+
+const Options = [
+  {
+    value: 'Filter',
+    label: 'Filter'
+  },
+  {
+    value: 'Txs',
+    label: 'Txs'
+  },
+  {
+    value: 'Address',
+    label: 'Address'
+  }
+];

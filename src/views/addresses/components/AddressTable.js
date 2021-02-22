@@ -244,8 +244,8 @@ const AddressTable = (props) => {
                     to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
-                  <Tooltip placement="right" target={`from_address${index}`}>
-                    view details
+                  <Tooltip placement="bottom" target={`from_address${index}`}>
+                    {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell>
@@ -259,8 +259,8 @@ const AddressTable = (props) => {
                     to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
-                  <Tooltip placement="right" target={`to_address${index}`}>
-                    view details
+                  <Tooltip placement="bottom" target={`to_address${index}`}>
+                    {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell>

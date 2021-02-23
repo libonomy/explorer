@@ -25,9 +25,11 @@ const HeadingWraper = styled.div`
   align-items: center;
 `;
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px !important;
-  font-family: PoppinsRegular;
-  padding: 20px;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
 const TableCell = styled.td`
   font-family: PoppinsRegular;

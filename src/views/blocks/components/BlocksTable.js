@@ -12,6 +12,7 @@ import {
   TableLoader,
   TableRow
 } from 'src/components';
+import { UncontrolledTooltip } from 'reactstrap';
 import { useMediaQuery } from 'src/hooks';
 import { getAllBlocks, getTotalSupply } from 'src/redux/actions';
 import styled from 'styled-components';
@@ -45,7 +46,13 @@ const Text = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
 `;
-
+const Tooltip = styled(UncontrolledTooltip)`
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
+`;
 const BlocksTable = () => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
@@ -130,9 +137,16 @@ const BlocksTable = () => {
             latestBlocks.data.blocks.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
-                  <Link to={`/blocks/${item.block_meta.header.height}`}>
+                  <Link
+                    to={`/blocks/${item.block_meta.header.height}`}
+                    id={`height_exp_alpha${index}`}>
                     {item.block_meta.header.height}
                   </Link>
+                  <Tooltip
+                    placement="right"
+                    target={`height_exp_alpha${index}`}>
+                    view block by height!
+                  </Tooltip>
                 </TableCell>
                 <TableCell>{item.block_meta.block_id.hash}</TableCell>
                 <TableCell>

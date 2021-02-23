@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Button, UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
@@ -152,20 +152,23 @@ const LinkExp = styled(Link)`
     text-decoration: none;
 `;
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px;
-  font-family: PoppinsRegular;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
 const LatestBlocks = () => {
   const dispatch = useDispatch();
-
+  const [state, setState] = useState({ limit: 5, currentPage: 0 });
   // const supply = useSelector((state) => state.supply.totalSupply);
 
   useEffect(() => {
     // supply &&
     // dispatch(getAllBlocks(supply.height - 4, supply.height));
 
-    dispatch(getAllBlocks());
-  }, []);
+    dispatch(getAllBlocks(state.currentPage, state.limit));
+  }, [state.currentPage, state.limit]);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(
     (state) => state.blocks
@@ -186,7 +189,7 @@ const LatestBlocks = () => {
         <TableBody>
           {latestBlocks &&
             !latestBlocksLoading &&
-            latestBlocks.data.blocks.slice(0, 5).map((item, i) => (
+            latestBlocks.data.blocks.map((item, i) => (
               <TableRow key={i}>
                 <TableCol>
                   <IconText>

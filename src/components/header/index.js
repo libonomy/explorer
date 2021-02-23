@@ -11,7 +11,6 @@ import {
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import history from 'src/utils/history';
-import MySelect from './selectbox';
 import Select from 'react-select';
 const Wrapper = styled.div`
   background-color: ${colors.white};
@@ -119,50 +118,50 @@ const IconButton = styled(Button)`
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 `;
-const InputExp = styled(Input)`
-  max-width: 22% !important ;
-  opacity: 1 !important;
-  font-family: 'PoppinsRegular' !important;
-  font-size: 14px !important;
-  padding: 0 8px !important;
-  color: #495057;
-  background-color: #fff;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-  margin-top: 4px !important;
-  display: flex;
-  text-align: justify;
-  cursor: pointer;
+// const InputExp = styled(Input)`
+//   max-width: 22% !important ;
+//   opacity: 1 !important;
+//   font-family: 'PoppinsRegular' !important;
+//   font-size: 14px !important;
+//   padding: 0 8px !important;
+//   color: #495057;
+//   background-color: #fff;
+//   border-top-left-radius: 6px;
+//   border-bottom-left-radius: 6px;
+//   margin-top: 4px !important;
+//   display: flex;
+//   text-align: justify;
+//   cursor: pointer;
 
-  @media (max-width: 991px) {
-    max-width: 20% !important;
-  }
-  &:focus {
-    color: #000;
-    background-color: #fff;
-    border-color: #f1f1f1;
-    outline: none;
-    box-shadow: none;
-  }
-`;
-const OptionExp = styled.option`
-  font-family: PoppinsRegular;
-  font-size: 13.5px !important;
-  font-weight: 400;
-  line-height: 1.5;
-  background: transparent;
-  width: 150px;
-  padding-right: 100px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  height: 34px;
+//   @media (max-width: 991px) {
+//     max-width: 20% !important;
+//   }
+//   &:focus {
+//     color: #000;
+//     background-color: #fff;
+//     border-color: #f1f1f1;
+//     outline: none;
+//     box-shadow: none;
+//   }
+// `;
+// const OptionExp = styled.option`
+//   font-family: PoppinsRegular;
+//   font-size: 13.5px !important;
+//   font-weight: 400;
+//   line-height: 1.5;
+//   background: transparent;
+//   width: 150px;
+//   padding-right: 100px;
+//   font-size: 16px;
+//   border: 1px solid #ccc;
+//   height: 34px;
 
-  cursor: pointer !important;
-  &:hover {
-    color: #000;
-    background-color: ${colors.primary};
-  }
-`;
+//   cursor: pointer !important;
+//   &:hover {
+//     color: #000;
+//     background-color: ${colors.primary};
+//   }
+// `;
 
 const SelectExp = styled(Select)`
   .css-1layoqn-control {
@@ -214,17 +213,16 @@ const style = {
   control: (base) => ({
     ...base,
     border: 0,
-    // This line disable the blue border
     boxShadow: 'none',
     borderRadius: '7px',
     marginTop: ' 2px !important',
     cursor: 'pointer'
   }),
-  option: (styles, { data, isDisabled, isFocused, isSelected, isActive }) => {
+  option: (styles, { isFocused, isSelected, isActive }) => {
     return {
       ...styles,
       backgroundColor: isFocused
-        ? '#e9f6ff !important'
+        ? '#dbeef1 !important'
         : isSelected
         ? 'none !important'
         : isActive
@@ -253,13 +251,12 @@ const Header = (props) => {
   };
 
   const hanldeDropDown = (e) => {
-    setState({ ...state, filterName: e.target.value });
+    setState({ ...state, filterName: e.value });
   };
   const handleChange = (e) => {
     setState({ ...state, keyword: e.target.value });
-    console.log(e.target.value, 'shhs');
   };
-  console.log('shhsbhrse2');
+
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && state.keyword !== '') {
       if (state.filterName === 'Txs') history.push(`/txs/${state.keyword}`);
@@ -294,13 +291,11 @@ const Header = (props) => {
                 <OptionExp>Txs</OptionExp>
                 <OptionExp>Address</OptionExp>
               </InputExp> */}
-
               <SelectExp
-                defaultValue={Options[0]}
                 styles={style}
                 options={Options}
-
-                // })}
+                defaultValue={Options[0]}
+                onChange={hanldeDropDown}
               />
               <VerticalLine />
               <Input

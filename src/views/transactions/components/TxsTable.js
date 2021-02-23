@@ -98,8 +98,11 @@ const Icon = styled.img`
 `;
 
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px;
-  font-family: PoppinsRegular;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
 
 const TxsTable = (props) => {

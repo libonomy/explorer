@@ -16,6 +16,7 @@ import {
 import colors from 'src/vars/colors';
 import { Link } from 'react-router-dom';
 import { menuIcon } from 'src/assets/images';
+import { useSelector } from 'react-redux';
 const bgColor = colors.primary;
 const Wrapper = styled.div``;
 const NavItems = styled(NavItem)`
@@ -171,7 +172,6 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-
   return (
     <Wrapper>
       <NavbarExp light expand="md" id="navbar">
@@ -190,7 +190,7 @@ const NavBar = () => {
                   <LinkExp to="/blocks">Blocks</LinkExp>
                 </NavItems>
                 <NavItems>
-                  <LinkExp to="/txs">Transaction</LinkExp>
+                  <LinkExp to={`/txs`}>Transaction</LinkExp>
                 </NavItems>
                 {/* <NavItems>
                   <InputGroupButtonDropdownExp

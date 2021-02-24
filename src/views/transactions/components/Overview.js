@@ -104,6 +104,11 @@ const TextNumber = styled.span`
 `;
 const LinkExp = styled(Link)`
   text-decoration: none !important;
+  color: #212529;
+  font-family: PoppinsRegular;
+  :hover {
+    color: #212529;
+  }
 `;
 const Overview = (props) => {
   const dispatch = useDispatch();
@@ -196,13 +201,16 @@ const Overview = (props) => {
                     </HeadingWraper>
                   </TableHeading>
                   <TableCell>
-                    <Wrapper>
-                      {tx.data.tx.value.msg[0].value.from_address}{' '}
-                      <Copy
-                        id="from_address-copy"
-                        value={tx.data.tx.value.msg[0].value.from_address}
-                      />
-                    </Wrapper>
+                    <LinkExp
+                      to={`/addresses/${tx.data.tx.value.msg[0].value.from_address}`}>
+                      <Wrapper>
+                        {tx.data.tx.value.msg[0].value.from_address}{' '}
+                        <Copy
+                          id="from_address-copy"
+                          value={tx.data.tx.value.msg[0].value.from_address}
+                        />
+                      </Wrapper>
+                    </LinkExp>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -213,13 +221,16 @@ const Overview = (props) => {
                     </HeadingWraper>
                   </TableHeading>
                   <TableCell>
-                    <Wrapper>
-                      {tx.data.tx.value.msg[0].value.to_address}{' '}
-                      <Copy
-                        id="to_address-copy"
-                        value={tx.data.tx.value.msg[0].value.to_address}
-                      />
-                    </Wrapper>
+                    <LinkExp
+                      to={`/addresses/${tx.data.tx.value.msg[0].value.to_address}`}>
+                      <Wrapper>
+                        {tx.data.tx.value.msg[0].value.to_address}{' '}
+                        <Copy
+                          id="to_address-copy"
+                          value={tx.data.tx.value.msg[0].value.to_address}
+                        />
+                      </Wrapper>
+                    </LinkExp>
                   </TableCell>
                 </TableRow>
 

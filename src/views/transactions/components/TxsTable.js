@@ -7,7 +7,7 @@ import colors from 'src/vars/colors';
 import { useMediaQuery } from 'src/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTransactions } from 'src/redux/actions';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
@@ -104,33 +104,21 @@ const Tooltip = styled(UncontrolledTooltip)`
     background-color: #000;
   }
 `;
-
 const TxsTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
-
+  // const location = useLocation();
   const [state, setState] = useState({ limit: 10, currentPage: 0 });
   const dispatch = useDispatch();
-
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
-
   const queryString = require('query-string');
   const { block } = queryString.parse(props.location.search);
-
   let txs = latestTxs && latestTxs.data.txs;
-  useEffect(() => {
-    const filter = {
-      page: state.currentPage,
-      limit: state.limit,
-      blockHeight: block
-    };
-    dispatch(getAllTransactions(filter));
-  }, [block, state.currentPage, state.limit]);
-
   const pageHandler = (e, index) => {
     e.preventDefault();
+    // props.history.push(`/txs?page=${index}&&limit=${state.limit}`);
+
     setState({
       ...state,
-
       currentPage: index - 1
     });
   };
@@ -144,7 +132,18 @@ const TxsTable = (props) => {
     if (currentPage) {
       setState({ ...state, limit, currentPage: currentPage - 1 });
     }
+    props.history.push(`/txs?page=${currentPage}&&limit=${limit} `);
   };
+
+  // console.log('params', location.search);
+  useEffect(() => {
+    const filter = {
+      page: state.currentPage,
+      limit: state.limit,
+      blockHeight: block
+    };
+    dispatch(getAllTransactions(filter));
+  }, [block, state.currentPage, state.limit]);
 
   return (
     <Wrapper>

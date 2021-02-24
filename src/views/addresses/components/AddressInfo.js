@@ -224,14 +224,14 @@ const AddressInfo = (props) => {
               <InnerBody>
                 <Title>Balance</Title>
                 <Text>
-                  {details && details?.result?.value?.coins[0]?.amount ? (
+                  {details && details?.data?.value?.coins[0]?.amount ? (
                     <Fragment>
                       <TextFormat
-                        value={details?.result?.value?.coins[0]?.amount / SCALE}
+                        value={details?.data?.value?.coins[0]?.amount / SCALE}
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
-                      {details?.result?.value?.coins[0]?.denom.replace(
+                      {details?.value?.coins[0]?.denom.replace(
                         SYMBOL_REGEX,
 
                         ''
@@ -255,13 +255,13 @@ const AddressInfo = (props) => {
 
                 {details &&
                 marketPrice?.data?.usd &&
-                details?.result?.value?.coins[0]?.amount ? (
+                details?.data?.value?.coins[0]?.amount ? (
                   <Text>
                     <NumExp>
                       $
                       <TextFormat
                         value={(
-                          (details?.result?.value?.coins[0]?.amount * x) /
+                          (details?.data?.value?.coins[0]?.amount * x) /
                           SCALE
                         ).toFixed(6)}
                         displayType={'text'}
@@ -286,14 +286,14 @@ const AddressInfo = (props) => {
                 <Title>Other Assets</Title>
 
                 <Text>
-                  {details && details?.result?.value?.coins[1]?.amount ? (
+                  {details && details?.data?.value?.coins[1]?.amount ? (
                     <Fragment>
                       <TextFormat
-                        value={details?.result?.value?.coins[1]?.amount / SCALE}
+                        value={details?.data?.value?.coins[1]?.amount / SCALE}
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
-                      {details?.result?.value?.coins[1]?.denom.replace(
+                      {details?.data?.value?.coins[1]?.denom.replace(
                         SYMBOL_REGEX,
 
                         ''
@@ -305,11 +305,11 @@ const AddressInfo = (props) => {
                 </Text>
               </InnerBody>
 
-              {details?.result?.value?.coins?.amount > 1 &&
-              details?.result?.value?.coins?.denom > 1 ? (
+              {details?.data?.value?.coins?.amount > 1 &&
+              details?.data?.value?.coins?.denom > 1 ? (
                 <InputExp type="select" name="select" id="exampleSelect">
                   {details &&
-                    details.result.value.coins.slice(1).map((item, i) => (
+                    details.result.data?.value.coins.slice(1).map((item, i) => (
                       <OptionExp>
                         {item.amount / SCALE}
 

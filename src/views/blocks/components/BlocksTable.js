@@ -53,7 +53,7 @@ const Tooltip = styled(UncontrolledTooltip)`
     background-color: #000;
   }
 `;
-const BlocksTable = () => {
+const BlocksTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
 
@@ -78,6 +78,7 @@ const BlocksTable = () => {
       currentPage: index - 1
     });
   };
+
   const changeLimit = (limit) => {
     let totalCount = (state.currentPage + 1) * state.limit;
     if (totalCount > latestBlocks.data.total_count) {

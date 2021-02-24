@@ -251,7 +251,15 @@ const Statistics = () => {
   const { marketPrice, marketPriceLoading } = useSelector(
     (state) => state.price
   );
-
+  // const cuspstakejs = require('@libonomy/cuspstakejs');
+  // const chainId = 'main-stake';
+  // const libonomy = cuspstakejs.network('http://18.232.124.100:1318/', chainId);
+  // libonomy.setBech32MainPrefix('libonomy');
+  // libonomy.setPath("m/44'/118'/0'/0/0");
+  // const balance = await libonomy.getAddressBalance(
+  //   'libonomy1yr0mfycrgf7w569h3zlk43szf8304y6k84jcz3'
+  // );
+  // console.log(balance);
   return (
     <Wrapper>
       <Row>

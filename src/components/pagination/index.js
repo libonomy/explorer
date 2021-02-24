@@ -185,6 +185,7 @@ const Pagination = ({
         <DropdownMenu>
           {[10, 20, 30, 40, 50].map((item, i) => (
             <DropdownItemExp
+              key={i}
               active={item === limit}
               onClick={() => changeLimit(item)}>
               {item}/pages

@@ -104,11 +104,8 @@ const TextNumber = styled.span`
 `;
 const LinkExp = styled(Link)`
   text-decoration: none !important;
-  color: #212529;
+  color: #527bff;
   font-family: PoppinsRegular;
-  :hover {
-    color: #212529;
-  }
 `;
 const Overview = (props) => {
   const dispatch = useDispatch();

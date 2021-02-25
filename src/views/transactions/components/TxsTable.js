@@ -7,11 +7,12 @@ import colors from 'src/vars/colors';
 import { useMediaQuery } from 'src/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTransactions } from 'src/redux/actions';
-import { Link, withRouter, useLocation } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
+import queryString from 'query-string';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -106,16 +107,17 @@ const Tooltip = styled(UncontrolledTooltip)`
 `;
 const TxsTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
-  // const location = useLocation();
-  const [state, setState] = useState({ limit: 10, currentPage: 0 });
+  const { location } = props;
+  const { page = 1, limit = 10 } = queryString.parse(location.search);
+
+  const [state, setState] = useState({ limit: limit, currentPage: page - 1 });
   const dispatch = useDispatch();
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
-  const queryString = require('query-string');
   const { block } = queryString.parse(props.location.search);
   let txs = latestTxs && latestTxs.data.txs;
   const pageHandler = (e, index) => {
     e.preventDefault();
-    // props.history.push(`/txs?page=${index}&&limit=${state.limit}`);
+    props.history.push(`/txs?page=${index}&&limit=${state.limit}`);
 
     setState({
       ...state,
@@ -137,13 +139,15 @@ const TxsTable = (props) => {
 
   // console.log('params', location.search);
   useEffect(() => {
+    const { location } = props;
+    const { page = 1, limit = 10 } = queryString.parse(location.search);
     const filter = {
-      page: state.currentPage,
-      limit: state.limit,
+      page: page - 1,
+      limit: limit,
       blockHeight: block
     };
     dispatch(getAllTransactions(filter));
-  }, [block, state.currentPage, state.limit]);
+  }, [block, page, limit]);
 
   return (
     <Wrapper>

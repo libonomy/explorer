@@ -16,7 +16,6 @@ import {
 import colors from 'src/vars/colors';
 import { Link } from 'react-router-dom';
 import { menuIcon } from 'src/assets/images';
-import { useSelector } from 'react-redux';
 const bgColor = colors.primary;
 const Wrapper = styled.div``;
 const NavItems = styled(NavItem)`

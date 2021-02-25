@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  getAllBlocks,
-  getAllBlocksLoading
+  getAllBlocks
+  // getAllBlocksLoading
   // getAllTransactions,
   // getTotalSupply
 } from 'src/redux/actions';
@@ -160,7 +160,7 @@ const Tooltip = styled(UncontrolledTooltip)`
 `;
 const LatestBlocks = () => {
   const dispatch = useDispatch();
-  const [state, setState] = useState({ limit: 5, currentPage: 0 });
+  const [state] = useState({ limit: 5, currentPage: 0 });
   // const supply = useSelector((state) => state.supply.totalSupply);
 
   useEffect(() => {

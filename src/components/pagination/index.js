@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import {
   Pagination as RsPagination,
@@ -180,29 +180,33 @@ const Pagination = ({
         </Item>
       </RsPagination>
       {/* Temporary: i will be uncomment in future */}
-      <DropdownExp isOpen={dropdownOpen} toggle={toggle}>
-        <DropdownToggleExp caret>{limit}/Page</DropdownToggleExp>
-        <DropdownMenu>
-          {[10, 20, 30, 40, 50].map((item, i) => (
-            <DropdownItemExp
-              key={i}
-              active={item === limit}
-              onClick={() => changeLimit(item)}>
-              {item}/pages
-            </DropdownItemExp>
-          ))}
-        </DropdownMenu>
-      </DropdownExp>
+      {pagesCount >= 5
+        ? displayPagination() && (
+            <DropdownExp isOpen={dropdownOpen} toggle={toggle}>
+              <DropdownToggleExp caret>{limit}/Page</DropdownToggleExp>
+              <DropdownMenu>
+                {[10, 20, 30, 40, 50].map((item, i) => (
+                  <DropdownItemExp
+                    key={i}
+                    active={item === limit}
+                    onClick={() => changeLimit(item)}>
+                    {item}/pages
+                  </DropdownItemExp>
+                ))}
+              </DropdownMenu>
+            </DropdownExp>
+          )
+        : ''}
     </Wrapper>
   );
 };
 
-Pagination.propTypes = {
-  count: PropTypes.number.isRequired,
-  limit: PropTypes.number.isRequired,
-  pageHandler: PropTypes.func.isRequired,
-  changeLimit: PropTypes.func.isRequired,
-  currentPage: PropTypes.number.isRequired
-};
+// Pagination.propTypes = {
+//   count: PropTypes.number.isRequired,
+//   limit: PropTypes.number.isRequired,
+//   pageHandler: PropTypes.func.isRequired,
+//   changeLimit: PropTypes.func.isRequired,
+//   currentPage: PropTypes.number.isRequired
+// };
 
 export default Pagination;

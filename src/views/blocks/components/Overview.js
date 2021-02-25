@@ -79,7 +79,6 @@ const Overview = (props) => {
     dispatch(getBlocksByHeight(height));
     dispatch(getAllTransactions(filter));
   }, [params.height]);
-  console.log(params.height, '3');
   return (
     <Table responsive>
       <TableBody>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   NoData,
   Pagination,
@@ -14,10 +14,11 @@ import {
 } from 'src/components';
 import { UncontrolledTooltip } from 'reactstrap';
 import { useMediaQuery } from 'src/hooks';
-import { getAllBlocks, getTotalSupply } from 'src/redux/actions';
+import { getAllBlocks } from 'src/redux/actions';
 import styled from 'styled-components';
 import moment from 'moment';
-
+import history from '../../../utils/history';
+import queryString from 'query-string';
 const Wrapper = styled.div`
   overflow-y: auto;
 `;
@@ -57,9 +58,10 @@ const BlocksTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
 
-  const [state, setState] = useState({ limit: 10, currentPage: 0 });
   // const supply = useSelector((state) => state.supply.totalSupply);
-
+  const location = useLocation();
+  const { page = 1, limit = 10 } = queryString.parse(location.search);
+  const [state, setState] = useState({ limit: limit, currentPage: page - 1 });
   useEffect(() => {
     dispatch(getAllBlocks(state.currentPage, state.limit));
   }, [state.currentPage, state.limit]);
@@ -73,6 +75,8 @@ const BlocksTable = (props) => {
   );
   const pageHandler = (e, index) => {
     e.preventDefault();
+
+    history.push(`/blocks?page=${index}&&limit=${state.limit}`);
     setState({
       ...state,
       currentPage: index - 1
@@ -89,6 +93,7 @@ const BlocksTable = (props) => {
     if (currentPage) {
       setState({ ...state, limit, currentPage: currentPage - 1 });
     }
+    history.push(`/blocks?page=${currentPage}&&limit=${limit}`);
   };
 
   return (

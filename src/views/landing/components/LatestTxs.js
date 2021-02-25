@@ -112,8 +112,11 @@ justify-content: center;
 `;
 
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px;
-  font-family: PoppinsRegular;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
 
 const TableButton = styled(Button)`
@@ -201,7 +204,7 @@ const LatestTxs = () => {
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
                   <Tooltip placement="right" target={`from_address_alpha${i}`}>
-                    view details
+                    {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCol>
                 <TableCol>
@@ -211,7 +214,7 @@ const LatestTxs = () => {
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
                   <Tooltip placement="right" target={`to_address_alpha${i}`}>
-                    view details
+                    {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCol>
               </TableRow>

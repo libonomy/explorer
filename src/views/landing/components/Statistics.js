@@ -251,7 +251,15 @@ const Statistics = () => {
   const { marketPrice, marketPriceLoading } = useSelector(
     (state) => state.price
   );
-
+  // const cuspstakejs = require('@libonomy/cuspstakejs');
+  // const chainId = 'main-stake';
+  // const libonomy = cuspstakejs.network('http://18.232.124.100:1318/', chainId);
+  // libonomy.setBech32MainPrefix('libonomy');
+  // libonomy.setPath("m/44'/118'/0'/0/0");
+  // const balance = await libonomy.getAddressBalance(
+  //   'libonomy1yr0mfycrgf7w569h3zlk43szf8304y6k84jcz3'
+  // );
+  // console.log(balance);
   return (
     <Wrapper>
       <Row>
@@ -261,14 +269,14 @@ const Statistics = () => {
               <Icon src={latestblockheight} alt="latestblockheight" />
               <InnerBody>
                 <Title>Network</Title>
-                <Text>{nodeInfo && nodeInfo.node_info.network}</Text>
+                <Text>{nodeInfo && nodeInfo.data.node_info.network}</Text>
               </InnerBody>
             </CardContent>
             <CardContent>
               <Icon src={latestblockheight} alt="latestblockheight" />
               <InnerBody>
                 <Title>Version</Title>
-                <Text>{nodeInfo && nodeInfo.node_info.version}</Text>
+                <Text>{nodeInfo && nodeInfo.data.node_info.version}</Text>
               </InnerBody>
             </CardContent>
           </CardExp>
@@ -282,7 +290,7 @@ const Statistics = () => {
                 <Text>
                   {totalSupply && (
                     <TextFormat
-                      value={totalSupply.height}
+                      value={totalSupply.data.height}
                       displayType={'text'}
                       thousandSeparator={true}
                     />
@@ -295,7 +303,7 @@ const Statistics = () => {
               <InnerBody>
                 <Title>Protocol Version</Title>
                 <Text>
-                  {nodeInfo && nodeInfo.node_info.protocol_version.p2p}
+                  {nodeInfo && nodeInfo.data.node_info.protocol_version.p2p}
                 </Text>
               </InnerBody>
             </CardContent>
@@ -329,13 +337,16 @@ const Statistics = () => {
                   {totalSupply && (
                     <Fragment>
                       <TextFormat
-                        value={totalSupply.result[0].amount / SCALE}
+                        value={totalSupply.data.result[0].amount / SCALE}
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
                       <TextExp>
                         {' '}
-                        {totalSupply.result[0].denom.replace(SYMBOL_REGEX, '')}
+                        {totalSupply.data.result[0].denom.replace(
+                          SYMBOL_REGEX,
+                          ''
+                        )}
                       </TextExp>
                     </Fragment>
                   )}

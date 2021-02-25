@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   NoData,
   Pagination,
@@ -12,11 +12,13 @@ import {
   TableLoader,
   TableRow
 } from 'src/components';
+import { UncontrolledTooltip } from 'reactstrap';
 import { useMediaQuery } from 'src/hooks';
-import { getAllBlocks, getTotalSupply } from 'src/redux/actions';
+import { getAllBlocks } from 'src/redux/actions';
 import styled from 'styled-components';
 import moment from 'moment';
-
+import history from '../../../utils/history';
+import queryString from 'query-string';
 const Wrapper = styled.div`
   overflow-y: auto;
 `;
@@ -45,14 +47,21 @@ const Text = styled.span`
   letter-spacing: 0.36px;
   text-align: left;
 `;
-
-const BlocksTable = () => {
+const Tooltip = styled(UncontrolledTooltip)`
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
+`;
+const BlocksTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
 
-  const [state, setState] = useState({ limit: 10, currentPage: 0 });
   // const supply = useSelector((state) => state.supply.totalSupply);
-
+  const location = useLocation();
+  const { page = 1, limit = 10 } = queryString.parse(location.search);
+  const [state, setState] = useState({ limit: limit, currentPage: page - 1 });
   useEffect(() => {
     dispatch(getAllBlocks(state.currentPage, state.limit));
   }, [state.currentPage, state.limit]);
@@ -66,11 +75,14 @@ const BlocksTable = () => {
   );
   const pageHandler = (e, index) => {
     e.preventDefault();
+
+    history.push(`/blocks?page=${index}&&limit=${state.limit}`);
     setState({
       ...state,
       currentPage: index - 1
     });
   };
+
   const changeLimit = (limit) => {
     let totalCount = (state.currentPage + 1) * state.limit;
     if (totalCount > latestBlocks.data.total_count) {
@@ -81,6 +93,7 @@ const BlocksTable = () => {
     if (currentPage) {
       setState({ ...state, limit, currentPage: currentPage - 1 });
     }
+    history.push(`/blocks?page=${currentPage}&&limit=${limit}`);
   };
 
   return (
@@ -130,9 +143,16 @@ const BlocksTable = () => {
             latestBlocks.data.blocks.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
-                  <Link to={`/blocks/${item.block_meta.header.height}`}>
+                  <Link
+                    to={`/blocks/${item.block_meta.header.height}`}
+                    id={`height_exp_alpha${index}`}>
                     {item.block_meta.header.height}
                   </Link>
+                  <Tooltip
+                    placement="right"
+                    target={`height_exp_alpha${index}`}>
+                    view block by height!
+                  </Tooltip>
                 </TableCell>
                 <TableCell>{item.block_meta.block_id.hash}</TableCell>
                 <TableCell>

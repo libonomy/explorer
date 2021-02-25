@@ -24,7 +24,13 @@ margin: -6px 8px 0px 20px;
 } 
   
 `;
-
+const TooltipExp = styled(UncontrolledTooltip)`
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
+`;
 const Copy = ({ id, value }) => {
   const [show, setShow] = useState(false);
 
@@ -39,9 +45,9 @@ const Copy = ({ id, value }) => {
     <Wrapper onClick={() => copy(value)}>
       <Icon onClick={() => setShow(true)} id={id} src={copyIcon} alt="icon" />{' '}
       {show && <CopyText>Copied</CopyText>}
-      <UncontrolledTooltip placement="bottom" target={id}>
+      <TooltipExp placement="bottom" target={id}>
         Copy to clipboard
-      </UncontrolledTooltip>
+      </TooltipExp>
     </Wrapper>
   );
 };

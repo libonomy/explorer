@@ -71,8 +71,11 @@ const TextExp = styled.span`
   margin: 12px 0px;
 `;
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px;
-  font-family: PoppinsRegular;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
 const FailText = styled.span`
   font-family: PoppinsRegular;
@@ -244,8 +247,8 @@ const AddressTable = (props) => {
                     to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
-                  <Tooltip placement="right" target={`from_address${index}`}>
-                    view details
+                  <Tooltip placement="bottom" target={`from_address${index}`}>
+                    {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell>
@@ -259,8 +262,8 @@ const AddressTable = (props) => {
                     to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
-                  <Tooltip placement="right" target={`to_address${index}`}>
-                    view details
+                  <Tooltip placement="bottom" target={`to_address${index}`}>
+                    {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell>

@@ -25,9 +25,11 @@ const HeadingWraper = styled.div`
   align-items: center;
 `;
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px !important;
-  font-family: PoppinsRegular;
-  padding: 20px;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
 const TableCell = styled.td`
   font-family: PoppinsRegular;
@@ -102,6 +104,8 @@ const TextNumber = styled.span`
 `;
 const LinkExp = styled(Link)`
   text-decoration: none !important;
+  color: #527bff;
+  font-family: PoppinsRegular;
 `;
 const Overview = (props) => {
   const dispatch = useDispatch();
@@ -194,13 +198,16 @@ const Overview = (props) => {
                     </HeadingWraper>
                   </TableHeading>
                   <TableCell>
-                    <Wrapper>
-                      {tx.data.tx.value.msg[0].value.from_address}{' '}
-                      <Copy
-                        id="from_address-copy"
-                        value={tx.data.tx.value.msg[0].value.from_address}
-                      />
-                    </Wrapper>
+                    <LinkExp
+                      to={`/addresses/${tx.data.tx.value.msg[0].value.from_address}`}>
+                      <Wrapper>
+                        {tx.data.tx.value.msg[0].value.from_address}{' '}
+                        <Copy
+                          id="from_address-copy"
+                          value={tx.data.tx.value.msg[0].value.from_address}
+                        />
+                      </Wrapper>
+                    </LinkExp>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -211,13 +218,16 @@ const Overview = (props) => {
                     </HeadingWraper>
                   </TableHeading>
                   <TableCell>
-                    <Wrapper>
-                      {tx.data.tx.value.msg[0].value.to_address}{' '}
-                      <Copy
-                        id="to_address-copy"
-                        value={tx.data.tx.value.msg[0].value.to_address}
-                      />
-                    </Wrapper>
+                    <LinkExp
+                      to={`/addresses/${tx.data.tx.value.msg[0].value.to_address}`}>
+                      <Wrapper>
+                        {tx.data.tx.value.msg[0].value.to_address}{' '}
+                        <Copy
+                          id="to_address-copy"
+                          value={tx.data.tx.value.msg[0].value.to_address}
+                        />
+                      </Wrapper>
+                    </LinkExp>
                   </TableCell>
                 </TableRow>
 

@@ -12,6 +12,7 @@ import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
+import queryString from 'query-string';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -98,36 +99,28 @@ const Icon = styled.img`
 `;
 
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px;
-  font-family: PoppinsRegular;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
-
 const TxsTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
+  const { location } = props;
+  const { page = 1, limit = 10 } = queryString.parse(location.search);
 
-  const [state, setState] = useState({ limit: 10, currentPage: 0 });
+  const [state, setState] = useState({ limit: limit, currentPage: page - 1 });
   const dispatch = useDispatch();
-
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
-
-  const queryString = require('query-string');
   const { block } = queryString.parse(props.location.search);
-
   let txs = latestTxs && latestTxs.data.txs;
-  useEffect(() => {
-    const filter = {
-      page: state.currentPage,
-      limit: state.limit,
-      blockHeight: block
-    };
-    dispatch(getAllTransactions(filter));
-  }, [block, state.currentPage, state.limit]);
-
   const pageHandler = (e, index) => {
     e.preventDefault();
+    props.history.push(`/txs?page=${index}&&limit=${state.limit}`);
+
     setState({
       ...state,
-
       currentPage: index - 1
     });
   };
@@ -141,7 +134,20 @@ const TxsTable = (props) => {
     if (currentPage) {
       setState({ ...state, limit, currentPage: currentPage - 1 });
     }
+    props.history.push(`/txs?page=${currentPage}&&limit=${limit} `);
   };
+
+  // console.log('params', location.search);
+  useEffect(() => {
+    const { location } = props;
+    const { page = 1, limit = 10 } = queryString.parse(location.search);
+    const filter = {
+      page: page - 1,
+      limit: limit,
+      blockHeight: block
+    };
+    dispatch(getAllTransactions(filter));
+  }, [block, page, limit]);
 
   return (
     <Wrapper>
@@ -208,9 +214,9 @@ const TxsTable = (props) => {
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
                   <Tooltip
-                    placement="right"
+                    placement="bottom"
                     target={`from_address_alpha${index}`}>
-                    view details
+                    {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell id={`to_address_alpha${index}`}>
@@ -219,9 +225,9 @@ const TxsTable = (props) => {
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
                   <Tooltip
-                    placement="right"
+                    placement="bottom"
                     target={`to_address_alpha${index}`}>
-                    view details
+                    {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell>

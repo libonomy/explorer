@@ -224,7 +224,9 @@ const AddressInfo = (props) => {
               <InnerBody>
                 <Title>Balance</Title>
                 <Text>
-                  {details && details?.data?.value?.coins[0]?.amount ? (
+                  {details &&
+                  details?.data?.value?.coins[0]?.amount &&
+                  details?.data?.value?.coins[0]?.denom.includes('flby') ? (
                     <Fragment>
                       <TextFormat
                         value={details?.data?.value?.coins[0]?.amount / SCALE}
@@ -255,7 +257,8 @@ const AddressInfo = (props) => {
 
                 {details &&
                 marketPrice?.data?.usd &&
-                details?.data?.value?.coins[0]?.amount ? (
+                details?.data?.value?.coins[0]?.amount &&
+                details?.data?.value?.coins[0]?.denom.includes('flby') ? (
                   <Text>
                     <NumExp>
                       $
@@ -284,25 +287,49 @@ const AddressInfo = (props) => {
             <CardContent>
               <InnerBody>
                 <Title>Other Assets</Title>
+                {details && details?.data?.value?.coins[1]?.amount ? (
+                  <Text>
+                    {details &&
+                    details?.data?.value?.coins[1]?.amount &&
+                    details?.data?.value?.coins[1]?.denom.includes('fpsix') ? (
+                      <Fragment>
+                        <TextFormat
+                          value={details?.data?.value?.coins[1]?.amount / SCALE}
+                          displayType={'text'}
+                          thousandSeparator={true}
+                        />{' '}
+                        {details?.data?.value?.coins[1]?.denom.replace(
+                          SYMBOL_REGEX,
 
-                <Text>
-                  {details && details?.data?.value?.coins[1]?.amount ? (
-                    <Fragment>
-                      <TextFormat
-                        value={details?.data?.value?.coins[1]?.amount / SCALE}
-                        displayType={'text'}
-                        thousandSeparator={true}
-                      />{' '}
-                      {details?.data?.value?.coins[1]?.denom.replace(
-                        SYMBOL_REGEX,
+                          ''
+                        )}
+                      </Fragment>
+                    ) : (
+                      ''
+                    )}
+                  </Text>
+                ) : (
+                  <Text>
+                    {details &&
+                    details?.data?.value?.coins[0]?.amount &&
+                    details?.data?.value?.coins[0]?.denom.includes('fpsix') ? (
+                      <Fragment>
+                        <TextFormat
+                          value={details?.data?.value?.coins[0]?.amount / SCALE}
+                          displayType={'text'}
+                          thousandSeparator={true}
+                        />{' '}
+                        {details?.data?.value?.coins[0]?.denom.replace(
+                          SYMBOL_REGEX,
 
-                        ''
-                      )}
-                    </Fragment>
-                  ) : (
-                    <TextExp>0</TextExp>
-                  )}
-                </Text>
+                          ''
+                        )}
+                      </Fragment>
+                    ) : (
+                      0
+                    )}
+                  </Text>
+                )}
               </InnerBody>
 
               {details?.data?.value?.coins?.amount > 1 &&

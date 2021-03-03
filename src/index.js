@@ -4,9 +4,9 @@ import App from 'src/App';
 import reportWebVitals from 'src/reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <App />
-  </React.StrictMode>,
+  </>,
   document.getElementById('root')
 );
 

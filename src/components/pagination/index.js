@@ -180,7 +180,7 @@ const Pagination = ({
         </Item>
       </RsPagination>
       {/* Temporary: i will be uncomment in future */}
-      {pagesCount >= 5
+      {pagesCount >= 1
         ? displayPagination() && (
             <DropdownExp isOpen={dropdownOpen} toggle={toggle}>
               <DropdownToggleExp caret>{limit}/Page</DropdownToggleExp>

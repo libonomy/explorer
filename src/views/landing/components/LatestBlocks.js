@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Table, Button, UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  getAllBlocks
+  // getAllBlocks,
+  getLatestBlocks
   // getAllBlocksLoading
   // getAllTransactions,
   // getTotalSupply
@@ -160,15 +161,18 @@ const Tooltip = styled(UncontrolledTooltip)`
 `;
 const LatestBlocks = () => {
   const dispatch = useDispatch();
-  const [state] = useState({ limit: 5, currentPage: 0 });
-  // const supply = useSelector((state) => state.supply.totalSupply);
+  // const [state] = useState({ limit: 5, currentPage: 0 });
+  // // const supply = useSelector((state) => state.supply.totalSupply);
 
+  // useEffect(() => {
+  //   // supply &&
+  //   // dispatch(getAllBlocks(supply.height - 4, supply.height));
+
+  //   dispatch(getAllBlocks(state.currentPage, state.limit));
+  // }, [state.currentPage, state.limit]);
   useEffect(() => {
-    // supply &&
-    // dispatch(getAllBlocks(supply.height - 4, supply.height));
-
-    dispatch(getAllBlocks(state.currentPage, state.limit));
-  }, [state.currentPage, state.limit]);
+    dispatch(getLatestBlocks());
+  }, []);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(
     (state) => state.blocks
@@ -189,7 +193,7 @@ const LatestBlocks = () => {
         <TableBody>
           {latestBlocks &&
             !latestBlocksLoading &&
-            latestBlocks.data.blocks.map((item, i) => (
+            latestBlocks.map((item, i) => (
               <TableRow key={i}>
                 <TableCol>
                   <IconText>

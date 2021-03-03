@@ -4,7 +4,7 @@ import { txIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTransactions } from 'src/redux/actions';
+import { getLatestTransactions } from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { IconText } from 'src/components/typography';
@@ -155,15 +155,16 @@ const LatestTxs = () => {
 
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
 
+  // useEffect(() => {
+  //   const filter = {
+  //     page: 0,
+  //     limit: 5
+  //   };
+  //   dispatch(getAllTransactions(filter));
+  // }, []);
   useEffect(() => {
-    const filter = {
-      page: 0,
-      limit: 5
-    };
-    dispatch(getAllTransactions(filter));
+    dispatch(getLatestTransactions());
   }, []);
-
-  let txs = latestTxs && latestTxs.data.txs;
   return (
     <Wrapper>
       <Header>Latest Transactions</Header>
@@ -178,9 +179,9 @@ const LatestTxs = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {txs &&
+          {latestTxs &&
             !latestTxsLoading &&
-            txs.map((item, i) => (
+            latestTxs.map((item, i) => (
               <TableRow key={i}>
                 <TableCol icon>
                   <IconText>

@@ -20,11 +20,10 @@ import {
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import colors from 'src/vars/colors';
-import { getNodeInfo, getTotalSupply, getMarketPrice } from 'src/redux/actions';
+import { getNodeInfo, getTotalSupply, getPrice } from 'src/redux/actions';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
-
 const Wrapper = styled.div``;
 
 // const ButtonExp = styled.div`
@@ -242,24 +241,16 @@ const Statistics = () => {
   useEffect(() => {
     dispatch(getNodeInfo());
     dispatch(getTotalSupply());
-    dispatch(getMarketPrice());
+    dispatch(getPrice());
   }, []);
+
   const { nodeInfo, nodeInfoLoading } = useSelector((state) => state.info);
   const { totalSupply, totalSupplyLoading } = useSelector(
     (state) => state.supply
   );
-  const { marketPrice, marketPriceLoading } = useSelector(
-    (state) => state.price
-  );
-  // const cuspstakejs = require('@libonomy/cuspstakejs');
-  // const chainId = 'main-stake';
-  // const libonomy = cuspstakejs.network('http://18.232.124.100:1318/', chainId);
-  // libonomy.setBech32MainPrefix('libonomy');
-  // libonomy.setPath("m/44'/118'/0'/0/0");
-  // const balance = await libonomy.getAddressBalance(
-  //   'libonomy1yr0mfycrgf7w569h3zlk43szf8304y6k84jcz3'
-  // );
-  // console.log(balance);
+  const { price, priceLoading } = useSelector((state) => state.price);
+
+  const { latestBlocks } = useSelector((state) => state.blocks);
   return (
     <Wrapper>
       <Row>
@@ -269,14 +260,14 @@ const Statistics = () => {
               <Icon src={latestblockheight} alt="latestblockheight" />
               <InnerBody>
                 <Title>Network</Title>
-                <Text>{nodeInfo && nodeInfo.data.node_info.network}</Text>
+                <Text>{nodeInfo && nodeInfo.node_info.network}</Text>
               </InnerBody>
             </CardContent>
             <CardContent>
               <Icon src={latestblockheight} alt="latestblockheight" />
               <InnerBody>
                 <Title>Version</Title>
-                <Text>{nodeInfo && nodeInfo.data.node_info.version}</Text>
+                <Text>{nodeInfo && nodeInfo.node_info.version}</Text>
               </InnerBody>
             </CardContent>
           </CardExp>
@@ -288,13 +279,14 @@ const Statistics = () => {
               <InnerBody>
                 <Title>Latest Block</Title>
                 <Text>
-                  {totalSupply && (
+                  {/* {totalSupply && (
                     <TextFormat
-                      value={totalSupply.data.height}
+                      value={totalSupply.height}
                       displayType={'text'}
                       thousandSeparator={true}
                     />
-                  )}
+                  )} */}
+                  {latestBlocks && latestBlocks[0].block_meta.header.height}
                 </Text>
               </InnerBody>
             </CardContent>
@@ -303,7 +295,7 @@ const Statistics = () => {
               <InnerBody>
                 <Title>Protocol Version</Title>
                 <Text>
-                  {nodeInfo && nodeInfo.data.node_info.protocol_version.p2p}
+                  {nodeInfo && nodeInfo.node_info.protocol_version.p2p}
                 </Text>
               </InnerBody>
             </CardContent>
@@ -337,16 +329,13 @@ const Statistics = () => {
                   {totalSupply && (
                     <Fragment>
                       <TextFormat
-                        value={totalSupply.data.result[0].amount / SCALE}
+                        value={totalSupply.result[0].amount / SCALE}
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
                       <TextExp>
                         {' '}
-                        {totalSupply.data.result[0].denom.replace(
-                          SYMBOL_REGEX,
-                          ''
-                        )}
+                        {totalSupply.result[0].denom.replace(SYMBOL_REGEX, '')}
                       </TextExp>
                     </Fragment>
                   )}
@@ -357,7 +346,7 @@ const Statistics = () => {
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp loading={+marketPriceLoading}>
+          <CardExp loading={+priceLoading}>
             <CardContent>
               <Icon src={accounts} alt="accounts" />
               <InnerBody>
@@ -370,7 +359,7 @@ const Statistics = () => {
               <InnerBody>
                 <Title>LBY Price</Title>
                 <Text>
-                  {marketPrice && marketPrice.data.usd} &nbsp;
+                  {price && price} &nbsp;
                   <TextExp>USD</TextExp>
                 </Text>
               </InnerBody>

@@ -70,9 +70,7 @@ const BlocksTable = (props) => {
   //   dispatch(getTotalSupply());
   // }, []);
 
-  const { latestBlocks, latestBlocksLoading } = useSelector(
-    (state) => state.blocks
-  );
+  const { allBlocks, allBlocksLoading } = useSelector((state) => state.blocks);
   const pageHandler = (e, index) => {
     e.preventDefault();
 
@@ -85,8 +83,8 @@ const BlocksTable = (props) => {
 
   const changeLimit = (limit) => {
     let totalCount = (state.currentPage + 1) * state.limit;
-    if (totalCount > latestBlocks.data.total_count) {
-      totalCount = latestBlocks.data.total_count;
+    if (totalCount > allBlocks.data.total_count) {
+      totalCount = allBlocks.data.total_count;
     }
     let currentPage = totalCount / limit;
     currentPage = Math.ceil(currentPage);
@@ -98,16 +96,16 @@ const BlocksTable = (props) => {
 
   return (
     <Wrapper>
-      {latestBlocks && latestBlocks.data.blocks.length >= 1 ? (
+      {allBlocks && allBlocks.data.blocks.length >= 1 ? (
         <Header>
-          {latestBlocks && (
+          {allBlocks && (
             <Text>
-              Block #{latestBlocks.data.blocks[0].block_meta.header.height} to #
+              Block #{allBlocks.data.blocks[0].block_meta.header.height} to #
               {
-                latestBlocks.data.blocks[latestBlocks.data.blocks.length - 1]
+                allBlocks.data.blocks[allBlocks.data.blocks.length - 1]
                   .block_meta.header.height
               }{' '}
-              ( Total of {latestBlocks.data.blocks.length} blocks)
+              ( Total of {allBlocks.data.blocks.length} blocks)
             </Text>
           )}
 
@@ -116,11 +114,10 @@ const BlocksTable = (props) => {
               pageHandler={pageHandler}
               changeLimit={changeLimit}
               limit={state.limit}
-              count={latestBlocks && latestBlocks.data.total_count}
+              count={allBlocks && allBlocks.data.total_count}
               currentPage={state.currentPage}
             />
           )}
-          {/* {console.log(latestBlocks.data.total_count, 'count')} */}
         </Header>
       ) : (
         <Header>
@@ -138,9 +135,9 @@ const BlocksTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {latestBlocks &&
-            !latestBlocksLoading &&
-            latestBlocks.data.blocks.map((item, index) => (
+          {allBlocks &&
+            !allBlocksLoading &&
+            allBlocks.data.blocks.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <Link
@@ -163,19 +160,19 @@ const BlocksTable = (props) => {
               </TableRow>
             ))}
 
-          {!latestBlocksLoading && !latestBlocks && (
+          {!allBlocksLoading && !allBlocks && (
             <NoData colSpan={6} height={360} />
           )}
-          {latestBlocksLoading && <TableLoader colSpan={6} height={360} />}
+          {allBlocksLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
-      {latestBlocks && latestBlocks.data.blocks.length >= 1 ? (
+      {allBlocks && allBlocks.data.blocks.length >= 1 ? (
         <Footer>
           {' '}
           <Pagination
             pageHandler={pageHandler}
             changeLimit={changeLimit}
-            count={latestBlocks && latestBlocks.data.total_count}
+            count={allBlocks && allBlocks.data.total_count}
             limit={state.limit}
             currentPage={state.currentPage}
           />

@@ -204,9 +204,7 @@ const TextExp = styled.span`
 
 const AddressInfo = (props) => {
   const { details, detailsLoading } = useSelector((state) => state.addresses);
-  const { marketPrice, marketPriceLoading } = useSelector(
-    (state) => state.price
-  );
+  const { marketPrice } = useSelector((state) => state.price);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -233,7 +231,7 @@ const AddressInfo = (props) => {
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
-                      {details?.value?.coins[0]?.denom.replace(
+                      {details?.data.value?.coins[0]?.denom.replace(
                         SYMBOL_REGEX,
 
                         ''
@@ -250,7 +248,7 @@ const AddressInfo = (props) => {
           </CardExp>
         </Col>
         <Col>
-          <CardExp loading={+detailsLoading && +marketPriceLoading}>
+          <CardExp loading={+detailsLoading}>
             <CardContent>
               <InnerBody>
                 <Title> Value</Title>

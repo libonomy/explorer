@@ -36,11 +36,42 @@
       property="og:description"
       content="Libonomy is Artificial Intelligence controlled blockchain that solves previously known issues like high energy usage, scalability, centralization, accessibility, interoperability and security. It is a completely autonomous multi-layer blockchain that strives evenly well on both private and public blockchains."
     />
+
+    <style>
+      .loading {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(100, 100, 100, 0.2);
+        border-radius: 50%;
+        border-top-color: rgba(10, 199, 224, 0.938);
+        animation: spin 1s ease-in-out infinite;
+        -webkit-animation: spin 1s ease-in-out infinite;
+        left: calc(50% - 20px);
+        top: calc(50% - 20px);
+        position: fixed;
+        z-index: 1;
+      }
+
+      @keyframes spin {
+        to {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @-webkit-keyframes spin {
+        to {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
 
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <div class="loading"></div>
+    </div>
 
     <script
       async

@@ -186,7 +186,7 @@ const NavBar = () => {
                   <LinkExp to="/">Home</LinkExp>
                 </NavItems>
                 <NavItems>
-                  <LinkExp to="/blocks">Blocks</LinkExp>
+                  <LinkExp to={'/blocks'}>Blocks</LinkExp>
                 </NavItems>
                 <NavItems>
                   <LinkExp to={`/txs`}>Transaction</LinkExp>

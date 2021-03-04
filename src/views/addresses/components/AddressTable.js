@@ -64,12 +64,12 @@ const Text = styled.span`
   ${({ success }) => (success ? `color:${colors.darkerGreen}` : null)}
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
-const TextExp = styled.span`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  text-align: left;
-  margin: 12px 0px;
-`;
+// const TextExp = styled.span`
+//   font-family: PoppinsRegular;
+//   font-size: 12px;
+//   text-align: left;
+//   margin: 12px 0px;
+// `;
 const Tooltip = styled(UncontrolledTooltip)`
   .tooltip-inner {
     font-size: 12px !important;
@@ -153,11 +153,12 @@ const AddressTable = (props) => {
   };
   const changeLimit = (limit) => {
     let totalCount = (state.currentPage + 1) * state.limit;
-    if (totalCount > txs.data.total_count) {
-      totalCount = txs.data.total_count;
+    if (totalCount > txs.data.count) {
+      totalCount = txs.data.count;
     }
     let currentPage = totalCount / limit;
     currentPage = Math.ceil(currentPage);
+
     if (currentPage) {
       setState({ ...state, limit, currentPage: currentPage - 1 });
     }

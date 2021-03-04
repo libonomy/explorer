@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardTitle, CardText, Col, Row } from 'reactstrap';
+import { Card, CardBody, CardTitle, Col, Row } from 'reactstrap';
 import colors from 'src/vars/colors';
 import {
   channelIcon,
@@ -59,17 +59,17 @@ const Title = styled(CardTitle)`
   text-align: center;
   color: #000000;
 `;
-const Text = styled(CardText)`
-  font-family: PoppinsBold;
-  font-size: 13px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.1;
-  letter-spacing: 0.3px;
-  text-align: center;
-  color: #000000;
-`;
+// const Text = styled(CardText)`
+//   font-family: PoppinsBold;
+//   font-size: 13px;
+//   font-weight: normal;
+//   font-stretch: normal;
+//   font-style: normal;
+//   line-height: 1.1;
+//   letter-spacing: 0.3px;
+//   text-align: center;
+//   color: #000000;
+// `;
 
 const Heading = styled.div`
   font-family: PoppinsMedium;

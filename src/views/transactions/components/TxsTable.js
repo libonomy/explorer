@@ -111,10 +111,11 @@ const TxsTable = (props) => {
   const { page = 1, limit = 10 } = queryString.parse(location.search);
 
   const [state, setState] = useState({ limit: limit, currentPage: page - 1 });
+
   const dispatch = useDispatch();
-  const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
+  const { allTxs, allTxsLoading } = useSelector((state) => state.txs);
   const { block } = queryString.parse(props.location.search);
-  let txs = latestTxs && latestTxs.data.txs;
+  let txs = allTxs && allTxs.data.txs;
   const pageHandler = (e, index) => {
     e.preventDefault();
     props.history.push(`/txs?page=${index}&&limit=${state.limit}`);
@@ -126,8 +127,8 @@ const TxsTable = (props) => {
   };
   const changeLimit = (limit) => {
     let totalCount = (state.currentPage + 1) * state.limit;
-    if (totalCount > latestTxs.data.total_count) {
-      totalCount = latestTxs.data.total_count;
+    if (totalCount > allTxs.data.total_count) {
+      totalCount = allTxs.data.total_count;
     }
     let currentPage = totalCount / limit;
     currentPage = Math.ceil(currentPage);
@@ -136,8 +137,6 @@ const TxsTable = (props) => {
     }
     props.history.push(`/txs?page=${currentPage}&&limit=${limit} `);
   };
-
-  // console.log('params', location.search);
   useEffect(() => {
     const { location } = props;
     const { page = 1, limit = 10 } = queryString.parse(location.search);
@@ -158,9 +157,9 @@ const TxsTable = (props) => {
             <Pagination
               pageHandler={pageHandler}
               changeLimit={changeLimit}
-              count={latestTxs && latestTxs.data.count}
-              limit={state.limit}
-              currentPage={state.currentPage}
+              count={allTxs && allTxs.data.count}
+              limit={limit}
+              currentPage={page - 1}
             />
           )}
         </Header>
@@ -182,7 +181,7 @@ const TxsTable = (props) => {
         </TableHeader>
         <TableBody>
           {txs &&
-            !latestTxsLoading &&
+            !allTxsLoading &&
             txs.map((item, index) => (
               <TableRow key={index}>
                 <TableCell id={`txhash_exp_alpha${index}`}>
@@ -246,10 +245,10 @@ const TxsTable = (props) => {
                 </TableCell>
               </TableRow>
             ))}
-          {!latestTxsLoading && !txs?.length && (
+          {!allTxsLoading && !txs?.length && (
             <NoData colSpan={6} height={360} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={360} />}
+          {allTxsLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
       {txs && txs.length >= 1 ? (
@@ -257,9 +256,9 @@ const TxsTable = (props) => {
           <Pagination
             pageHandler={pageHandler}
             changeLimit={changeLimit}
-            count={latestTxs && latestTxs.data.count}
-            limit={state.limit}
-            currentPage={state.currentPage}
+            count={allTxs && allTxs.data.count}
+            limit={limit}
+            currentPage={page - 1}
           />
         </Footer>
       ) : (

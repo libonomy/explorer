@@ -174,6 +174,17 @@ const SelectExp = styled(Select)`
     width: 116px;
   }
   ,
+  .css-1wa3eu0-placeholder {
+    margin-left: 2px;
+    margin-right: 2px;
+    position: absolute;
+    top: 50%;
+    opacity: 1 !important;
+    font-family: 'PoppinsMedium' !important;
+    font-size: 15px !important;
+    color: #495057;
+  }
+  ,
   .css-1layoqn-control:hover {
     border-color: transparent !important;
   }
@@ -221,6 +232,7 @@ const style = {
   option: (styles, { isFocused, isSelected, isActive }) => {
     return {
       ...styles,
+
       backgroundColor: isFocused
         ? '#dbeef1 !important'
         : isSelected
@@ -294,7 +306,7 @@ const Header = (props) => {
               <SelectExp
                 styles={style}
                 options={Options}
-                defaultValue={Options[0]}
+                placeholder="Filter"
                 onChange={hanldeDropDown}
               />
               <VerticalLine />
@@ -322,10 +334,6 @@ const Header = (props) => {
 export default Header;
 
 const Options = [
-  {
-    value: 'Filter',
-    label: 'Filter'
-  },
   {
     value: 'Txs',
     label: 'Txs'

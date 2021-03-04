@@ -3,9 +3,9 @@ import {
   GET_All_TRANSACTIONS,
   GET_All_TRANSACTIONS_LOADING,
   GET_TRANSACTIONS_BY_HASH,
-  GET_TRANSACTIONS_BY_HASH_LOADING
+  GET_TRANSACTIONS_BY_HASH_LOADING,
+  GET_LATEST_TRANSACTIONS_LOADING
 } from './actionTypes';
-
 export const getAllTransactions = (filter) => (dispatch) => {
   dispatch(getAllTransactionsLoading());
   axios
@@ -50,4 +50,7 @@ export const getTransectionByHash = (hash) => (dispatch) => {
 
 export const getTransectionByHashLoading = () => ({
   type: GET_TRANSACTIONS_BY_HASH_LOADING
+});
+export const getLatestTransactionsLoading = () => ({
+  type: GET_LATEST_TRANSACTIONS_LOADING
 });

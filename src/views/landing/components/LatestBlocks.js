@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Table, Button, UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getAllBlocks
-  // getAllBlocksLoading
-  // getAllTransactions,
-  // getTotalSupply
-} from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { blockIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { TableLoader } from 'src/components';
 import { NoData } from 'src/components';
+import { getLandingPageData } from 'src/redux/socket/actions';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -160,15 +155,9 @@ const Tooltip = styled(UncontrolledTooltip)`
 `;
 const LatestBlocks = () => {
   const dispatch = useDispatch();
-  const [state] = useState({ limit: 5, currentPage: 0 });
-  // const supply = useSelector((state) => state.supply.totalSupply);
-
   useEffect(() => {
-    // supply &&
-    // dispatch(getAllBlocks(supply.height - 4, supply.height));
-
-    dispatch(getAllBlocks(state.currentPage, state.limit));
-  }, [state.currentPage, state.limit]);
+    dispatch(getLandingPageData());
+  }, []);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(
     (state) => state.blocks
@@ -189,7 +178,7 @@ const LatestBlocks = () => {
         <TableBody>
           {latestBlocks &&
             !latestBlocksLoading &&
-            latestBlocks.data.blocks.map((item, i) => (
+            latestBlocks.map((item, i) => (
               <TableRow key={i}>
                 <TableCol>
                   <IconText>

@@ -9,7 +9,7 @@ import { blockIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { TableLoader } from 'src/components';
 import { NoData } from 'src/components';
-import { getRealTime } from 'src/redux/socket/actions';
+import { getLandingPageData } from 'src/redux/socket/actions';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -156,7 +156,7 @@ const Tooltip = styled(UncontrolledTooltip)`
 const LatestBlocks = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getRealTime());
+    dispatch(getLandingPageData());
   }, []);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(

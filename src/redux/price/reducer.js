@@ -1,15 +1,15 @@
 import {
   GET_MARKET_PRICE,
   GET_MARKET_PRICE_LOADING,
-  GET_PRICE,
-  GET_PRICE_LOADING
+  GET_COIN_PRICE,
+  GET_COIN_PRICE_LOADING
 } from './actionTypes';
 
 const initialState = {
   marketPrice: null,
   marketPriceLoading: false,
-  price: null,
-  priceLoading: false
+  coinPrice: null,
+  coinPriceLoading: false
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -22,14 +22,14 @@ export default (state = initialState, { type, payload }) => {
       };
     case GET_MARKET_PRICE_LOADING:
       return { ...state, marketPriceLoading: true };
-    case GET_PRICE:
+    case GET_COIN_PRICE:
       return {
         ...state,
-        price: payload,
-        priceLoading: false
+        coinPrice: payload,
+        coinPriceLoading: false
       };
-    case GET_PRICE_LOADING:
-      return { ...state, priceLoading: true };
+    case GET_COIN_PRICE_LOADING:
+      return { ...state, coinPriceLoading: true };
     default:
       return state;
   }

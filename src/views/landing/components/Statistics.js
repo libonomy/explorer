@@ -87,6 +87,7 @@ const Wrapper = styled.div``;
 const CardExp = styled(Card)`
   padding: 1rem;
   display: flex;
+  min-height: 76px;
   flex-direction: row;
   justify-content: space-between;
   border-radius: 8px;
@@ -244,13 +245,13 @@ const Statistics = () => {
     dispatch(getPrice());
   }, []);
 
-  const { nodeInfo, nodeInfoLoading } = useSelector((state) => state.info);
+  const { nodeInfo, nodeInfoLoading } = useSelector((state) => state.socket);
   const { totalSupply, totalSupplyLoading } = useSelector(
-    (state) => state.supply
+    (state) => state.socket
   );
-  const { price, priceLoading } = useSelector((state) => state.price);
+  const { price, priceLoading } = useSelector((state) => state.socket);
 
-  const { latestBlocks } = useSelector((state) => state.blocks);
+  const { latestBlocks } = useSelector((state) => state.socket);
   return (
     <Wrapper>
       <Row>

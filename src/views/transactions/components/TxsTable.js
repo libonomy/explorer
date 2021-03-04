@@ -111,6 +111,7 @@ const TxsTable = (props) => {
   const { page = 1, limit = 10 } = queryString.parse(location.search);
 
   const [state, setState] = useState({ limit: limit, currentPage: page - 1 });
+
   const dispatch = useDispatch();
   const { allTxs, allTxsLoading } = useSelector((state) => state.txs);
   const { block } = queryString.parse(props.location.search);
@@ -136,8 +137,6 @@ const TxsTable = (props) => {
     }
     props.history.push(`/txs?page=${currentPage}&&limit=${limit} `);
   };
-
-  // console.log('params', location.search);
   useEffect(() => {
     const { location } = props;
     const { page = 1, limit = 10 } = queryString.parse(location.search);
@@ -159,8 +158,8 @@ const TxsTable = (props) => {
               pageHandler={pageHandler}
               changeLimit={changeLimit}
               count={allTxs && allTxs.data.count}
-              limit={state.limit}
-              currentPage={state.currentPage}
+              limit={limit}
+              currentPage={page - 1}
             />
           )}
         </Header>
@@ -258,8 +257,8 @@ const TxsTable = (props) => {
             pageHandler={pageHandler}
             changeLimit={changeLimit}
             count={allTxs && allTxs.data.count}
-            limit={state.limit}
-            currentPage={state.currentPage}
+            limit={limit}
+            currentPage={page - 1}
           />
         </Footer>
       ) : (

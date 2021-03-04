@@ -153,7 +153,7 @@ const TableButton = styled(Button)`
 const LatestTxs = () => {
   const dispatch = useDispatch();
 
-  const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
+  const { latestTxs, latestTxsLoading } = useSelector((state) => state.socket);
 
   // useEffect(() => {
   //   const filter = {

@@ -2,17 +2,9 @@ import axios from 'axios';
 import {
   GET_All_TRANSACTIONS,
   GET_All_TRANSACTIONS_LOADING,
-  GET_LATEST_TRANSACTIONS,
-  GET_LATEST_TRANSACTIONS_LOADING,
   GET_TRANSACTIONS_BY_HASH,
   GET_TRANSACTIONS_BY_HASH_LOADING
 } from './actionTypes';
-import io from 'socket.io-client';
-import store from '../store';
-const socket = io.connect('http://34.239.36.156:8787', {
-  secure: true,
-  transports: ['websocket']
-});
 export const getAllTransactions = (filter) => (dispatch) => {
   dispatch(getAllTransactionsLoading());
   axios
@@ -57,27 +49,4 @@ export const getTransectionByHash = (hash) => (dispatch) => {
 
 export const getTransectionByHashLoading = () => ({
   type: GET_TRANSACTIONS_BY_HASH_LOADING
-});
-
-export const getLatestTransactions = () => (dispatch) => {
-  dispatch({
-    type: GET_LATEST_TRANSACTIONS_LOADING,
-    payload: true
-  });
-  socket.emit('RegisterClient');
-};
-
-export const getLatestTransactionsLoading = () => ({
-  type: GET_LATEST_TRANSACTIONS_LOADING
-});
-
-socket.on('DashBoard', (data) => {
-  store.dispatch({
-    type: GET_LATEST_TRANSACTIONS_LOADING,
-    payload: false
-  });
-  store.dispatch({
-    type: GET_LATEST_TRANSACTIONS,
-    payload: data.transactions
-  });
 });

@@ -153,11 +153,12 @@ const AddressTable = (props) => {
   };
   const changeLimit = (limit) => {
     let totalCount = (state.currentPage + 1) * state.limit;
-    if (totalCount > txs.data.total_count) {
-      totalCount = txs.data.total_count;
+    if (totalCount > txs.data.count) {
+      totalCount = txs.data.count;
     }
     let currentPage = totalCount / limit;
     currentPage = Math.ceil(currentPage);
+
     if (currentPage) {
       setState({ ...state, limit, currentPage: currentPage - 1 });
     }

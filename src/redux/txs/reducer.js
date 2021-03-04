@@ -1,15 +1,11 @@
 import {
   GET_All_TRANSACTIONS,
   GET_All_TRANSACTIONS_LOADING,
-  GET_LATEST_TRANSACTIONS,
-  GET_LATEST_TRANSACTIONS_LOADING,
   GET_TRANSACTIONS_BY_HASH,
   GET_TRANSACTIONS_BY_HASH_LOADING
 } from './actionTypes';
 
 const initialState = {
-  latestTxs: null,
-  latestTxsLoading: false,
   allTxs: null,
   allTxsLoading: false,
   tx: null,
@@ -25,10 +21,7 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, allTxs: payload, allTxsLoading: false };
     case GET_All_TRANSACTIONS_LOADING:
       return { ...state, allTxsLoading: true };
-    case GET_LATEST_TRANSACTIONS:
-      return { ...state, latestTxs: payload, latestTxsLoading: false };
-    case GET_LATEST_TRANSACTIONS_LOADING:
-      return { ...state, latestTxsLoading: true };
+
     case GET_TRANSACTIONS_BY_HASH:
       return { ...state, tx: payload, txLoading: false };
     case GET_TRANSACTIONS_BY_HASH_LOADING:

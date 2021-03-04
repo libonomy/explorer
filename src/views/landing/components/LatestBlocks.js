@@ -175,7 +175,7 @@ const LatestBlocks = () => {
   }, []);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(
-    (state) => state.blocks
+    (state) => state.socket
   );
 
   return (

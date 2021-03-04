@@ -62,15 +62,18 @@ const BlocksTable = (props) => {
   const location = useLocation();
   const { page = 1, limit = 10 } = queryString.parse(location.search);
   const [state, setState] = useState({ limit: limit, currentPage: page - 1 });
-  useEffect(() => {
-    dispatch(getAllBlocks(state.currentPage, state.limit));
-  }, [state.currentPage, state.limit]);
-
-  // useEffect(() => {
-  //   dispatch(getTotalSupply());
-  // }, []);
-
   const { allBlocks, allBlocksLoading } = useSelector((state) => state.blocks);
+
+  useEffect(() => {
+    const { location } = props;
+    const { page = 1, limit = 10 } = queryString.parse(location);
+    const filter = {
+      page: page - 1,
+      limit: state.limit
+    };
+    dispatch(getAllBlocks(filter));
+  }, [page, state.limit]);
+
   const pageHandler = (e, index) => {
     e.preventDefault();
 
@@ -80,7 +83,6 @@ const BlocksTable = (props) => {
       currentPage: index - 1
     });
   };
-
   const changeLimit = (limit) => {
     let totalCount = (state.currentPage + 1) * state.limit;
     if (totalCount > allBlocks.data.total_count) {
@@ -113,9 +115,9 @@ const BlocksTable = (props) => {
             <Pagination
               pageHandler={pageHandler}
               changeLimit={changeLimit}
-              limit={state.limit}
+              limit={limit}
               count={allBlocks && allBlocks.data.total_count}
-              currentPage={state.currentPage}
+              currentPage={page - 1}
             />
           )}
         </Header>
@@ -173,8 +175,8 @@ const BlocksTable = (props) => {
             pageHandler={pageHandler}
             changeLimit={changeLimit}
             count={allBlocks && allBlocks.data.total_count}
-            limit={state.limit}
-            currentPage={state.currentPage}
+            limit={limit}
+            currentPage={page - 1}
           />
         </Footer>
       ) : (

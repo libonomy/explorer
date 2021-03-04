@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import { GET_NODE_INFO, GET_NODE_INFO_LOADING } from '../info/actionTypes';
-import { GET_PRICE, GET_PRICE_LOADING } from '../price/actionTypes';
+import { GET_COIN_PRICE, GET_COIN_PRICE_LOADING } from '../price/actionTypes';
 import store from '../store';
 import {
   GET_TOTAL_SUPPLY,
@@ -20,9 +20,9 @@ const socket = io.connect('http://34.239.36.156:8787', {
   secure: true,
   transports: ['websocket']
 });
-export const getRealTime = () => (dispatch) => {
+export const getLandingPageData = () => (dispatch) => {
   dispatch({
-    type: GET_PRICE_LOADING,
+    type: GET_COIN_PRICE_LOADING,
     payload: true
   });
   dispatch({
@@ -54,11 +54,11 @@ socket.on('DashBoard', (data) => {
     payload: data.supplyInfo
   });
   store.dispatch({
-    type: GET_PRICE_LOADING,
+    type: GET_COIN_PRICE_LOADING,
     payload: false
   });
   store.dispatch({
-    type: GET_PRICE,
+    type: GET_COIN_PRICE,
     payload: data.lbyPrice
   });
   store.dispatch({

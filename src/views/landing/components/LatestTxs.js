@@ -9,7 +9,7 @@ import moment from 'moment';
 import { IconText } from 'src/components/typography';
 import { TableLoader } from 'src/components';
 import { NoData } from 'src/components';
-import { getRealTime } from 'src/redux/socket/actions';
+import { getLandingPageData } from 'src/redux/socket/actions';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -156,7 +156,7 @@ const LatestTxs = () => {
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
 
   useEffect(() => {
-    dispatch(getRealTime());
+    dispatch(getLandingPageData());
   }, []);
   return (
     <Wrapper>

@@ -23,7 +23,7 @@ import colors from 'src/vars/colors';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
-import { getRealTime } from 'src/redux/socket/actions';
+import { getLandingPageData } from 'src/redux/socket/actions';
 const Wrapper = styled.div``;
 
 // const ButtonExp = styled.div`
@@ -240,14 +240,14 @@ const Statistics = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getRealTime());
+    dispatch(getLandingPageData());
   }, []);
 
   const { nodeInfo, nodeInfoLoading } = useSelector((state) => state.info);
   const { totalSupply, totalSupplyLoading } = useSelector(
     (state) => state.supply
   );
-  const { price, priceLoading } = useSelector((state) => state.price);
+  const { coinPrice, coinPriceLoading } = useSelector((state) => state.price);
 
   const { latestBlocks } = useSelector((state) => state.blocks);
   return (
@@ -345,7 +345,7 @@ const Statistics = () => {
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp loading={+priceLoading}>
+          <CardExp loading={+coinPriceLoading}>
             <CardContent>
               <Icon src={accounts} alt="accounts" />
               <InnerBody>
@@ -358,7 +358,7 @@ const Statistics = () => {
               <InnerBody>
                 <Title>LBY Price</Title>
                 <Text>
-                  {price && price} &nbsp;
+                  {coinPrice && coinPrice} &nbsp;
                   <TextExp>USD</TextExp>
                 </Text>
               </InnerBody>

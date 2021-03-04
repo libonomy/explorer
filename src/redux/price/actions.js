@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { GET_MARKET_PRICE, GET_MARKET_PRICE_LOADING } from './actionTypes';
+import {
+  GET_MARKET_PRICE,
+  GET_MARKET_PRICE_LOADING,
+  GET_PRICE_LOADING
+} from './actionTypes';
 
 export const getMarketPrice = () => (dispatch) => {
   dispatch(getMarketPriceLoading());
@@ -23,4 +27,7 @@ export const getMarketPrice = () => (dispatch) => {
 
 export const getMarketPriceLoading = () => ({
   type: GET_MARKET_PRICE_LOADING
+});
+export const getPriceLoading = () => ({
+  type: GET_PRICE_LOADING
 });

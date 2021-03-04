@@ -3,7 +3,8 @@ import {
   GET_ALL_BLOCKS,
   GET_ALL_BLOCKS_LOADING,
   GET_BLOCKS_BY_HEIGHT,
-  GET_BLOCKS_BY_HEIGHT_LOADING
+  GET_BLOCKS_BY_HEIGHT_LOADING,
+  GET_LATEST_BLOCKS_LOADING
 } from './actionTypes';
 export const getAllBlocks = (filter) => (dispatch) => {
   dispatch(getAllBlocksLoading());
@@ -50,4 +51,8 @@ export const getBlocksByHeight = (height) => (dispatch) => {
 
 export const getBlocksByHeightLoading = () => ({
   type: GET_BLOCKS_BY_HEIGHT_LOADING
+});
+
+export const getLatestBlocksLoading = () => ({
+  type: GET_LATEST_BLOCKS_LOADING
 });

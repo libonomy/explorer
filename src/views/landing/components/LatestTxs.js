@@ -4,12 +4,12 @@ import { txIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLatestTransactions } from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { IconText } from 'src/components/typography';
 import { TableLoader } from 'src/components';
 import { NoData } from 'src/components';
+import { getRealTime } from 'src/redux/socket/actions';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -153,17 +153,10 @@ const TableButton = styled(Button)`
 const LatestTxs = () => {
   const dispatch = useDispatch();
 
-  const { latestTxs, latestTxsLoading } = useSelector((state) => state.socket);
+  const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
 
-  // useEffect(() => {
-  //   const filter = {
-  //     page: 0,
-  //     limit: 5
-  //   };
-  //   dispatch(getAllTransactions(filter));
-  // }, []);
   useEffect(() => {
-    dispatch(getLatestTransactions());
+    dispatch(getRealTime());
   }, []);
   return (
     <Wrapper>
@@ -175,7 +168,6 @@ const LatestTxs = () => {
             <TableHeading>Age</TableHeading>
             <TableHeading>From</TableHeading>
             <TableHeading>To</TableHeading>
-            {/* <TableHeading>Amount</TableHeading> */}
           </TableRow>
         </TableHeader>
         <TableBody>

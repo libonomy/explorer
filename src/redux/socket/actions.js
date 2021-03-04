@@ -1,70 +1,42 @@
-// import axios from 'axios';
+import io from 'socket.io-client';
+import { GET_NODE_INFO, GET_NODE_INFO_LOADING } from '../info/actionTypes';
+import { GET_PRICE, GET_PRICE_LOADING } from '../price/actionTypes';
+import store from '../store';
 import {
   GET_TOTAL_SUPPLY,
-  GET_TOTAL_SUPPLY_LOADING,
-  GET_PRICE,
-  GET_PRICE_LOADING,
-  GET_NODE_INFO,
-  GET_NODE_INFO_LOADING,
+  GET_TOTAL_SUPPLY_LOADING
+} from '../supply/actionTypes';
+import {
   GET_LATEST_BLOCKS,
-  GET_LATEST_BLOCKS_LOADING,
+  GET_LATEST_BLOCKS_LOADING
+} from '../blocks/actionTypes';
+
+import {
   GET_LATEST_TRANSACTIONS,
   GET_LATEST_TRANSACTIONS_LOADING
-} from './actionTypes';
-import io from 'socket.io-client';
-import store from '../store';
+} from '../txs/actionTypes';
 
 const socket = io.connect('http://34.239.36.156:8787', {
   secure: true,
   transports: ['websocket']
 });
-export const getTotalSupply = () => (dispatch) => {
-  dispatch({
-    type: GET_TOTAL_SUPPLY_LOADING,
-    payload: true
-  });
-  socket.emit('RegisterClient');
-};
-export const getTotalSupplyLoading = () => ({
-  type: GET_TOTAL_SUPPLY_LOADING
-});
-
-export const getPrice = () => (dispatch) => {
+export const getRealTime = () => (dispatch) => {
   dispatch({
     type: GET_PRICE_LOADING,
     payload: true
   });
-  socket.emit('RegisterClient');
-};
-
-export const getPriceLoading = () => ({
-  type: GET_PRICE_LOADING
-});
-export const getNodeInfo = () => (dispatch) => {
   dispatch({
     type: GET_NODE_INFO_LOADING,
     payload: true
   });
-
-  socket.emit('RegisterClient');
-};
-export const getNodeInfoLoading = () => ({
-  type: GET_NODE_INFO_LOADING
-});
-
-export const getLatestBlocks = () => (dispatch) => {
+  dispatch({
+    type: GET_TOTAL_SUPPLY_LOADING,
+    payload: true
+  });
   dispatch({
     type: GET_LATEST_BLOCKS_LOADING,
     payload: true
   });
-  socket.emit('RegisterClient');
-};
-
-export const getLatestBlocksLoading = () => ({
-  type: GET_LATEST_BLOCKS_LOADING
-});
-
-export const getLatestTransactions = () => (dispatch) => {
   dispatch({
     type: GET_LATEST_TRANSACTIONS_LOADING,
     payload: true
@@ -72,9 +44,6 @@ export const getLatestTransactions = () => (dispatch) => {
   socket.emit('RegisterClient');
 };
 
-export const getLatestTransactionsLoading = () => ({
-  type: GET_LATEST_TRANSACTIONS_LOADING
-});
 socket.on('DashBoard', (data) => {
   store.dispatch({
     type: GET_TOTAL_SUPPLY_LOADING,

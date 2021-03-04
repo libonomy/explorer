@@ -20,10 +20,10 @@ import {
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import colors from 'src/vars/colors';
-import { getNodeInfo, getTotalSupply, getPrice } from 'src/redux/actions';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
+import { getRealTime } from 'src/redux/socket/actions';
 const Wrapper = styled.div``;
 
 // const ButtonExp = styled.div`
@@ -240,18 +240,16 @@ const Statistics = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getNodeInfo());
-    dispatch(getTotalSupply());
-    dispatch(getPrice());
+    dispatch(getRealTime());
   }, []);
 
-  const { nodeInfo, nodeInfoLoading } = useSelector((state) => state.socket);
+  const { nodeInfo, nodeInfoLoading } = useSelector((state) => state.info);
   const { totalSupply, totalSupplyLoading } = useSelector(
-    (state) => state.socket
+    (state) => state.supply
   );
-  const { price, priceLoading } = useSelector((state) => state.socket);
+  const { price, priceLoading } = useSelector((state) => state.price);
 
-  const { latestBlocks } = useSelector((state) => state.socket);
+  const { latestBlocks } = useSelector((state) => state.blocks);
   return (
     <Wrapper>
       <Row>

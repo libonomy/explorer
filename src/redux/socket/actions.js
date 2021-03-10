@@ -15,6 +15,7 @@ import {
   GET_LATEST_TRANSACTIONS,
   GET_LATEST_TRANSACTIONS_LOADING
 } from '../txs/actionTypes';
+import { GET_GRAPH_DATA, GET_GRAPH_DATA_LOADING } from '../graph/actionTypes';
 
 const socket = io.connect('http://34.239.36.156:8787', {
   secure: true,
@@ -39,6 +40,10 @@ export const getLandingPageData = () => (dispatch) => {
   });
   dispatch({
     type: GET_LATEST_TRANSACTIONS_LOADING,
+    payload: true
+  });
+  dispatch({
+    type: GET_GRAPH_DATA_LOADING,
     payload: true
   });
   socket.emit('RegisterClient');
@@ -85,5 +90,13 @@ socket.on('DashBoard', (data) => {
   store.dispatch({
     type: GET_LATEST_TRANSACTIONS,
     payload: data.transactions
+  });
+  store.dispatch({
+    type: GET_GRAPH_DATA_LOADING,
+    payload: false
+  });
+  store.dispatch({
+    type: GET_GRAPH_DATA,
+    payload: data.graphData
   });
 });

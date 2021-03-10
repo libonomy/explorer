@@ -328,9 +328,8 @@ const Statistics = () => {
                   {totalSupply && (
                     <Fragment>
                       <TextFormat
-                        value={totalSupply.result[0].amount / SCALE}
+                        value={Math.ceil(totalSupply.result[0].amount / SCALE)}
                         displayType={'text'}
-                        thousandSeparator={true}
                       />{' '}
                       <TextExp>
                         {' '}

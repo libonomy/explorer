@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { Card, CardBody, CardTitle, Col, Row } from 'reactstrap';
+// import { Card, CardBody, CardTitle, Col, Row } from 'reactstrap';
 import colors from 'src/vars/colors';
-import {
-  channelIcon,
-  peerIcon,
-  layerIcon,
-  poolingIcon
-} from 'src/assets/images';
+// import {
+//   channelIcon,
+//   peerIcon,
+//   layerIcon,
+//   poolingIcon
+// } from 'src/assets/images';
 import styled from 'styled-components';
 import moment from 'moment';
 import {
@@ -14,12 +14,8 @@ import {
   Area,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  Legend
+  ResponsiveContainer
 } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLandingPageData } from 'src/redux/socket/actions';
@@ -93,46 +89,50 @@ z-index: 101;
 const Graph = styled.div`
   width: 100%;
   height: 80%;
+  tspan {
+    font-family: PoppinsRegular;
+    font-size: 12px;
+  }
 `;
-const CardExp = styled(Card)`
-  padding: 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  border-radius: 8px;
-  background-color: ${colors.white};
-  margin-bottom: 1rem;
-`;
-const CardContent = styled(CardBody)`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0px;
-`;
+// const CardExp = styled(Card)`
+//   padding: 1rem;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: center;
+//   text-align: center;
+//   border-radius: 8px;
+//   background-color: ${colors.white};
+//   margin-bottom: 1rem;
+// `;
+// const CardContent = styled(CardBody)`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: flex-start;
+//   align-items: center;
+//   padding: 0px;
+// `;
 
-const InnerBody = styled.div`
-  display: flex;
-  flex-direction: Column;
-  align-items: center;
-`;
-const Icon = styled.img`
-  width: 32px;
-  height: 32px;
-  margin-right: 1rem;
-`;
-const Title = styled(CardTitle)`
-  font-family: PoppinsRegular;
-  font-size: 3px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: 0.29px;
-  text-align: center;
-  color: #000000;
-`;
+// const InnerBody = styled.div`
+//   display: flex;
+//   flex-direction: Column;
+//   align-items: center;
+// `;
+// const Icon = styled.img`
+//   width: 32px;
+//   height: 32px;
+//   margin-right: 1rem;
+// `;
+// const Title = styled(CardTitle)`
+//   font-family: PoppinsRegular;
+//   font-size: 3px;
+//   font-weight: normal;
+//   font-stretch: normal;
+//   font-style: normal;
+//   letter-spacing: 0.29px;
+//   text-align: center;
+//   color: #000000;
+// `;
 // const Text = styled(CardText)`
 //   font-family: PoppinsBold;
 //   font-size: 13px;
@@ -153,7 +153,7 @@ const Heading = styled.h1`
   font-style: normal;
   line-height: 1.17;
   letter-spacing: 0.36px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `;
 
 const ConsensusState = () => {

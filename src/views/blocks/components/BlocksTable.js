@@ -69,10 +69,10 @@ const BlocksTable = (props) => {
     const { page = 1, limit = 10 } = queryString.parse(location);
     const filter = {
       page: page - 1,
-      limit: state.limit
+      limit: limit
     };
     dispatch(getAllBlocks(filter));
-  }, [page, state.limit]);
+  }, [page, limit]);
 
   const pageHandler = (e, index) => {
     e.preventDefault();

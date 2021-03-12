@@ -198,16 +198,16 @@ const Overview = (props) => {
                     </HeadingWraper>
                   </TableHeading>
                   <TableCell>
-                    <LinkExp
-                      to={`/addresses/${tx.data.tx.value.msg[0].value.from_address}`}>
-                      <Wrapper>
+                    <Wrapper>
+                      <LinkExp
+                        to={`/addresses/${tx.data.tx.value.msg[0].value.from_address}`}>
                         {tx.data.tx.value.msg[0].value.from_address}{' '}
-                        <Copy
-                          id="from_address-copy"
-                          value={tx.data.tx.value.msg[0].value.from_address}
-                        />
-                      </Wrapper>
-                    </LinkExp>
+                      </LinkExp>
+                      <Copy
+                        id="from_address-copy"
+                        value={tx.data.tx.value.msg[0].value.from_address}
+                      />
+                    </Wrapper>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -218,16 +218,17 @@ const Overview = (props) => {
                     </HeadingWraper>
                   </TableHeading>
                   <TableCell>
-                    <LinkExp
-                      to={`/addresses/${tx.data.tx.value.msg[0].value.to_address}`}>
-                      <Wrapper>
+                    <Wrapper>
+                      <LinkExp
+                        to={`/addresses/${tx.data.tx.value.msg[0].value.to_address}`}>
+                        {' '}
                         {tx.data.tx.value.msg[0].value.to_address}{' '}
-                        <Copy
-                          id="to_address-copy"
-                          value={tx.data.tx.value.msg[0].value.to_address}
-                        />
-                      </Wrapper>
-                    </LinkExp>
+                      </LinkExp>
+                      <Copy
+                        id="to_address-copy"
+                        value={tx.data.tx.value.msg[0].value.to_address}
+                      />
+                    </Wrapper>
                   </TableCell>
                 </TableRow>
 

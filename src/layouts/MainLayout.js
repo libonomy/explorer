@@ -7,7 +7,7 @@ const Wrapper = styled.div``;
 const MainLayout = ({ children }) => {
   return (
     <Wrapper>
-      <Notification />
+      {/* <Notification /> */}
       <Header />
       <NavBar />
       <Wrapper>{children}</Wrapper>

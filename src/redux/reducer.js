@@ -6,6 +6,7 @@ import txsReducer from './txs/reducer';
 import supplyReducer from './supply/reducer';
 import addressesReducer from './addresses/reducer';
 import priceReducer from './price/reducer';
+import graphReducer from './graph/reducer';
 export default combineReducers({
   auth: authReducer,
   info: infoReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
   txs: txsReducer,
   supply: supplyReducer,
   addresses: addressesReducer,
-  price: priceReducer
+  price: priceReducer,
+  graph: graphReducer
 });

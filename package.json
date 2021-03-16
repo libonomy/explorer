@@ -29,6 +29,7 @@
     "react-select": "^4.1.0",
     "react-slick": "^0.27.13",
     "reactstrap": "^8.9.0",
+    "recharts": "^2.0.8",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",

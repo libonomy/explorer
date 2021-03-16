@@ -14,8 +14,8 @@ import {
   averageblock,
   marketcap,
   accounts,
-  difficulty,
-  toggler
+  difficulty
+  // toggler
 } from 'src/assets/images';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -217,21 +217,21 @@ const TextFormat = styled(NumberFormat)`
   text-align: left;
   color: ${colors.black};
 `;
-const ToggleCard = styled.div`
-  width: 18px;
-  height: 17px;
-  position: absolute;
-  background-color: white;
-  top: 0;
-  right: 0;
-`;
-const MenuIcon = styled.span`
-  position: absolute;
-  width: 8px;
-  height: 7px;
-  top: 6px;
-  right: 2px;
-`;
+// const ToggleCard = styled.div`
+//   width: 18px;
+//   height: 17px;
+//   position: absolute;
+//   background-color: white;
+//   top: 0;
+//   right: 0;
+// `;
+// const MenuIcon = styled.span`
+//   position: absolute;
+//   width: 8px;
+//   height: 7px;
+//   top: 6px;
+//   right: 2px;
+// `;
 // const Texts = styled.span`
 //   text-transform: uppercase;
 //   font-family: PoppinsBold;
@@ -301,36 +301,20 @@ const Statistics = () => {
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">
-          <CardExp>
-            <CardContent>
-              <Icon src={averageblock} alt="averageblock" />
-              <InnerBody>
-                <Title>Peer Speed</Title>
-                <Text>Not Loaded</Text>
-              </InnerBody>
-            </CardContent>
-            <CardContent>
-              <InnerBody>
-                <ToggleCard className="toggle-btn">
-                  <MenuIcon src={toggler} alt="menuicon" />
-                </ToggleCard>
-              </InnerBody>
-            </CardContent>
-          </CardExp>
-        </Col>
-        <Col lg="6" md="6" sm="6">
           <CardExp loading={+totalSupplyLoading}>
             <CardContent>
               <Icon src={marketcap} alt="marketcap" />
               <InnerBody>
-                <Title>Current Supply</Title>
+                <Title>Inflation</Title>
                 <Text>
                   {totalSupply && (
                     <Fragment>
                       <TextFormat
-                        value={totalSupply.result[0].amount / SCALE}
+                        value={(
+                          totalSupply.result[0].amount / SCALE -
+                          70000000
+                        ).toFixed(6)}
                         displayType={'text'}
-                        thousandSeparator={true}
                       />{' '}
                       <TextExp>
                         {' '}
@@ -342,6 +326,34 @@ const Statistics = () => {
               </InnerBody>
             </CardContent>
             <CardContent></CardContent>
+          </CardExp>
+        </Col>
+        <Col lg="6" md="6" sm="6">
+          <CardExp loading={+totalSupplyLoading}>
+            <CardContent>
+              <Icon src={marketcap} alt="marketcap" />
+              <InnerBody>
+                <Title>Current Supply</Title>
+                <Text>
+                  {totalSupply && (
+                    <Fragment>
+                      70,000,000
+                      <TextExp>
+                        {' '}
+                        {totalSupply.result[0].denom.replace(SYMBOL_REGEX, '')}
+                      </TextExp>
+                    </Fragment>
+                  )}
+                </Text>
+              </InnerBody>
+            </CardContent>
+            <CardContent>
+              <Icon src={averageblock} alt="averageblock" />
+              <InnerBody>
+                <Title>Peer Speed</Title>
+                <Text>Not Loaded</Text>
+              </InnerBody>
+            </CardContent>
           </CardExp>
         </Col>
         <Col lg="6" md="6" sm="6">

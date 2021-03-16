@@ -15,7 +15,8 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Legend
 } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLandingPageData } from 'src/redux/socket/actions';
@@ -87,8 +88,9 @@ z-index: 101;
   }
 `;
 const Graph = styled.div`
-  width: 100%;
+  width: 105%;
   height: 80%;
+  margin-left: -40px;
   tspan {
     font-family: PoppinsRegular;
     font-size: 12px;
@@ -247,16 +249,9 @@ const ConsensusState = () => {
       </ResponsiveContainer> */}
       <Graph>
         <ResponsiveContainer>
-          <AreaChart
-            data={arr2}
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0
-            }}>
-            <XAxis style={{ fontSize: '14px' }} dataKey="Time" />
-            <YAxis style={{ fontSize: '14px' }} />
+          <AreaChart data={arr2}>
+            <XAxis dataKey="Time" />
+            <YAxis interval={1} />
             <Tooltip />
             <Area
               type="monotone"

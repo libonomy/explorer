@@ -17,7 +17,7 @@ import {
 } from '../txs/actionTypes';
 import { GET_GRAPH_DATA, GET_GRAPH_DATA_LOADING } from '../graph/actionTypes';
 
-const socket = io.connect('http://34.239.36.156:8787', {
+const socket = io.connect(process.env.REACT_SOCKET_URI, {
   secure: true,
   transports: ['websocket']
 });

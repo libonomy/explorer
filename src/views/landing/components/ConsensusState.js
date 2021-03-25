@@ -12,6 +12,8 @@ import moment from 'moment';
 import {
   AreaChart,
   Area,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
@@ -180,6 +182,7 @@ const ConsensusState = () => {
   arr1.map((item) =>
     arr2.push({ Price: item.price, Time: moment(item.time).format('hh A') })
   );
+  arr2.reverse();
 
   useEffect(() => {
     // dispatch(getLandingPageData());
@@ -187,7 +190,7 @@ const ConsensusState = () => {
 
   return (
     <Wrapper loading={+coinDataLoading}>
-      <Heading>Libonomy Price Graph Of 24 Hour</Heading>
+      <Heading>LBY Price Graph Of Last 24 Hour</Heading>
       {/* <Row>
         <Col lg="6" md="6" sm="6">
           <CardExp>
@@ -247,7 +250,7 @@ const ConsensusState = () => {
       </ResponsiveContainer> */}
       <Graph>
         <ResponsiveContainer>
-          <AreaChart
+          <LineChart
             data={arr2}
             margin={{
               top: 10,
@@ -256,15 +259,19 @@ const ConsensusState = () => {
               bottom: 0
             }}>
             <XAxis style={{ fontSize: '14px' }} dataKey="Time" />
-            <YAxis style={{ fontSize: '14px' }} />
+            <YAxis
+              style={{ fontSize: '14px' }}
+              domain={['auto', 'auto']}
+              interval={1}
+            />
             <Tooltip />
-            <Area
+            <Line
               type="monotone"
               dataKey="Price"
               stroke="#40b1be"
               fill="#40b1be"
             />
-          </AreaChart>
+          </LineChart>
         </ResponsiveContainer>
       </Graph>
     </Wrapper>

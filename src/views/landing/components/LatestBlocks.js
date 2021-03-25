@@ -156,7 +156,7 @@ const Tooltip = styled(UncontrolledTooltip)`
 const LatestBlocks = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getLandingPageData());
+    // dispatch(getLandingPageData());
   }, []);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(

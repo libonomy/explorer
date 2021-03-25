@@ -182,7 +182,7 @@ const ConsensusState = () => {
   );
 
   useEffect(() => {
-    dispatch(getLandingPageData());
+    // dispatch(getLandingPageData());
   }, []);
 
   return (

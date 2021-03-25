@@ -156,7 +156,7 @@ const LatestTxs = () => {
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
 
   useEffect(() => {
-    dispatch(getLandingPageData());
+    // dispatch(getLandingPageData());
   }, []);
   return (
     <Wrapper>

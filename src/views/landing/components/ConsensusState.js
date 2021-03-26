@@ -173,20 +173,16 @@ const ConsensusState = () => {
   let x = totalLength / 60;
   x = Math.floor(x);
   let arr1 = [];
-  let arrValue = 0;
+  let arrValue = 59;
   for (let i = 0; i < x; i++) {
     arr1.push(arr[arrValue]);
     arrValue = arrValue + 60;
   }
+
   const arr2 = [];
   arr1.map((item) =>
     arr2.push({ Price: item.price, Time: moment(item.time).format('hh A') })
   );
-  arr2.reverse();
-
-  useEffect(() => {
-    // dispatch(getLandingPageData());
-  }, []);
 
   return (
     <Wrapper loading={+coinDataLoading}>

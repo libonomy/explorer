@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {
   NoData,
   Pagination,
@@ -59,25 +59,16 @@ const BlocksTable = (props) => {
   const dispatch = useDispatch();
 
   // const supply = useSelector((state) => state.supply.totalSupply);
-  const location = useLocation();
+  const { location } = props;
   const { page = 1, limit = 10 } = queryString.parse(location.search);
   const [state, setState] = useState({ limit: limit, currentPage: page - 1 });
   const { allBlocks, allBlocksLoading } = useSelector((state) => state.blocks);
-
-  useEffect(() => {
-    const { location } = props;
-    const { page = 1, limit = 10 } = queryString.parse(location);
-    const filter = {
-      page: page - 1,
-      limit: limit
-    };
-    dispatch(getAllBlocks(filter));
-  }, [page, limit]);
 
   const pageHandler = (e, index) => {
     e.preventDefault();
 
     history.push(`/blocks?page=${index}&&limit=${state.limit}`);
+
     setState({
       ...state,
       currentPage: index - 1
@@ -95,6 +86,16 @@ const BlocksTable = (props) => {
     }
     history.push(`/blocks?page=${currentPage}&&limit=${limit}`);
   };
+  useEffect(() => {
+    const { location } = props;
+    const { page = 1, limit = 10 } = queryString.parse(location.search);
+    console.log(location.search, 'chking');
+    const filter = {
+      page: page - 1,
+      limit: limit
+    };
+    dispatch(getAllBlocks(filter));
+  }, [page, limit]);
 
   return (
     <Wrapper>
@@ -186,4 +187,4 @@ const BlocksTable = (props) => {
   );
 };
 
-export default BlocksTable;
+export default withRouter(BlocksTable);

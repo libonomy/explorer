@@ -115,6 +115,33 @@ const Overview = (props) => {
 
   const { hash } = props.match.params;
   const { tx, txLoading } = useSelector((state) => state.txs);
+
+  const findTransferType = (events) => {
+    let event = events.find((event) =>
+      event.attributes.find(
+        (item) => item.value === 'bank' || item.value === 'staking'
+      )
+    );
+    let transfer = event?.attributes.find(
+      (item) => item.value === 'bank' || item.value === 'staking'
+    );
+    return transfer?.value ? transfer?.value : 'N/A';
+  };
+
+  const findTransationType = (events) => {
+    events = events.sort((b, a) =>
+      a.type < b.type ? -1 : Number(a.type > b.type)
+    );
+
+    let transfer = events.find(
+      (item) =>
+        item.type === 'unbond' ||
+        item.type === 'transfer' ||
+        item.type === 'create_validator'
+    );
+    return transfer?.type ? transfer?.type : 'N/A';
+  };
+
   return (
     <Table responsive>
       <TableBody>
@@ -136,6 +163,30 @@ const Overview = (props) => {
                       {tx.data.txhash}
                       <Copy id="txhash-copy" value={tx.data.txhash} />
                     </Wrapper>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableHeading scope="row">
+                    <HeadingWraper>
+                      <InfoIcon>?</InfoIcon>
+                      <Heading>Operation</Heading>
+                    </HeadingWraper>
+                  </TableHeading>
+                  <TableCell>
+                    <Wrapper>{findTransferType(tx.data.events)}</Wrapper>
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableHeading scope="row">
+                    <HeadingWraper>
+                      <InfoIcon>?</InfoIcon>
+                      <Heading>Transaction Type</Heading>
+                    </HeadingWraper>
+                  </TableHeading>
+                  <TableCell>
+                    <Wrapper>{findTransationType(tx.data.events)}</Wrapper>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -190,50 +241,50 @@ const Overview = (props) => {
                     {new Date(tx.data.timestamp).toUTCString()})
                   </TableCell>
                 </TableRow>
-                <TableRow>
-                  <TableHeading scope="row">
-                    <HeadingWraper>
-                      <InfoIcon>?</InfoIcon>
-                      <Heading>From</Heading>
-                    </HeadingWraper>
-                  </TableHeading>
-                  <TableCell>
-                    <Wrapper>
-                      <LinkExp
-                        to={`/addresses/${tx.data.tx.value.msg[0].value.from_address}`}>
-                        {tx.data.tx.value.msg[0].value.from_address}{' '}
-                      </LinkExp>
-                      <Copy
-                        id="from_address-copy"
-                        value={tx.data.tx.value.msg[0].value.from_address}
-                      />
-                    </Wrapper>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableHeading scope="row">
-                    <HeadingWraper>
-                      <InfoIcon>?</InfoIcon>
-                      <Heading>To</Heading>
-                    </HeadingWraper>
-                  </TableHeading>
-                  <TableCell>
-                    <Wrapper>
-                      {tx.data.tx.value.msg[0].value.to_address && (
-                        <Fragment>
-                          <LinkExp
-                            to={`/addresses/${tx.data.tx.value.msg[0].value.to_address}`}>
-                            {tx.data.tx.value.msg[0].value.to_address}{' '}
-                          </LinkExp>
-                          <Copy
-                            id="to_address-copy"
-                            value={tx.data.tx.value.msg[0].value.to_address}
-                          />
-                        </Fragment>
-                      )}
-                    </Wrapper>
-                  </TableCell>
-                </TableRow>
+                {tx.data.tx.value.msg[0].value.from_address && (
+                  <TableRow>
+                    <TableHeading scope="row">
+                      <HeadingWraper>
+                        <InfoIcon>?</InfoIcon>
+                        <Heading>From</Heading>
+                      </HeadingWraper>
+                    </TableHeading>
+                    <TableCell>
+                      <Wrapper>
+                        <LinkExp
+                          to={`/addresses/${tx.data.tx.value.msg[0].value.from_address}`}>
+                          {tx.data.tx.value.msg[0].value.from_address}{' '}
+                        </LinkExp>
+                        <Copy
+                          id="from_address-copy"
+                          value={tx.data.tx.value.msg[0].value.from_address}
+                        />
+                      </Wrapper>
+                    </TableCell>
+                  </TableRow>
+                )}
+                {tx.data.tx.value.msg[0].value.to_address && (
+                  <TableRow>
+                    <TableHeading scope="row">
+                      <HeadingWraper>
+                        <InfoIcon>?</InfoIcon>
+                        <Heading>To</Heading>
+                      </HeadingWraper>
+                    </TableHeading>
+                    <TableCell>
+                      <Wrapper>
+                        <LinkExp
+                          to={`/addresses/${tx.data.tx.value.msg[0].value.to_address}`}>
+                          {tx.data.tx.value.msg[0].value.to_address}{' '}
+                        </LinkExp>
+                        <Copy
+                          id="to_address-copy"
+                          value={tx.data.tx.value.msg[0].value.to_address}
+                        />
+                      </Wrapper>
+                    </TableCell>
+                  </TableRow>
+                )}
 
                 <TableRow>
                   <TableHeading scope="row">

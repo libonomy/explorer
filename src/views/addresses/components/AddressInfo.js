@@ -118,7 +118,7 @@ const InnerBody = styled.div`
 const IconExp = styled.img`
   width: 40px;
   height: 40px;
-  margin-left: 3rem;
+  justify-content: space-between;
 `;
 const Title = styled(CardTitle)`
   font-family: PoppinsBold;
@@ -204,9 +204,7 @@ const TextExp = styled.span`
 
 const AddressInfo = (props) => {
   const { details, detailsLoading } = useSelector((state) => state.addresses);
-  const { marketPrice, marketPriceLoading } = useSelector(
-    (state) => state.price
-  );
+  const { marketPrice } = useSelector((state) => state.price);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -224,14 +222,16 @@ const AddressInfo = (props) => {
               <InnerBody>
                 <Title>Balance</Title>
                 <Text>
-                  {details && details?.result?.value?.coins[0]?.amount ? (
+                  {details &&
+                  details?.data?.value?.coins[0]?.amount &&
+                  details?.data?.value?.coins[0]?.denom.includes('flby') ? (
                     <Fragment>
                       <TextFormat
-                        value={details?.result?.value?.coins[0]?.amount / SCALE}
+                        value={details?.data?.value?.coins[0]?.amount / SCALE}
                         displayType={'text'}
                         thousandSeparator={true}
                       />{' '}
-                      {details?.result?.value?.coins[0]?.denom.replace(
+                      {details?.data.value?.coins[0]?.denom.replace(
                         SYMBOL_REGEX,
 
                         ''
@@ -248,20 +248,21 @@ const AddressInfo = (props) => {
           </CardExp>
         </Col>
         <Col>
-          <CardExp loading={+detailsLoading && +marketPriceLoading}>
+          <CardExp loading={+detailsLoading}>
             <CardContent>
               <InnerBody>
                 <Title> Value</Title>
 
                 {details &&
                 marketPrice?.data?.usd &&
-                details?.result?.value?.coins[0]?.amount ? (
+                details?.data?.value?.coins[0]?.amount &&
+                details?.data?.value?.coins[0]?.denom.includes('flby') ? (
                   <Text>
                     <NumExp>
                       $
                       <TextFormat
                         value={(
-                          (details?.result?.value?.coins[0]?.amount * x) /
+                          (details?.data?.value?.coins[0]?.amount * x) /
                           SCALE
                         ).toFixed(6)}
                         displayType={'text'}
@@ -284,32 +285,56 @@ const AddressInfo = (props) => {
             <CardContent>
               <InnerBody>
                 <Title>Other Assets</Title>
+                {details && details?.data?.value?.coins[1]?.amount ? (
+                  <Text>
+                    {details &&
+                    details?.data?.value?.coins[1]?.amount &&
+                    details?.data?.value?.coins[1]?.denom.includes('fpsix') ? (
+                      <Fragment>
+                        <TextFormat
+                          value={details?.data?.value?.coins[1]?.amount / SCALE}
+                          displayType={'text'}
+                          thousandSeparator={true}
+                        />{' '}
+                        {details?.data?.value?.coins[1]?.denom.replace(
+                          SYMBOL_REGEX,
 
-                <Text>
-                  {details && details?.result?.value?.coins[1]?.amount ? (
-                    <Fragment>
-                      <TextFormat
-                        value={details?.result?.value?.coins[1]?.amount / SCALE}
-                        displayType={'text'}
-                        thousandSeparator={true}
-                      />{' '}
-                      {details?.result?.value?.coins[1]?.denom.replace(
-                        SYMBOL_REGEX,
+                          ''
+                        )}
+                      </Fragment>
+                    ) : (
+                      ''
+                    )}
+                  </Text>
+                ) : (
+                  <Text>
+                    {details &&
+                    details?.data?.value?.coins[0]?.amount &&
+                    details?.data?.value?.coins[0]?.denom.includes('fpsix') ? (
+                      <Fragment>
+                        <TextFormat
+                          value={details?.data?.value?.coins[0]?.amount / SCALE}
+                          displayType={'text'}
+                          thousandSeparator={true}
+                        />{' '}
+                        {details?.data?.value?.coins[0]?.denom.replace(
+                          SYMBOL_REGEX,
 
-                        ''
-                      )}
-                    </Fragment>
-                  ) : (
-                    <TextExp>0</TextExp>
-                  )}
-                </Text>
+                          ''
+                        )}
+                      </Fragment>
+                    ) : (
+                      0
+                    )}
+                  </Text>
+                )}
               </InnerBody>
 
-              {details?.result?.value?.coins?.amount > 1 &&
-              details?.result?.value?.coins?.denom > 1 ? (
+              {details?.data?.value?.coins?.amount > 1 &&
+              details?.data?.value?.coins?.denom > 1 ? (
                 <InputExp type="select" name="select" id="exampleSelect">
                   {details &&
-                    details.result.value.coins.slice(1).map((item, i) => (
+                    details.result.data?.value.coins.slice(1).map((item, i) => (
                       <OptionExp>
                         {item.amount / SCALE}
 

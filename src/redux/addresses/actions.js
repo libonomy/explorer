@@ -9,7 +9,7 @@ import {
 export const getAccountDetails = (address) => (dispatch) => {
   dispatch(getAccountDetailsLoading());
   axios
-    .get(`${process.env.REACT_APP_REST_API}/auth/accounts/${address}`)
+    .get(`${process.env.REACT_APP_EXPLORER_API}/api/bank/balance/${address}`)
 
     .then((res) => {
       dispatch({

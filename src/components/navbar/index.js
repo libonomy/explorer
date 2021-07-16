@@ -171,7 +171,6 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-
   return (
     <Wrapper>
       <NavbarExp light expand="md" id="navbar">
@@ -187,10 +186,10 @@ const NavBar = () => {
                   <LinkExp to="/">Home</LinkExp>
                 </NavItems>
                 <NavItems>
-                  <LinkExp to="/blocks">Blocks</LinkExp>
+                  <LinkExp to={'/blocks'}>Blocks</LinkExp>
                 </NavItems>
                 <NavItems>
-                  <LinkExp to="/txs">Transaction</LinkExp>
+                  <LinkExp to={`/txs`}>Transaction</LinkExp>
                 </NavItems>
                 {/* <NavItems>
                   <InputGroupButtonDropdownExp

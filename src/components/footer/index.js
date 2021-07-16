@@ -235,7 +235,7 @@ const Footer = () => {
             </Col>
             <Col>
               <ContentSection>
-                <Text>&copy; Libonomy (2020). All rights reserved.</Text>
+                <Text>&copy; Libonomy (2021). All rights reserved.</Text>
               </ContentSection>
             </Col>
           </Row>

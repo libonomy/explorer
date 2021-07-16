@@ -11,7 +11,7 @@ import {
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import history from 'src/utils/history';
-
+import Select from 'react-select';
 const Wrapper = styled.div`
   background-color: ${colors.white};
   padding: 1rem 0 1rem 0rem;
@@ -118,43 +118,132 @@ const IconButton = styled(Button)`
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 `;
-const InputExp = styled(Input)`
-  max-width: 20% !important ;
-  opacity: 1 !important;
-  font-family: 'PoppinsRegular' !important;
-  font-size: 14px !important;
-  padding: 0 8px !important;
-  color: #495057;
-  background-color: #fff;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-  margin-top: 4px !important;
-  display: flex;
-  text-align: justify;
-  cursor: pointer;
-  @media (max-width: 991px) {
-    max-width: 20% !important;
-  }
-  &:focus {
-    color: #000;
-    background-color: #fff;
-    border-color: #f1f1f1;
-    outline: none;
-    box-shadow: none;
-  }
-`;
-const OptionExp = styled.option`
-  font-family: PoppinsRegular;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.5;
+// const InputExp = styled(Input)`
+//   max-width: 22% !important ;
+//   opacity: 1 !important;
+//   font-family: 'PoppinsRegular' !important;
+//   font-size: 14px !important;
+//   padding: 0 8px !important;
+//   color: #495057;
+//   background-color: #fff;
+//   border-top-left-radius: 6px;
+//   border-bottom-left-radius: 6px;
+//   margin-top: 4px !important;
+//   display: flex;
+//   text-align: justify;
+//   cursor: pointer;
 
-  cursor: pointer !important;
-  &:hover {
-    color: #000;
-    background-color: ${colors.primary};
+//   @media (max-width: 991px) {
+//     max-width: 20% !important;
+//   }
+//   &:focus {
+//     color: #000;
+//     background-color: #fff;
+//     border-color: #f1f1f1;
+//     outline: none;
+//     box-shadow: none;
+//   }
+// `;
+// const OptionExp = styled.option`
+//   font-family: PoppinsRegular;
+//   font-size: 13.5px !important;
+//   font-weight: 400;
+//   line-height: 1.5;
+//   background: transparent;
+//   width: 150px;
+//   padding-right: 100px;
+//   font-size: 16px;
+//   border: 1px solid #ccc;
+//   height: 34px;
+
+//   cursor: pointer !important;
+//   &:hover {
+//     color: #000;
+//     background-color: ${colors.primary};
+//   }
+// `;
+
+const SelectExp = styled(Select)`
+  .css-1layoqn-control {
+    opacity: 1 !important;
+    font-family: 'PoppinsRegular' !important;
+    font-size: 14px !important;
+    color: #495057;
+    background-color: #fff;
+    cursor: pointer;
+    width: 116px;
+  }
+  ,
+  .css-1wa3eu0-placeholder {
+    margin-left: 2px;
+    margin-right: 2px;
+    position: absolute;
+    top: 50%;
+    opacity: 1 !important;
+    font-family: 'PoppinsMedium' !important;
+    font-size: 15px !important;
+    color: #495057;
+  }
+  ,
+  .css-1layoqn-control:hover {
+    border-color: transparent !important;
+  }
+  ,
+  .css-15habef-control {
+    width: 116px !important;
+    outline: none;
+    border-color: transparent !important;
+    border-radius: 7px;
+    caret-color: transparent;
+    z-index: 4 !important;
+    font-family: 'PoppinsRegular' !important;
+    font-size: 14px !important;
+    color: #495057;
+    background-color: #fff;
+    cursor: pointer !important;
+  }
+  ,
+  .css-1okebmr-indicatorSeparator {
+    background-color: #fff;
+    margin-bottom: 0;
+    margin-top: 0;
+    width: 0px;
+    box-sizing: border-box;
+  }
+  .css-1uccc91-singleValue {
+    opacity: 1 !important;
+    font-family: 'PoppinsMedium' !important;
+    font-size: 14px !important;
+
+    color: #495057;
+    background-color: #fff;
   }
 `;
+
+const style = {
+  control: (base) => ({
+    ...base,
+    border: 0,
+    boxShadow: 'none',
+    borderRadius: '7px',
+    marginTop: ' 2px !important',
+    cursor: 'pointer'
+  }),
+  option: (styles, { isFocused, isSelected, isActive }) => {
+    return {
+      ...styles,
+
+      backgroundColor: isFocused
+        ? '#dbeef1 !important'
+        : isSelected
+        ? 'none !important'
+        : isActive
+        ? '95e7ec'
+        : null,
+      color: '#333333'
+    };
+  }
+};
 
 const Header = (props) => {
   const [state, setState] = useState({ filterName: 'Filter', keyword: '' });
@@ -174,12 +263,12 @@ const Header = (props) => {
   };
 
   const hanldeDropDown = (e) => {
-    setState({ ...state, filterName: e.target.value });
+    setState({ ...state, filterName: e.value });
   };
-
   const handleChange = (e) => {
     setState({ ...state, keyword: e.target.value });
   };
+
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && state.keyword !== '') {
       if (state.filterName === 'Txs') history.push(`/txs/${state.keyword}`);
@@ -204,7 +293,7 @@ const Header = (props) => {
           </RightSection>
           <LeftSection>
             <SearchBox>
-              <InputExp
+              {/* <InputExp
                 type="select"
                 name={state.filterName}
                 value={state.filterName}
@@ -213,7 +302,13 @@ const Header = (props) => {
                 <OptionExp>Filter</OptionExp>
                 <OptionExp>Txs</OptionExp>
                 <OptionExp>Address</OptionExp>
-              </InputExp>
+              </InputExp> */}
+              <SelectExp
+                styles={style}
+                options={Options}
+                placeholder="Filter"
+                onChange={hanldeDropDown}
+              />
               <VerticalLine />
               <Input
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"
@@ -237,3 +332,14 @@ const Header = (props) => {
 };
 
 export default Header;
+
+const Options = [
+  {
+    value: 'Txs',
+    label: 'Txs'
+  },
+  {
+    value: 'Address',
+    label: 'Address'
+  }
+];

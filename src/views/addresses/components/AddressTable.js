@@ -64,15 +64,18 @@ const Text = styled.span`
   ${({ success }) => (success ? `color:${colors.darkerGreen}` : null)}
   ${({ uppercase }) => uppercase && `text-transform: uppercase `}
 `;
-const TextExp = styled.span`
-  font-family: PoppinsRegular;
-  font-size: 12px;
-  text-align: left;
-  margin: 12px 0px;
-`;
+// const TextExp = styled.span`
+//   font-family: PoppinsRegular;
+//   font-size: 12px;
+//   text-align: left;
+//   margin: 12px 0px;
+// `;
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px;
-  font-family: PoppinsRegular;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
 const FailText = styled.span`
   font-family: PoppinsRegular;
@@ -149,8 +152,18 @@ const AddressTable = (props) => {
     });
   };
   const changeLimit = (limit) => {
-    setState({ ...state, limit });
+    let totalCount = (state.currentPage + 1) * state.limit;
+    if (totalCount > txs.data.count) {
+      totalCount = txs.data.count;
+    }
+    let currentPage = totalCount / limit;
+    currentPage = Math.ceil(currentPage);
+
+    if (currentPage) {
+      setState({ ...state, limit, currentPage: currentPage - 1 });
+    }
   };
+
   useEffect(() => {
     const filter = {
       address: params.address,
@@ -235,8 +248,8 @@ const AddressTable = (props) => {
                     to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
-                  <Tooltip placement="right" target={`from_address${index}`}>
-                    view details
+                  <Tooltip placement="bottom" target={`from_address${index}`}>
+                    {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell>
@@ -250,8 +263,8 @@ const AddressTable = (props) => {
                     to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
-                  <Tooltip placement="right" target={`to_address${index}`}>
-                    view details
+                  <Tooltip placement="bottom" target={`to_address${index}`}>
+                    {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell>

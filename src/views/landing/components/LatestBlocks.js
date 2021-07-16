@@ -3,17 +3,13 @@ import { Table, Button, UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getAllBlocks
-  // getAllTransactions,
-  // getTotalSupply
-} from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { blockIcon } from 'src/assets/images';
 import { IconText } from 'src/components';
 import { TableLoader } from 'src/components';
 import { NoData } from 'src/components';
+import { getLandingPageData } from 'src/redux/socket/actions';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -151,17 +147,17 @@ const LinkExp = styled(Link)`
     text-decoration: none;
 `;
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px;
-  font-family: PoppinsRegular;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
 const LatestBlocks = () => {
   const dispatch = useDispatch();
-
-  const supply = useSelector((state) => state.supply.totalSupply);
-
   useEffect(() => {
-    supply && dispatch(getAllBlocks(supply.height - 4, supply.height));
-  }, [supply]);
+    // dispatch(getLandingPageData());
+  }, []);
 
   const { latestBlocks, latestBlocksLoading } = useSelector(
     (state) => state.blocks
@@ -182,24 +178,26 @@ const LatestBlocks = () => {
         <TableBody>
           {latestBlocks &&
             !latestBlocksLoading &&
-            latestBlocks.result.block_metas.map((item, i) => (
+            latestBlocks.map((item, i) => (
               <TableRow key={i}>
                 <TableCol>
                   <IconText>
                     <Icon src={blockIcon} />
                     <Link
-                      to={`/blocks/${item.header.height}`}
+                      to={`/blocks/${item.block_meta.header.height}`}
                       id={`height_exp_alpha${i}`}>
-                      {item.header.height}
+                      {item.block_meta.header.height}
                     </Link>
                     <Tooltip placement="right" target={`height_exp_alpha${i}`}>
                       view block by height!
                     </Tooltip>
                   </IconText>
                 </TableCol>
-                <TableCol>{moment(item.header.time).fromNow()}</TableCol>
-                <TableCol>{item.header.num_txs}</TableCol>
-                <TableCol>{item.header.last_commit_hash}</TableCol>
+                <TableCol>
+                  {moment(item.block_meta.header.time).fromNow()}
+                </TableCol>
+                <TableCol>{item.block_meta.header.num_txs}</TableCol>
+                <TableCol>{item.block_meta.header.last_commit_hash}</TableCol>
               </TableRow>
             ))}
           {!latestBlocksLoading && !latestBlocks && (

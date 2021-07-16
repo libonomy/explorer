@@ -12,6 +12,7 @@ import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { SCALE } from 'src/vars/scale';
 import { SYMBOL_REGEX } from 'src/vars/regex';
+import queryString from 'query-string';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -98,41 +99,54 @@ const Icon = styled.img`
 `;
 
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px;
-  font-family: PoppinsRegular;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
-
 const TxsTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
+  const { location } = props;
+  const { page = 1, limit = 10 } = queryString.parse(location.search);
 
-  const [state, setState] = useState({ limit: 10, currentPage: 0 });
+  const [state, setState] = useState({ limit: limit, currentPage: page - 1 });
+
   const dispatch = useDispatch();
-
-  const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
-
-  const queryString = require('query-string');
+  const { allTxs, allTxsLoading } = useSelector((state) => state.txs);
   const { block } = queryString.parse(props.location.search);
-
-  let txs = latestTxs && latestTxs.data.txs;
-  useEffect(() => {
-    const filter = {
-      page: state.currentPage,
-      limit: state.limit,
-      blockHeight: block
-    };
-    dispatch(getAllTransactions(filter));
-  }, [block, state.currentPage, state.limit]);
-
+  let txs = allTxs && allTxs.data.txs;
   const pageHandler = (e, index) => {
     e.preventDefault();
+    props.history.push(`/txs?page=${index}&&limit=${state.limit}`);
+
     setState({
       ...state,
       currentPage: index - 1
     });
   };
   const changeLimit = (limit) => {
-    setState({ ...state, limit });
+    let totalCount = (state.currentPage + 1) * state.limit;
+    if (totalCount > allTxs.data.total_count) {
+      totalCount = allTxs.data.total_count;
+    }
+    let currentPage = totalCount / limit;
+    currentPage = Math.ceil(currentPage);
+    if (currentPage) {
+      setState({ ...state, limit, currentPage: currentPage - 1 });
+    }
+    props.history.push(`/txs?page=${currentPage}&&limit=${limit} `);
   };
+  useEffect(() => {
+    const { location } = props;
+    const { page = 1, limit = 10 } = queryString.parse(location.search);
+    const filter = {
+      page: page - 1,
+      limit: limit,
+      blockHeight: block
+    };
+    dispatch(getAllTransactions(filter));
+  }, [block, page, limit]);
 
   return (
     <Wrapper>
@@ -143,9 +157,9 @@ const TxsTable = (props) => {
             <Pagination
               pageHandler={pageHandler}
               changeLimit={changeLimit}
-              count={latestTxs && latestTxs.data.count}
-              limit={state.limit}
-              currentPage={state.currentPage}
+              count={allTxs && allTxs.data.count}
+              limit={limit}
+              currentPage={page - 1}
             />
           )}
         </Header>
@@ -167,7 +181,7 @@ const TxsTable = (props) => {
         </TableHeader>
         <TableBody>
           {txs &&
-            !latestTxsLoading &&
+            !allTxsLoading &&
             txs.map((item, index) => (
               <TableRow key={index}>
                 <TableCell id={`txhash_exp_alpha${index}`}>
@@ -199,9 +213,9 @@ const TxsTable = (props) => {
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
                   <Tooltip
-                    placement="right"
+                    placement="bottom"
                     target={`from_address_alpha${index}`}>
-                    view details
+                    {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell id={`to_address_alpha${index}`}>
@@ -210,9 +224,9 @@ const TxsTable = (props) => {
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
                   <Tooltip
-                    placement="right"
+                    placement="bottom"
                     target={`to_address_alpha${index}`}>
-                    view details
+                    {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCell>
                 <TableCell>
@@ -231,10 +245,10 @@ const TxsTable = (props) => {
                 </TableCell>
               </TableRow>
             ))}
-          {!latestTxsLoading && !txs?.length && (
+          {!allTxsLoading && !txs?.length && (
             <NoData colSpan={6} height={360} />
           )}
-          {latestTxsLoading && <TableLoader colSpan={6} height={360} />}
+          {allTxsLoading && <TableLoader colSpan={6} height={360} />}
         </TableBody>
       </Table>
       {txs && txs.length >= 1 ? (
@@ -242,9 +256,9 @@ const TxsTable = (props) => {
           <Pagination
             pageHandler={pageHandler}
             changeLimit={changeLimit}
-            count={latestTxs && latestTxs.data.count}
-            limit={state.limit}
-            currentPage={state.currentPage}
+            count={allTxs && allTxs.data.count}
+            limit={limit}
+            currentPage={page - 1}
           />
         </Footer>
       ) : (

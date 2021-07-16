@@ -4,12 +4,12 @@ import { txIcon } from 'src/assets/images';
 import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTransactions } from 'src/redux/actions';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { IconText } from 'src/components/typography';
 import { TableLoader } from 'src/components';
 import { NoData } from 'src/components';
+import { getLandingPageData } from 'src/redux/socket/actions';
 
 const Wrapper = styled.div`
   overflow-y: auto;
@@ -112,8 +112,11 @@ justify-content: center;
 `;
 
 const Tooltip = styled(UncontrolledTooltip)`
-  font-size: 10px;
-  font-family: PoppinsRegular;
+  .tooltip-inner {
+    font-size: 12px !important;
+    font-family: PoppinsRegular;
+    background-color: #000;
+  }
 `;
 
 const TableButton = styled(Button)`
@@ -153,14 +156,8 @@ const LatestTxs = () => {
   const { latestTxs, latestTxsLoading } = useSelector((state) => state.txs);
 
   useEffect(() => {
-    const filter = {
-      page: 0,
-      limit: 5
-    };
-    dispatch(getAllTransactions(filter));
+    // dispatch(getLandingPageData());
   }, []);
-
-  let txs = latestTxs && latestTxs.data.txs;
   return (
     <Wrapper>
       <Header>Latest Transactions</Header>
@@ -171,13 +168,12 @@ const LatestTxs = () => {
             <TableHeading>Age</TableHeading>
             <TableHeading>From</TableHeading>
             <TableHeading>To</TableHeading>
-            {/* <TableHeading>Amount</TableHeading> */}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {txs &&
+          {latestTxs &&
             !latestTxsLoading &&
-            txs.map((item, i) => (
+            latestTxs.map((item, i) => (
               <TableRow key={i}>
                 <TableCol icon>
                   <IconText>
@@ -201,7 +197,7 @@ const LatestTxs = () => {
                     {item.tx.value.msg[0].value.from_address}
                   </Link>
                   <Tooltip placement="right" target={`from_address_alpha${i}`}>
-                    view details
+                    {item.tx.value.msg[0].value.from_address}
                   </Tooltip>
                 </TableCol>
                 <TableCol>
@@ -211,7 +207,7 @@ const LatestTxs = () => {
                     {item.tx.value.msg[0].value.to_address}
                   </Link>
                   <Tooltip placement="right" target={`to_address_alpha${i}`}>
-                    view details
+                    {item.tx.value.msg[0].value.to_address}
                   </Tooltip>
                 </TableCol>
               </TableRow>

@@ -207,14 +207,20 @@ const LatestTxs = () => {
                   )}
                 </TableCol>
                 <TableCol>
-                  <Link
-                    to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
-                    id={`to_address_alpha${i}`}>
-                    {item.tx.value.msg[0].value.to_address}
-                  </Link>
-                  <Tooltip placement="right" target={`to_address_alpha${i}`}>
-                    {item.tx.value.msg[0].value.to_address}
-                  </Tooltip>
+                  {item.tx.value.msg[0].value.to_address && (
+                    <Fragment>
+                      <Link
+                        to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
+                        id={`to_address_alpha${i}`}>
+                        {item.tx.value.msg[0].value.to_address}
+                      </Link>
+                      <Tooltip
+                        placement="right"
+                        target={`to_address_alpha${i}`}>
+                        {item.tx.value.msg[0].value.to_address}
+                      </Tooltip>
+                    </Fragment>
+                  )}
                 </TableCol>
               </TableRow>
             ))}

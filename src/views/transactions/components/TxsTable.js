@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Table, UncontrolledTooltip } from 'reactstrap';
 import { IconText, NoData, TableLoader, Pagination } from 'src/components';
 import { successIcon, failIcon } from 'src/assets/images';
@@ -208,26 +208,34 @@ const TxsTable = (props) => {
                   )}
                 </TableCell>
                 <TableCell id={`from_address_alpha${index}`}>
-                  <Link
-                    to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
-                    {item.tx.value.msg[0].value.from_address}
-                  </Link>
-                  <Tooltip
-                    placement="bottom"
-                    target={`from_address_alpha${index}`}>
-                    {item.tx.value.msg[0].value.from_address}
-                  </Tooltip>
+                  {item.tx.value.msg[0].value.from_address && (
+                    <Fragment>
+                      <Link
+                        to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
+                        {item.tx.value.msg[0].value.from_address}
+                      </Link>
+                      <Tooltip
+                        placement="bottom"
+                        target={`from_address_alpha${index}`}>
+                        {item.tx.value.msg[0].value.from_address}
+                      </Tooltip>
+                    </Fragment>
+                  )}
                 </TableCell>
                 <TableCell id={`to_address_alpha${index}`}>
-                  <Link
-                    to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
-                    {item.tx.value.msg[0].value.to_address}
-                  </Link>
-                  <Tooltip
-                    placement="bottom"
-                    target={`to_address_alpha${index}`}>
-                    {item.tx.value.msg[0].value.to_address}
-                  </Tooltip>
+                  {item.tx.value.msg[0].value.to_address && (
+                    <Fragment>
+                      <Link
+                        to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
+                        {item.tx.value.msg[0].value.to_address}
+                      </Link>
+                      <Tooltip
+                        placement="bottom"
+                        target={`to_address_alpha${index}`}>
+                        {item.tx.value.msg[0].value.to_address}
+                      </Tooltip>
+                    </Fragment>
+                  )}
                 </TableCell>
                 <TableCell>
                   <NumberFormat

@@ -208,7 +208,7 @@ const TxsTable = (props) => {
                   )}
                 </TableCell>
                 <TableCell id={`from_address_alpha${index}`}>
-                  {item.tx.value.msg[0].value.from_address && (
+                  {item.tx.value.msg[0].value.from_address ? (
                     <Fragment>
                       <Link
                         to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
@@ -220,10 +220,12 @@ const TxsTable = (props) => {
                         {item.tx.value.msg[0].value.from_address}
                       </Tooltip>
                     </Fragment>
+                  ) : (
+                    'N/A'
                   )}
                 </TableCell>
                 <TableCell id={`to_address_alpha${index}`}>
-                  {item.tx.value.msg[0].value.to_address && (
+                  {item.tx.value.msg[0].value.to_address ? (
                     <Fragment>
                       <Link
                         to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
@@ -235,6 +237,8 @@ const TxsTable = (props) => {
                         {item.tx.value.msg[0].value.to_address}
                       </Tooltip>
                     </Fragment>
+                  ) : (
+                    'N/A'
                   )}
                 </TableCell>
                 <TableCell>

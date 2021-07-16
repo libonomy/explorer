@@ -191,7 +191,7 @@ const LatestTxs = () => {
                 <TableCol>{moment(item.timestamp).fromNow()}</TableCol>
 
                 <TableCol>
-                  {item.tx.value.msg[0].value.from_address && (
+                  {item.tx.value.msg[0].value.from_address ? (
                     <Fragment>
                       <Link
                         to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
@@ -204,10 +204,12 @@ const LatestTxs = () => {
                         {item.tx.value.msg[0].value.from_address}
                       </Tooltip>
                     </Fragment>
+                  ) : (
+                    'N/A'
                   )}
                 </TableCol>
                 <TableCol>
-                  {item.tx.value.msg[0].value.to_address && (
+                  {item.tx.value.msg[0].value.to_address ? (
                     <Fragment>
                       <Link
                         to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
@@ -220,6 +222,8 @@ const LatestTxs = () => {
                         {item.tx.value.msg[0].value.to_address}
                       </Tooltip>
                     </Fragment>
+                  ) : (
+                    'N/A'
                   )}
                 </TableCol>
               </TableRow>

@@ -231,16 +231,25 @@ const TxsTable = (props) => {
                 </TableCell>
                 <TableCell>
                   <NumberFormat
-                    value={item.tx.value.msg[0].value.amount[0].amount / SCALE}
+                    value={
+                      item.tx.value?.msg[0]?.value?.amount
+                        ? item.tx.value?.msg[0]?.value?.amount[0].amount / SCALE
+                        : item.tx.value?.msg[0]?.value?.value?.amount / SCALE
+                    }
                     displayType={'text'}
                     thousandSeparator={true}
                   />
                   <Text uppercase>
                     {' '}
-                    {item.tx.value.msg[0].value.amount[0].denom.replace(
-                      SYMBOL_REGEX,
-                      ''
-                    )}
+                    {item.tx.value.msg[0].value.amount
+                      ? item.tx.value.msg[0].value.amount[0].denom.replace(
+                          SYMBOL_REGEX,
+                          ''
+                        )
+                      : item.tx.value?.msg[0]?.value?.value?.denom.replace(
+                          SYMBOL_REGEX,
+                          ''
+                        )}
                   </Text>
                 </TableCell>
               </TableRow>

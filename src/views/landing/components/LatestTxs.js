@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Table, Button, UncontrolledTooltip } from 'reactstrap';
 import { txIcon } from 'src/assets/images';
 import styled from 'styled-components';
@@ -191,14 +191,20 @@ const LatestTxs = () => {
                 <TableCol>{moment(item.timestamp).fromNow()}</TableCol>
 
                 <TableCol>
-                  <Link
-                    to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
-                    id={`from_address_alpha${i}`}>
-                    {item.tx.value.msg[0].value.from_address}
-                  </Link>
-                  <Tooltip placement="right" target={`from_address_alpha${i}`}>
-                    {item.tx.value.msg[0].value.from_address}
-                  </Tooltip>
+                  {item.tx.value.msg[0].value.from_address && (
+                    <Fragment>
+                      <Link
+                        to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
+                        id={`from_address_alpha${i}`}>
+                        {item.tx.value.msg[0].value.from_address}
+                      </Link>
+                      <Tooltip
+                        placement="right"
+                        target={`from_address_alpha${i}`}>
+                        {item.tx.value.msg[0].value.from_address}
+                      </Tooltip>
+                    </Fragment>
+                  )}
                 </TableCol>
                 <TableCol>
                   <Link

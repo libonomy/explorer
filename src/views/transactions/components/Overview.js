@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Table } from 'reactstrap';
@@ -219,15 +219,18 @@ const Overview = (props) => {
                   </TableHeading>
                   <TableCell>
                     <Wrapper>
-                      <LinkExp
-                        to={`/addresses/${tx.data.tx.value.msg[0].value.to_address}`}>
-                        {' '}
-                        {tx.data.tx.value.msg[0].value.to_address}{' '}
-                      </LinkExp>
-                      <Copy
-                        id="to_address-copy"
-                        value={tx.data.tx.value.msg[0].value.to_address}
-                      />
+                      {tx.data.tx.value.msg[0].value.to_address && (
+                        <Fragment>
+                          <LinkExp
+                            to={`/addresses/${tx.data.tx.value.msg[0].value.to_address}`}>
+                            {tx.data.tx.value.msg[0].value.to_address}{' '}
+                          </LinkExp>
+                          <Copy
+                            id="to_address-copy"
+                            value={tx.data.tx.value.msg[0].value.to_address}
+                          />
+                        </Fragment>
+                      )}
                     </Wrapper>
                   </TableCell>
                 </TableRow>
@@ -242,16 +245,26 @@ const Overview = (props) => {
                   <TableCell>
                     <NumberFormat
                       value={
-                        tx.data.tx.value.msg[0].value.amount[0].amount / SCALE
+                        tx.data.tx.value?.msg[0]?.value?.amount
+                          ? tx.data.tx.value?.msg[0]?.value?.amount[0].amount /
+                            SCALE
+                          : tx.data.tx.value?.msg[0]?.value?.value?.amount /
+                            SCALE
                       }
                       displayType={'text'}
                       thousandSeparator={true}
-                    />{' '}
+                    />
                     <Text uppercase>
-                      {tx.data.tx.value.msg[0].value.amount[0].denom.replace(
-                        SYMBOL_REGEX,
-                        ''
-                      )}
+                      {' '}
+                      {tx.data.tx.value.msg[0].value.amount
+                        ? tx.data.tx.value.msg[0].value.amount[0].denom.replace(
+                            SYMBOL_REGEX,
+                            ''
+                          )
+                        : tx.data.tx.value?.msg[0]?.value?.value?.denom.replace(
+                            SYMBOL_REGEX,
+                            ''
+                          )}
                     </Text>
                   </TableCell>
                 </TableRow>

@@ -6,11 +6,18 @@ import {
   GET_BLOCKS_BY_HEIGHT_LOADING,
   GET_LATEST_BLOCKS_LOADING
 } from './actionTypes';
-export const getAllBlocks = (filter) => (dispatch) => {
-  dispatch(getAllBlocksLoading());
 
+export const getAllBlocks = (filter) => (dispatch, getState) => {
+  const { name } = getState().blockchain;
+  console.log(name);
+  dispatch(getAllBlocksLoading());
+  console.log(
+    process.env[`REACT_APP_EXPLORER_API_${name}`],
+    process.env.REACT_APP_EXPLORER_API_v2f,
+    `REACT_APP_EXPLORER_API_${name}`
+  );
   axios
-    .get(`${process.env.REACT_APP_EXPLORER_API}/api/blocks`, {
+    .get(`${process.env[`REACT_APP_EXPLORER_API_${name}`]}/api/blocks`, {
       params: filter
     })
     .then((res) => {
@@ -31,10 +38,14 @@ export const getAllBlocksLoading = () => ({
   type: GET_ALL_BLOCKS_LOADING
 });
 
-export const getBlocksByHeight = (height) => (dispatch) => {
+export const getBlocksByHeight = (height) => (dispatch, getState) => {
+  const { name } = getState().blockchain;
+
   dispatch(getBlocksByHeightLoading());
   axios
-    .get(`${process.env.REACT_APP_EXPLORER_API}/api/blocks/${height}`)
+    .get(
+      `${process.env[`REACT_APP_EXPLORER_API_${name}`]}/api/blocks/${height}`
+    )
     .then((res) => {
       dispatch({
         type: GET_BLOCKS_BY_HEIGHT,

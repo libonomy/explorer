@@ -7,7 +7,10 @@ import supplyReducer from './supply/reducer';
 import addressesReducer from './addresses/reducer';
 import priceReducer from './price/reducer';
 import graphReducer from './graph/reducer';
-export default combineReducers({
+import blockchain from './blockchain/reducer';
+
+const reducers = combineReducers({
+  blockchain,
   auth: authReducer,
   info: infoReducer,
   blocks: blocksReducer,
@@ -17,3 +20,5 @@ export default combineReducers({
   price: priceReducer,
   graph: graphReducer
 });
+
+export default reducers;

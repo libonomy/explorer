@@ -6,12 +6,18 @@ import {
   GET_TRANSACTIONS_BY_HASH_LOADING,
   GET_LATEST_TRANSACTIONS_LOADING
 } from './actionTypes';
-export const getAllTransactions = (filter) => (dispatch) => {
+
+export const getAllTransactions = (filter) => (dispatch, getState) => {
+  const { name } = getState().blockchain;
+
   dispatch(getAllTransactionsLoading());
   axios
-    .get(`${process.env.REACT_APP_EXPLORER_API}/api/transaction/txs`, {
-      params: filter
-    })
+    .get(
+      `${process.env[`REACT_APP_EXPLORER_API_${name}`]}/api/transaction/txs`,
+      {
+        params: filter
+      }
+    )
     .then((res) => {
       dispatch({
         type: GET_All_TRANSACTIONS,
@@ -30,10 +36,16 @@ export const getAllTransactionsLoading = () => ({
   type: GET_All_TRANSACTIONS_LOADING
 });
 
-export const getTransectionByHash = (hash) => (dispatch) => {
+export const getTransectionByHash = (hash) => (dispatch, getState) => {
+  const { name } = getState().blockchain;
+
   dispatch(getTransectionByHashLoading());
   axios
-    .get(`${process.env.REACT_APP_EXPLORER_API}/api/transaction/txs/${hash}`)
+    .get(
+      `${
+        process.env[`REACT_APP_EXPLORER_API_${name}`]
+      }/api/transaction/txs/${hash}`
+    )
     .then((res) => {
       dispatch({
         type: GET_TRANSACTIONS_BY_HASH,

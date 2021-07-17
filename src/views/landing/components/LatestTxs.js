@@ -62,6 +62,8 @@ const TableBody = styled.tbody`
   display: table;
   width: 100%;
   table-layout: fixed;
+  min-height: 185px;
+  // align-items: flex-end;
 `;
 
 const Header = styled.div`

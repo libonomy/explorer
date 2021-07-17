@@ -6,10 +6,15 @@ import {
   GET_TRANSACTIONS_BY_ADDRESS_LOADING
 } from './actionTypes';
 
-export const getAccountDetails = (address) => (dispatch) => {
+export const getAccountDetails = (address) => (dispatch, getState) => {
+  const { name } = getState().blockchain;
   dispatch(getAccountDetailsLoading());
   axios
-    .get(`${process.env.REACT_APP_EXPLORER_API}/api/bank/balance/${address}`)
+    .get(
+      `${
+        process.env[`REACT_APP_EXPLORER_API_${name}`]
+      }/api/bank/balance/${address}`
+    )
 
     .then((res) => {
       dispatch({
@@ -28,12 +33,17 @@ export const getAccountDetails = (address) => (dispatch) => {
 export const getAccountDetailsLoading = () => ({
   type: GET_ACCOUNT_DETAILS_LOADING
 });
-export const getTransactionsByAddresses = (address) => (dispatch) => {
+export const getTransactionsByAddresses = (address) => (dispatch, getState) => {
+  const { name } = getState().blockchain;
+
   dispatch(getTransactionsByAddressesLoading());
   axios
-    .get(`${process.env.REACT_APP_EXPLORER_API}/api/transaction/txs`, {
-      params: address
-    })
+    .get(
+      `${process.env[`REACT_APP_EXPLORER_API_${name}`]}/api/transaction/txs`,
+      {
+        params: address
+      }
+    )
     .then((res) => {
       dispatch({
         type: GET_TRANSACTIONS_BY_ADDRESS,

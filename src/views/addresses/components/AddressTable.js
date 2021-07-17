@@ -221,7 +221,7 @@ const AddressTable = (props) => {
         <TableBody>
           {txs &&
             !txsLoading &&
-            txs.data.txs.map((item, index) => (
+            txs.data.txs?.map((item, index) => (
               <TableRow key={index}>
                 <TableCell id={`txhash${index}`}>
                   <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
@@ -283,7 +283,7 @@ const AddressTable = (props) => {
                 </TableCell>
               </TableRow>
             ))}
-          {!txsLoading && txs?.data.txs?.length === 0 && (
+          {!txsLoading && !txs?.data.txs?.length && (
             <NoData colSpan={7} height={360} />
           )}
           {txsLoading && <TableLoader colSpan={7} height={360} />}

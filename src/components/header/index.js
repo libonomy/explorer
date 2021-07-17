@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { logo, search } from 'src/assets/images';
 import { Link } from 'react-router-dom';
 import {
@@ -12,10 +12,14 @@ import styled from 'styled-components';
 import colors from 'src/vars/colors';
 import history from 'src/utils/history';
 import Select from 'react-select';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveBlockchain } from 'src/redux/actions';
+
 const Wrapper = styled.div`
   background-color: ${colors.white};
   padding: 1rem 0 1rem 0rem;
 `;
+
 const Section = styled.div`
   display: flex;
   justify-content: space-between;
@@ -28,10 +32,15 @@ const Section = styled.div`
 `;
 
 const RightSection = styled.div`
-  flex: 1;
+  flex: 2;
 `;
 const LeftSection = styled.div`
-  flex: 1;
+  flex: 3;
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 991px) {
+    margin: 1.5rem 0px 0px 0px;
+  }
 `;
 
 const Logo = styled.img`
@@ -56,14 +65,13 @@ const SearchIcon = styled.img`
   width: 20px;
   height: 20px;
 `;
+
 const SearchBox = styled(InputGroup)`
+  flex: 3;
   background: white;
   border-radius: 6px;
   border: solid 1px ${colors.borderGrey};
 
-  @media (max-width: 991px) {
-    margin: 1.5rem 0px 0px 0px;
-  }
   input.form-control {
     padding-left: 20px !important;
   }
@@ -106,6 +114,7 @@ const SearchBox = styled(InputGroup)`
     box-shadow: none !important;
   }
 `;
+
 const IconButton = styled(Button)`
   background-color: #28a0b0 !important;
   font-size: 18px;
@@ -118,106 +127,18 @@ const IconButton = styled(Button)`
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 `;
-// const InputExp = styled(Input)`
-//   max-width: 22% !important ;
-//   opacity: 1 !important;
-//   font-family: 'PoppinsRegular' !important;
-//   font-size: 14px !important;
-//   padding: 0 8px !important;
-//   color: #495057;
-//   background-color: #fff;
-//   border-top-left-radius: 6px;
-//   border-bottom-left-radius: 6px;
-//   margin-top: 4px !important;
-//   display: flex;
-//   text-align: justify;
-//   cursor: pointer;
 
-//   @media (max-width: 991px) {
-//     max-width: 20% !important;
-//   }
-//   &:focus {
-//     color: #000;
-//     background-color: #fff;
-//     border-color: #f1f1f1;
-//     outline: none;
-//     box-shadow: none;
-//   }
-// `;
-// const OptionExp = styled.option`
-//   font-family: PoppinsRegular;
-//   font-size: 13.5px !important;
-//   font-weight: 400;
-//   line-height: 1.5;
-//   background: transparent;
-//   width: 150px;
-//   padding-right: 100px;
-//   font-size: 16px;
-//   border: 1px solid #ccc;
-//   height: 34px;
+const SelectExp = styled(Select)``;
 
-//   cursor: pointer !important;
-//   &:hover {
-//     color: #000;
-//     background-color: ${colors.primary};
-//   }
-// `;
+const SelectBoxWrapper = styled.div`
+  width: 100px;
+`;
 
-const SelectExp = styled(Select)`
-  .css-1layoqn-control {
-    opacity: 1 !important;
-    font-family: 'PoppinsRegular' !important;
-    font-size: 14px !important;
-    color: #495057;
-    background-color: #fff;
-    cursor: pointer;
-    width: 116px;
-  }
-  ,
-  .css-1wa3eu0-placeholder {
-    margin-left: 2px;
-    margin-right: 2px;
-    position: absolute;
-    top: 50%;
-    opacity: 1 !important;
-    font-family: 'PoppinsMedium' !important;
-    font-size: 15px !important;
-    color: #495057;
-  }
-  ,
-  .css-1layoqn-control:hover {
-    border-color: transparent !important;
-  }
-  ,
-  .css-15habef-control {
-    width: 116px !important;
-    outline: none;
-    border-color: transparent !important;
-    border-radius: 7px;
-    caret-color: transparent;
-    z-index: 4 !important;
-    font-family: 'PoppinsRegular' !important;
-    font-size: 14px !important;
-    color: #495057;
-    background-color: #fff;
-    cursor: pointer !important;
-  }
-  ,
-  .css-1okebmr-indicatorSeparator {
-    background-color: #fff;
-    margin-bottom: 0;
-    margin-top: 0;
-    width: 0px;
-    box-sizing: border-box;
-  }
-  .css-1uccc91-singleValue {
-    opacity: 1 !important;
-    font-family: 'PoppinsMedium' !important;
-    font-size: 14px !important;
-
-    color: #495057;
-    background-color: #fff;
-  }
+const BlockchainSelect = styled(Select)`
+  border: solid 1px rgba(90, 90, 90, 0.5);
+  border-radius: 6px;
+  margin-right: 10px;
+  flex-basis: 130px;
 `;
 
 const style = {
@@ -247,6 +168,9 @@ const style = {
 
 const Header = (props) => {
   const [state, setState] = useState({ filterName: 'Filter', keyword: '' });
+  const [blockchain, setBlockChain] = useState('libonomy');
+  const { name } = useSelector((state) => state.blockchain);
+  const dispatch = useDispatch();
 
   const handleSearch = (e) => {
     if (state.keyword !== '') {
@@ -265,8 +189,19 @@ const Header = (props) => {
   const hanldeDropDown = (e) => {
     setState({ ...state, filterName: e.value });
   };
+
+  const hanldeSelectBlockchain = (e) => {
+    setBlockChain(e.value);
+    dispatch(setActiveBlockchain(e.value));
+    refreshPage();
+  };
+
   const handleChange = (e) => {
     setState({ ...state, keyword: e.target.value });
+  };
+
+  const refreshPage = () => {
+    window.location.reload(false);
   };
 
   const handleKeyDown = (event) => {
@@ -292,23 +227,28 @@ const Header = (props) => {
             </Link>
           </RightSection>
           <LeftSection>
+            <BlockchainSelect
+              styles={style}
+              options={BlockchainOptions}
+              placeholder="Blockchain"
+              onChange={hanldeSelectBlockchain}
+              value={BlockchainOptions.filter(
+                (option) => option.value === name
+              )}
+            />
             <SearchBox>
-              {/* <InputExp
-                type="select"
-                name={state.filterName}
-                value={state.filterName}
-                id="exampleSelect"
-                onChange={(value) => hanldeDropDown(value)}>
-                <OptionExp>Filter</OptionExp>
-                <OptionExp>Txs</OptionExp>
-                <OptionExp>Address</OptionExp>
-              </InputExp> */}
-              <SelectExp
-                styles={style}
-                options={Options}
-                placeholder="Filter"
-                onChange={hanldeDropDown}
-              />
+              <SelectBoxWrapper>
+                <SelectExp
+                  styles={style}
+                  options={Options}
+                  name="filter"
+                  placeholder="Filter"
+                  onChange={hanldeDropDown}
+                  components={{
+                    IndicatorSeparator: () => null
+                  }}
+                />
+              </SelectBoxWrapper>
               <VerticalLine />
               <Input
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"
@@ -341,5 +281,16 @@ const Options = [
   {
     value: 'Address',
     label: 'Address'
+  }
+];
+
+const BlockchainOptions = [
+  {
+    value: 'libonomy',
+    label: 'Libonomy'
+  },
+  {
+    value: 'v2f',
+    label: 'V2F'
   }
 ];

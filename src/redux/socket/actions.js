@@ -17,10 +17,15 @@ import {
 } from '../txs/actionTypes';
 import { GET_GRAPH_DATA, GET_GRAPH_DATA_LOADING } from '../graph/actionTypes';
 
-const socket = io.connect(process.env.REACT_APP_SOCKET_URI, {
+const name = localStorage.getItem('blockchain')
+  ? localStorage.getItem('blockchain')
+  : 'libonomy';
+
+const socket = io.connect(`${process.env[`REACT_APP_SOCKET_URI_${name}`]}`, {
   secure: true,
   transports: ['websocket']
 });
+
 export const getLandingPageData = () => (dispatch) => {
   dispatch({
     type: GET_COIN_PRICE_LOADING,

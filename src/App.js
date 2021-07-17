@@ -3,15 +3,18 @@ import styled from 'styled-components';
 import GlobalStyle from 'src/globalStyle';
 import MainApp from 'src/navigation/RouterConfig';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import store, { persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Wrapper = styled.div``;
 const App = () => {
   return (
     <Wrapper>
       <Provider store={store}>
-        <GlobalStyle />
-        <MainApp />
+        <PersistGate loading={null} persistor={persistor}>
+          <GlobalStyle />
+          <MainApp />
+        </PersistGate>
       </Provider>
     </Wrapper>
   );

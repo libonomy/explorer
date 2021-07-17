@@ -217,25 +217,7 @@ const TextFormat = styled(NumberFormat)`
   text-align: left;
   color: ${colors.black};
 `;
-// const ToggleCard = styled.div`
-//   width: 18px;
-//   height: 17px;
-//   position: absolute;
-//   background-color: white;
-//   top: 0;
-//   right: 0;
-// `;
-// const MenuIcon = styled.span`
-//   position: absolute;
-//   width: 8px;
-//   height: 7px;
-//   top: 6px;
-//   right: 2px;
-// `;
-// const Texts = styled.span`
-//   text-transform: uppercase;
-//   font-family: PoppinsBold;
-// `;
+
 const Statistics = () => {
   const dispatch = useDispatch();
 
@@ -244,6 +226,7 @@ const Statistics = () => {
   }, []);
 
   const { nodeInfo, nodeInfoLoading } = useSelector((state) => state.info);
+  const { name } = useSelector((state) => state.blockchain);
   const { totalSupply, totalSupplyLoading } = useSelector(
     (state) => state.supply
   );
@@ -307,21 +290,26 @@ const Statistics = () => {
               <InnerBody>
                 <Title>Inflation</Title>
                 <Text>
-                  {totalSupply && (
-                    <Fragment>
-                      <TextFormat
-                        value={(
-                          totalSupply.result[0].amount / SCALE -
-                          70000000
-                        ).toFixed(6)}
-                        displayType={'text'}
-                      />{' '}
-                      <TextExp>
-                        {' '}
-                        {totalSupply.result[0].denom.replace(SYMBOL_REGEX, '')}
-                      </TextExp>
-                    </Fragment>
-                  )}
+                  {name === 'v2f'
+                    ? 'N/A'
+                    : totalSupply && (
+                        <Fragment>
+                          <TextFormat
+                            value={(
+                              totalSupply.result[0].amount / SCALE -
+                              70000000
+                            ).toFixed(6)}
+                            displayType={'text'}
+                          />{' '}
+                          <TextExp>
+                            {' '}
+                            {totalSupply.result[0].denom.replace(
+                              SYMBOL_REGEX,
+                              ''
+                            )}
+                          </TextExp>
+                        </Fragment>
+                      )}
                 </Text>
               </InnerBody>
             </CardContent>
@@ -337,7 +325,7 @@ const Statistics = () => {
                 <Text>
                   {totalSupply && (
                     <Fragment>
-                      70,000,000
+                      {name === 'v2f' ? '333,333,333' : '70,000,000'}
                       <TextExp>
                         {' '}
                         {totalSupply.result[0].denom.replace(SYMBOL_REGEX, '')}

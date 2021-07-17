@@ -39,7 +39,7 @@ export const getTransactionsByAddresses = (address) => (dispatch, getState) => {
   dispatch(getTransactionsByAddressesLoading());
   axios
     .get(
-      `$${process.env[`REACT_APP_EXPLORER_API_${name}`]}/api/transaction/txs`,
+      `${process.env[`REACT_APP_EXPLORER_API_${name}`]}/api/transaction/txs`,
       {
         params: address
       }

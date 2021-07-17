@@ -34,12 +34,17 @@ const Section = styled.div`
 const RightSection = styled.div`
   flex: 2;
 `;
+
 const LeftSection = styled.div`
   flex: 3;
   display: flex;
   flex-direction: row;
   @media (max-width: 991px) {
     margin: 1.5rem 0px 0px 0px;
+  }
+
+  @media (max-width: 412px) {
+    display: block;
   }
 `;
 
@@ -116,6 +121,7 @@ const SearchBox = styled(InputGroup)`
 `;
 
 const IconButton = styled(Button)`
+  z-index: 0;
   background-color: #28a0b0 !important;
   font-size: 18px;
   line-height: 1.27;
@@ -139,6 +145,10 @@ const BlockchainSelect = styled(Select)`
   border-radius: 6px;
   margin-right: 10px;
   flex-basis: 130px;
+  @media (max-width: 412px) {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 `;
 
 const style = {

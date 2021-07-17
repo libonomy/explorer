@@ -201,6 +201,9 @@ const TextExp = styled.span`
   text-align: left;
   color: ${colors.black};
 `;
+const TextBox = styled.div`
+  padding: 2px 0px;
+`;
 
 const AddressInfo = (props) => {
   const { details, detailsLoading } = useSelector((state) => state.addresses);
@@ -324,10 +327,57 @@ const AddressInfo = (props) => {
                         )}
                       </Fragment>
                     ) : (
-                      0
+                      <TextExp> $0 </TextExp>
                     )}
                   </Text>
                 )}
+                <TextBox>
+                  {details && details?.data?.value?.coins[2]?.amount ? (
+                    <Text>
+                      {details &&
+                      details?.data?.value?.coins[2]?.amount &&
+                      details?.data?.value?.coins[2]?.denom.includes('fv2f') ? (
+                        <Fragment>
+                          <TextFormat
+                            value={
+                              details?.data?.value?.coins[2]?.amount / SCALE
+                            }
+                            displayType={'text'}
+                            thousandSeparator={true}
+                          />{' '}
+                          {details?.data?.value?.coins[2]?.denom.replace(
+                            SYMBOL_REGEX,
+
+                            ''
+                          )}
+                        </Fragment>
+                      ) : (
+                        ''
+                      )}
+                    </Text>
+                  ) : (
+                    <Text>
+                      {details &&
+                      details?.data?.value?.coins[1]?.amount &&
+                      details?.data?.value?.coins[1]?.denom.includes('fv2f') ? (
+                        <Fragment>
+                          <TextFormat
+                            value={
+                              details?.data?.value?.coins[1]?.amount / SCALE
+                            }
+                            displayType={'text'}
+                            thousandSeparator={true}
+                          />{' '}
+                          {details?.data?.value?.coins[1]?.denom.replace(
+                            SYMBOL_REGEX,
+
+                            ''
+                          )}
+                        </Fragment>
+                      ) : null}
+                    </Text>
+                  )}
+                </TextBox>
               </InnerBody>
 
               {details?.data?.value?.coins?.amount > 1 &&

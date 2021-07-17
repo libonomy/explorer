@@ -233,6 +233,7 @@ const Statistics = () => {
   const { coinPrice, coinPriceLoading } = useSelector((state) => state.price);
 
   const { latestBlocks } = useSelector((state) => state.blocks);
+
   return (
     <Wrapper>
       <Row>
@@ -328,7 +329,12 @@ const Statistics = () => {
                       {name === 'v2f' ? '333,333,333' : '70,000,000'}
                       <TextExp>
                         {' '}
-                        {totalSupply.result[0].denom.replace(SYMBOL_REGEX, '')}
+                        {name === 'v2f'
+                          ? 'V2F'
+                          : totalSupply.result[0].denom.replace(
+                              SYMBOL_REGEX,
+                              ''
+                            )}
                       </TextExp>
                     </Fragment>
                   )}

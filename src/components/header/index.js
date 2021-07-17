@@ -168,8 +168,11 @@ const style = {
 
 const Header = (props) => {
   const [state, setState] = useState({ filterName: 'Filter', keyword: '' });
-  const [blockchain, setBlockChain] = useState('libonomy');
+
   const { name } = useSelector((state) => state.blockchain);
+
+  const [blockchain, setBlockChain] = useState(name);
+
   const dispatch = useDispatch();
 
   const handleSearch = (e) => {
@@ -233,7 +236,7 @@ const Header = (props) => {
               placeholder="Blockchain"
               onChange={hanldeSelectBlockchain}
               value={BlockchainOptions.filter(
-                (option) => option.value === name
+                (option) => option.value === blockchain
               )}
             />
             <SearchBox>

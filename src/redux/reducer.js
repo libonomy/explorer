@@ -7,17 +7,10 @@ import supplyReducer from './supply/reducer';
 import addressesReducer from './addresses/reducer';
 import priceReducer from './price/reducer';
 import graphReducer from './graph/reducer';
-import blockchainReducer from './blockchain/reducer';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-
-const blockchainPersistConfig = {
-  key: 'name',
-  storage: storage
-};
+import blockchain from './blockchain/reducer';
 
 const reducers = combineReducers({
-  blockchain: persistReducer(blockchainPersistConfig, blockchainReducer),
+  blockchain,
   auth: authReducer,
   info: infoReducer,
   blocks: blocksReducer,

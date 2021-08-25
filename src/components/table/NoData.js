@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TableCell, TableRow } from '../table';
+import { TableCell } from '../table';
 import styled from 'styled-components';
 import { noData } from 'src/assets/images';
 import colors from 'src/vars/colors';
@@ -20,6 +20,15 @@ const Text = styled.p`
 `;
 
 const Image = styled.img``;
+
+const TableRow = styled.tr`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  :hover {
+    background-color: #fff !important;
+  }
+`;
 
 const NoData = (props) => {
   return (

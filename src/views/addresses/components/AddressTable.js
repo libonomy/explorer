@@ -50,7 +50,7 @@ const Footer = styled.div`
 
 const TableHeader = styled.thead`
   border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
-  background-color: rgba(240, 249, 250, 0.8);
+  background-color: #f0f4ff;
 `;
 
 const Text = styled.span`

@@ -30,27 +30,27 @@ const Wrapper = styled.div``;
 //   padding: 10.5px 16px;
 //   .btn-secondary:hover {
 //     color: #fff;
-//     background-color: #40B1BE !important;
-//     border-color: #40b1be;
+//     background-color: #1f4bb1 !important;
+//     border-color: #1f4bb1;
 //   }
 //   .btn-secondary:focus,
 //   .btn-secondary.focus {
 //     color: #fff;
-//     background-color: #40b1be !important;
-//     border-color: #40b1be !important;
+//     background-color: #1f4bb1 !important;
+//     border-color: #1f4bb1 !important;
 //     box-shadow: none !important;
 //   }
 //   .btn-secondary:not(:disabled):not(.disabled):active,
 //   .btn-secondary:not(:disabled):not(.disabled).active,
 //   .show > .btn-secondary.dropdown-toggle {
 //     color: #fff;
-//     background-color: #40b1be;
-//     border-color: #40b1be;
+//     background-color: #1f4bb1;
+//     border-color: #1f4bb1;
 //   }
 //   .btn-secondary {
 //     color: #fff;
-//     background-color: #40b1be;
-//     border-color: #40b1be;
+//     background-color: #1f4bb1;
+//     border-color: #1f4bb1;
 // `;
 
 // const CardButton = styled(Button)`
@@ -58,7 +58,7 @@ const Wrapper = styled.div``;
 //   height: 28px;
 //   border-radius: 3px;
 //   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
-//   background-color: #40b1be;
+//   background-color: #1f4bb1;
 //   display: flex;
 //   align-items: center;
 //   box-shadow: none;
@@ -66,22 +66,22 @@ const Wrapper = styled.div``;
 //   font-size: 11px;
 //   .btn-secondary:hover {
 //     color: #fff;
-//     background-color: ##40b1be !important;
-//     border-color: ##40b1be !important;
+//     background-color: ##1f4bb1 !important;
+//     border-color: ##1f4bb1 !important;
 //   }
 //   .btn-secondary:focus,
 //   .btn-secondary.focus {
 //     color: #fff;
-//     background-color: #40b1be !important;
-//     border-color: #40b1be !important;
+//     background-color: #1f4bb1 !important;
+//     border-color: #1f4bb1 !important;
 //     box-shadow: none !important;
 //   }
 //   .btn-secondary:not(:disabled):not(.disabled):active,
 //   .btn-secondary:not(:disabled):not(.disabled).active,
 //   .show > .btn-secondary.dropdown-toggle {
 //     color: #fff;
-//     background-color: #40b1be;
-//     border-color: #40b1be;
+//     background-color: #1f4bb1;
+//     border-color: #1f4bb1;
 //   }
 // `;
 const CardExp = styled(Card)`

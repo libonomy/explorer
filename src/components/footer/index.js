@@ -81,7 +81,7 @@ const Paragraph = styled.p`
   text-align: left;
 `;
 const FooterTail = styled.div`
-  background-color: #40b1be;
+  background-color: #1f4bb1;
   color: #fff;
   padding: 0.7rem 0;
 `;

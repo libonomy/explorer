@@ -15,7 +15,7 @@ const TableLoader = (props) => {
     <TableRow {...props}>
       <TableCell colSpan={props.colSpan}>
         <LoaderWrapper height={props.height}>
-          <Spinner color="info" />
+          <Spinner style={{ color: '#1f4bb1' }} />
         </LoaderWrapper>
       </TableCell>
     </TableRow>

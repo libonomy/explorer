@@ -30,7 +30,7 @@ const NavLinkExp = styled(NavLink)`
     border-top-color: transparent !important;
   }
   &:hover {
-    color: #40b1be;
+    color: #1f4bb1;
     text-decoration: none;
   }
 `;

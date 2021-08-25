@@ -122,7 +122,7 @@ const SearchBox = styled(InputGroup)`
 
 const IconButton = styled(Button)`
   z-index: 0;
-  background-color: #28a0b0 !important;
+  background-color: #1f4bb1 !important;
   font-size: 18px;
   line-height: 1.27;
   letter-spacing: 0.66px;

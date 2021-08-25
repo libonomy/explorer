@@ -12,7 +12,7 @@ const colors = {
   black80Alpha2: 'rgba(37, 36, 41, 0.8)',
   disabledGray: '#BCBCBD',
   disabledGray10Alpha: 'rgba(188, 188, 189, 0.1)',
-  primary: '#40b1be',
+  primary: '#1f4bb1',
   darkerPrimary: '#3698a3',
   blue: '#1776E3',
   darkerBlue: '#0E4F9A',
@@ -29,7 +29,7 @@ const colors = {
   dmBlack2: '#353439',
   shaddow: '0 0.75rem 1.5rem rgb(18 38 63 / 10%)',
   borderGrey: 'rgba(90, 90, 90, 0.5)',
-  chipColor: '#40b1be42'
+  chipColor: '#f0f4ff'
 };
 
 export default colors;

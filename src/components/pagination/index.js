@@ -42,8 +42,8 @@ const Link = styled(PaginationLink)`
     z-index: 2;
     color: #fff;
     text-decoration: none;
-    background-color: #40b1be;
-    border-color: #40b1be;
+    background-color: #1f4bb1;
+    border-color: #1f4bb1;
   }
 `;
 

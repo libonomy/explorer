@@ -45,7 +45,7 @@ const TableHeading = styled.th`
 `;
 const TableHeader = styled.thead`
   border: solid 0.5px rgba(0, 0, 0, 0.1) 0;
-  background-color: rgba(240, 249, 250, 0.8);
+  background-color: #f0f4ff;
 `;
 const LinkExp = styled(Link)`
   text-decoration: none;
@@ -90,27 +90,27 @@ justify-content: center;
 
   .btn-secondary:hover {
     color: #fff;
-    background-color: #40B1BE !important;
-    border-color: #40b1be;
+    background-color: #1f4bb1 !important;
+    border-color: #1f4bb1;
   }
   .btn-secondary:focus,
   .btn-secondary.focus {
     color: #fff;
-    background-color: #40b1be !important;
-    border-color: #40b1be !important;
+    background-color: #1f4bb1 !important;
+    border-color: #1f4bb1 !important;
     box-shadow: none !important;
   }
   .btn-secondary:not(:disabled):not(.disabled):active,
   .btn-secondary:not(:disabled):not(.disabled).active,
   .show > .btn-secondary.dropdown-toggle {
     color: #fff;
-    background-color: #40b1be;
-    border-color: #40b1be;
+    background-color: #1f4bb1;
+    border-color: #1f4bb1;
   }
   .btn-secondary {
     color: #fff;
-    background-color: #40b1be;
-    border-color: #40b1be;
+    background-color: #1f4bb1;
+    border-color: #1f4bb1;
 `;
 
 const Tooltip = styled(UncontrolledTooltip)`
@@ -126,7 +126,7 @@ const TableButton = styled(Button)`
   height: 28px;
   border-radius: 3px;
   box-shadow: ${colors.shaddow};
-  background-color: #40b1be;
+  background-color: #1f4bb1;
   display: flex;
   align-items: center;
   box-shadow: none;
@@ -134,22 +134,22 @@ const TableButton = styled(Button)`
   font-size: 11px;
   .btn-secondary:hover {
     color: #fff;
-    background-color: ##40b1be !important;
-    border-color: ##40b1be !important;
+    background-color: ##1f4bb1 !important;
+    border-color: ##1f4bb1 !important;
   }
   .btn-secondary:focus,
   .btn-secondary.focus {
     color: #fff;
-    background-color: #40b1be !important;
-    border-color: #40b1be !important;
+    background-color: #1f4bb1 !important;
+    border-color: #1f4bb1 !important;
     box-shadow: none !important;
   }
   .btn-secondary:not(:disabled):not(.disabled):active,
   .btn-secondary:not(:disabled):not(.disabled).active,
   .show > .btn-secondary.dropdown-toggle {
     color: #fff;
-    background-color: #40b1be;
-    border-color: #40b1be;
+    background-color: #1f4bb1;
+    border-color: #1f4bb1;
   }
 `;
 const LatestTxs = () => {

@@ -268,8 +268,8 @@ const ConsensusState = () => {
             <Line
               type="monotone"
               dataKey="Price"
-              stroke="#40b1be"
-              fill="#40b1be"
+              stroke="#1f4bb1"
+              fill="#1f4bb1"
             />
           </LineChart>
         </ResponsiveContainer>

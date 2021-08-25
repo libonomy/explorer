@@ -105,6 +105,12 @@ const Tooltip = styled(UncontrolledTooltip)`
     background-color: #000;
   }
 `;
+
+const LinkText = styled(Link)`
+  color: #1f4bb1;
+  &:hover {
+    color: #1f4bb1;
+`;
 const TxsTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
   const { location } = props;
@@ -185,7 +191,7 @@ const TxsTable = (props) => {
             txs.map((item, index) => (
               <TableRow key={index}>
                 <TableCell id={`txhash_exp_alpha${index}`}>
-                  <Link to={`/txs/${item.txhash}`}>{item.txhash}</Link>
+                  <LinkText to={`/txs/${item.txhash}`}>{item.txhash}</LinkText>
                   <Tooltip
                     placement="right"
                     target={`txhash_exp_alpha${index}`}>
@@ -210,10 +216,10 @@ const TxsTable = (props) => {
                 <TableCell id={`from_address_alpha${index}`}>
                   {item.tx.value.msg[0].value.from_address ? (
                     <Fragment>
-                      <Link
+                      <LinkText
                         to={`/addresses/${item.tx.value.msg[0].value.from_address}`}>
                         {item.tx.value.msg[0].value.from_address}
-                      </Link>
+                      </LinkText>
                       <Tooltip
                         placement="bottom"
                         target={`from_address_alpha${index}`}>
@@ -227,10 +233,10 @@ const TxsTable = (props) => {
                 <TableCell id={`to_address_alpha${index}`}>
                   {item.tx.value.msg[0].value.to_address ? (
                     <Fragment>
-                      <Link
+                      <LinkText
                         to={`/addresses/${item.tx.value.msg[0].value.to_address}`}>
                         {item.tx.value.msg[0].value.to_address}
-                      </Link>
+                      </LinkText>
                       <Tooltip
                         placement="bottom"
                         target={`to_address_alpha${index}`}>

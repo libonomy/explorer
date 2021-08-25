@@ -54,6 +54,12 @@ const Tooltip = styled(UncontrolledTooltip)`
     background-color: #000;
   }
 `;
+
+const LinkText = styled(Link)`
+  color: #1f4bb1;
+  &:hover {
+    color: #1f4bb1;
+`;
 const BlocksTable = (props) => {
   const matches = useMediaQuery('(min-width:600px)');
   const dispatch = useDispatch();
@@ -143,11 +149,11 @@ const BlocksTable = (props) => {
             allBlocks.data.blocks.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>
-                  <Link
+                  <LinkText
                     to={`/blocks/${item.block_meta.header.height}`}
                     id={`height_exp_alpha${index}`}>
                     {item.block_meta.header.height}
-                  </Link>
+                  </LinkText>
                   <Tooltip
                     placement="right"
                     target={`height_exp_alpha${index}`}>

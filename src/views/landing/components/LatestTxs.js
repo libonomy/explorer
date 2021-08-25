@@ -152,6 +152,12 @@ const TableButton = styled(Button)`
     border-color: #1f4bb1;
   }
 `;
+
+const LinkText = styled(Link)`
+  color: #1f4bb1;
+  &:hover {
+    color: #1f4bb1;
+`;
 const LatestTxs = () => {
   const dispatch = useDispatch();
 
@@ -180,11 +186,11 @@ const LatestTxs = () => {
                 <TableCol icon>
                   <IconText>
                     <Icon src={txIcon} />
-                    <Link
+                    <LinkText
                       to={`/txs/${item.txhash}`}
                       id={`txhash_exp_alpha${i}`}>
                       {item.txhash}
-                    </Link>
+                    </LinkText>
                     <Tooltip placement="right" target={`txhash_exp_alpha${i}`}>
                       view tx by hash!
                     </Tooltip>
@@ -195,11 +201,11 @@ const LatestTxs = () => {
                 <TableCol>
                   {item.tx.value.msg[0].value.from_address ? (
                     <Fragment>
-                      <Link
+                      <LinkText
                         to={`/addresses/${item.tx.value.msg[0].value.from_address}`}
                         id={`from_address_alpha${i}`}>
                         {item.tx.value.msg[0].value.from_address}
-                      </Link>
+                      </LinkText>
                       <Tooltip
                         placement="right"
                         target={`from_address_alpha${i}`}>
@@ -213,11 +219,11 @@ const LatestTxs = () => {
                 <TableCol>
                   {item.tx.value.msg[0].value.to_address ? (
                     <Fragment>
-                      <Link
+                      <LinkText
                         to={`/addresses/${item.tx.value.msg[0].value.to_address}`}
                         id={`to_address_alpha${i}`}>
                         {item.tx.value.msg[0].value.to_address}
-                      </Link>
+                      </LinkText>
                       <Tooltip
                         placement="right"
                         target={`to_address_alpha${i}`}>

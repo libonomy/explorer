@@ -153,6 +153,12 @@ const Tooltip = styled(UncontrolledTooltip)`
     background-color: #000;
   }
 `;
+
+const LinkText = styled(Link)`
+  color: #1f4bb1;
+  &:hover {
+    color: #1f4bb1;
+`;
 const LatestBlocks = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -183,11 +189,11 @@ const LatestBlocks = () => {
                 <TableCol>
                   <IconText>
                     <Icon src={blockIcon} />
-                    <Link
+                    <LinkText
                       to={`/blocks/${item.block_meta.header.height}`}
                       id={`height_exp_alpha${i}`}>
                       {item.block_meta.header.height}
-                    </Link>
+                    </LinkText>
                     <Tooltip placement="right" target={`height_exp_alpha${i}`}>
                       view block by height!
                     </Tooltip>

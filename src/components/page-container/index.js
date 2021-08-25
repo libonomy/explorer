@@ -20,7 +20,7 @@ const Heading = styled.h1`
   line-height: 1.45;
   letter-spacing: 0.6px;
   text-align: left;
-  color: black;
+  color: #1f4bb1;
   margin: 2rem 0 1rem 0px;
   font-family: PoppinsMedium;
 `;

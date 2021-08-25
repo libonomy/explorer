@@ -36,3 +36,4 @@ export { default as balance } from './balance.svg';
 export { default as home } from './home.svg';
 export { default as discord } from './discord.png';
 export { default as telegram } from './telegram.png';
+export { default as filter } from './filter.png';

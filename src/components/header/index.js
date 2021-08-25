@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { logo, search } from 'src/assets/images';
+import { logo, search, filter } from 'src/assets/images';
 import { Link } from 'react-router-dom';
 import {
   Container,
@@ -136,8 +136,14 @@ const IconButton = styled(Button)`
 
 const SelectExp = styled(Select)``;
 
+const SelectWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const SelectBoxWrapper = styled.div`
   width: 100px;
+  // background-color: pink;
 `;
 
 const BlockchainSelect = styled(Select)`
@@ -149,6 +155,10 @@ const BlockchainSelect = styled(Select)`
     margin-right: 0;
     margin-bottom: 10px;
   }
+`;
+
+const FilterIcon = styled.img`
+  height: 20px;
 `;
 
 const style = {
@@ -250,19 +260,7 @@ const Header = (props) => {
               )}
             />
             <SearchBox>
-              <SelectBoxWrapper>
-                <SelectExp
-                  styles={style}
-                  options={Options}
-                  name="filter"
-                  placeholder="Filter"
-                  onChange={hanldeDropDown}
-                  components={{
-                    IndicatorSeparator: () => null
-                  }}
-                />
-              </SelectBoxWrapper>
-              <VerticalLine />
+              {/* <VerticalLine /> */}
               <Input
                 placeholder="Search by Address / Txn Hash / Block / Token / Ens"
                 type="text"
@@ -271,6 +269,21 @@ const Header = (props) => {
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
               />
+              <SelectWrapper>
+                <FilterIcon src={filter} alt="filter" />
+                <SelectBoxWrapper>
+                  <SelectExp
+                    styles={style}
+                    options={Options}
+                    name="filter"
+                    placeholder="Filter"
+                    onChange={hanldeDropDown}
+                    components={{
+                      IndicatorSeparator: () => null
+                    }}
+                  />
+                </SelectBoxWrapper>
+              </SelectWrapper>
               <InputGroupAddon addonType="append" onClick={handleSearch}>
                 <IconButton>
                   <SearchIcon src={search} alt="search-logo" />

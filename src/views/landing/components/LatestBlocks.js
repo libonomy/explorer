@@ -63,6 +63,7 @@ const TableBody = styled.tbody`
 `;
 
 const Header = styled.div`
+  color: #1f4bb1;
   font-family: PoppinsMedium;
   font-size: 15px;
   font-weight: 500;

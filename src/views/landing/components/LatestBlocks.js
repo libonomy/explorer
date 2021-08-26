@@ -79,11 +79,11 @@ const Icon = styled.img`
   margin-right: 5px;
 `;
 const ButtonExp = styled.div`
-border-top: 1px solid #dee2e6;
-margin-top: -1rem;
-padding: 1rem;
-display: flex;
-justify-content: center;
+  border-top: 1px solid #dee2e6;
+  margin-top: -1rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
 
   .btn-secondary:hover {
     color: #fff;
@@ -105,9 +105,10 @@ justify-content: center;
     border-color: #1f4bb1;
   }
   .btn-secondary {
-    color: #fff;
-    background-color: #1f4bb1;
+    color: #1f4bb1;
+    background-color: #fff;
     border-color: #1f4bb1;
+  }
 `;
 
 const TableButton = styled(Button)`
@@ -123,8 +124,8 @@ const TableButton = styled(Button)`
   font-size: 11px;
   .btn-secondary:hover {
     color: #fff;
-    background-color: ##1f4bb1 !important;
-    border-color: ##1f4bb1 !important;
+    background-color: #1f4bb1 !important;
+    border-color: #1f4bb1 !important;
   }
   .btn-secondary:focus,
   .btn-secondary.focus {

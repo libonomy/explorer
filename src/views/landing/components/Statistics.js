@@ -90,11 +90,10 @@ const CardExp = styled(Card)`
   min-height: 76px;
   flex-direction: row;
   justify-content: space-between;
-  border-radius: 8px;
+  border: solid 1px #e8efff;
   background-color: ${colors.white};
   margin-bottom: 1rem;
-  box-shadow: ${colors.shaddow};
-  border: none;
+
   ${({ loading }) =>
     loading &&
     `

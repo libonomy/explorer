@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   padding: 22px 0 18.9px 0px;
-  border-radius: 8px;
-  box-shadow: ${colors.shaddow};
+  border: solid 1px #e8efff;
+  border-top: 4px solid #1f4bb1;
   ${({ bg }) => `
   background-color:${bg ? bg : colors.white};
   min-height: 500px  ;

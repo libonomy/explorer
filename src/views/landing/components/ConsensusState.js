@@ -23,8 +23,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getLandingPageData } from 'src/redux/socket/actions';
 const Wrapper = styled.div`
   padding: 1rem;
-  border-radius: 10px;
-  box-shadow: ${colors.shaddow};
+  border: solid 1px #e8efff;
+  // box-shadow: ${colors.shaddow};
   background-color: ${colors.white};
   height: calc(100% - 16px);
   @media (max-width: 991px) {

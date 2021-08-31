@@ -14,8 +14,8 @@ import { getLandingPageData } from 'src/redux/socket/actions';
 const Wrapper = styled.div`
   overflow-y: auto;
   background: ${colors.white};
-  border-radius: 10px;
-  box-shadow: ${colors.shaddow};
+  border: solid 1px #e8efff;
+  border-top: 4px solid #1f4bb1;
   @media (max-width: 991px) {
     margin-bottom: 2rem;
   }

@@ -51,12 +51,14 @@ export const getTransactionsByAddresses = (address) => (dispatch, getState) => {
       });
     })
     .catch((err) => {
+      console.log(err);
       dispatch({
         type: GET_TRANSACTIONS_BY_ADDRESS,
         payload: null
       });
     });
 };
+
 export const getTransactionsByAddressesLoading = () => ({
   type: GET_TRANSACTIONS_BY_ADDRESS_LOADING
 });

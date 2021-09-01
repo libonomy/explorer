@@ -172,6 +172,7 @@ const AddressTable = (props) => {
     };
     dispatch(getTransactionsByAddresses(filter));
   }, [params.address, state.limit, state.currentPage]);
+
   const { address } = props.match.params;
 
   const getType = (to, from) => {

@@ -24,11 +24,12 @@ import { getLandingPageData } from 'src/redux/socket/actions';
 const Wrapper = styled.div`
   padding: 1rem;
   border-radius: 10px;
+  min-height: 230px;
   box-shadow: ${colors.shaddow};
   background-color: ${colors.white};
   height: calc(100% - 16px);
   @media (max-width: 991px) {
-    height: auto;
+    // height: auto;
   }
   ${({ loading }) =>
     loading &&
